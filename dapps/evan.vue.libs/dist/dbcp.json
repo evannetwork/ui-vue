@@ -1,0 +1,40 @@
+{
+  "public": {
+    "author": "evan GmbH",
+    "dapp": {
+      "dependencies": {
+        "vue.libs": "^2.5.0",
+        "material.vue.libs": "^1.0.0"
+      },
+      "entrypoint": "evan.vue.libs.js",
+      "files": [
+        "evan.vue.libs.js",
+        "evan.vue.libs.css"
+      ],
+      "primaryColor": "",
+      "secondaryColor": "#f9f9ff",
+      "origin": "",
+      "standalone": false,
+      "type": "dapp"
+    },
+    "dbcpVersion": 1,
+    "description": "",
+    "i18n": {
+      "description": {
+        "en": ""
+      },
+      "name": {
+        "en": "evan.vue.libs"
+      }
+    },
+    "imgSquare": "https://pbs.twimg.com/profile_images/3786155988/46ea2dd8b1bdd31a8ba61044cb5b6ebe_400x400.png",
+    "name": "evan.vue.libs",
+    "tags": [
+      "dapp",
+      "evan",
+      "library"
+    ],
+    "version": "1.0.0",
+    "versions": {}
+  }
+}

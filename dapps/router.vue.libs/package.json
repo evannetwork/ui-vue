@@ -1,0 +1,19 @@
+{
+  "author": "evan GmbH",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "API",
+    "VueJS",
+    "DApp",
+    "CSS"
+  ],
+  "main": "dist/index.js",
+  "name": "router.vue.libs",
+  "scripts": {
+    "build": "gulp"
+  },
+  "typings": "dist/index.d.ts",
+  "version": "2.5.2"
+}

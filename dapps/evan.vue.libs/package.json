@@ -1,0 +1,19 @@
+{
+  "author": "evan GmbH",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "API",
+    "VueJS",
+    "DApp",
+    "CSS"
+  ],
+  "main": "dist/evan.vue.libs.js",
+  "name": "@evan.network/vue-core",
+  "scripts": {
+    "build": "gulp"
+  },
+  "typings": "dist/index.d.ts",
+  "version": "1.0.0"
+}
