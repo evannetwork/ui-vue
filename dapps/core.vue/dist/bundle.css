@@ -1,0 +1,49 @@
+.helloworld-vue {
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  /* top: 0; */
+  padding: 25px;
+  background: linear-gradient(#023845, #61cbc8); }
+
+.helloworld-vue h2, .helloworld-vue table, .helloworld-vue div {
+  color: #ffffff; }
+
+.helloworld-vue .vue-login {
+  font-size: 16px;
+  width: 300px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 25px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1); }
+
+.helloworld-vue .vue-login label {
+  display: block;
+  margin-top: 20px; }
+
+.helloworld-vue .vue-login label input {
+  padding: 10px;
+  border: 1px;
+  border-bottom: 1px solid #ffffff;
+  background: transparent; }
+
+.helloworld-vue .vue-login button {
+  margin-top: 20px; }
+
+.helloworld-vue table {
+  width: 100%;
+  margin-top: 20px; }
+
+.helloworld-vue table tr th, .helloworld-vue table tr td {
+  padding: 10px;
+  text-align: left; }
+
+.helloworld-vue textarea {
+  width: 100%;
+  border: 0;
+  background-color: transparent; }
+

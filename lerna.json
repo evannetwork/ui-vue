@@ -1,0 +1,7 @@
+{
+  "lerna": "2.9.0",
+  "packages": [
+    "dapps/*"
+  ],
+  "version": "0.0.0"
+}
