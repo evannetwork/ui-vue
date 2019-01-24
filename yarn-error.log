@@ -1,0 +1,70 @@
+Arguments: 
+  /Users/tschuck/.nvm/versions/node/v10.15.0/bin/node /Users/tschuck/.nvm/versions/node/v8.14.1/bin/yarn add file-loader
+
+PATH: 
+  /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/tschuck/installed:/usr/local/lib:/usr/local/lib/Postman:/usr/local/lib/python2.7/dist-packages:/Users/tschuck/Documents/bin:/Users/tschuck/projects/evan.network/dev-environment/bin:/bin:/Users/tschuck/.nvm/versions/node/v8.14.1/bin:/Users/tschuck/.Android/sdk/tools:/Users/tschuck/.Android/sdk/tools/bin:/Users/tschuck/.Android/sdk/platform-tools
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  10.15.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/tschuck/Library/Caches/Yarn/v4/npm-fast-deep-equal-1.1.0-c053477817c86b51daa853c81e059b733d023614/node_modules/fast-deep-equal/LICENSE' -> '/Users/tschuck/projects/evan.network/ui/ui-vue-core/node_modules/@evan.network/dbcp/node_modules/fast-deep-equal/LICENSE'
+
+npm manifest: 
+  {
+    "description": "",
+    "devDependencies": {
+      "@evan.network/api-blockchain-core": "^1.7.0",
+      "@evan.network/ui-dapp-browser": "^1.7.0",
+      "css-loader": "^1.0.0",
+      "del": "^3.0.0",
+      "gulp": "^3.9.1",
+      "mini-css-extract-plugin": "^0.5.0",
+      "node-sass": "^4.11.0",
+      "readline": "1.3.0",
+      "sass-loader": "^7.1.0",
+      "style-loader": "^0.22.0",
+      "ts-loader": "^4.0.0",
+      "typescript": "^2.7.2",
+      "uglifyjs-webpack-plugin": "^1.2.7",
+      "vue": "^2.5.2",
+      "vue-class-component": "^6.0.0",
+      "vue-loader": "^15.2.6",
+      "vue-material": "^1.0.0-beta-10.2",
+      "vue-property-decorator": "^6.0.0",
+      "vue-router": "^3.0.1",
+      "vue-template-compiler": "^2.5.16",
+      "webpack": "^4.16.3",
+      "webpack-cli": "^3.2.1"
+    },
+    "keywords": [
+      "javascript",
+      "typescript",
+      "API",
+      "Angular 5",
+      "Ionic",
+      "DApp",
+      "SASS"
+    ],
+    "license": "Apache-2.0",
+    "name": "ui-vue-core",
+    "scripts": {
+      "dapps-build": "gulp --gulpfile gulp/dapps.js dapps-build",
+      "dapps-serve": "gulp --gulpfile gulp/dapps.js dapps-serve",
+      "deploy": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/deployment.js deploy --config /Users/tschuck/projects/evan.network/ui/ui-vue-core/scripts/config/deployment.js",
+      "serve": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/serve.js serve"
+    },
+    "version": "1.0.0"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

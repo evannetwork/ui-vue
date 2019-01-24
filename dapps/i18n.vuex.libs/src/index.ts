@@ -24,24 +24,9 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+// map the original vue path to i18n.vuex.libs
+import { System, getDomainName } from 'dapp-browser';
+System.map['vuex-i18n'] = `i18n.vuex.libs.${ getDomainName() }!dapp-content`;
 
-import HelloComponent from './components/hello.vue';
-
-// list all components
-export const components = [
-  HelloComponent
-];
-
-/**
- * Registers the components within Vue. If a name is specified, register it also as component, not
- * only for routing.
- *
- * @param      {any}     Vue     vue instance
- */
-export function registerComponents(Vue) {
-  // include all components
-  components.forEach((comp) => {
-    // register the component
-    Vue.component(comp.name, comp);
-  });
-}
+import vuexI18n from 'vuex-i18n';
+export default vuexI18n;

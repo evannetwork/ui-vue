@@ -1,3 +1,4 @@
+
 /*
   Copyright (C) 2018-present evan GmbH.
 
@@ -24,9 +25,24 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+@mixin contentStyles($name, $colors, $sizes) {
+  .evan-theme-#{$name} {
+    background : map-get($colors, background);
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
 
-@mixin contentStyles($colors, $sizes) {
-  .evan-content {
-    background: map-get($colors, background);
+    .evan-theme-$name {
+      background : transparent;
+    }
+
+    *:not(.md-icon) {
+      box-sizing: border-box;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    .evan-content {
+      background : map-get($colors, content);
+    }
   }
 }

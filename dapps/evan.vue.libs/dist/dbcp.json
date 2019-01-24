@@ -3,17 +3,19 @@
     "author": "evan GmbH",
     "dapp": {
       "dependencies": {
-        "vue.libs": "^2.5.0",
-        "material.vue.libs": "^1.0.0"
+        "vuex.libs": "3.1.0",
+        "i18n.vuex.libs": "1.11.0",
+        "material.vue.libs": "^1.0.0",
+        "vue.libs": "^2.5.0"
       },
       "entrypoint": "evan.vue.libs.js",
       "files": [
         "evan.vue.libs.js",
         "evan.vue.libs.css"
       ],
+      "origin": "",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
-      "origin": "",
       "standalone": false,
       "type": "dapp"
     },

@@ -14,9 +14,11 @@ module.exports = {
   externals: {
     'bcc': 'bcc',
     'dapp-browser': 'dapp-browser',
-    'vue-material': 'vue-material',
     'smart-contracts': 'smart-contracts',
     'vue': 'vue',
+    'vue-material': 'vue-material',
+    'vuex': 'vuex',
+    'vuex-i18n': 'vuex-i18n',
   },
   devtool: '#eval-source-map',
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -64,20 +66,14 @@ module.exports = {
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'assets/[name].[ext]?[hash]'
+            name: 'assets/[name].[ext]?[hash]',
+            publicPath: './'
           }
         }]
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
       },
       {
         test: /\.js$/,

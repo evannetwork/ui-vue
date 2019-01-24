@@ -378,14 +378,89 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
-.evan-vue * {
-  font-family: 'Open Sans', Arial, sans-serif; }
+/*
+  Copyright (C) 2018-present evan GmbH.
 
-.evan-theme-evan .evan-content {
-  background: linear-gradient(#023845, #023845); }
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
 
-.evan-theme-light .evan-content {
-  background: linear-gradient(#023845, #023845); }
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+
+  You can be released from the requirements of the GNU Affero General Public
+  License by purchasing a commercial license.
+  Buying such a license is mandatory as soon as you use this software or parts
+  of it on other blockchains than evan.network.
+
+  For more information, please contact evan GmbH at this address:
+  https://evan.network/license/
+*/
+.evan-logo, .evan-logo-favicon {
+  background-repeat: no-repeat;
+  background-size: 100%; }
+
+.evan-logo {
+  background-image: url(./assets/evan-logo.svg?818f32cd000ca86d5c7f2144c98bc8b7); }
+
+.evan-logo-favicon {
+  background-image: url(./assets/evan-favicon.png?0533ed6d5f2ed0ff7bfabb7891f07414); }
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v42/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format("woff2"); }
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased; }
+
+.evan-theme-evan {
+  background: linear-gradient(#023845, #61cbc8);
+  height: 100%;
+  overflow-y: auto;
+  width: 100%; }
+  .evan-theme-evan .evan-theme-$name {
+    background: transparent; }
+  .evan-theme-evan *:not(.md-icon) {
+    box-sizing: border-box;
+    font-family: 'Open Sans', Arial, sans-serif; }
+  .evan-theme-evan .evan-content {
+    background: rgba(2, 56, 69, 0.5); }
+
+.evan-theme-light {
+  background: linear-gradient(#023845, #023845);
+  height: 100%;
+  overflow-y: auto;
+  width: 100%; }
+  .evan-theme-light .evan-theme-$name {
+    background: transparent; }
+  .evan-theme-light *:not(.md-icon) {
+    box-sizing: border-box;
+    font-family: 'Open Sans', Arial, sans-serif; }
+  .evan-theme-light .evan-content {
+    background: rgba(2, 56, 69, 0.5); }
 
 .hello[data-v-82afa81c] {
   background: red;

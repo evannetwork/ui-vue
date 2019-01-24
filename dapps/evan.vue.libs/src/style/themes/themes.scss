@@ -37,6 +37,6 @@ $evanThemes: (
   light: $lightTheme
 );
 
-@mixin evanTheme($colors, $sizes) {
-  @include contentStyles($colors, $sizes);
+@mixin evanTheme($name, $colors, $sizes) {
+  @include contentStyles($name, $colors, $sizes);
 }

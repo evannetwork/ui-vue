@@ -27,17 +27,13 @@
 
 @import './open-sans';
 @import './themes/themes';
-
-.evan-vue * {
-  font-family: 'Open Sans', Arial, sans-serif;
-}
+@import './images';
 
 // start all themes
 @each $name, $theme in $evanThemes {
-  .evan-theme-#{$name} {
-    @include evanTheme(
-      map-get($theme, colors),
-      map-get($theme, sizes)
-    );
-  }
+  @include evanTheme(
+    $name,
+    map-get($theme, colors),
+    map-get($theme, sizes)
+  );
 }
