@@ -1,3 +1,4 @@
+
 /*
   Copyright (C) 2018-present evan GmbH.
 
@@ -24,32 +25,15 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+@mixin materialStyles($name, $colors, $sizes) {
+  $mdThemeName: if($name == 'evan', 'evan', 'evan-' + $name);
 
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
+  .md-theme-#{$mdThemeName}.md-autocomplete-box-content {
+    background-color: map-get($colors, hover);
 
-$primary: #61cbc8;
-$secondary: #023845;
-$hover: $secondary;
-$danger: md-get-palette-color(red, 600);
-$warn: md-get-palette-color(orange, 600);
-$success: md-get-palette-color(green, 600);
-
-$colors: (
-  primary: $primary,
-  secondary: $secondary,
-  danger: $danger,
-  warn: $warn,
-  success: $success,
-
-  // backgrounds
-  background: linear-gradient($secondary, $primary),
-  content: rgba($secondary, 0.5),
-  hover: $hover
-);
-
-$sizes: (
-  content-padding: 25px,
-  content-margin: 25px
-);
-
-$evanTheme: (colors: $colors, sizes: $sizes);
+    &:after {
+      display: none;
+      content: '';
+    }
+  }
+}

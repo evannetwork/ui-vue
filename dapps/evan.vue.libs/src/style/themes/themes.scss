@@ -31,6 +31,7 @@
 
 // import styles
 @import '../content';
+@import '../material';
 
 $evanThemes: (
   evan: $evanTheme,
@@ -39,4 +40,5 @@ $evanThemes: (
 
 @mixin evanTheme($name, $colors, $sizes) {
   @include contentStyles($name, $colors, $sizes);
+  @include materialStyles($name, $colors, $sizes);
 }

@@ -25,16 +25,26 @@
   https://evan.network/license/
 */
 
+@import "~vue-material/dist/theme/engine"; // Import the theme engine
+
 $primary: #61cbc8;
 $secondary: #023845;
+$hover: $secondary;
+$danger: md-get-palette-color(red, 600);
+$warn: md-get-palette-color(orange, 600);
+$success: md-get-palette-color(green, 600);
 
 $colors: (
   primary: $primary,
   secondary: $secondary,
+  danger: $danger,
+  warn: $warn,
+  success: $success,
 
   // backgrounds
-  background: linear-gradient($secondary, $secondary),
-  content: rgba($secondary, 0.5)
+  background: linear-gradient($secondary, $primary),
+  content: rgba($secondary, 0.5),
+  hover: $hover
 );
 
 $sizes: (

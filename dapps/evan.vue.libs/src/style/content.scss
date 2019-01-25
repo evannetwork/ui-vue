@@ -32,7 +32,7 @@
     overflow-y: auto;
     width: 100%;
 
-    .evan-theme-$name {
+    .evan-theme-#{$name} {
       background : transparent;
     }
 
@@ -41,8 +41,15 @@
       font-family: 'Open Sans', Arial, sans-serif;
     }
 
-    .evan-content {
-      background : map-get($colors, content);
+    .md-layout.md-gutter {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  
+  .md-theme-#{$name}.md-autocomplete-box-content {
+    &, &:after {
+      background-color: map-get($colors, hover);
     }
   }
 }
