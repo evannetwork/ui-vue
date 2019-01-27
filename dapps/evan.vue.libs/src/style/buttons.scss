@@ -1,3 +1,4 @@
+
 /*
   Copyright (C) 2018-present evan GmbH.
 
@@ -24,23 +25,43 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+@import "~vue-material/dist/theme/engine";
 
-// import themes
-@import './evan';
-@import './light';
+@mixin buttonStyles($name, $colors, $sizes) {
+  .evan-theme-#{$name} {
+    .md-button.evan-round {
+      border-radius: 20px;
+      padding: 0 25px;
+      text-transform: none;
+      border: 2px solid;
 
-// import styles
-@import '../buttons';
-@import '../content';
-@import '../material';
+      &[disabled] {
+        -webkit-filter: grayscale(70%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(70%);
+        opacity: 0.5;
+      }
 
-$evanThemes: (
-  evan: $evanTheme,
-  light: $lightTheme
-);
+      // setup all control colors for the buttons
+      $controls: map-get($colors, controls);
+      @each $control, $color in $controls {
+        &.evan-#{$control} {
+          border-color: $color;
 
-@mixin evanTheme($name, $colors, $sizes) {
-  @include buttonStyles($name, $colors, $sizes);
-  @include contentStyles($name, $colors, $sizes);
-  @include materialStyles($name, $colors, $sizes);
+          .md-button-content {
+            color: $color;
+          }
+
+          &:hover {
+            background-color: $color;
+
+            .md-button-content {
+              $contrast: md-pick-contrast($color);
+
+              color: if($contrast == 'light', map-get($colors, textLight), map-get($colors, textDark));
+            }
+          }
+        }
+      }
+    }
+  }
 }

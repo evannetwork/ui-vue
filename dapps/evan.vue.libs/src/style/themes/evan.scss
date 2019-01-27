@@ -34,12 +34,25 @@ $danger: md-get-palette-color(red, 600);
 $warn: md-get-palette-color(orange, 600);
 $success: md-get-palette-color(green, 600);
 
+$textDark: rgba(0, 0, 0, 0.87);
+$textLight: #ffffff;
+$textPrimary: $textLight;
+
 $colors: (
+  // colors
   primary: $primary,
   secondary: $secondary,
   danger: $danger,
   warn: $warn,
   success: $success,
+
+  // control status
+  controls: (primary: $primary, danger: $danger, warn: $warn, success: $success),
+
+  // text colors
+  textDark: $textDark,
+  textLight: $textLight,
+  textPrimary: $textPrimary,
 
   // backgrounds
   background: linear-gradient($secondary, $primary),
