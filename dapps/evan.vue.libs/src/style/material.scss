@@ -28,12 +28,18 @@
 @mixin materialStyles($name, $colors, $sizes) {
   $mdThemeName: if($name == 'evan', 'evan', 'evan-' + $name);
 
-  .md-theme-#{$mdThemeName}.md-autocomplete-box-content {
-    background-color: map-get($colors, hover);
+  .md-theme-#{$mdThemeName} {
+    &.md-autocomplete-box-content {
+      background-color: map-get($colors, hover);
 
-    &:after {
-      display: none;
-      content: '';
+      &:after {
+        display: none;
+        content: '';
+      }
+    }
+
+    &.md-dialog {
+      background-color: map-get($colors, hover);
     }
   }
 }

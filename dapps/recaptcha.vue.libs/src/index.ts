@@ -24,45 +24,9 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+// map the original vue path to recaptcha.vue.libs
+import { System, getDomainName } from 'dapp-browser';
+System.map['vue-recaptcha'] = `recaptcha.vue.libs.${ getDomainName() }!dapp-content`;
 
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
-
-$primary: #61cbc8;
-$secondary: #023845;
-$hover: $secondary;
-$danger: #ff7676;
-$warn: #ffc107;
-$success: #53e69d;
-
-$textDark: rgba(0, 0, 0, 0.87);
-$textLight: #ffffff;
-$textPrimary: $textLight;
-
-$colors: (
-  // colors
-  primary: $primary,
-  secondary: $secondary,
-  danger: $danger,
-  warn: $warn,
-  success: $success,
-
-  // control status
-  controls: (primary: $primary, danger: $danger, warn: $warn, success: $success),
-
-  // text colors
-  textDark: $textDark,
-  textLight: $textLight,
-  textPrimary: $textPrimary,
-
-  // backgrounds
-  background: linear-gradient($secondary, $primary),
-  content: rgba($secondary, 0.5),
-  hover: $hover
-);
-
-$sizes: (
-  padding: 20px,
-  margin: 20px
-);
-
-$evanTheme: (colors: $colors, sizes: $sizes);
+import VueRecaptcha from 'vue-recaptcha';
+export default VueRecaptcha;

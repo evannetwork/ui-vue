@@ -1405,6 +1405,58 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+
+  You can be released from the requirements of the GNU Affero General Public
+  License by purchasing a commercial license.
+  Buying such a license is mandatory as soon as you use this software or parts
+  of it on other blockchains than evan.network.
+
+  For more information, please contact evan GmbH at this address:
+  https://evan.network/license/
+*/
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+
+  You can be released from the requirements of the GNU Affero General Public
+  License by purchasing a commercial license.
+  Buying such a license is mandatory as soon as you use this software or parts
+  of it on other blockchains than evan.network.
+
+  For more information, please contact evan GmbH at this address:
+  https://evan.network/license/
+*/
 .evan-logo, .evan-logo-favicon {
   background-repeat: no-repeat;
   background-size: 100%; }
@@ -1456,35 +1508,36 @@
       .evan-theme-evan .md-button.evan-round.evan-primary:hover .md-button-content {
         color: #ffffff; }
   .evan-theme-evan .md-button.evan-round.evan-danger {
-    border-color: #e53935; }
+    border-color: #ff7676; }
     .evan-theme-evan .md-button.evan-round.evan-danger .md-button-content {
-      color: #e53935; }
+      color: #ff7676; }
     .evan-theme-evan .md-button.evan-round.evan-danger:hover {
-      background-color: #e53935; }
+      background-color: #ff7676; }
       .evan-theme-evan .md-button.evan-round.evan-danger:hover .md-button-content {
-        color: rgba(0, 0, 0, 0.87); }
+        color: #ffffff; }
   .evan-theme-evan .md-button.evan-round.evan-warn {
-    border-color: #fb8c00; }
+    border-color: #ffc107; }
     .evan-theme-evan .md-button.evan-round.evan-warn .md-button-content {
-      color: #fb8c00; }
+      color: #ffc107; }
     .evan-theme-evan .md-button.evan-round.evan-warn:hover {
-      background-color: #fb8c00; }
+      background-color: #ffc107; }
       .evan-theme-evan .md-button.evan-round.evan-warn:hover .md-button-content {
         color: #ffffff; }
   .evan-theme-evan .md-button.evan-round.evan-success {
-    border-color: #43a047; }
+    border-color: #53e69d; }
     .evan-theme-evan .md-button.evan-round.evan-success .md-button-content {
-      color: #43a047; }
+      color: #53e69d; }
     .evan-theme-evan .md-button.evan-round.evan-success:hover {
-      background-color: #43a047; }
+      background-color: #53e69d; }
       .evan-theme-evan .md-button.evan-round.evan-success:hover .md-button-content {
-        color: rgba(0, 0, 0, 0.87); }
+        color: #ffffff; }
 
 .evan-theme-evan {
   background: linear-gradient(#023845, #61cbc8);
   height: 100%;
   overflow-y: auto;
-  width: 100%; }
+  width: 100%;
+  /************************************** padding / margins *************************************/ }
   .evan-theme-evan .evan-theme-evan {
     background: transparent; }
   .evan-theme-evan *:not(.md-icon) {
@@ -1493,6 +1546,40 @@
   .evan-theme-evan .md-layout.md-gutter {
     margin-left: 0;
     margin-right: 0; }
+  .evan-theme-evan .evan-content {
+    background: rgba(2, 56, 69, 0.5); }
+  .evan-theme-evan .evan-padding {
+    padding: 20px; }
+  .evan-theme-evan .evan-padding-top {
+    padding-top: 20px; }
+  .evan-theme-evan .evan-padding-bottom {
+    padding-bottom: 20px; }
+  .evan-theme-evan .evan-padding-left {
+    padding-left: 20px; }
+  .evan-theme-evan .evan-padding-right {
+    padding-right: 20px; }
+  .evan-theme-evan .evan-padding-horizontal {
+    padding-left: 20px;
+    padding-right: 20px; }
+  .evan-theme-evan .evan-padding-verical {
+    padding-top: 20px;
+    padding-bottom: 20px; }
+  .evan-theme-evan .evan-margin {
+    padding: 20px; }
+  .evan-theme-evan .evan-margin-top {
+    margin-top: 20px; }
+  .evan-theme-evan .evan-margin-bottom {
+    margin-bottom: 20px; }
+  .evan-theme-evan .evan-margin-left {
+    margin-left: 20px; }
+  .evan-theme-evan .evan-margin-right {
+    margin-right: 20px; }
+  .evan-theme-evan .evan-margin-horizontal {
+    margin-left: 20px;
+    margin-right: 20px; }
+  .evan-theme-evan .evan-margin-verical {
+    margin-top: 20px;
+    margin-bottom: 20px; }
 
 .md-theme-evan.md-autocomplete-box-content, .md-theme-evan.md-autocomplete-box-content:after {
   background-color: #023845; }
@@ -1502,6 +1589,20 @@
   .md-theme-evan.md-autocomplete-box-content:after {
     display: none;
     content: ''; }
+
+.md-theme-evan.md-dialog {
+  background-color: #023845; }
+
+.evan-theme-evan .evan-recaptcha > div {
+  left: 0;
+  right: 0;
+  margin: 20px auto 0 auto; }
+
+.evan-theme-evan .md-error {
+  color: #ff7676; }
+
+.md-theme-evan.md-field.md-invalid .md-error {
+  color: #ff7676; }
 
 .evan-theme-light .md-button.evan-round {
   border-radius: 20px;
@@ -1550,7 +1651,8 @@
   background: linear-gradient(#023845, #61cbc8);
   height: 100%;
   overflow-y: auto;
-  width: 100%; }
+  width: 100%;
+  /************************************** padding / margins *************************************/ }
   .evan-theme-light .evan-theme-light {
     background: transparent; }
   .evan-theme-light *:not(.md-icon) {
@@ -1559,6 +1661,8 @@
   .evan-theme-light .md-layout.md-gutter {
     margin-left: 0;
     margin-right: 0; }
+  .evan-theme-light .evan-content {
+    background: rgba(2, 56, 69, 0.5); }
 
 .md-theme-light.md-autocomplete-box-content, .md-theme-light.md-autocomplete-box-content:after {
   background-color: #023845; }
@@ -1568,6 +1672,20 @@
   .md-theme-evan-light.md-autocomplete-box-content:after {
     display: none;
     content: ''; }
+
+.md-theme-evan-light.md-dialog {
+  background-color: #023845; }
+
+.evan-theme-light .evan-recaptcha > div {
+  left: 0;
+  right: 0;
+  margin: auto 0 auto; }
+
+.evan-theme-light .md-error {
+  color: #e53935; }
+
+.md-theme-evan-light.md-field.md-invalid .md-error {
+  color: #e53935; }
 
 .hello[data-v-82afa81c] {
   background: red;

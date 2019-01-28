@@ -45,6 +45,71 @@
       margin-left: 0;
       margin-right: 0;
     }
+
+    .evan-content {
+      background : map-get($colors, content);
+    }
+
+    /************************************** padding / margins *************************************/
+    .evan-padding {
+      padding: map-get($sizes, padding);
+    }
+
+    .evan-padding-top {
+      padding-top: map-get($sizes, padding);
+    }
+
+    .evan-padding-bottom {
+      padding-bottom: map-get($sizes, padding);
+    }
+
+    .evan-padding-left {
+      padding-left: map-get($sizes, padding);
+    }
+
+    .evan-padding-right {
+      padding-right: map-get($sizes, padding);
+    }
+
+    .evan-padding-horizontal {
+      padding-left: map-get($sizes, padding);
+      padding-right: map-get($sizes, padding);
+    }
+
+    .evan-padding-verical {
+      padding-top: map-get($sizes, padding);
+      padding-bottom: map-get($sizes, padding);
+    }
+
+    .evan-margin {
+      padding: map-get($sizes, margin);
+    }
+
+    .evan-margin-top {
+      margin-top: map-get($sizes, margin);
+    }
+
+    .evan-margin-bottom {
+      margin-bottom: map-get($sizes, margin);
+    }
+
+    .evan-margin-left {
+      margin-left: map-get($sizes, margin);
+    }
+
+    .evan-margin-right {
+      margin-right: map-get($sizes, margin);
+    }
+
+    .evan-margin-horizontal {
+      margin-left: map-get($sizes, margin);
+      margin-right: map-get($sizes, margin);
+    }
+
+    .evan-margin-verical {
+      margin-top: map-get($sizes, margin);
+      margin-bottom: map-get($sizes, margin);
+    }
   }
   
   .md-theme-#{$name}.md-autocomplete-box-content {

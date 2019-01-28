@@ -40,6 +40,7 @@ $sizes: map-get($theme, sizes);
   primary: map-get($colors, primary), // The primary color of your application
   accent: rgba(map-get($colors, secondary), 0.5), // The accent or secondary color
   background: rgba(map-get($colors, content), 0.5),
+  fieldvariant: rgba(map-get($colors, danger), 0.5),
   theme: dark // This can be dark or light
 ));
 

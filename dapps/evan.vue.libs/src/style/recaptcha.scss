@@ -1,3 +1,4 @@
+
 /*
   Copyright (C) 2018-present evan GmbH.
 
@@ -25,44 +26,14 @@
   https://evan.network/license/
 */
 
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
-
-$primary: #61cbc8;
-$secondary: #023845;
-$hover: $secondary;
-$danger: #ff7676;
-$warn: #ffc107;
-$success: #53e69d;
-
-$textDark: rgba(0, 0, 0, 0.87);
-$textLight: #ffffff;
-$textPrimary: $textLight;
-
-$colors: (
-  // colors
-  primary: $primary,
-  secondary: $secondary,
-  danger: $danger,
-  warn: $warn,
-  success: $success,
-
-  // control status
-  controls: (primary: $primary, danger: $danger, warn: $warn, success: $success),
-
-  // text colors
-  textDark: $textDark,
-  textLight: $textLight,
-  textPrimary: $textPrimary,
-
-  // backgrounds
-  background: linear-gradient($secondary, $primary),
-  content: rgba($secondary, 0.5),
-  hover: $hover
-);
-
-$sizes: (
-  padding: 20px,
-  margin: 20px
-);
-
-$evanTheme: (colors: $colors, sizes: $sizes);
+@mixin recaptchaStyles($name, $colors, $sizes) {
+  .evan-theme-#{$name} {
+    .evan-recaptcha {
+      & > div {
+        left: 0;
+        right: 0;
+        margin: map-get($sizes, margin) auto 0 auto;
+      }
+    }
+  }
+}

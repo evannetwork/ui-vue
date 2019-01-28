@@ -33,6 +33,8 @@
 @import '../buttons';
 @import '../content';
 @import '../material';
+@import '../recaptcha';
+@import '../text-forms';
 
 $evanThemes: (
   evan: $evanTheme,
@@ -43,4 +45,6 @@ $evanThemes: (
   @include buttonStyles($name, $colors, $sizes);
   @include contentStyles($name, $colors, $sizes);
   @include materialStyles($name, $colors, $sizes);
+  @include recaptchaStyles($name, $colors, $sizes);
+  @include textFormsStyles($name, $colors, $sizes);
 }
