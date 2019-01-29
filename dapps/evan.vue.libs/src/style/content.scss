@@ -48,6 +48,18 @@
 
     .evan-content {
       background : map-get($colors, content);
+
+      $controls: map-get($colors, controls);
+      @each $control, $color in $controls {
+        &.evan-#{$control} {
+          background-color: rgba($color, 0.7);
+
+          * {
+            $contrast: md-pick-contrast($color);
+            color: if($contrast == 'light', map-get($colors, textLight), map-get($colors, textDark));
+          }
+        }
+      }
     }
 
     /************************************** padding / margins *************************************/

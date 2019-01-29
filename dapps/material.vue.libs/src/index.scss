@@ -38,9 +38,9 @@ $sizes: map-get($theme, sizes);
 
 @include md-register-theme('evan', (
   primary: map-get($colors, primary), // The primary color of your application
-  accent: rgba(map-get($colors, secondary), 0.5), // The accent or secondary color
-  background: rgba(map-get($colors, content), 0.5),
-  fieldvariant: rgba(map-get($colors, danger), 0.5),
+  accent: rgba(map-get($colors, secondary), map-get($colors, contentOpacity)), // The accent or secondary color
+  background: map-get($colors, content),
+  fieldvariant: map-get($colors, danger),
   theme: dark // This can be dark or light
 ));
 
@@ -55,46 +55,9 @@ $sizes: map-get($theme, sizes);
 
 @include md-register-theme('evan-light', (
   primary: map-get($colors, primary), // The primary color of your application
-  accent: rgba(map-get($colors, content), 0.5), // The accent or secondary color
-  background: rgba(map-get($colors, content), 0.5),
+  accent: rgba(map-get($colors, secondary), map-get($colors, contentOpacity)), // The accent or secondary color
+  background: map-get($colors, content),
   theme: light // This can be dark or light
 ));
 
 @import "~vue-material/dist/theme/all"; // Apply the theme
-
-/*----------  register evan danger style  ----------*/
-
-// // start all themes
-// @include md-register-theme('evan-danger', (
-//   primary: md-get-palette-color(red, 600), // The primary color of your application
-//   accent: md-get-palette-color(red, 900), // The accent or secondary color
-//   theme: dark // This can be dark or light
-// ));
-
-// @import "~vue-material/dist/theme/all"; // Apply the theme
-
-// /*----------  register evan warn style  ----------*/
-
-// // start all themes
-// @include md-register-theme('evan-warn', (
-//   primary: md-get-palette-color(orange, 600), // The primary color of your application
-//   accent: md-get-palette-color(orange, 900), // The accent or secondary color
-//   theme: dark // This can be dark or light
-// ));
-
-// @import "~vue-material/dist/theme/all"; // Apply the theme
-
-// /*----------  register evan success style  ----------*/
-
-// // start all themes
-// $theme: map-get($evanThemes, light);
-// $colors: map-get($theme, colors);
-// $sizes: map-get($theme, sizes);
-
-// @include md-register-theme('evan-success', (
-//   primary: md-get-palette-color(green, 600), // The primary color of your application
-//   accent: md-get-palette-color(green, 900), // The accent or secondary color
-//   theme: dark // This can be dark or light
-// ));
-
-// @import "~vue-material/dist/theme/all"; // Apply the theme

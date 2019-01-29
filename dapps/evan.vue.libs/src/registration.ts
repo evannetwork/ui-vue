@@ -24,30 +24,23 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+import SuccessComponent from './components/success.vue';
 
-<template>
-  <div>
-    <md-content>{{ 'hello' | translate }}</md-content>
-  </div>
-</template>
+// list all components
+export const components = [
+  { name: 'evan-success', comp: SuccessComponent },
+];
 
-<script lang="ts">
-  import Vue from 'vue';
-  import * as bcc from 'bcc';
-  import { System, core, } from 'dapp-browser';
-    
-  export default {
-    name: 'evan-hello',
-    data: function () {
-      return { }
-    },
-    methods: {
-
-    }
-  };
-</script>
-<style lang="scss" scoped>
-  .hello {
-    background: red;
-  }
-</style>
+/**
+ * Registers the components within Vue. If a name is specified, register it also as component, not
+ * only for routing.
+ *
+ * @param      {any}     Vue     vue prototype
+ */
+export function registerComponents(Vue) {
+  // include all components
+  components.forEach((comp) => {
+    // register the component
+    Vue.component(comp.name, comp.comp);
+  });
+}

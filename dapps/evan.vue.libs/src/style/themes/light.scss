@@ -25,18 +25,19 @@
   https://evan.network/license/
 */
 
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
-
 $primary: #61cbc8;
 $secondary: #023845;
 $hover: $secondary;
-$danger: md-get-palette-color(red, 600);
-$warn: md-get-palette-color(orange, 600);
-$success: md-get-palette-color(green, 600);
+$danger: #ff7676;
+$warn: #ffc107;
+$success: #53e69d;
+$cancel: #b5b5b5;
 
 $textDark: rgba(0, 0, 0, 0.87);
 $textLight: #ffffff;
 $textPrimary: $textLight;
+
+$contentOpacity: 0.5;
 
 $colors: (
   // colors
@@ -47,7 +48,7 @@ $colors: (
   success: $success,
 
   // control status
-  controls: (primary: $primary, danger: $danger, warn: $warn, success: $success),
+  controls: (primary: $primary, danger: $danger, warn: $warn, success: $success, cancel: $cancel),
 
   // text colors
   textDark: $textDark,
@@ -56,14 +57,14 @@ $colors: (
 
   // backgrounds
   background: linear-gradient($secondary, $primary),
-  content: rgba($secondary, 0.5),
-  hover: $hover
+  content: rgba($secondary, $contentOpacity),
+  hover: $hover,
+  contentOpacity: $contentOpacity
 );
 
 $sizes: (
-  content-padding: 25px,
-  content-margin: 25px
+  padding: 20px,
+  margin: 20px
 );
-
 
 $lightTheme: (colors: $colors, sizes: $sizes);

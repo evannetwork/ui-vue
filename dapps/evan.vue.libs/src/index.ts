@@ -36,7 +36,7 @@ import VueMaterial from 'vue-material';
 // import styles
 import './style/core.scss';
 import { translations, registerEvanI18N } from './i18n/translate';
-import { registerComponents } from './components/components';
+import { registerComponents } from './registration';
 
 let VueCoreEvan = (Vue) => {
   Vue.use(VueMaterial);

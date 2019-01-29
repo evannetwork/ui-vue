@@ -41,5 +41,9 @@
     &.md-dialog {
       background-color: map-get($colors, hover);
     }
+
+    &.md-steppers {
+      position: relative;
+    }
   }
 }
