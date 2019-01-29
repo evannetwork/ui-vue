@@ -493,6 +493,13 @@
  * @group themes
  */
 /**
+ * Store the newly registered theme name for comparison, used for checking just called md-register-theme's theme name
+ * ---
+ * @access private
+ * @type string
+ * @group themes
+ */
+/**
  * The color contrast values
  * ---
  * @access private
@@ -980,6 +987,9 @@
 .md-theme-evan.md-autocomplete-box-content, .md-theme-evan.md-autocomplete-box-content:after {
   background-color: #023845; }
 
+.md-theme-evan.md-content {
+  padding: 20px; }
+
 .md-theme-evan.md-autocomplete-box-content {
   background-color: #023845; }
   .md-theme-evan.md-autocomplete-box-content:after {
@@ -991,6 +1001,13 @@
 
 .md-theme-evan.md-steppers {
   position: relative; }
+  @media (max-width: 768px) {
+    .md-theme-evan.md-steppers .md-stepper:after {
+      display: none; }
+    .md-theme-evan.md-steppers .md-stepper .md-ripple {
+      padding: 0 5px 0 5px; }
+    .md-theme-evan.md-steppers .md-stepper-content {
+      padding: 0 5px 0 5px; } }
 
 .evan-theme-evan .evan-recaptcha > div {
   left: 0;
@@ -1126,6 +1143,9 @@
 .md-theme-light.md-autocomplete-box-content, .md-theme-light.md-autocomplete-box-content:after {
   background-color: #023845; }
 
+.md-theme-evan-light.md-content {
+  padding: 20px; }
+
 .md-theme-evan-light.md-autocomplete-box-content {
   background-color: #023845; }
   .md-theme-evan-light.md-autocomplete-box-content:after {
@@ -1137,6 +1157,13 @@
 
 .md-theme-evan-light.md-steppers {
   position: relative; }
+  @media (max-width: 768px) {
+    .md-theme-evan-light.md-steppers .md-stepper:after {
+      display: none; }
+    .md-theme-evan-light.md-steppers .md-stepper .md-ripple {
+      padding: 0 5px 0 5px; }
+    .md-theme-evan-light.md-steppers .md-stepper-content {
+      padding: 0 5px 0 5px; } }
 
 .evan-theme-light .evan-recaptcha > div {
   left: 0;
@@ -1362,6 +1389,13 @@
  */
 /**
  * Store the current theme name
+ * ---
+ * @access private
+ * @type string
+ * @group themes
+ */
+/**
+ * Store the newly registered theme name for comparison, used for checking just called md-register-theme's theme name
  * ---
  * @access private
  * @type string

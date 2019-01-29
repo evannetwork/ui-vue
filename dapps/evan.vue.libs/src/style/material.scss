@@ -29,6 +29,10 @@
   $mdThemeName: if($name == 'evan', 'evan', 'evan-' + $name);
 
   .md-theme-#{$mdThemeName} {
+    &.md-content {
+      padding: map-get($sizes, padding);
+    }
+
     &.md-autocomplete-box-content {
       background-color: map-get($colors, hover);
 
@@ -44,6 +48,22 @@
 
     &.md-steppers {
       position: relative;
+
+      @media(max-width: 768px) {
+        .md-stepper {
+          &:after {
+            display: none;
+          }
+
+          .md-ripple {
+            padding: 0 5px 0 5px;
+          }
+        }
+
+        .md-stepper-content {
+          padding: 0 5px 0 5px;
+        }
+      }
     }
   }
 }
