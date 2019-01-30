@@ -6,12 +6,11 @@
 /browser-polyfill.js
 /browser.js
 /build
+/dapps/*/dist
 /dapps/*/node_modules
 /node_modules
-/packages/*/node_modules
-/runtime.js
 coverage
 dist
 documentation/*
 package-lock.json
-yarn.json
+yarn.lock

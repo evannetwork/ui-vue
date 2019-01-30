@@ -1,14 +1,12 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 
-// process.env.NODE_ENV = 'production';
-
-// load name from package.json
+// load not the name from package.json, it useds @evan.network/vue-core and not the dbcp origin
 const name = 'evan.vue.libs';
-
 module.exports = {
   entry: './src/index.ts',
   externals: {
@@ -120,6 +118,7 @@ if (process.env.NODE_ENV === 'production') {
       exclude: /(node_modules)/,
       parallel: true,
       sourceMap: false
-    })
+    }),
+    new OptimizeCSSAssetsPlugin({}),
   ])
 }

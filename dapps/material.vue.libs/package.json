@@ -15,5 +15,10 @@
     "build": "gulp"
   },
   "typings": "dist/index.d.ts",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "babel-loader": "7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "vue-material": "^1.0.0-beta-10.2"
+  }
 }

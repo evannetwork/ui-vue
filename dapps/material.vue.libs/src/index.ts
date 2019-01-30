@@ -30,6 +30,6 @@ import { System, getDomainName } from 'dapp-browser';
 System.map['vue-material'] = `material.vue.libs.${ getDomainName() }!dapp-content`;
 
 import './index.scss';
-import VueMaterial from '../../../node_modules/vue-material/src/index.js';
+import VueMaterial from 'vue-material';
 
 export default VueMaterial;

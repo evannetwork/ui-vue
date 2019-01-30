@@ -19,6 +19,8 @@ const gulp = require('gulp');
 const path = require('path');
 const del = require('del');
 const exec = require('child_process').exec;
+const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
+  process.env.NODE_ENV || 'development';
 
 const scriptsFolder = process.cwd();
 const isDirectory = source => lstatSync(source).isDirectory()
@@ -33,7 +35,7 @@ const getDirectories = source =>
  */
 async function runExec(command) {
   return new Promise((resolve, reject) => {
-    exec(command, { }, async (err, stdout, stderr) => {
+    exec(command, { NODE_ENV: nodeEnv }, (err, stdout, stderr) => {
       if (err) {
         reject(stdout);
       } else {
@@ -84,8 +86,8 @@ dappDirs.forEach(dappDir => {
 const logServing = () => {
   console.clear();
 
-  console.log('Watching DApps');
-  console.log('--------------\n');
+  console.log(`  Watching DApps: ${ nodeEnv }`);
+  console.log('  ----------------------------\n');
 
   for (let dappDir of dappDirs) {
     const dappName = dappDir.split('/').pop();
