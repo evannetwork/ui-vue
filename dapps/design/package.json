@@ -1,0 +1,19 @@
+{
+  "author": "evan GmbH",
+  "main": "dist/index.js",
+  "name": "design",
+  "description": "",
+  "typings": "dist/index.d.ts",
+  "version": "1.0.0",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "API",
+    "VueJS",
+    "DApp",
+    "CSS"
+  ],
+  "scripts": {
+    "build": "gulp"
+  }
+}
