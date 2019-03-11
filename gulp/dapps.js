@@ -19,31 +19,7 @@ const gulp = require('gulp');
 const path = require('path');
 const del = require('del');
 const exec = require('child_process').exec;
-const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
-  process.env.NODE_ENV || 'development';
-
-const scriptsFolder = process.cwd();
-const isDirectory = source => lstatSync(source).isDirectory()
-const getDirectories = source =>
-  readdirSync(source).map(name => path.join(source, name)).filter(isDirectory)
-
-/**
- * Executes and console command
- *
- * @param      {string}       command  command to execute
- * @return     {Promise<any}  resolved when command is finished
- */
-async function runExec(command) {
-  return new Promise((resolve, reject) => {
-    exec(command, { NODE_ENV: nodeEnv }, (err, stdout, stderr) => {
-      if (err) {
-        reject(stdout);
-      } else {
-        resolve({ stdout, stderr });
-      }
-    });
-  });
-}
+const { runExec, scriptsFolder, isDirectory, getDirectories } = require('./lib');
 
 const dappDirs = getDirectories(path.resolve('../dapps'));
 let longestDAppName = 0;
@@ -77,7 +53,7 @@ const serves = { };
 dappDirs.forEach(dappDir => {
   const dappName = dappDir.split('/').pop();
 
-  serves[dappName] = { };
+  serves[dappName] = { duration: 0, lastDuration: 0 };
 });
 
 /**
@@ -86,25 +62,21 @@ dappDirs.forEach(dappDir => {
 const logServing = () => {
   console.clear();
 
-  console.log(`  Watching DApps: ${ nodeEnv }`);
-  console.log('  ----------------------------\n');
+  console.log('Watching DApps');
+  console.log('--------------\n');
 
   for (let dappDir of dappDirs) {
     const dappName = dappDir.split('/').pop();
     const logDAppName = getFilledDAppName(dappName);
 
     // load the status of the dapp
+    const timeLog = `(${ serves[dappName].duration }s / ${ serves[dappName].lastDuration }s)`;
     if (serves[dappName].rebuild) {
-      console.log(`  ${ logDAppName }: rebuilding`);
+      console.log(`  ${ logDAppName }:     rebuilding ${ timeLog }`);
     } else if (serves[dappName].loading) {
-      console.log(`  ${ logDAppName }: building`);
+      console.log(`  ${ logDAppName }:   building ${ timeLog }`);
     } else {
-      console.log(`  ${ logDAppName }: watching`);
-    }
-
-    if (serves[dappName].stderr) {
-      console.log();
-      console.log(serves[dappName].stderr);
+      console.log(`  ${ logDAppName }: watching ${ timeLog }`);
     }
 
     if (serves[dappName].error) {
@@ -127,18 +99,31 @@ const buildDApp = async (dappDir) => {
   const dappName = dappDir.split('/').pop();
   if (!serves[dappName].loading) {
     serves[dappName].loading = true;
-    serves[dappName].stderr = '';
+    serves[dappName].error = '';
     logServing();
+
+    // track the build time
+    const startTime = Date.now();
+    const timeCounter = setInterval(() => {
+      serves[dappName].duration = Math.round((Date.now() - startTime) / 1000);
+      logServing();
+    }, 1000);
 
     try {
       // navigate to the dapp dir and run the build command
       process.chdir(dappDir);
-      serves[dappName].stderr = (await runExec('npm run build')).stderr;
+
+      await runExec('npm run build', dappDir);
+
+      // clear timer and calculate time
+      serves[dappName].lastDuration = Math.round((Date.now() - startTime) / 1000);
 
       delete serves[dappName].error;
     } catch (ex) {
-      serves[dappName].error = ex.message;
+      serves[dappName].error = ex.stderr;
     }
+
+    clearInterval(timeCounter);
 
     // reset loading, rebuild if nessecary
     serves[dappName].loading = false;

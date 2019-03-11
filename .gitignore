@@ -14,3 +14,4 @@ dist
 documentation/*
 package-lock.json
 yarn.lock
+dapps/**/dist

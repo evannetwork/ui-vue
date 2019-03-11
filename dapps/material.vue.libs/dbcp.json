@@ -14,7 +14,7 @@
       "standalone": false,
       "type": "dapp"
     },
-    "dbcpVersion": 1,
+    "dbcpVersion": 2,
     "description": "",
     "i18n": {
       "description": {
