@@ -31,15 +31,13 @@ System.map['@evan.network/vue-core'] = `evan.vue.libs.${ getDomainName() }!dapp-
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import VueMaterial from 'vue-material';
 
 // import styles
-import './style/core.scss';
+import './style/index.scss';
 import { translations, registerEvanI18N } from './i18n/translate';
 import { registerComponents } from './registration';
 
 let VueCoreEvan = (Vue) => {
-  Vue.use(VueMaterial);
   Vue.use(Vuex);
 
   // register evan vue stuff

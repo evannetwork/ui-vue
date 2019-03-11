@@ -10,7 +10,7 @@
     "CSS"
   ],
   "main": "dist/index.js",
-  "name": "i18n.vuex.libs",
+  "name": "@evan.network/vuex-i18n",
   "scripts": {
     "build": "gulp"
   },

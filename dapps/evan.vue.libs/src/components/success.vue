@@ -41,8 +41,8 @@
 
 <style lang="scss" scoped>
   // Colors
-  @import '../style/themes/themes.scss';
-  $green: map-get($colors, success);
+  @import '~@evan.network/ui/src/style/utils';
+  $green: cssVar('green');
   $white: #fff;
 
   // Misc

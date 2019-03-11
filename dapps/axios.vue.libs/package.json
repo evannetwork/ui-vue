@@ -10,7 +10,7 @@
     "CSS"
   ],
   "main": "dist/index.js",
-  "name": "axios.vue.libs",
+  "name": "@evan.network/axios.vue.libs",
   "scripts": {
     "build": "gulp"
   },

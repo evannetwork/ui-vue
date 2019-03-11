@@ -3,10 +3,10 @@
     "author": "evan GmbH",
     "dapp": {
       "dependencies": {
-        "vuex.libs": "3.1.0",
+        "bootstrap.vue.libs": "^2.0.0",
         "i18n.vuex.libs": "1.11.0",
-        "material.vue.libs": "^1.0.0",
-        "vue.libs": "^2.5.0"
+        "vue.libs": "^2.5.0",
+        "vuex.libs": "3.1.0"
       },
       "entrypoint": "evan.vue.libs.js",
       "files": [

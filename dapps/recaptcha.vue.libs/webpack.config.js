@@ -6,7 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 
 
-const name = require('./package.json').name;
+const name = require('./dbcp.json').public.name;
 module.exports = {
   entry: './src/index.ts',
   externals: {

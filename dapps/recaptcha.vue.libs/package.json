@@ -10,7 +10,7 @@
     "CSS"
   ],
   "main": "dist/index.js",
-  "name": "recaptcha.vue.libs",
+  "name": "@evan.network/vue-recaptcha",
   "scripts": {
     "build": "gulp"
   },

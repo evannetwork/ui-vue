@@ -2,6 +2,7 @@
   "description": "",
   "devDependencies": {
     "@evan.network/api-blockchain-core": "^1.7.0",
+    "@evan.network/ui": "^1.0.0",
     "@evan.network/ui-dapp-browser": "^1.7.0",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
@@ -22,7 +23,6 @@
     "vue": "^2.5.2",
     "vue-class-component": "^6.0.0",
     "vue-loader": "^15.2.6",
-    "vue-material": "^1.0.0-beta-10.2",
     "vue-property-decorator": "^6.0.0",
     "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",

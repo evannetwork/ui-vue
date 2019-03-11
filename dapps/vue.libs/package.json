@@ -10,7 +10,7 @@
     "CSS"
   ],
   "main": "dist/index.js",
-  "name": "vue.libs",
+  "name": "@evan.network/vue-router",
   "scripts": {
     "build": "gulp"
   },
