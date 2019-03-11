@@ -1,4 +1,3 @@
-
 /*
   Copyright (C) 2018-present evan GmbH.
 
@@ -26,14 +25,3 @@
   https://evan.network/license/
 */
 
-@mixin recaptchaStyles($name, $colors, $sizes) {
-  .evan-theme-#{$name} {
-    .evan-recaptcha {
-      & > div {
-        left: 0;
-        right: 0;
-        margin: map-get($sizes, margin) auto 0 auto;
-      }
-    }
-  }
-}
