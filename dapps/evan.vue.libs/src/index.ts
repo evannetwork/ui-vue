@@ -26,7 +26,7 @@
 */
 
 // map the original vue path to vue.libs
-import { System, getDomainName, utils, lightwallet } from 'dapp-browser';
+import { System, getDomainName, utils, lightwallet } from '@evan.network/ui-dapp-browser';
 System.map['@evan.network/vue-core'] = `evan.vue.libs.${ getDomainName() }!dapp-content`;
 
 import Vue from 'vue';

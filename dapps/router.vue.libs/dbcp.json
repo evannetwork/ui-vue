@@ -11,7 +11,7 @@
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
-      "type": "dapp"
+      "type": "cached-dapp"
     },
     "dbcpVersion": 2,
     "description": "",

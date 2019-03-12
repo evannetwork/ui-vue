@@ -25,7 +25,7 @@
   https://evan.network/license/
 */
 // map the original vue path to i18n.vuex.libs
-import { System, getDomainName } from 'dapp-browser';
+import { System, getDomainName } from '@evan.network/ui-dapp-browser';
 System.map['vuex-i18n'] = `i18n.vuex.libs.${ getDomainName() }!dapp-content`;
 
 import vuexI18n from 'vuex-i18n';

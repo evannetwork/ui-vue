@@ -25,7 +25,7 @@
   https://evan.network/license/
 */
 // map the original vue path to axios.vue.libs
-import { System, getDomainName } from 'dapp-browser';
+import { System, getDomainName } from '@evan.network/ui-dapp-browser';
 System.map['axios'] = `axios.vue.libs.${ getDomainName() }!dapp-content`;
 
 import axios from 'axios';

@@ -25,10 +25,14 @@
   https://evan.network/license/
 */
 import SuccessComponent from './components/success.vue';
+import DashboardComponent from './components/dashboard.vue';
+import DashboardSidebarLevel2 from './components/dashboard-sidebar-level-2.vue';
 
 // list all components
 export const components = [
   { name: 'evan-success', comp: SuccessComponent },
+  { name: 'evan-dashboard', comp: DashboardComponent },
+  { name: 'dashboard-sidebar-level-2', comp: DashboardSidebarLevel2 },
 ];
 
 /**

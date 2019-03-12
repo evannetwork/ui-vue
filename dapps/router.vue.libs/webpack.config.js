@@ -9,9 +9,9 @@ const name = require('./dbcp.json').public.name;
 module.exports = {
   entry: './src/index.ts',
   externals: {
-    'bcc': 'bcc',
-    'dapp-browser': 'dapp-browser',
-    'smart-contracts': 'smart-contracts',
+    '@evan.network/api-blockchain-core': '@evan.network/api-blockchain-core',
+    '@evan.network/mart-contracts-co': '@evan.network/smart-contracts-core',
+    '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
     'vue': 'vue'
   },
   devtool: '#eval-source-map',
