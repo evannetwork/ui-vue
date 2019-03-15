@@ -24,9 +24,17 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
-// map the original vue path to axios.vue.libs
-import { getDomainName, System } from '@evan.network/ui-dapp-browser';
-System.map['axios'] = `axios.vue.libs.${ getDomainName() }!dapp-content`;
 
-import axios from 'axios';
-export default axios;
+// vue imports
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
+
+// evan.network imports
+import * as bcc from '@evan.network/api-blockchain-core';
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
+
+@Component({ })
+export default class DAppLoader extends Vue {
+
+}

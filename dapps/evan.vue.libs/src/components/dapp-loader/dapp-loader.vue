@@ -24,9 +24,11 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
-// map the original vue path to axios.vue.libs
-import { getDomainName, System } from '@evan.network/ui-dapp-browser';
-System.map['axios'] = `axios.vue.libs.${ getDomainName() }!dapp-content`;
 
-import axios from 'axios';
-export default axios;
+<template>
+</template>
+
+<script lang="ts">
+  import DAppLoader from './dapp-loader.ts';
+  export default DAppLoader;
+</script>

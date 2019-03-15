@@ -25,7 +25,7 @@
   https://evan.network/license/
 */
 // map the original vue path to vue.libs
-import { System, getDomainName } from '@evan.network/ui-dapp-browser';
+import { getDomainName, System } from '@evan.network/ui-dapp-browser';
 System.map['vue'] = `vue.libs.${ getDomainName() }!dapp-content`;
 
 import Vue from 'vue';

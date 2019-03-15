@@ -26,48 +26,16 @@
 */
 
 <template>
-  <div>
-    <slot name="content"></slot>
-  </div>
+  <div class="evan-loading"><div></div><div></div><div></div><div></div></div>
 </template>
 
 <script lang="ts">
+  // vue imports
   import Vue from 'vue';
-  import * as dappBrowser from '@evan.network/ui-dapp-browser';
+  import Component from 'vue-class-component';
 
-  export default Vue.extend({
-    /**
-     * Take the current element and search for an parent dashboard level 2 container, so move the
-     * current element to this element.
-     */
-    mounted() {
-      let parent: any = this.$el;
-      let dashboards: Array<any> = [ ];
-
-      // search until body or an dashboard body is reached
-      do {
-        parent = parent.parentElement;
-
-        // collect a list of all parent dashboard bodies, to be able to take the highest one 
-        if (parent.className.indexOf('dashboard-body') !== -1) {
-          dashboards.push(parent);
-        }
-      } while (parent !== document.body);
-
-      // if it's not the body, clear the latest dashboard-sidebar-2 element and 
-      if (dashboards.length > 0) {
-        dashboards.pop()
-          .querySelector('.dashboard-sidebar-2')
-          .appendChild(this.$el);
-      } else {
-        dappBrowser.utils.log(`dashboard-sidebar-level-2 element not included within an evan
-          dashboard...`, 'warning');
-      }
-    },
-  });
+  @Component({ })
+  export default class EvanLoading extends Vue { }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
 

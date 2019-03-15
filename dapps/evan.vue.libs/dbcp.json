@@ -3,7 +3,9 @@
     "author": "evan GmbH",
     "dapp": {
       "dependencies": {
+        "axios.vue.libs": "^0.18.0",
         "i18n.vuex.libs": "1.11.0",
+        "router.vue.libs": "^2.5.0",
         "vue.libs": "^2.5.0",
         "vuex.libs": "3.1.0"
       },

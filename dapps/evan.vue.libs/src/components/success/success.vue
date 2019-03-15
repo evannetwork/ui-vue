@@ -33,72 +33,15 @@
 </template>
 
 <script lang="ts">
+  // vue imports
   import Vue from 'vue';
-  export default Vue.extend({
-    methods: { }
-  });
+  import Component from 'vue-class-component';
+
+  @Component({ })
+  export default class EvanSuccess extends Vue { }
 </script>
 
 <style lang="scss" scoped>
-  // Colors
-  @import '~@evan.network/ui/src/style/utils';
-  $green: cssVar('green');
-  $white: #fff;
-
-  // Misc
-  $curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);
-
-  .checkmark {
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-    stroke-width: 2;
-    stroke: $white;
-    stroke-miterlimit: 10;
-    box-shadow: inset 0px 0px 0px $green;
-    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
-  }
-
-  .checkmark__circle {
-    stroke-dasharray: 166;
-    stroke-dashoffset: 166;
-    stroke-width: 2;
-    stroke-miterlimit: 10;
-    stroke: $green;
-    fill: none;
-    animation: stroke .6s $curve forwards;
-  }
-
-  .checkmark__check {
-    transform-origin: 50% 50%;
-    stroke-dasharray: 48;
-    stroke-dashoffset: 48;
-    animation: stroke .3s $curve .8s forwards;
-  }
-
-  @keyframes stroke {
-    100% {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  @keyframes scale {
-    0%, 100% {
-      transform: none;
-    }
-    50% {
-      transform: scale3d(1.1, 1.1, 1);
-    }
-  }
-
-  @keyframes fill {
-    100% {
-      box-shadow: inset 0px 0px 0px 50px $green;
-    }
-  }
+  @import './success.scss';
 </style>
 

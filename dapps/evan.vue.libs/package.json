@@ -10,7 +10,7 @@
     "CSS"
   ],
   "main": "dist/evan.vue.libs.js",
-  "name": "@evan.network/vue-core",
+  "name": "@evan.network/ui-vue-core",
   "scripts": {
     "build": "gulp"
   },

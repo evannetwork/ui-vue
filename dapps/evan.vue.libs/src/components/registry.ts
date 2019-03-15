@@ -25,39 +25,32 @@
   https://evan.network/license/
 */
 
-import de from './de';
-import en from './en';
-import Vuex from 'vuex';
-import vuexI18n from 'vuex-i18n';
+// import evan libs
+import { ComponentRegistrationInterface } from '../interfaces';
 
-// map all langugage
-const translations = { de, en };
+// import all components
+import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
+import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
+import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
+import SuccessComponent from './success/success.vue';
+import EvanLoading from './loading/loading.vue';
 
-/**
- * Register the current translations within vueJS.
- *
- * @param      {any}     Vue     vue prototype
- * @param      {any}     store   the vuex store
- */
-let registerEvanI18N = (Vue: any, store: any) => {
-  // add all i18n definitions
-  Object.keys(translations).forEach(key => Vue.i18n.add(key, translations[key]));
-};
+// export them all, so other applications can access them
+export {
+  DAppLoaderComponent,
+  DAppWrapperComponent,
+  DAppWrapperSidebarLevel2,
+  EvanLoading,
+  SuccessComponent,
+}
 
-/**
- * Setup vuexi18n plugin and register all i18n.
- *
- * @param      {any}     Vue     vue prototype
- * @param      {any}     store   the vuex store
- */
-const useI18N = (Vue: any, store: any) => {
-  Vue.use(vuexI18n.plugin, store);
+// map them to element names, so they can be used within templates
+const componentRegistration: Array<ComponentRegistrationInterface> = [
+  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
+  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },
+  { name: 'evan-dapp-loader', component: DAppLoaderComponent },
+  { name: 'evan-loading', component: EvanLoading },
+  { name: 'evan-success', component: SuccessComponent },
+];
 
-  // add all i18n definitions
-  registerEvanI18N(Vue, store);
-
-  // use defined or browser language
-  Vue.i18n.set(window.localStorage['evan-language'] || navigator.language.split('-')[0]);
-};
-
-export { translations, registerEvanI18N, useI18N }
+export default componentRegistration;

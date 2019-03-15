@@ -25,7 +25,7 @@
   https://evan.network/license/
 */
 // map the original vue path to recaptcha.vue.libs
-import { System, getDomainName } from '@evan.network/ui-dapp-browser';
+import { getDomainName, System } from '@evan.network/ui-dapp-browser';
 System.map['vue-recaptcha'] = `recaptcha.vue.libs.${ getDomainName() }!dapp-content`;
 
 import VueRecaptcha from 'vue-recaptcha';

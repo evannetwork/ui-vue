@@ -20,6 +20,8 @@ const path = require('path');
 const del = require('del');
 const exec = require('child_process').exec;
 const { runExec, scriptsFolder, isDirectory, getDirectories } = require('./lib');
+const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
+  process.env.NODE_ENV || 'development';
 
 const dappDirs = getDirectories(path.resolve('../dapps'));
 let longestDAppName = 0;
@@ -62,7 +64,7 @@ dappDirs.forEach(dappDir => {
 const logServing = () => {
   console.clear();
 
-  console.log('Watching DApps');
+  console.log(`Watching DApps: ${ nodeEnv }`);
   console.log('--------------\n');
 
   for (let dappDir of dappDirs) {

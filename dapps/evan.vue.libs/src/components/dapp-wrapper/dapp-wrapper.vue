@@ -26,7 +26,8 @@
 */
 
 <template>
-  <div class="evan-dashboard">
+  <div class="evan-dapp-wrapper"
+    :class="{ 'small-toolbar': smallToolbar }">
     <nav class="navbar">
       <div class="navbar-brand" href="#">
         <img class="brand-large" :src="$props.brandLarge">
@@ -34,7 +35,7 @@
       </div>
       <div class="nav">
         <div>
-          <button class="btn btn-lg">
+          <button class="btn btn-lg" @click="toggleSmallToolbar()">
             <i class="fas fa-bars"></i>
           </button>
         </div>
@@ -48,23 +49,57 @@
           <button class="btn btn-sm">
             <i class="far fa-envelope"></i>
           </button>
-          <button class="btn btn-sm">
+          <button class="btn btn-sm">showSideBar2
             <i class="fas fa-tasks"></i>
           </button>
         </div>
       </div>
     </nav>
 
-    <div class="dashboard-body">
-      <div class="dashboard-sidebar">
-        <slot name="sidebar"></slot>
+    <div class="dapp-wrapper-body"
+      :class="{
+        'show-sidebar': showSideBar,
+        'show-sidebar-2': showSideBar2
+      }">
+      <div class="dapp-wrapper-sidebar">
+        <div class="sidebar-header">
+          <div class="clickable">
+            <h5
+              v-if="showSideBar && showSideBar2"
+              @click="showSideBar2 = false;">
+              <i class="fas fa-chevron-left mr-2"></i>
+              {{ activeRouteTitle | translate }}
+            </h5>
+          </div>
+          <h3 class="mr-2" @click="showSideBar = false;">
+            <i class="fas fa-times close"></i>
+          </h3>
+        </div>
+        <slot name="sidebar">
+          <ul class="nav font-medium in" id="main-menu">
+            <li v-for="(route, index) in routes">
+              <a
+                :href="`#${ route.fullPath }`"
+                :class="{ active: $route.path.startsWith(route.fullPath) }"
+                @click="routeActivated(route)">
+                <i :class="'fas fa-' + route.icon" data-icon="v"></i>
+                <span class="hide-menu">{{ route.title | translate }}</span>
+              </a>
+            </li>
+          </ul>
+        </slot>
       </div>
 
-      <div class="dashboard-sidebar-2">
-        <!-- will be filled by using the dashboard-sidebar-level-2 component -->
+      <!-- close side panel on medium screens -->
+      <div class="dapp-wrapper-sidebar-background"
+        @click="showSideBar = false;">
       </div>
 
-      <div class="dashboard-content bg-gray-300">
+      <div class="dapp-wrapper-sidebar-2">
+        <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
+      </div>
+
+      <div class="dapp-wrapper-content bg-gray-300">
         <slot name="content"></slot>
       </div>
     </div>
@@ -72,27 +107,7 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import * as bcc from '@evan.network/api-blockchain-core';
-  import * as dappBrowser from '@evan.network/ui-dapp-browser';
-
-  export default Vue.extend({
-    props: {
-      brandLarge: String,
-      brandSmall: String,
-    },
-    data () {
-      return {
-        
-      }
-    },
-    async created() {
-
-    }
-  });
+  import DAppWrapper from './dapp-wrapper.ts';
+  export default DAppWrapper;
 </script>
-
-<style lang="scss" scoped>
-
-</style>
 

@@ -29,19 +29,11 @@
 import { System, getDomainName, utils, lightwallet } from '@evan.network/ui-dapp-browser';
 System.map['@evan.network/vue-core'] = `evan.vue.libs.${ getDomainName() }!dapp-content`;
 
-import Vue from 'vue';
-import Vuex from 'vuex';
+// export all components
+export * from './components/registry';
 
-// import styles
-import './style/index.scss';
-import { translations, registerEvanI18N } from './i18n/translate';
-import { registerComponents } from './registration';
+// export data interfaces
+export * from './interfaces';
 
-let VueCoreEvan = (Vue) => {
-  Vue.use(Vuex);
-
-  // register evan vue stuff
-  registerComponents(Vue);
-}
-
-export { VueCoreEvan, translations, registerEvanI18N };
+// export evan vue core
+export * from './vue-core';

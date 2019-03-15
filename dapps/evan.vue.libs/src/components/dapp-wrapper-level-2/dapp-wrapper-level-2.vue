@@ -24,27 +24,19 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
-import SuccessComponent from './components/success.vue';
-import DashboardComponent from './components/dashboard.vue';
-import DashboardSidebarLevel2 from './components/dashboard-sidebar-level-2.vue';
 
-// list all components
-export const components = [
-  { name: 'evan-success', comp: SuccessComponent },
-  { name: 'evan-dashboard', comp: DashboardComponent },
-  { name: 'dashboard-sidebar-level-2', comp: DashboardSidebarLevel2 },
-];
+<template>
+  <div>
+    <slot name="content"></slot>
+  </div>
+</template>
 
-/**
- * Registers the components within Vue. If a name is specified, register it also as component, not
- * only for routing.
- *
- * @param      {any}     Vue     vue prototype
- */
-export function registerComponents(Vue) {
-  // include all components
-  components.forEach((comp) => {
-    // register the component
-    Vue.component(comp.name, comp.comp);
-  });
-}
+<script lang="ts">
+  import DAppWrapperLevel2 from './dapp-wrapper-level-2.ts';
+  export default DAppWrapperLevel2;
+</script>
+
+<style lang="scss" scoped>
+
+</style>
+
