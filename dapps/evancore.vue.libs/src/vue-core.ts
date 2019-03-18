@@ -35,6 +35,7 @@ import { dapp, getDomainName, lightwallet,  System, utils } from '@evan.network/
 
 // import vue core stuff
 import evanComponents from './components/registry';
+import DAppLoaderComponent from './components/dapp-loader/dapp-loader';
 import evanTranslations from './i18n/translations';
 import {
   RouteRegistrationInterface,
@@ -94,9 +95,13 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
 
   return new Vue({
     el: options.container,
-    render: h => h(options.RootComponent),
     router,
     store,
+    render: render => render(options.RootComponent),
+    mounted: function () {
+      // add an element id, so the dapp-loader can detect already loaded nested dapps
+      this.$el.id = options.dbcpName;
+    }
   });
 }
 
@@ -129,12 +134,18 @@ export function initializeRouting(Vue: any, dbcpName: string, routes: Array<Rout
   const split = window.location.hash.split(baseDAppName);
   const beforePath = split[0];
   const routeBaseHash = (beforePath + baseDAppName).replace('#', '');
+  const rootRoute = `${ routeBaseHash }${ split[1] || '' }`;
+
+  // add initialy provided routes
+  [
+    // add dynamic dapp
+    { path: `${ routeBaseHash }/**`, name: 'dapp-loader', component: DAppLoaderComponent },
+  ].forEach((defaultRoute: RouteRegistrationInterface) => routes.push(defaultRoute));
 
   // initialize vue router using the provided routes
   const router = new VueRouter({ base: routeBaseHash, routes: routes });
-
   // start up the router!
-  router.push({ path: `${ routeBaseHash }${ split[1] || '' }` });
+  router.push({ path: rootRoute });
 
   return { routeBaseHash, router, };
 }

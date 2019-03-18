@@ -36,5 +36,47 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
 export default class DAppLoader extends Vue {
+  /**
+   * no valid dapp could be found for this route
+   */
+  dappNotFound: boolean;
 
+  async mounted() {
+    // get runtime from axios store (initialized by the parent dapp-wrapper)
+    const runtime = this.$store.state.runtime;
+
+    // parse current route by replacing all #/ and /# to handle incorrect navigations
+    const currentHash = decodeURIComponent(window.location.hash);
+
+    // get module id
+    let dappToStart;
+    const moduleIds = currentHash.split('/');
+    for (let moduleId of moduleIds) {
+      try {
+        // only start the dapp if a dbcp exists!
+        if (!document.getElementById(moduleId)) {
+          try {
+            const defintion = await runtime.definitions.getDescription(moduleId);
+            if (defintion && defintion.public && !document.getElementById(defintion.name)) {
+              dappToStart = moduleId;
+
+              break;
+            }
+          } catch (ex) { }
+        }
+      } catch (ex) { }
+    }
+
+    // if no dapp to start is found with the url (e.g. when opening an contract
+    // id), load the last url path
+    if (!dappToStart && moduleIds.length > 0) {
+      dappToStart = moduleIds[moduleIds.length - 1];
+    }
+
+    if (dappToStart) {
+      await dappBrowser.dapp.startDApp(dappToStart, this.$el);
+    } else {
+      this.dappNotFound = true;
+    }
+  }
 }

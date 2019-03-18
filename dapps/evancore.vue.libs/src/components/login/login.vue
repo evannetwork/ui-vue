@@ -34,10 +34,6 @@
       <br>
     </div>
     <div class="bg-level-1 mx-auto border password-dialog">
-      <!-- <h3 class="p-4">
-        {{ '_evan.login' | translate }}
-      </h3> -->
-
       <form class="p-4" v-on:submit.prevent="login">
         <div class="form-group">
           <label for="password">{{ '_evan.password' | translate }}</label>
@@ -73,4 +69,3 @@
 <style lang="scss" scoped>
   @import './login';
 </style>
-

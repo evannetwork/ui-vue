@@ -83,7 +83,7 @@ export default class EvanLoginComponent extends Vue {
 
       // get the current account id
       try {
-        this.form.password.value = await dappBrowser.bccHelper.isAccountPasswordValid(bcc,
+        this.form.password.valid = await dappBrowser.bccHelper.isAccountPasswordValid(bcc,
           this.accountId, this.form.password.value);
       } catch (ex) {
         this.form.password.value = false;
@@ -91,7 +91,7 @@ export default class EvanLoginComponent extends Vue {
 
       // if the password is correct, create the correct active vault in dapp-browser, so other
       // applications can access it
-      if (this.form.password.value) {
+      if (this.form.password.valid) {
         this.$emit('logged-in', this.form.password.value);
       }
 

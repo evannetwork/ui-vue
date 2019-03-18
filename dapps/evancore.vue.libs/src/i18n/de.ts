@@ -28,6 +28,13 @@
 /* tslint:disable */
 export default {
   "_evan": {
+    "_routes": {
+      "contacts": "Contacts",
+      "favorites": "Favorites",
+      "identities": "Identities",
+      "mailbox": "Messages",
+      "profile": "Profile"
+    },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "password": "Passwort",

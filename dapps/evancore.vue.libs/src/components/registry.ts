@@ -32,7 +32,6 @@ import { ComponentRegistrationInterface } from '../interfaces';
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
 import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
-import EvanLoadingComponent from './loading/loading.vue';
 import EvanLoginComponent from './login/login.vue';
 import SuccessComponent from './success/success.vue';
 
@@ -41,7 +40,6 @@ export {
   DAppLoaderComponent,
   DAppWrapperComponent,
   DAppWrapperSidebarLevel2Component,
-  EvanLoadingComponent,
   EvanLoginComponent,
   SuccessComponent,
 }
@@ -51,7 +49,6 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
-  { name: 'evan-loading', component: EvanLoadingComponent },
   { name: 'evan-login', component: EvanLoginComponent },
   { name: 'evan-success', component: SuccessComponent },
 ];
