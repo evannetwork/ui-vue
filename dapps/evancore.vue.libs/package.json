@@ -9,7 +9,7 @@
     "DApp",
     "CSS"
   ],
-  "main": "dist/evan.vue.libs.js",
+  "main": "dist/evancore.vue.libs.js",
   "name": "@evan.network/ui-vue-core",
   "scripts": {
     "build": "gulp"

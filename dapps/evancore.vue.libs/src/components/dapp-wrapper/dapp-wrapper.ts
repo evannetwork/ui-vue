@@ -68,7 +68,7 @@ export default class DAppWrapper extends Vue {
   /**
    * should be the runtime created? Includes onboarding & login checks.
    */
-  @Prop() createRuntime = true;
+  @Prop({ default: true }) createRuntime: any;
 
   /**
    * is the small toolbar shown on large devices?

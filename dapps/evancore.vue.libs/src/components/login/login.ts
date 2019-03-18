@@ -47,31 +47,27 @@ export default class EvanLoginComponent extends Vue {
   /**
    * formular specific variables
    */
-  form: any = {
+  form = {
     /**
      * current password input
      */
-    password: window.localStorage['evan-test-password'] || '',
-
-    valid: {
-      // check if the inserted password is wrong
-      password: false
+    password: {
+      value: window.localStorage['evan-test-password'] || '',
+      valid: false,
+      touched: false,
+      ref: null as any
     },
-
-    refs: {
-      password: null
-    }
   };
 
   /**
    * Focus the password element.
    */
   mounted() {
-    this.form.refs.password = this.$refs['password'];
-    this.form.refs.password.focus();
+    this.form.password.ref = this.$refs['password'];
+    this.form.password.ref.focus();
 
     // automatically login when user has specified a dev password
-    if (this.form.password) {
+    if (this.form.password.value) {
       this.login();
     }
   }
@@ -82,23 +78,24 @@ export default class EvanLoginComponent extends Vue {
    * @param      {any}  event   form submit event
    */
   async login() {
-    if (this.form.password.length > 7) {
+    if (this.form.password.value.length > 7) {
       this.checkingPassword = true;
 
       // get the current account id
       try {
-        this.form.valid.password = await dappBrowser.bccHelper.isAccountPasswordValid(bcc,
-          this.accountId, this.form.password);
+        this.form.password.value = await dappBrowser.bccHelper.isAccountPasswordValid(bcc,
+          this.accountId, this.form.password.value);
       } catch (ex) {
-        this.form.valid.password = false;
+        this.form.password.value = false;
       }
 
       // if the password is correct, create the correct active vault in dapp-browser, so other
       // applications can access it
-      if (this.form.valid.password) {
-        this.$emit('logged-in', this.form.password);
+      if (this.form.password.value) {
+        this.$emit('logged-in', this.form.password.value);
       }
 
+      this.form.password.touched = true;
       this.checkingPassword = false;
     }
   }

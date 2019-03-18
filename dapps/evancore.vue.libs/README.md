@@ -1,4 +1,4 @@
-# evan.vue.libs
+# evancore.vue.libs
 
 This is a evan.network DApp. To build and deploy your DApp, please visit the readme.md of your containing evan.network basic project.
 

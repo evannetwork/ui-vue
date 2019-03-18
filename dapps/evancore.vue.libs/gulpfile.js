@@ -47,7 +47,10 @@ gulp.task('build', async function () {
   const runtimeFolder = `../../node_modules/@evan.network/ui-dapp-browser/runtime/external/${dbcp.public.name}`;
 
   // clear the dist folder
-  del.sync(`${dappDir}/dist`, { force: true });
+  del.sync([
+    `${dappDir}/dist/**/*`,
+    `!${dappDir}/dist/dll-manifest.json`,
+  ], { force: true });
 
   try {
     // bundle everything using webpack

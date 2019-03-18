@@ -44,8 +44,8 @@
           <input class="form-control" type="password" required
             id="password" ref="password"
             :placeholder="'_evan.password-placeholder' | translate"
-            v-model="form.password"
-            v-bind:class="{ 'is-invalid' : !form.valid.password }">
+            v-model="form.password.value"
+            v-bind:class="{ 'is-invalid' : form.password.touched && !form.password.valid }">
           <div class="invalid-feedback">
             {{ '_evan.invalid-password' | translate }}
           </div>
@@ -53,7 +53,7 @@
 
         <div class="text-center">
           <button type="submit" class="btn btn-rounded btn-primary font-weight-normal"
-            :disabled="form.password.length < 8 || checkingPassword">
+            :disabled="form.password.value.length < 8 || checkingPassword">
             <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"
               v-if="checkingPassword">
             </span>

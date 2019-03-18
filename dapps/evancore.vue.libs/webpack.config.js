@@ -5,8 +5,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 
-// load not the name from package.json, it useds @evan.network/vue-core and not the dbcp origin
-const name = 'evan.vue.libs';
+// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
+const name = 'evancore.vue.libs';
 module.exports = {
   entry: './src/index.ts',
   externals: {
@@ -14,7 +14,7 @@ module.exports = {
     '@evan.network/smart-contracts-core': '@evan.network/smart-contracts-core',
     '@evan.network/ui': '@evan.network/ui',
     '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
-    '@evan.network/vue-core': '@evan.network/vue-core',
+    '@evan.network/ui-vue-core': '@evan.network/ui-vue-core',
     'axios': 'axios',
     'vue': 'vue',
     'vue-material': 'vue-material',
@@ -92,7 +92,11 @@ module.exports = {
       // both options are optional
       filename: `${ name }.css`,
       chunkFilename: `${ name }.css`,
-    })
+    }),
+    // new webpack.DllPlugin({
+    //   path: path.join(__dirname, "dist", "dll-manifest.json"),
+    //   name: `${ name }.js`
+    // })
   ],
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
