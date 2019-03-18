@@ -48,13 +48,13 @@ export default class DAppWrapperLevel2 extends Vue {
     do {
       parent = parent.parentElement;
 
-      // collect a list of all parent wrapper bodies, to be able to take the highest one 
+      // collect a list of all parent wrapper bodies, to be able to take the highest one
       if (parent.className.indexOf('dapp-wrapper-body') !== -1) {
         wrappers.push(parent);
       }
     } while (parent !== document.body);
 
-    // if it's not the body, clear the latest wrapper-sidebar-2 element and 
+    // if it's not the body, clear the latest wrapper-sidebar-2 element and
     if (wrappers.length > 0) {
       const highestSidebar = wrappers.pop().querySelector('.dapp-wrapper-sidebar-2');
 

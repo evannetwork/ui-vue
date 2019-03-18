@@ -1,0 +1,76 @@
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+
+  You can be released from the requirements of the GNU Affero General Public
+  License by purchasing a commercial license.
+  Buying such a license is mandatory as soon as you use this software or parts
+  of it on other blockchains than evan.network.
+
+  For more information, please contact evan GmbH at this address:
+  https://evan.network/license/
+*/
+
+<template>
+  <div class="bg-level-3 w-100 h-100 d-flex align-items-center flex-column">
+    <div class="text-center mt-5 mb-3">
+      <br>
+      <p class="text-secondary font-weight-bold">{{ '_evan.welcome-to-evan' | translate }}</p>
+      <h2>{{ '_evan.please-login' | translate }}</h2>
+      <br>
+    </div>
+    <div class="bg-level-1 mx-auto border password-dialog">
+      <!-- <h3 class="p-4">
+        {{ '_evan.login' | translate }}
+      </h3> -->
+
+      <form class="p-4" v-on:submit.prevent="login">
+        <div class="form-group">
+          <label for="password">{{ '_evan.password' | translate }}</label>
+          <input class="form-control" type="password" required
+            id="password" ref="password"
+            :placeholder="'_evan.password-placeholder' | translate"
+            v-model="form.password"
+            v-bind:class="{ 'is-invalid' : !form.valid.password }">
+          <div class="invalid-feedback">
+            {{ '_evan.invalid-password' | translate }}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-rounded btn-primary font-weight-normal"
+            :disabled="form.password.length < 8 || checkingPassword">
+            <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"
+              v-if="checkingPassword">
+            </span>
+            <span>{{ '_evan.use-password' | translate }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+  import EvanLoginComponent from './login.ts';
+  export default EvanLoginComponent;
+</script>
+
+<style lang="scss" scoped>
+  @import './login';
+</style>
+

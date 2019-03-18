@@ -66,7 +66,7 @@ export default class DAppWrapper extends Vue {
   @Prop() routeBaseHash: string;
 
   /**
-   * should be the runtime created?
+   * should be the runtime created? Includes onboarding & login checks.
    */
   @Prop() createRuntime = true;
 
@@ -74,6 +74,18 @@ export default class DAppWrapper extends Vue {
    * is the small toolbar shown on large devices?
    */
   smallToolbar: boolean = window.localStorage['evan-small-toolbar'] ? true : false;
+
+  /**
+   * Is the sidebar enabled and should be shown? Per defaul enabled, but when no routes are defined
+   * or the user is within an onboarding or login process, it will be true.
+   */
+  enableSidebar = true;
+
+  /**
+   * Enables the nav bar icons including mailbox, synchronisation, .... Will be disabled uring login
+   * or onboarding process.
+   */
+  enableNav = true;
 
   /**
    * show sidebar on small / medium devices?
@@ -85,12 +97,10 @@ export default class DAppWrapper extends Vue {
    */
   showSideBar2 = true;
 
-  constructor() {
-    super();
-
-    // map full path to check active route states
-    this.routes.forEach((route) => route.fullPath = `${ this.routeBaseHash }/${ route.path }`);
-  }
+  /**
+   * login function that was applied by the setPasswordFunction
+   */
+  login: Function|boolean = false;
 
   /**
    * Returns the i18n title key for the active route.
@@ -105,31 +115,6 @@ export default class DAppWrapper extends Vue {
     }
 
     return this.$route.path;
-  }
-
-  /**
-   * Initialize the core runtime for the evan network.
-   */
-  async created(): Promise<any> {
-    // if the runtime should be created, start it up
-    if (this.createRuntime) {
-      // check for logged in account and if its onboarded
-      const activeAccount = dappBrowser.core.activeAccount();
-
-      // check if a user is already logged in, if yes, navigate to the signed in route
-      if (activeAccount && window.localStorage['evan-vault']) {
-        let isOnboarded = false;
-        try {
-          isOnboarded = await dappBrowser.bccHelper.isAccountOnboarded(activeAccount);
-        } catch (ex) { }
-
-        if (!isOnboarded) {
-          return window.location.hash = `#/onboarding.${ dappBrowser.getDomainName() }`;
-        }
-      }
-
-      dappBrowser.loading.finishDAppLoading();
-    }
   }
 
   /**
@@ -164,5 +149,55 @@ export default class DAppWrapper extends Vue {
     if (!this.$route.path.startsWith(<string>route.fullPath)) {
       this.showSideBar = false;
     }
+  }
+
+  /**
+   * Initialize the core runtime for the evan network.
+   */
+  async created(): Promise<any> {
+    // disable sidebar, when no routes are defined
+    if (this.routes.length === 0) {
+      this.enableSidebar = false;
+    } else {
+      // else map full path to check active route states and translations
+      this.routes.forEach((route) => route.fullPath = `${ this.routeBaseHash }/${ route.path }`);
+    }
+
+    // if the runtime should be created, start it up
+    if (this.createRuntime) {
+      // check for logged in account and if its onboarded
+      const activeAccount = dappBrowser.core.activeAccount();
+      let loggedIn = false;
+      let isOnboarded = false;
+
+      // check if a user is already logged in, if yes, navigate to the signed in route
+      if (activeAccount && window.localStorage['evan-vault']) {
+        loggedIn = true;
+
+        try {
+          isOnboarded = await dappBrowser.bccHelper.isAccountOnboarded(activeAccount);
+        } catch (ex) { }
+      }
+
+      if (!isOnboarded || !loggedIn) {
+        return window.location.hash =
+          `#${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`;
+      } else {
+        // set the password function
+        dappBrowser.lightwallet.setPasswordFunction(async () =>
+          // set resolve password
+          await new Promise((resolve) => this.login = (password: string) => {
+            this.login = false;
+
+            resolve(password);
+          })
+        );
+
+        // unlock the profile directly
+        await dappBrowser.lightwallet.loadUnlockedVault();
+      }
+    }
+
+    dappBrowser.loading.finishDAppLoading();
   }
 }

@@ -31,25 +31,28 @@ import { ComponentRegistrationInterface } from '../interfaces';
 // import all components
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
 import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
-import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
+import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
+import EvanLoadingComponent from './loading/loading.vue';
+import EvanLoginComponent from './login/login.vue';
 import SuccessComponent from './success/success.vue';
-import EvanLoading from './loading/loading.vue';
 
 // export them all, so other applications can access them
 export {
   DAppLoaderComponent,
   DAppWrapperComponent,
-  DAppWrapperSidebarLevel2,
-  EvanLoading,
+  DAppWrapperSidebarLevel2Component,
+  EvanLoadingComponent,
+  EvanLoginComponent,
   SuccessComponent,
 }
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
-  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
-  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
-  { name: 'evan-loading', component: EvanLoading },
+  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
+  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
+  { name: 'evan-loading', component: EvanLoadingComponent },
+  { name: 'evan-login', component: EvanLoginComponent },
   { name: 'evan-success', component: SuccessComponent },
 ];
 

@@ -25,6 +25,16 @@
   https://evan.network/license/
 */
 
+/* tslint:disable */
 export default {
-
+  "_evan": {
+    "invalid-password": "Das eingegebene Passwort ist ungültig.",
+    "login": "Profil entsperren",
+    "password": "Passwort",
+    "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
+    "please-login": "Bitte entsperren Sie Ihr Profil um fortzufahren.",
+    "use-password": "Entsperren",
+    "welcome-to-evan": "Willkommen im evan.network"
+  }
 }
+/* tslint:enable */

@@ -33,7 +33,7 @@
         <img class="brand-large" :src="$props.brandLarge">
         <img class="brand-small" :src="$props.brandSmall">
       </div>
-      <div class="nav">
+      <div class="nav" v-if="enableNav && !login">
         <div>
           <button class="btn btn-lg" @click="toggleSmallToolbar()">
             <i class="fas fa-bars"></i>
@@ -49,7 +49,7 @@
           <button class="btn btn-sm">
             <i class="far fa-envelope"></i>
           </button>
-          <button class="btn btn-sm">showSideBar2
+          <button class="btn btn-sm">
             <i class="fas fa-tasks"></i>
           </button>
         </div>
@@ -57,6 +57,7 @@
     </nav>
 
     <div class="dapp-wrapper-body"
+      v-if="enableSidebar && !login"
       :class="{
         'show-sidebar': showSideBar,
         'show-sidebar-2': showSideBar2
@@ -99,7 +100,17 @@
         <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
       </div>
 
-      <div class="dapp-wrapper-content bg-gray-300">
+      <div class="dapp-wrapper-content">
+        <slot name="content"></slot>
+      </div>
+    </div>
+    <div class="dapp-wrapper-body" v-else>
+      <evan-login
+        v-if="login"
+        v-on:logged-in="login">
+      </evan-login>
+      <div class="dapp-wrapper-content"
+        v-else>
         <slot name="content"></slot>
       </div>
     </div>
