@@ -26,18 +26,42 @@
 */
 
 <template>
-  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-  </svg>
+  <div>
+    <template v-if="render">
+      <div class="modal fade" tabindex="-1" role="dialog"
+        :class="{ 'show': show }"
+        @click="hideModal()">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" v-on:click.stop>
+            <div class="modal-header">
+              <slot name="header"></slot>
+              <button type="button" class="close" aria-label="Close"
+                @click="hideModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <slot name="body"></slot>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary btn-rounded" data-dismiss="modal"
+                @click="hideModal()">
+                {{ '_evan.cancel' | translate }}
+              </button>
+              <slot name="footer"></slot>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-backdrop fade"
+        :class="{ 'show': show }">
+      </div>
+    </template>
+  </div>
 </template>
 
 <script lang="ts">
-  import SuccessComponent from './success.ts';
-  export default SuccessComponent;
+  import ModalComponent from './modal.ts';
+  export default ModalComponent;
 </script>
-
-<style lang="scss" scoped>
-  @import './success.scss';
-</style>
 

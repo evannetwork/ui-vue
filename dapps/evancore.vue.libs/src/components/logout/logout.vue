@@ -25,26 +25,34 @@
   https://evan.network/license/
 */
 
-/* tslint:disable */
-export default {
-  "_evan": {
-    "_routes": {
-      "contacts": "Contacts",
-      "favorites": "Favorites",
-      "identities": "Identities",
-      "mailbox": "Messages",
-      "profile": "Profile"
-    },
-    "cancel": "Cancel",
-    "invalid-password": "The provided password is invalid.",
-    "login": "Unlock profile",
-    "logout": "Logout",
-    "logout-desc": "Are you sure you want to logout?",
-    "password": "Password",
-    "password-placeholder": "Password from the original profile creation",
-    "please-login": "Please unlock your profile to continue.",
-    "use-password": "Unlock",
-    "welcome-to-evan": "Welcome to the evan.network"
-  }
-}
-/* tslint:enable */
+<template>
+  <div>
+    <evan-modal ref="logoutModal">
+      <template v-slot:header>
+        <h5 class="modal-title">
+          {{ '_evan.logout' | translate }}
+        </h5>
+      </template>
+      <template v-slot:body>
+        <p>{{ '_evan.logout-desc' | translate }}</p>
+      </template>
+      <template v-slot:footer>
+        <button type="button" class="btn btn-rounded btn-primary font-weight-normal"
+          @click="logout()">
+          {{ '_evan.logout' | translate }}
+        </button>
+      </template>
+    </evan-modal>
+
+    <button type="submit" class="btn btn-outline-secondary btn-rounded"
+      @click="$refs.logoutModal.showModal()">
+      <span>{{ '_evan.logout' | translate }}</span>
+    </button>
+  </div>
+</template>
+
+<script lang="ts">
+  import EvanLogoutComponent from './logout.ts';
+  export default EvanLogoutComponent;
+</script>
+

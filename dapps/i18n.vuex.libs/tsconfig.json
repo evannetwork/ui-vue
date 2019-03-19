@@ -13,12 +13,15 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
     "target": "es5"
   },
   "exclude": [
     "../../../node_modules/@evan.network"
   ],
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "../../shims/*"
   ]
 }

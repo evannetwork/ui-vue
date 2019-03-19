@@ -136,14 +136,15 @@ export function initializeRouting(Vue: any, dbcpName: string, routes: Array<Rout
   const routeBaseHash = (beforePath + baseDAppName).replace('#', '');
   const rootRoute = `${ routeBaseHash }${ split[1] || '' }`;
 
-  // add initialy provided routes
-  [
-    // add dynamic dapp
-    { path: `${ routeBaseHash }/**`, name: 'dapp-loader', component: DAppLoaderComponent },
-  ].forEach((defaultRoute: RouteRegistrationInterface) => routes.push(defaultRoute));
+  // add dynamic dapp-loader route
+  routes.push({ path: `**`, name: 'dapp-loader', component: DAppLoaderComponent });
+
+  // prefill routes with base hash
+  routes.forEach((route) => route.path = `${ routeBaseHash }/${ route.path }`);
 
   // initialize vue router using the provided routes
   const router = new VueRouter({ base: routeBaseHash, routes: routes });
+
   // start up the router!
   router.push({ path: rootRoute });
 

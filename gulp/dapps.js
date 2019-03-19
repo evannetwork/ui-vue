@@ -19,9 +19,7 @@ const gulp = require('gulp');
 const path = require('path');
 const del = require('del');
 const exec = require('child_process').exec;
-const { runExec, scriptsFolder, isDirectory, getDirectories } = require('./lib');
-const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
-  process.env.NODE_ENV || 'development';
+const { runExec, scriptsFolder, isDirectory, getDirectories, nodeEnv } = require('./lib');
 
 const dappDirs = getDirectories(path.resolve('../dapps'));
 let longestDAppName = 0;

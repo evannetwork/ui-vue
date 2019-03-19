@@ -1,3 +1,4 @@
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
@@ -36,7 +37,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
@@ -93,10 +94,7 @@ module.exports = {
       filename: `${ name }.css`,
       chunkFilename: `${ name }.css`,
     }),
-    // new webpack.DllPlugin({
-    //   path: path.join(__dirname, "dist", "dll-manifest.json"),
-    //   name: `${ name }.js`
-    // })
+    new HardSourceWebpackPlugin({ cacheDirectory: 'build-cache', })
   ],
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],

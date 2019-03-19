@@ -3,7 +3,6 @@
   "devDependencies": {
     "@evan.network/api-blockchain-core": "^1.7.0",
     "@evan.network/ui-dapp-browser": "^1.7.0",
-    "@evan.network/ui": "^1.0.0",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.0.0",
@@ -50,5 +49,8 @@
     "deploy": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/deployment.js deploy --config /Users/tschuck/projects/evan.network/ui/ui-vue-core/scripts/config/deployment.js",
     "serve": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/serve.js serve"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "hard-source-webpack-plugin": "^0.13.1"
+  }
 }

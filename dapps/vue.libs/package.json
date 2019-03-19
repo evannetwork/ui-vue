@@ -12,7 +12,7 @@
   "main": "dist/index.js",
   "name": "@evan.network/vue-router",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp --gulpfile ../../gulp/vue.js --dapp $(pwd)"
   },
   "typings": "dist/index.d.ts",
   "version": "2.5.2"

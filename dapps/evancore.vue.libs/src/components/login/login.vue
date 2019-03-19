@@ -58,12 +58,14 @@
         </div>
       </form>
     </div>
+
+    <evan-logout class="text-center mt-5"></evan-logout>
   </div>
 </template>
 
 <script lang="ts">
-  import EvanLoginComponent from './login.ts';
-  export default EvanLoginComponent;
+  import LoginComponent from './login.ts';
+  export default LoginComponent;
 </script>
 
 <style lang="scss" scoped>

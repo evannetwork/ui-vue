@@ -46,13 +46,13 @@ const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
 async function runExec(command, runtimeFolder) {
   return new Promise((resolve, reject) => {
     exec(command, { cwd: runtimeFolder, NODE_ENV: nodeEnv }, async (err, stdout, stderr) => {
-      if (err || stderr) {
-        reject({ stdout, stderr });
+      if (err) {
+        reject(stderr);
       } else {
-        resolve({ stdout, stderr });
+        resolve(stdout);
       }
     });
   });
 }
 
-module.exports = { runExec, scriptsFolder, isDirectory, getDirectories }
+module.exports = { runExec, scriptsFolder, isDirectory, getDirectories, nodeEnv }

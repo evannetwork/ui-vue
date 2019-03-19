@@ -32,7 +32,9 @@ import { ComponentRegistrationInterface } from '../interfaces';
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
 import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
-import EvanLoginComponent from './login/login.vue';
+import LoginComponent from './login/login.vue';
+import LogoutComponent from './logout/logout.vue';
+import ModalComponent from './modal/modal.vue';
 import SuccessComponent from './success/success.vue';
 
 // export them all, so other applications can access them
@@ -40,7 +42,9 @@ export {
   DAppLoaderComponent,
   DAppWrapperComponent,
   DAppWrapperSidebarLevel2Component,
-  EvanLoginComponent,
+  LoginComponent,
+  LogoutComponent,
+  ModalComponent,
   SuccessComponent,
 }
 
@@ -49,7 +53,9 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
-  { name: 'evan-login', component: EvanLoginComponent },
+  { name: 'evan-login', component: LoginComponent },
+  { name: 'evan-logout', component: LogoutComponent },
+  { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-success', component: SuccessComponent },
 ];
 

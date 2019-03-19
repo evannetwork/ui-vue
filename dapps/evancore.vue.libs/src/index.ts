@@ -24,7 +24,6 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
-
 // map the original vue path to vue.libs
 import { System, getDomainName, utils, lightwallet } from '@evan.network/ui-dapp-browser';
 System.map['@evan.network/ui-vue-core'] = `evancore.vue.libs.${ getDomainName() }!dapp-content`;

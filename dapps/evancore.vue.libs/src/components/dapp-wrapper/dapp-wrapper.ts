@@ -24,7 +24,6 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
-
 // vue imports
 import Vue from 'vue';
 import Component from 'vue-class-component';

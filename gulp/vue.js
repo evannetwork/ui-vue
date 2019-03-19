@@ -19,25 +19,8 @@ const gulp = require('gulp');
 const path = require('path');
 const del = require('del');
 const exec = require('child_process').exec;
-const dappDir = process.cwd();
-
-/**
- * Executes and console command
- *
- * @param      {string}       command  command to execute
- * @return     {Promise<any}  resolved when command is finished
- */
-async function runExec(command) {
-  return new Promise((resolve, reject) => {
-    exec(command, { }, async (err, stdout, stderr) => {
-      if (err) {
-        reject(stdout);
-      } else {
-        resolve(stdout);
-      }
-    });
-  });
-}
+const dappDir = process.argv[process.argv.indexOf('--dapp') + 1];
+const { runExec, scriptsFolder, isDirectory, getDirectories } = require('./lib');
 
 // Run Express, auto rebuild and restart on src changes
 gulp.task('build', async function () {
@@ -46,15 +29,20 @@ gulp.task('build', async function () {
   const dappConfig = dbcp.public.dapp;
   const runtimeFolder = `../../node_modules/@evan.network/ui-dapp-browser/runtime/external/${dbcp.public.name}`;
 
+  console.log(dappDir)
+
+  const distSources = [
+    `${ dappDir }/dist/**/*`,
+    `!${ dappDir }/dist/build-cache`,
+    `!${ dappDir }/dist/build-cache/**/*`,
+  ];  
+
   // clear the dist folder
-  del.sync([
-    `${dappDir}/dist/**/*`,
-    `!${dappDir}/dist/dll-manifest.json`,
-  ], { force: true });
+  del.sync(distSources, { force: true });
 
   try {
     // bundle everything using webpack
-    await runExec('../../node_modules/webpack/bin/webpack.js');
+    await runExec('../../node_modules/webpack/bin/webpack.js', dappDir);
 
     // copy the dbcp.json and all css files into the runtimeFolder
     await new Promise((resolve, reject) => {
@@ -71,7 +59,7 @@ gulp.task('build', async function () {
     // copy the build files into the runtimeFolder
     await new Promise((resolve, reject) => {
       gulp
-        .src(`${ dappDir }/dist/**/*`)
+        .src(distSources)
         .pipe(gulp.dest(runtimeFolder))
         .on('end', () => resolve());
     });

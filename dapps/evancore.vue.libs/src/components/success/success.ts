@@ -22,29 +22,13 @@
   of it on other blockchains than evan.network.
 
   For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
+https://evan.network/license/
 */
 
-/* tslint:disable */
-export default {
-  "_evan": {
-    "_routes": {
-      "contacts": "Contacts",
-      "favorites": "Favorites",
-      "identities": "Identities",
-      "mailbox": "Messages",
-      "profile": "Profile"
-    },
-    "cancel": "Cancel",
-    "invalid-password": "The provided password is invalid.",
-    "login": "Unlock profile",
-    "logout": "Logout",
-    "logout-desc": "Are you sure you want to logout?",
-    "password": "Password",
-    "password-placeholder": "Password from the original profile creation",
-    "please-login": "Please unlock your profile to continue.",
-    "use-password": "Unlock",
-    "welcome-to-evan": "Welcome to the evan.network"
-  }
-}
-/* tslint:enable */
+// vue imports
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
+
+@Component({ })
+export default class SuccessComponent extends Vue { }

@@ -21,6 +21,7 @@
     "../../../node_modules/@evan.network"
   ],
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "../../shims/*"
   ]
 }

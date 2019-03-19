@@ -122,4 +122,3 @@
   import DAppWrapper from './dapp-wrapper.ts';
   export default DAppWrapper;
 </script>
-

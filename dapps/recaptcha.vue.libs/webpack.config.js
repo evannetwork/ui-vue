@@ -1,3 +1,4 @@
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
@@ -90,7 +91,8 @@ module.exports = {
       // both options are optional
       filename: `${ name }.css`,
       chunkFilename: `${ name }.css`,
-    })
+    }),
+    new HardSourceWebpackPlugin({ cacheDirectory: 'build-cache', })
   ],
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
