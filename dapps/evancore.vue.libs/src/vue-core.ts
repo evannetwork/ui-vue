@@ -31,7 +31,7 @@ import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
 
 // import evan libs
-import { dapp, getDomainName, lightwallet,  System, utils } from '@evan.network/ui-dapp-browser';
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 // import vue core stuff
 import evanComponents from './components/registry';
@@ -65,18 +65,18 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   registerComponents(Vue, options.components);
 
   // setup dapp routing
-  const { routeBaseHash, router } = initializeRouting(Vue, options.dbcpName, options.routes);
+  const { routeBaseHash, router } = await initializeRouting(options);
 
   // load the vue evan core to get its origin and access the images
-  const vueCoreDbcp = await System.import('@evan.network/ui!ens');
-  const uiLibBaseUrl = dapp.getDAppBaseUrl(vueCoreDbcp,
-    `${ vueCoreDbcp.name }.${ getDomainName() }`);
+  const vueCoreDbcp = await dappBrowser.System.import('@evan.network/ui!ens');
+  const uiLibBaseUrl = dappBrowser.dapp.getDAppBaseUrl(vueCoreDbcp,
+    `${ vueCoreDbcp.name }.${ dappBrowser.getDomainName() }`);
 
   // initialze VueX
   Vue.use(Vuex);
   const store = new Vuex.Store({
     state: {
-      dappBaseUrl: options.dappBaseUrl,
+      options,
       routeBaseHash,
       uiLibBaseUrl,
       ...options.state
@@ -100,7 +100,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     render: render => render(options.RootComponent),
     mounted: function () {
       // add an element id, so the dapp-loader can detect already loaded nested dapps
-      this.$el.id = options.dbcpName;
+      this.$el.id = options.dappEnsOrContract;
     }
   });
 }
@@ -126,29 +126,86 @@ export function registerComponents(Vue: any, components: Array<ComponentRegistra
  * @param      {string}             dbcpName  current inserted dbcp name to map relative paths to it
  * @param      {ArrayEvanVueRoute}  routes    routes that should be added
  */
-export function initializeRouting(Vue: any, dbcpName: string, routes: Array<RouteRegistrationInterface>) {
-  Vue.use(VueRouter);
+export async function initializeRouting(options: EvanVueOptionsInterface) {
+  options.Vue.use(VueRouter);
 
   // get the correct base paths
-  const baseDAppName = `${ dbcpName }.${ getDomainName() }`;
-  const split = window.location.hash.split(baseDAppName);
-  const beforePath = split[0];
-  const routeBaseHash = (beforePath + baseDAppName).replace('#', '');
-  const rootRoute = `${ routeBaseHash }${ split[1] || '' }`;
+  const routeBaseHash = await dappPathToOpen(options.dappEnsOrContract);
 
   // add dynamic dapp-loader route
-  routes.push({ path: `**`, name: 'dapp-loader', component: DAppLoaderComponent });
+  options.routes.push({
+    path: `**`,
+    name: 'dapp-loader-' + (Math.random() + Date.now()),
+    component: DAppLoaderComponent
+  });
 
   // prefill routes with base hash
-  routes.forEach((route) => route.path = `${ routeBaseHash }/${ route.path }`);
+  options.routes.forEach((route) => route.path = `${ routeBaseHash }/${ route.path }`);
 
   // initialize vue router using the provided routes
-  const router = new VueRouter({ base: routeBaseHash, routes: routes });
+  const router = new VueRouter({ base: routeBaseHash, routes: options.routes });
 
   // start up the router!
-  router.push({ path: rootRoute });
+  const windowHash = decodeURIComponent(window.location.hash);
+  router.push({ path: windowHash.slice(1, windowHash.length) });
 
   return { routeBaseHash, router, };
+}
+
+/**
+ * Gets the
+ */
+export async function dappPathToOpen(dappEnsOrContract?: string) {
+  // parse current route by replacing all #/ and /# to handle incorrect navigations
+  const currentHash = decodeURIComponent(window.location.hash);
+  const coreRuntime = dappBrowser.bccHelper.getCoreRuntime();
+  const domainName = dappBrowser.getDomainName();
+
+  // get module id
+  let dappIndex;
+  const moduleIds = currentHash.split('/');
+
+  if (dappEnsOrContract) {
+    // start at index 1 to skip initial hash
+    for (let i = 1; i < moduleIds.length; i++) {
+      // check if the module id machtes the route one
+      if (moduleIds[i] === dappEnsOrContract) {
+        dappIndex = i;
+      }
+    }
+  }
+
+  // if no dappEnsOrContract was applied or this one wasn't found, try to track it dynamically
+  if (!dappIndex) {
+    // start at index 1 to skip initial hash
+    for (let i = 1; i < moduleIds.length; i++) {
+      // if an dapp ens was applied, only check these module id's
+      // if the module id should be checked, try to resolve the dbcp
+      if (!document.getElementById(moduleIds[i])) {
+        try {
+          // only load dapps with an valid description
+          const description = await coreRuntime.description.getDescription(moduleIds[i]);
+          // ensure, that the dapp wasn't loaded before
+          if (description && description.public &&
+            !document.getElementById(`${ description.public.name }.${ domainName }`)) {
+            dappIndex = i;
+
+            break;
+          }
+        } catch (ex) {
+          console.log(ex);
+        }
+      }
+    }
+  }
+
+  // if no dapp to start is found with the url (e.g. when opening an contract
+  // id), load the last url path
+  if (typeof dappIndex === 'undefined' && moduleIds.length > 0) {
+    dappIndex = moduleIds.length - 1;
+  }
+
+  return `/${ moduleIds.slice(1, dappIndex + 1).join('/') }`;
 }
 
 /**

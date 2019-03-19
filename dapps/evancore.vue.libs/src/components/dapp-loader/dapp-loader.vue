@@ -27,9 +27,7 @@
 
 <template>
   <div>
-    <div class="w-100 h-100 mt-5 text-center">
-      <div class="spinner-border text-secondary" role="status"></div>
-    </div>
+    <evan-loading></evan-loading>
   </div>
 </template>
 

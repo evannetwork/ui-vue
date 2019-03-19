@@ -31,7 +31,7 @@ const path = require('path');
 const del = require('del');
 const exec = require('child_process').exec;
 const dappDir = process.argv[process.argv.indexOf('--dapp') + 1];
-const { runExec, scriptsFolder, isDirectory, getDirectories } = require('./lib');
+const { runExec, scriptsFolder, isDirectory, getDirectories } = require('../gulp/lib');
 
 // Run Express, auto rebuild and restart on src changes
 gulp.task('build', async function () {
@@ -51,32 +51,39 @@ gulp.task('build', async function () {
   // clear the dist folder
   del.sync(distSources, { force: true });
 
-  try {
-    // bundle everything using webpack
-    await runExec('../../node_modules/webpack/bin/webpack.js', dappDir);
+  // bundle everything using webpack
+  await runExec('../../node_modules/webpack/bin/webpack.js', dappDir);
 
-    // copy the dbcp.json and all css files into the runtimeFolder
-    await new Promise((resolve, reject) => {
-      gulp
-        .src([
-          `${ dappDir }/dbcp.json`,
-          `${ dappDir }/src/**/*.css`,
-        ])
-        .pipe(gulp.dest(`${ dappDir }/dist`))
-        .pipe(gulp.dest(runtimeFolder))
-        .on('end', () => resolve());
-    });
+  // copy the dbcp.json and all css files into the runtimeFolder
+  await new Promise((resolve, reject) => {
+    gulp
+      .src([
+        `${ dappDir }/dbcp.json`,
+        `${ dappDir }/src/**/*.css`,
+      ])
+      .pipe(gulp.dest(`${ dappDir }/dist`))
+      .pipe(gulp.dest(runtimeFolder))
+      .on('end', () => resolve());
+  });
 
-    // copy the build files into the runtimeFolder
-    await new Promise((resolve, reject) => {
-      gulp
-        .src(distSources)
-        .pipe(gulp.dest(runtimeFolder))
-        .on('end', () => resolve());
-    });
-  } catch (ex) {
-    console.error(ex);
-  }
+  // copy all assets to the dist assets folder
+  await new Promise((resolve, reject) => {
+    gulp
+      .src([
+        `${ dappDir }/src/assets/**`,
+      ])
+      .pipe(gulp.dest(`${ dappDir }/dist/assets`))
+      .pipe(gulp.dest(runtimeFolder))
+      .on('end', () => resolve());
+  });
+
+  // copy the build files into the runtimeFolder
+  await new Promise((resolve, reject) => {
+    gulp
+      .src(distSources)
+      .pipe(gulp.dest(runtimeFolder))
+      .on('end', () => resolve());
+  });
 });
 
 gulp.task('default', [ 'build' ]);

@@ -45,7 +45,7 @@ export default class DAppWrapper extends Vue {
    */
   @Prop({
     default: function() {
-      return (this as any).$store.state.uiLibBaseUrl + '/assets/evan-logo-dark-half.svg';
+      return (<any>this).$store.state.uiLibBaseUrl + '/assets/evan-logo-dark-half.svg';
     }
   }) brandLarge: string;
 
@@ -54,7 +54,7 @@ export default class DAppWrapper extends Vue {
    */
   @Prop({
     default: function() {
-      return (this as any).$store.state.uiLibBaseUrl + '/assets/evan-logo-small.svg';
+      return (<any>this).$store.state.uiLibBaseUrl + '/assets/evan-logo-small.svg';
     }
   }) brandSmall: string;
 
@@ -86,7 +86,7 @@ export default class DAppWrapper extends Vue {
    */
   @Prop({
     default: function() {
-      return (this as any).$store.state.routeBaseHash;
+      return (<any>this).$store.state.routeBaseHash;
     }
   }) routeBaseHash: string;
 

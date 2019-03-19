@@ -92,7 +92,7 @@ const logServing = () => {
 
     if (serves[dappName].error) {
       console.log();
-      console.log(serves[dappName].error);
+      console.error(serves[dappName].error);
     }
   }
 
@@ -131,7 +131,7 @@ const buildDApp = async (dappDir) => {
 
       delete serves[dappName].error;
     } catch (ex) {
-      serves[dappName].error = ex.stderr;
+      serves[dappName].error = ex;
     }
 
     clearInterval(timeCounter);

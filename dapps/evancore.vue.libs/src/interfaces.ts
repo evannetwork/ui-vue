@@ -60,11 +60,12 @@ export interface ComponentRegistrationInterface {
 export interface EvanVueOptionsInterface {
   components: Array<ComponentRegistrationInterface>;
   container: Element;
+  dappBaseUrl: string;
+  dappEnsOrContract: string;
   dbcpName: string;
+  RootComponent: any;
   routes: Array<RouteRegistrationInterface>;
   state: any;
   translations: any;
   Vue: any;
-  dappBaseUrl: string;
-  RootComponent: any;
 }
