@@ -38,11 +38,70 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 @Component({ })
 export default class DAppLoader extends Vue {
   /**
+   * save the latest dapp path that was started, so we can check on an hash change, if the dapp for
+   * this dapp loader has been changed.
+   */
+  startedDAppPath: string;
+
+  /**
+   * Watch for hash updates and start a new dapp, when the corresponding hash for this dapp-loader
+   * has been changed
+   */
+  hashChangeWatcher: any;
+
+  /**
    * no valid dapp could be found for this route
    */
   dappNotFound: boolean;
 
+  /**
+   * Was the component destroyed, before the hash change event was bind?
+   */
+  wasDestroyed: boolean;
+
+  /**
+   * Start the dapp directly and create an hash change watcher, so we can react on hash changes to
+   * reload the dapp or to start another one.
+   */
   async mounted() {
+    await this.startDApp();
+
+    // set the hash change watcher, so we can remove it on component destroy
+    const dappLoader = this;
+    this.hashChangeWatcher = function() {
+      // if the startedDappPath for this hash level has been changed, load the new dapp
+      if (!window.location.hash.startsWith(`#${ dappLoader.startedDAppPath }`)) {
+        dappLoader.startDApp();
+      }
+    };
+
+    // add the hash change listener
+    window.addEventListener('hashchange', this.hashChangeWatcher);
+
+    // clear the watcher if the component was already destroyed
+    if (this.wasDestroyed) {
+      this.destroyed();
+    }
+  }
+
+  /**
+   * Clear the hash change watcher
+   */
+  destroyed() {
+    this.wasDestroyed = true;
+
+    // only remove the hashChangeWatcher, when it was already bind (asynchronious call can take
+    // longer and the dapp was switched before)
+    if (this.hashChangeWatcher) {
+      // add the hash change listener
+      window.removeEventListener('hashchange', this.hashChangeWatcher);
+    }
+  }
+
+  /**
+   * Searches for the next dapp in the url that should be started and run it
+   */
+  async startDApp() {
     // get runtime from axios store (initialized by the parent dapp-wrapper)
     const runtime = this.$store.state.runtime;
 
@@ -50,9 +109,16 @@ export default class DAppLoader extends Vue {
     const currentHash = decodeURIComponent(window.location.hash);
 
     // get module id
-    let dappToStart = (await dappPathToOpen()).split('/').pop();
-    if (dappToStart) {
-      await dappBrowser.dapp.startDApp(dappToStart, this.$el);
+    this.startedDAppPath = await dappPathToOpen();
+    if (this.startedDAppPath) {
+      // clear everything, that was loaded before
+      this.$el.innerHTML = '';
+
+      // create a new container el, vue will replace this element
+      const containerEl = document.createElement('div');
+      this.$el.appendChild(containerEl);
+
+      await dappBrowser.dapp.startDApp(this.startedDAppPath.split('/').pop(), containerEl);
     } else {
       this.dappNotFound = true;
     }

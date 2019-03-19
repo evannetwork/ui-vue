@@ -127,23 +127,37 @@ export function registerComponents(Vue: any, components: Array<ComponentRegistra
  * @param      {ArrayEvanVueRoute}  routes    routes that should be added
  */
 export async function initializeRouting(options: EvanVueOptionsInterface) {
+  // apply the router to vue
   options.Vue.use(VueRouter);
+
+  // do not use the original routes array, clone it!
+  const routes: Array<RouteRegistrationInterface> = [ ];
 
   // get the correct base paths
   const routeBaseHash = await dappPathToOpen(options.dappEnsOrContract);
 
+  // prefill routes with base hash
+  options.routes.forEach((route) => {
+    // clone the route, so we can adjust standalone route objects (without this, routeBaseHash was
+    // applied multiples times to rout.path)
+    const clonedRoute = Object.assign({ }, route);
+
+    // apply the correct absolute nested dapp hash origin
+    clonedRoute.path = `${ routeBaseHash }/${ route.path }`
+
+    // apply it to the routes
+    routes.push(clonedRoute);
+  });
+
   // add dynamic dapp-loader route
-  options.routes.push({
-    path: `**`,
+  routes.push({
+    path: `${ routeBaseHash }/**`,
     name: 'dapp-loader-' + (Math.random() + Date.now()),
     component: DAppLoaderComponent
   });
 
-  // prefill routes with base hash
-  options.routes.forEach((route) => route.path = `${ routeBaseHash }/${ route.path }`);
-
   // initialize vue router using the provided routes
-  const router = new VueRouter({ base: routeBaseHash, routes: options.routes });
+  const router = new VueRouter({ base: routeBaseHash, routes: routes });
 
   // start up the router!
   const windowHash = decodeURIComponent(window.location.hash);

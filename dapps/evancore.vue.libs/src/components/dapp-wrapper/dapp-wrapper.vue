@@ -63,45 +63,47 @@
         'show-sidebar-2': showSideBar2
       }">
       <template v-if="!login">
-        <div class="dapp-wrapper-sidebar" v-if="enableSidebar">
-          <div class="sidebar-header">
-            <div class="clickable">
-              <h5
-                v-if="showSideBar && showSideBar2"
-                @click="showSideBar2 = false;">
-                <i class="fas fa-chevron-left mr-2"></i>
-                {{ activeRouteTitle | translate }}
-              </h5>
+        <template v-if="!onboarding">
+          <div class="dapp-wrapper-sidebar" v-if="enableSidebar">
+            <div class="sidebar-header">
+              <div class="clickable">
+                <h5
+                  v-if="showSideBar && showSideBar2"
+                  @click="showSideBar2 = false;">
+                  <i class="fas fa-chevron-left mr-2"></i>
+                  {{ activeRouteTitle | translate }}
+                </h5>
+              </div>
+              <h3 class="mr-2" @click="showSideBar = false;">
+                <i class="fas fa-times close"></i>
+              </h3>
             </div>
-            <h3 class="mr-2" @click="showSideBar = false;">
-              <i class="fas fa-times close"></i>
-            </h3>
+            <slot name="sidebar">
+              <ul class="nav font-medium in" id="main-menu">
+                <li v-for="(route, index) in routes">
+                  <a
+                    :href="`#${ route.fullPath }`"
+                    :class="{ active: $route.path.startsWith(route.fullPath) }"
+                    @click="routeActivated(route)">
+                    <i :class="'fas fa-' + route.icon" data-icon="v"></i>
+                    <span class="hide-menu">{{ route.title | translate }}</span>
+                  </a>
+                </li>
+              </ul>
+            </slot>
           </div>
-          <slot name="sidebar">
-            <ul class="nav font-medium in" id="main-menu">
-              <li v-for="(route, index) in routes">
-                <a
-                  :href="`#${ route.fullPath }`"
-                  :class="{ active: $route.path.startsWith(route.fullPath) }"
-                  @click="routeActivated(route)">
-                  <i :class="'fas fa-' + route.icon" data-icon="v"></i>
-                  <span class="hide-menu">{{ route.title | translate }}</span>
-                </a>
-              </li>
-            </ul>
-          </slot>
-        </div>
 
-        <!-- close side panel on medium screens -->
-        <div class="dapp-wrapper-sidebar-background"
-          @click="showSideBar = false;">
-        </div>
+          <!-- close side panel on medium screens -->
+          <div class="dapp-wrapper-sidebar-background"
+            @click="showSideBar = false;">
+          </div>
 
-        <div class="dapp-wrapper-sidebar-2">
-          <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
-        </div>
+          <div class="dapp-wrapper-sidebar-2">
+            <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
+          </div>
+        </template>
 
-        <div class="dapp-wrapper-content" v-if="!login">
+        <div class="dapp-wrapper-content">
           <slot name="content"></slot>
         </div>
       </template>

@@ -134,6 +134,11 @@ export default class DAppWrapper extends Vue {
   login: Function|boolean = false;
 
   /**
+   * onboarding dapp is opened, so the user isn't logged in
+   */
+  onboarding: Function|boolean = false;
+
+  /**
    * Returns the i18n title key for the active route.
    *
    * @return     {string}  active route i18n or route path
@@ -243,6 +248,7 @@ export default class DAppWrapper extends Vue {
 
     if (!isOnboarded || !loggedIn) {
       this.loading = false;
+      this.onboarding = true;
 
       return window.location.hash =
         `#${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`;
