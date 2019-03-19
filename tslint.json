@@ -1,6 +1,4 @@
 {
-  "rulesDirectory": [
-  ],
   "rules": {
     "class-name": true,
     "comment-format": [
@@ -87,5 +85,6 @@
       "check-separator",
       "check-type"
     ]
-  }
+  },
+  "rulesDirectory": []
 }
