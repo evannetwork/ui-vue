@@ -120,11 +120,10 @@ export function registerComponents(Vue: any, components: Array<ComponentRegistra
 }
 
 /**
- * Start the routing for a vue application.
+ * Start the routing for a vue application. Clones the original routes and sets the base routing (=
+ * current dapp that should be opened).
  *
- * @param      {any}                Vue       vue prototype
- * @param      {string}             dbcpName  current inserted dbcp name to map relative paths to it
- * @param      {ArrayEvanVueRoute}  routes    routes that should be added
+ * @param      {EvanVueOptionsInterface}  options  Evan vue options
  */
 export async function initializeRouting(options: EvanVueOptionsInterface) {
   // apply the router to vue
@@ -167,7 +166,21 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
 }
 
 /**
- * Gets the
+ * Retrieves the url hash path for the next dapp, that should be loaded, by checking the
+ * dappEnsOrContract address or by tracing every url hash part and checks, if an element with the
+ * dom id exists.
+ *
+ * E.g.: opened url #/dashboard.evan/onboarding.evan
+ *
+ *   1. dashboard.evan element was not found, start it
+ *   2. dashboard.evan/** will be triggered and loads the dapp-loader compoment
+ *   3. dapp-loader tracks the url hashes and detects the dashboard.evan/onboarding.evan route and
+ *      will start this dapp in the dapp-loader
+ *   4. when navigating to /dashboard.evan/identities.evan, the dapp-loader trackts the url change
+ *      and 3. will be started with the new url hash
+ *
+ * @param      {string}  dappEnsOrContract  The dapp ens or contract (e.g.
+ *                                          /dashboard.evan/onboarding.evan)
  */
 export async function dappPathToOpen(dappEnsOrContract?: string) {
   // parse current route by replacing all #/ and /# to handle incorrect navigations
