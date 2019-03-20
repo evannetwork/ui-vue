@@ -33,7 +33,7 @@
         <img class="brand-large" :src="$props.brandLarge">
         <img class="brand-small" :src="$props.brandSmall">
       </div>
-      <div class="nav" v-if="!login">
+      <div class="nav" v-if="!login && !onboarding">
         <div>
           <button class="btn btn-lg" @click="toggleSmallToolbar()">
             <i class="fas fa-bars"></i>

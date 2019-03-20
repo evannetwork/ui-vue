@@ -139,6 +139,12 @@ export default class DAppWrapper extends Vue {
   onboarding: Function|boolean = false;
 
   /**
+   * Watch for hash updates when the user is on the onboarding screen. Wait for the user to finished
+   * the process.
+   */
+  hashChangeWatcher: any;
+
+  /**
    * Returns the i18n title key for the active route.
    *
    * @return     {string}  active route i18n or route path
@@ -211,6 +217,21 @@ export default class DAppWrapper extends Vue {
     dappBrowser.loading.finishDAppLoading();
   }
 
+
+  /**
+   * Clear the hash change watcher
+   */
+  destroyed() {
+    // only remove the hashChangeWatcher, when it was already bind (user was on the onboarding)
+    if (this.hashChangeWatcher) {
+      // remove the hash change listener
+      window.removeEventListener('hashchange', this.hashChangeWatcher);
+    }
+  }
+
+  /**
+   * Check for parent dapp-wrapper elements and disable nav / sidebar if needed
+   */
   async mounted() {
     let parent: any = this.$el;
 
@@ -250,10 +271,35 @@ export default class DAppWrapper extends Vue {
       this.loading = false;
       this.onboarding = true;
 
-      return window.location.hash =
-        `#${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`;
+      // if the watcher was already bound, remove it!
+      if (this.hashChangeWatcher) {
+         window.removeEventListener('hashchange', this.hashChangeWatcher);
+      }
+
+      // set the hash change watcher, so we can check that the user finished the onboarding process
+      const dappLoader = this;
+      this.hashChangeWatcher = function() {
+        if (window.location.hash.indexOf(`onboarding.${ dappBrowser.getDomainName() }`) === -1) {
+          // recheck login and onboarding
+          dappLoader.handleLoginOnboarding();
+        }
+      };
+
+      // add the hash change listener
+      window.addEventListener('hashchange', this.hashChangeWatcher);
+
+      // navigate to the onboarding and apply the current hash as origin, so the onboarding can
+      // navigate back their
+      return this.$router.push({
+        path: `${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`,
+        query: {
+          origin: this.$route.hash,
+          ...this.$route.query,
+        }
+      });
     } else {
       this.loading = false;
+      this.onboarding = false;
 
       // set the password function
       dappBrowser.lightwallet.setPasswordFunction(async () =>

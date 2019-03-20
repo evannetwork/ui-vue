@@ -184,7 +184,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  */
 export async function dappPathToOpen(dappEnsOrContract?: string) {
   // parse current route by replacing all #/ and /# to handle incorrect navigations
-  const currentHash = decodeURIComponent(window.location.hash);
+  const currentHash = decodeURIComponent(window.location.hash).split('?')[0];
   const coreRuntime = dappBrowser.bccHelper.getCoreRuntime();
   const domainName = dappBrowser.getDomainName();
 

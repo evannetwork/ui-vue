@@ -93,7 +93,7 @@ export default class DAppLoader extends Vue {
     // only remove the hashChangeWatcher, when it was already bind (asynchronious call can take
     // longer and the dapp was switched before)
     if (this.hashChangeWatcher) {
-      // add the hash change listener
+      // remove the hash change listener
       window.removeEventListener('hashchange', this.hashChangeWatcher);
     }
   }
@@ -102,12 +102,6 @@ export default class DAppLoader extends Vue {
    * Searches for the next dapp in the url that should be started and run it
    */
   async startDApp() {
-    // get runtime from axios store (initialized by the parent dapp-wrapper)
-    const runtime = this.$store.state.runtime;
-
-    // parse current route by replacing all #/ and /# to handle incorrect navigations
-    const currentHash = decodeURIComponent(window.location.hash);
-
     // get module id
     this.startedDAppPath = await dappPathToOpen();
     if (this.startedDAppPath) {

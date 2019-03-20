@@ -26,7 +26,7 @@
 */
 
 <template>
-  <div>
+  <div class="h-100">
     <evan-loading></evan-loading>
   </div>
 </template>
