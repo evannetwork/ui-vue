@@ -54,7 +54,7 @@ export default class LoginComponent extends Vue {
     password: {
       value: window.localStorage['evan-test-password'] || '',
       valid: false,
-      touched: false,
+      dirty: false,
       ref: null as any
     },
   };
@@ -95,7 +95,7 @@ export default class LoginComponent extends Vue {
         this.$emit('logged-in', this.form.password.value);
       }
 
-      this.form.password.touched = true;
+      this.form.password.dirty = true;
       this.checkingPassword = false;
     }
   }

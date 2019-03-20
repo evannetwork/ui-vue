@@ -69,3 +69,12 @@ export interface EvanVueOptionsInterface {
   translations: any;
   Vue: any;
 }
+
+/**
+ * Represents one generalized form control within an vue form.
+ */
+export interface EvanFormControlOptions {
+  validator?: Function;
+  name: string;
+  value?: any;
+}

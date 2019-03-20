@@ -37,6 +37,13 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 @Component({ })
 export default class EvanLogoutComponent extends Vue {
   /**
+   * Show the logout modal
+   */
+  showLogoutModal() {
+    (<any>this.$refs.logoutModal).showModal();
+  }
+
+  /**
    * Logout the user.
    */
   logout() {

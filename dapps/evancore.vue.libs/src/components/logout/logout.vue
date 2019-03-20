@@ -44,10 +44,12 @@
       </template>
     </evan-modal>
 
-    <button type="submit" class="btn btn-outline-secondary btn-rounded"
-      @click="$refs.logoutModal.showModal()">
-      <span>{{ '_evan.logout' | translate }}</span>
-    </button>
+    <slot name="button">
+      <button type="submit" class="btn btn-outline-secondary btn-rounded"
+        @click="showLogoutModal()">
+        <span>{{ '_evan.logout' | translate }}</span>
+      </button>
+    </slot>
   </div>
 </template>
 

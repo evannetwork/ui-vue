@@ -31,7 +31,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
-import { dappPathToOpen } from '../../vue-core';
+import { dappPathToOpen } from '../../routing';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 

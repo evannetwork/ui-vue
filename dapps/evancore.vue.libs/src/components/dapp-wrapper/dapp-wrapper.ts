@@ -288,15 +288,19 @@ export default class DAppWrapper extends Vue {
       // add the hash change listener
       window.addEventListener('hashchange', this.hashChangeWatcher);
 
-      // navigate to the onboarding and apply the current hash as origin, so the onboarding can
-      // navigate back their
-      return this.$router.push({
-        path: `${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`,
-        query: {
-          origin: this.$route.hash,
-          ...this.$route.query,
-        }
-      });
+      if (this.$route.path.indexOf(`/onboarding.${ domainName }`) === -1) {
+        // navigate to the onboarding and apply the current hash as origin, so the onboarding can
+        // navigate back their
+        this.$router.push({
+          path: `${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`,
+          query: {
+            origin: this.$route.path,
+            ...this.$route.query,
+          }
+        });
+      }
+
+      return;
     } else {
       this.loading = false;
       this.onboarding = false;
@@ -304,11 +308,8 @@ export default class DAppWrapper extends Vue {
       // set the password function
       dappBrowser.lightwallet.setPasswordFunction(async () =>
         // set resolve password
-        await new Promise((resolve) => this.login = (password: string) => {
-          this.login = false;
-
-          resolve(password);
-        })
+        await new Promise((resolve) =>
+          this.login = (password: string) => resolve(password))
       );
 
       // unlock the profile directly
@@ -321,6 +322,8 @@ export default class DAppWrapper extends Vue {
         vault.encryptionKey,
         dappBrowser.lightwallet.getPrivateKey(vault, activeAccount)
       );
+
+      this.login = false;
     }
   }
 }

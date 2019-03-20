@@ -34,9 +34,10 @@ declare module '*.vue' {
   import vuexI18n from 'vuex-i18n';
 
   class EvanVue extends Vue {
+    $i18n: vuexI18n;
     $route: VueRouter;
     $store: Vuex;
-    $t: vuexI18n;
+    $t: any;
   }
 
   export default EvanVue;

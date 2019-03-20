@@ -34,6 +34,17 @@
       <br>
     </div>
     <div class="bg-level-1 mx-auto border password-dialog">
+      <div class="d-flex p-2 pt-3 pb-3 align-items-center justify-content-between border-bottom">
+        <h4 class="m-0 ml-3">{{ '_evan.login' | translate }}</h4>
+        <evan-logout ref="evanLogout">
+          <template v-slot:button>
+            <button type="button" class="btn"
+              @click="$refs.evanLogout.showLogoutModal()">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </template>
+        </evan-logout>
+      </div>
       <form class="p-4" v-on:submit.prevent="login">
         <div class="form-group">
           <label for="password">{{ '_evan.password' | translate }}</label>
@@ -41,7 +52,7 @@
             id="password" ref="password"
             :placeholder="'_evan.password-placeholder' | translate"
             v-model="form.password.value"
-            v-bind:class="{ 'is-invalid' : form.password.touched && !form.password.valid }">
+            v-bind:class="{ 'is-invalid' : form.password.dirty && !form.password.valid }">
           <div class="invalid-feedback">
             {{ '_evan.invalid-password' | translate }}
           </div>
@@ -58,8 +69,6 @@
         </div>
       </form>
     </div>
-
-    <evan-logout class="text-center mt-5"></evan-logout>
   </div>
 </template>
 

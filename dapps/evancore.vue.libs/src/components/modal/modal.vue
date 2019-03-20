@@ -28,7 +28,7 @@
 <template>
   <div>
     <template v-if="render">
-      <div class="modal fade" tabindex="-1" role="dialog"
+      <div class="modal fade" tabindex="-1"
         :class="{ 'show': show }"
         @click="hideModal()">
         <div class="modal-dialog" role="document">
@@ -44,7 +44,7 @@
               <slot name="body"></slot>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary btn-rounded" data-dismiss="modal"
+              <button type="button" class="btn btn-outline-secondary btn-rounded"
                 @click="hideModal()">
                 {{ '_evan.cancel' | translate }}
               </button>

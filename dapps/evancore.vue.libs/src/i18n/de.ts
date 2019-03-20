@@ -35,7 +35,7 @@ export default {
       "mailbox": "Messages",
       "profile": "Profile"
     },
-    "cancel": "Abbrechen",
+    "cancel": "schließen",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
