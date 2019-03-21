@@ -93,10 +93,12 @@ export default class LoginComponent extends Vue {
       // applications can access it
       if (this.form.password.valid) {
         this.$emit('logged-in', this.form.password.value);
+      } else {
+        // only enable button when password is invalid
+        this.checkingPassword = false;
       }
 
       this.form.password.dirty = true;
-      this.checkingPassword = false;
     }
   }
 }

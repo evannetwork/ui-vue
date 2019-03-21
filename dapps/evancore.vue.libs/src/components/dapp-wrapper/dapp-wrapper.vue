@@ -29,7 +29,9 @@
   <div class="evan-dapp-wrapper"
     :class="{ 'small-toolbar': smallToolbar }">
     <nav class="navbar" v-if="enableNav">
-      <div class="navbar-brand" href="#">
+      <div class="navbar-brand"
+        :class="{ 'clickable': !onboarding }"
+        @click="openRouteBaseHash()">
         <img class="brand-large" :src="$props.brandLarge">
         <img class="brand-small" :src="$props.brandSmall">
       </div>
@@ -79,17 +81,32 @@
               </h3>
             </div>
             <slot name="sidebar">
-              <ul class="nav font-medium in" id="main-menu">
-                <li v-for="(route, index) in routes">
-                  <a
-                    :href="`#${ route.fullPath }`"
-                    :class="{ active: $route.path.startsWith(route.fullPath) }"
-                    @click="routeActivated(route)">
-                    <i :class="'fas fa-' + route.icon" data-icon="v"></i>
-                    <span class="hide-menu">{{ route.title | translate }}</span>
-                  </a>
-                </li>
-              </ul>
+              <div class="d-flex flex-column h-100">
+                <ul class="nav font-medium in w-100" id="main-menu">
+                  <li v-for="(route, index) in routes">
+                    <a
+                      :href="`#${ route.fullPath }`"
+                      :class="{ active: $route.path.startsWith(route.fullPath) }"
+                      @click="routeActivated(route)">
+                      <i :class="route.icon" data-icon="v"></i>
+                      <span class="hide-menu">{{ route.title | translate }}</span>
+                    </a>
+                  </li>
+                </ul>
+
+                <ul class="nav small font-medium in w-100 mb-3 mt-auto" id="main-menu"
+                  v-if="bottomRoutes">
+                  <li v-for="(route, index) in bottomRoutes">
+                    <a
+                      :href="`#${ route.fullPath }`"
+                      :class="{ active: $route.path.startsWith(route.fullPath) }"
+                      @click="routeActivated(route)">
+                      <i :class="route.icon" data-icon="v"></i>
+                      <span class="hide-menu">{{ route.title | translate }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </slot>
           </div>
 

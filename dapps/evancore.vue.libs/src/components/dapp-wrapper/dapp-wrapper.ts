@@ -75,11 +75,19 @@ export default class DAppWrapper extends Vue {
         { title: `${ i18nPref }.identities`, path: `identities.${ domainName }`, icon: 'fas fa-id-card' },
         { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'fas fa-bookmark' },
         { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
-        { title: `${ i18nPref }.contacts`, path: `contacts.${ domainName }`, icon: 'fas fa-address-book' },
+        { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'fas fa-address-book' },
         { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'fas fa-user' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
+
+  /**
+   * organized like the normal routes, but displayed smaller on the bottom of the nav
+   */
+  @Prop({
+    type: Array,
+  }) bottomRoutes: Array<DAppWrapperRouteInterface>;
+
 
   /**
    * base url of the vue component that uses the dapp-wrapper (e.g.: dashboard.evan)
@@ -151,7 +159,9 @@ export default class DAppWrapper extends Vue {
    */
   get activeRouteTitle(): string {
     if (this.routes) {
-      for (let i = 0; i < this.routes.length; i++) {
+      const allRoutes = (<any>[ ]).concat(this.routes, this.bottomRoutes || [ ]);
+
+      for (let i = 0; i < allRoutes.length; i++) {
         if (this.$route.path.startsWith(<string>this.routes[i].fullPath)) {
           return this.routes[i].title;
         }
@@ -204,7 +214,8 @@ export default class DAppWrapper extends Vue {
       this.enableSidebar = false;
     } else {
       // else map full path to check active route states and translations
-      this.routes.forEach((route) => route.fullPath = `${ this.routeBaseHash }/${ route.path }`);
+      (<any>[ ]).concat(this.routes, this.bottomRoutes || [ ])
+        .forEach((route) => route.fullPath = `${ this.routeBaseHash }/${ route.path }`);
     }
 
     // if the runtime should be created, start it up
@@ -213,8 +224,6 @@ export default class DAppWrapper extends Vue {
     } else {
       this.loading = false;
     }
-
-    dappBrowser.loading.finishDAppLoading();
   }
 
 
@@ -324,6 +333,15 @@ export default class DAppWrapper extends Vue {
       );
 
       this.login = false;
+    }
+  }
+
+  /**
+   * Navigates the user to the root page of the dapp.
+   */
+  openRouteBaseHash() {
+    if (!this.onboarding) {
+      this.$router.push({ path: this.$store.state.routeBaseHash })
     }
   }
 }

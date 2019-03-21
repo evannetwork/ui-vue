@@ -29,37 +29,40 @@
 import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
-import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
+import DAppLoader from './dapp-loader/dapp-loader.vue';
 import DAppLoading from './loading/loading.vue';
-import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
-import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
-import LoginComponent from './login/login.vue';
-import LogoutComponent from './logout/logout.vue';
-import ModalComponent from './modal/modal.vue';
-import SuccessComponent from './success/success.vue';
+import DAppWrapper from './dapp-wrapper/dapp-wrapper.vue';
+import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
+import Login from './login/login.vue';
+import Logout from './logout/logout.vue';
+import Modal from './modal/modal.vue';
+import Success from './success/success.vue';
+import EvanIframe from './iframe/iframe.vue';
 
 // export them all, so other applications can access them
 export {
-  DAppLoaderComponent,
+  DAppLoader,
   DAppLoading,
-  DAppWrapperComponent,
-  DAppWrapperSidebarLevel2Component,
-  LoginComponent,
-  LogoutComponent,
-  ModalComponent,
-  SuccessComponent,
+  DAppWrapper,
+  DAppWrapperSidebarLevel2,
+  EvanIframe,
+  Login,
+  Logout,
+  Modal,
+  Success,
 }
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
-  { name: 'evan-dapp-loader', component: DAppLoaderComponent },
-  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
-  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
+  { name: 'evan-dapp-loader', component: DAppLoader },
+  { name: 'evan-dapp-wrapper', component: DAppWrapper },
+  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },
+  { name: 'evan-iframe', component: EvanIframe },
   { name: 'evan-loading', component: DAppLoading },
-  { name: 'evan-login', component: LoginComponent },
-  { name: 'evan-logout', component: LogoutComponent },
-  { name: 'evan-modal', component: ModalComponent },
-  { name: 'evan-success', component: SuccessComponent },
+  { name: 'evan-login', component: Login },
+  { name: 'evan-logout', component: Logout },
+  { name: 'evan-modal', component: Modal },
+  { name: 'evan-success', component: Success },
 ];
 
 export default componentRegistration;

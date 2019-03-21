@@ -89,7 +89,10 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   // use defined or browser language
   Vue.i18n.set(window.localStorage['evan-language'] || navigator.language.split('-')[0]);
 
-  return new Vue({
+  // hide the initial loading screen
+  dappBrowser.loading.finishDAppLoading();
+
+  const vue = new Vue({
     el: options.container,
     router,
     store,
@@ -99,6 +102,15 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       this.$el.id = options.dappEnsOrContract;
     }
   });
+
+  /**
+   * Specify a custom navigation method for evan vue projects.
+   */
+  vue.$router.evanNavigate = function(path) {
+    window.location.hash = `${ routeBaseHash }/${ path }`;
+  }.bind(vue);
+
+  return vue;
 }
 
 /**
