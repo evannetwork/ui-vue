@@ -109,6 +109,15 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
        */
       activeDApp: function() {
         return dappToLoad;
+      },
+
+      /**
+       * Returns the current runtime from the state or returns an dappBrowser core runtime.
+       *
+       * @return     {any}  bcc runtime
+       */
+      getRuntime: function() {
+        return this.$store.state.runtime || dappBrowser.bccHelper.getCoreRuntime();
       }
     },
   });

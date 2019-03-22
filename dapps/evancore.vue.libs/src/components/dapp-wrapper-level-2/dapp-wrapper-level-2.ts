@@ -67,7 +67,7 @@ export default class DAppWrapperLevel2 extends Vue {
     // if it's not the body, clear the latest wrapper-sidebar-2 element and
     if (wrappers.length > 0) {
       this.highestSidebar = wrappers.pop().querySelector('.dapp-wrapper-sidebar-2');
-      this.contentElement = (<any>this.$el).querySelector('.l2-content');
+      this.contentElement = (<any>this.$el).firstChild;
 
       // clear element
       this.highestSidebar.innerHTML = '';
@@ -85,7 +85,6 @@ export default class DAppWrapperLevel2 extends Vue {
    * when found.
    */
   destroyed() {
-    console.log('destroyed')
     if (this.highestSidebar) {
       this.highestSidebar.removeChild(this.contentElement);
     }

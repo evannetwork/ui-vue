@@ -28,7 +28,7 @@
 <template>
   <div>
     <div class="w-100 h-100 pt-5 pb-5 text-center">
-      <div class="spinner-border text-secondary" role="status"></div>
+      <div class="spinner-border text-secondary"></div>
     </div>
   </div>
 </template>
