@@ -37,6 +37,16 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 @Component({ })
 export default class DAppWrapperLevel2 extends Vue {
   /**
+   * found dapp-wrapper-sidebar 2 container element, where this element can be applied to
+   */
+  highestSidebar: Element;
+
+  /**
+   * Child element that contains the level 2 content
+   */
+  contentElement: Element;
+
+  /**
    * Take the current element and search for an parent wrapper level 2 container, so move the
    * current element to this element.
    */
@@ -56,16 +66,28 @@ export default class DAppWrapperLevel2 extends Vue {
 
     // if it's not the body, clear the latest wrapper-sidebar-2 element and
     if (wrappers.length > 0) {
-      const highestSidebar = wrappers.pop().querySelector('.dapp-wrapper-sidebar-2');
+      this.highestSidebar = wrappers.pop().querySelector('.dapp-wrapper-sidebar-2');
+      this.contentElement = (<any>this.$el).querySelector('.l2-content');
 
       // clear element
-      highestSidebar.innerHTML = '';
+      this.highestSidebar.innerHTML = '';
 
       // append the current element
-      highestSidebar.appendChild(this.$el);
+      this.highestSidebar.appendChild(this.contentElement);
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');
+    }
+  }
+
+  /**
+   * When the element was destroyed, remove this element from the parent dapp-wrapper-2 container,
+   * when found.
+   */
+  destroyed() {
+    console.log('destroyed')
+    if (this.highestSidebar) {
+      this.highestSidebar.removeChild(this.contentElement);
     }
   }
 }

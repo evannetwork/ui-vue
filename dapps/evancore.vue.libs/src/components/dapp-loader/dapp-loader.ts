@@ -31,7 +31,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
-import { dappPathToOpen } from '../../routing';
+import { getNextDApp } from '../../routing';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
@@ -41,7 +41,7 @@ export default class DAppLoader extends Vue {
    * save the latest dapp path that was started, so we can check on an hash change, if the dapp for
    * this dapp loader has been changed.
    */
-  startedDAppPath: string;
+  startedDApp: any;
 
   /**
    * Watch for hash updates and start a new dapp, when the corresponding hash for this dapp-loader
@@ -69,8 +69,8 @@ export default class DAppLoader extends Vue {
     // set the hash change watcher, so we can remove it on component destroy
     const dappLoader = this;
     this.hashChangeWatcher = function() {
-      // if the startedDappPath for this hash level has been changed, load the new dapp
-      if (!window.location.hash.startsWith(`#${ dappLoader.startedDAppPath }`)) {
+      // if the startedDapp for this hash level has been changed, load the new dapp
+      if (!window.location.hash.startsWith(`#${ dappLoader.startedDApp.baseHash }`)) {
         dappLoader.startDApp();
       }
     };
@@ -103,18 +103,16 @@ export default class DAppLoader extends Vue {
    */
   async startDApp() {
     // get module id
-    this.startedDAppPath = await dappPathToOpen();
-    if (this.startedDAppPath) {
-      // clear everything, that was loaded before
-      this.$el.innerHTML = '';
+    this.startedDApp = await getNextDApp();
 
-      // create a new container el, vue will replace this element
-      const containerEl = document.createElement('div');
-      this.$el.appendChild(containerEl);
+    // clear everything, that was loaded before
+    this.$el.innerHTML = '';
 
-      await dappBrowser.dapp.startDApp(this.startedDAppPath.split('/').pop(), containerEl);
-    } else {
-      this.dappNotFound = true;
-    }
+    // create a new container el, vue will replace this element
+    const containerEl = document.createElement('div');
+    this.$el.appendChild(containerEl);
+
+    // startup the dapp
+    await dappBrowser.dapp.startDApp(this.startedDApp.ens, containerEl);
   }
 }

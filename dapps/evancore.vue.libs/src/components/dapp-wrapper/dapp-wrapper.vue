@@ -85,7 +85,6 @@
                 <ul class="nav font-medium in w-100" id="main-menu">
                   <li v-for="(route, index) in routes">
                     <a
-                      :href="`#${ route.fullPath }`"
                       :class="{ active: $route.path.startsWith(route.fullPath) }"
                       @click="routeActivated(route)">
                       <i :class="route.icon" data-icon="v"></i>
@@ -98,7 +97,6 @@
                   v-if="bottomRoutes">
                   <li v-for="(route, index) in bottomRoutes">
                     <a
-                      :href="`#${ route.fullPath }`"
                       :class="{ active: $route.path.startsWith(route.fullPath) }"
                       @click="routeActivated(route)">
                       <i :class="route.icon" data-icon="v"></i>

@@ -1,8 +1,6 @@
 {
   "description": "",
   "devDependencies": {
-    "@evan.network/api-blockchain-core": "^1.7.0",
-    "@evan.network/ui-dapp-browser": "^1.7.0",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.0.0",
@@ -10,6 +8,7 @@
     "del": "^3.0.0",
     "file-loader": "^3.0.1",
     "gulp": "^3.9.1",
+    "hard-source-webpack-plugin": "^0.13.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -51,6 +50,7 @@
   },
   "version": "1.0.0",
   "dependencies": {
-    "hard-source-webpack-plugin": "^0.13.1"
+    "leaflet": "^1.4.0",
+    "vue2-leaflet": "^2.0.2"
   }
 }

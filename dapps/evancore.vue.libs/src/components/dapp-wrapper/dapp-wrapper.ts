@@ -94,7 +94,7 @@ export default class DAppWrapper extends Vue {
    */
   @Prop({
     default: function() {
-      return (<any>this).$store.state.routeBaseHash;
+      return (<any>this).$store.state.dapp.baseHash;
     }
   }) routeBaseHash: string;
 
@@ -162,8 +162,8 @@ export default class DAppWrapper extends Vue {
       const allRoutes = (<any>[ ]).concat(this.routes, this.bottomRoutes || [ ]);
 
       for (let i = 0; i < allRoutes.length; i++) {
-        if (this.$route.path.startsWith(<string>this.routes[i].fullPath)) {
-          return this.routes[i].title;
+        if (this.$route.path.startsWith(<string>allRoutes[i].fullPath)) {
+          return allRoutes[i].title;
         }
       }
     }
@@ -197,12 +197,16 @@ export default class DAppWrapper extends Vue {
    * @param      {DAppWrapperRouteInterface}  route   route that was activated
    */
   routeActivated(route: DAppWrapperRouteInterface) {
-    this.showSideBar2 = true;
+    (<any>this).evanNavigate(route.path);
 
-    // if the same route was opened, the second navigation should be displayed
-    if (!this.$route.path.startsWith(<string>route.fullPath)) {
-      this.showSideBar = false;
-    }
+    this.$nextTick(() => {
+      this.showSideBar2 = true;
+
+      // if the same route was opened, the second navigation should be displayed
+      if (!this.$route.path.startsWith(<string>route.fullPath)) {
+        this.showSideBar = false;
+      }
+    });
   }
 
   /**
@@ -215,7 +219,7 @@ export default class DAppWrapper extends Vue {
     } else {
       // else map full path to check active route states and translations
       (<any>[ ]).concat(this.routes, this.bottomRoutes || [ ])
-        .forEach((route) => route.fullPath = `${ this.routeBaseHash }/${ route.path }`);
+        .forEach((route) => route.fullPath = `${ (<any>this).activeDApp().baseHash }/${ route.path }`);
     }
 
     // if the runtime should be created, start it up
@@ -301,7 +305,7 @@ export default class DAppWrapper extends Vue {
         // navigate to the onboarding and apply the current hash as origin, so the onboarding can
         // navigate back their
         this.$router.push({
-          path: `${ this.routeBaseHash }/onboarding.${ dappBrowser.getDomainName() }`,
+          path: `${ (<any>this).activeDApp().baseHash }/onboarding.${ dappBrowser.getDomainName() }`,
           query: {
             origin: this.$route.path,
             ...this.$route.query,
@@ -341,7 +345,7 @@ export default class DAppWrapper extends Vue {
    */
   openRouteBaseHash() {
     if (!this.onboarding) {
-      this.$router.push({ path: this.$store.state.routeBaseHash })
+      this.$router.push({ path: (<any>this).activeDApp().baseHash })
     }
   }
 }

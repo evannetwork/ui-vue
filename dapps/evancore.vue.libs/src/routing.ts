@@ -50,16 +50,16 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
   const routes: Array<RouteRegistrationInterface> = [ ];
 
   // get the correct base paths
-  const routeBaseHash = await dappPathToOpen(options.dappEnsOrContract);
+  const dappToLoad = await getNextDApp(options.dappEnsOrContract);
 
   // prefill routes with base hash
   options.routes.forEach((route) => {
-    // clone the route, so we can adjust standalone route objects (without this, routeBaseHash was
+    // clone the route, so we can adjust standalone route objects (without this, dapp.baseHash was
     // applied multiples times to rout.path)
     const clonedRoute = Object.assign({ }, route);
 
     // apply the correct absolute nested dapp hash origin
-    clonedRoute.path = `${ routeBaseHash }/${ route.path }`
+    clonedRoute.path = `${ dappToLoad.baseHash }/${ route.path }`
 
     // apply it to the routes
     routes.push(clonedRoute);
@@ -67,25 +67,30 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
 
   // add dynamic dapp-loader route
   routes.push({
-    path: `${ routeBaseHash }/**`,
+    path: `${ dappToLoad.baseHash }/**`,
     name: 'dapp-loader-' + (Math.random() + Date.now()),
     component: DAppLoaderComponent
   });
 
   // initialize vue router using the provided routes
-  const router = new VueRouter({ base: routeBaseHash, routes: routes });
+  const router = new VueRouter({ base: dappToLoad.baseHash, routes: routes });
 
   // start up the router!
   const windowHash = decodeURIComponent(window.location.hash);
   router.push({ path: windowHash.slice(1, windowHash.length) });
 
-  return { routeBaseHash, router, };
+  return { dappToLoad, router, };
 }
 
 /**
  * Retrieves the url hash path for the next dapp, that should be loaded, by checking the
  * dappEnsOrContract address or by tracing every url hash part and checks, if an element with the
  * dom id exists.
+ *
+ * Returns ens:
+ *   - ens: ens address of the loaded dapp
+ *   - contractAddess: optional detected contract address
+ *   - baseHash: base of the dapp
  *
  * E.g.: opened url #/dashboard.evan/onboarding.evan
  *
@@ -99,21 +104,29 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  * @param      {string}  dappEnsOrContract  The dapp ens or contract (e.g.
  *                                          /dashboard.evan/onboarding.evan)
  */
-export async function dappPathToOpen(dappEnsOrContract?: string) {
+export async function getNextDApp(dappEnsOrContract?: string) {
   // parse current route by replacing all #/ and /# to handle incorrect navigations
   const currentHash = decodeURIComponent(window.location.hash).split('?')[0];
-  const coreRuntime = dappBrowser.bccHelper.getCoreRuntime();
+  // all hash paths in the url
+  const ensParts = currentHash.split('/');
+
+  // calculated domain name for quick usage
   const domainName = dappBrowser.getDomainName();
 
   // get module id
   let dappIndex;
-  const moduleIds = currentHash.split('/');
+  // optional detected contract address, opened dapp can directly be loaded or, in case of an dapp
+  // that loads an contract, return it optionally
+  let contractAddress;
+
+  // full base hash of the current dapp
+  let baseHash;
 
   if (dappEnsOrContract) {
     // start at index 1 to skip initial hash
-    for (let i = 1; i < moduleIds.length; i++) {
+    for (let i = 1; i < ensParts.length; i++) {
       // check if the module id machtes the route one
-      if (moduleIds[i] === dappEnsOrContract) {
+      if (ensParts[i] === dappEnsOrContract) {
         dappIndex = i;
       }
     }
@@ -122,16 +135,15 @@ export async function dappPathToOpen(dappEnsOrContract?: string) {
   // if no dappEnsOrContract was applied or this one wasn't found, try to track it dynamically
   if (!dappIndex) {
     // start at index 1 to skip initial hash
-    for (let i = 1; i < moduleIds.length; i++) {
+    for (let i = 1; i < ensParts.length; i++) {
       // if an dapp ens was applied, only check these module id's
       // if the module id should be checked, try to resolve the dbcp
-      if (!document.getElementById(moduleIds[i])) {
+      if (!document.getElementById(ensParts[i])) {
         try {
           // only load dapps with an valid description
-          const description = await coreRuntime.description.getDescription(moduleIds[i]);
+          const description = await dappBrowser.System.import(`${ ensParts[i] }!ens`);
           // ensure, that the dapp wasn't loaded before
-          if (description && description.public &&
-            !document.getElementById(`${ description.public.name }.${ domainName }`)) {
+          if (description && !document.getElementById(`${ description.name }.${ domainName }`)) {
             dappIndex = i;
 
             break;
@@ -145,9 +157,28 @@ export async function dappPathToOpen(dappEnsOrContract?: string) {
 
   // if no dapp to start is found with the url (e.g. when opening an contract
   // id), load the last url path
-  if (typeof dappIndex === 'undefined' && moduleIds.length > 0) {
-    dappIndex = moduleIds.length - 1;
+  if (typeof dappIndex === 'undefined' && ensParts.length > 0) {
+    dappIndex = ensParts.length - 1;
   }
 
-  return `/${ moduleIds.slice(1, dappIndex + 1).join('/') }`;
+  baseHash = `/${ ensParts.slice(1, dappIndex + 1).join('/') }`;
+
+  // check for loading an contract
+  //   => dappIndex loads an contract directly
+  //   => it's not the last ens index of the hash, but the next element starts with 0x, so we
+  //      assumes to load an contract
+  if (ensParts[dappIndex].startsWith('0x')) {
+    contractAddress = ensParts[dappIndex];
+  } else if (dappIndex < ensParts.length - 1 && ensParts[dappIndex + 1].startsWith('0x')) {
+    contractAddress = ensParts[dappIndex + 1];
+
+    // add the contract address, so the correct base url will be used
+    baseHash = `${ baseHash }/${ contractAddress }`;
+  }
+
+  return {
+    contractAddress,
+    ens: ensParts[dappIndex],
+    baseHash,
+  };
 }

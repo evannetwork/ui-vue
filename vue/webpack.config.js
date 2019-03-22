@@ -33,7 +33,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 
-module.exports = function(name, dist, externals) {
+module.exports = function(name, dist, externals, prodMode) {
   externals = externals || {
     '@evan.network/api-blockchain-core': '@evan.network/api-blockchain-core',
     '@evan.network/smart-contracts-core': '@evan.network/smart-contracts-core',
@@ -49,7 +49,7 @@ module.exports = function(name, dist, externals) {
     'vuex-i18n': 'vuex-i18n',
   };
 
-  return {
+  const webpackConfig = {
     entry: './src/index.ts',
     externals: externals,
     devtool: '#eval-source-map',
@@ -98,20 +98,14 @@ module.exports = function(name, dist, externals) {
           ]
         },
         {
-          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif)(\?v=\d+\.\d+\.\d+)?$/,
           use: [{
             loader: 'file-loader',
             options: {
-              name: 'assets/[name].[ext]?[hash]'
+              name: 'assets/[name].[ext]?[hash]',
+              publicPath: './'
             }
           }]
-        },
-        {
-          test: /\.(png|jpg|gif|svg)$/,
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]?[hash]'
-          }
         },
         {
           test: /\.js$/,
@@ -128,7 +122,6 @@ module.exports = function(name, dist, externals) {
         filename: `${ name }.css`,
         chunkFilename: `${ name }.css`,
       }),
-      new HardSourceWebpackPlugin({ cacheDirectory: 'build-cache', })
     ],
     resolve: {
       extensions: ['.ts', '.js', '.vue', '.json'],
@@ -145,10 +138,10 @@ module.exports = function(name, dist, externals) {
     }
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map';
+  if (process.env.NODE_ENV === 'production' || prodMode) {
+    webpackConfig.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.plugins = (module.exports.plugins || []).concat([
+    webpackConfig.plugins = (webpackConfig.plugins || []).concat([
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: '"production"'
@@ -161,6 +154,10 @@ module.exports = function(name, dist, externals) {
         sourceMap: false
       }),
       new OptimizeCSSAssetsPlugin({}),
-    ])
-  };
+    ]);
+  } else {
+    webpackConfig.plugins.push(new HardSourceWebpackPlugin({ cacheDirectory: 'build-cache', }));
+  }
+
+  return webpackConfig;
 }

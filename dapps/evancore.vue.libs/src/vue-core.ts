@@ -61,7 +61,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   registerComponents(Vue, options.components);
 
   // setup dapp routing
-  const { routeBaseHash, router } = await initializeRouting(options);
+  const { dappToLoad, router } = await initializeRouting(options);
 
   // load the vue evan core to get its origin and access the images
   const vueCoreDbcp = await dappBrowser.System.import('@evan.network/ui!ens');
@@ -73,8 +73,8 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   const store = new Vuex.Store({
     state: {
       options,
-      routeBaseHash,
       uiLibBaseUrl,
+      dapp: dappToLoad,
       ...options.state
     },
   });
@@ -92,6 +92,28 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   // hide the initial loading screen
   dappBrowser.loading.finishDAppLoading();
 
+  Vue.mixin({
+    methods: {
+      /**
+       * Specify a custom navigation method for evan vue projects.
+       */
+      evanNavigate: function(path) {
+        window.location.hash = `${ dappToLoad.baseHash }/${ path }`;
+      },
+
+      /**
+       * Returns the active dapp object, including the current contract address, route base hash and
+       * ens address
+       *
+       * @return     {any}  routing.getNextDApp result
+       */
+      activeDApp: function() {
+        return dappToLoad;
+      }
+    },
+  });
+
+
   const vue = new Vue({
     el: options.container,
     router,
@@ -102,13 +124,6 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       this.$el.id = options.dappEnsOrContract;
     }
   });
-
-  /**
-   * Specify a custom navigation method for evan vue projects.
-   */
-  vue.$router.evanNavigate = function(path) {
-    window.location.hash = `${ routeBaseHash }/${ path }`;
-  }.bind(vue);
 
   return vue;
 }

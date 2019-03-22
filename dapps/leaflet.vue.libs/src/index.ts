@@ -24,25 +24,9 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+// map the original vue path to leaflet.vue.libs
+import { getDomainName, System } from '@evan.network/ui-dapp-browser';
+System.map['vue2-leaflet'] = `leaflet.vue.libs.${ getDomainName() }!dapp-content`;
 
-// !IMPORTANT!: Import this d.ts file within your vue tsconfig to fix "cannot find module" errors
-// while importing vue files
-declare module '*.vue' {
-  import Vue from 'vue';
-  import VueRouter from 'vue-router';
-  import Vuex from 'vuex';
-  import vuexI18n from 'vuex-i18n';
-
-  class EvanVueRouter extends VueRouter {
-    evanNavigate(path: string) {  }
-  }
-
-  class EvanVue extends Vue {
-    $i18n: vuexI18n;
-    $router: EvanVueRouter;
-    $store: Vuex;
-    $t: any;
-  }
-
-  export default EvanVue;
-}
+import * as Vue2Leaflet from 'vue2-leaflet';
+export default Vue2Leaflet;

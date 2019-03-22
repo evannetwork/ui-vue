@@ -31,5 +31,6 @@ module.exports = require('../../vue/webpack.config')(
   require('path').resolve(__dirname, './dist'),
   {
     '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
-  }
+  },
+  true
 );

@@ -26,8 +26,10 @@
 */
 
 <template>
-  <div>
-    <slot name="content"></slot>
+  <div class="d-none">
+    <div class="l2-content">
+      <slot name="content"></slot>
+    </div>
   </div>
 </template>
 
