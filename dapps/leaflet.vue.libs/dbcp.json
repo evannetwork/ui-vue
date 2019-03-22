@@ -5,7 +5,8 @@
       "dependencies": {},
       "entrypoint": "leaflet.vue.libs.js",
       "files": [
-        "leaflet.vue.libs.js"
+        "leaflet.vue.libs.js",
+        "leaflet.vue.libs.css"
       ],
       "origin": "",
       "primaryColor": "",

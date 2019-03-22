@@ -27,6 +27,5 @@
 // map the original vue path to leaflet.vue.libs
 import { getDomainName, System } from '@evan.network/ui-dapp-browser';
 System.map['vue2-leaflet'] = `leaflet.vue.libs.${ getDomainName() }!dapp-content`;
-
-import * as Vue2Leaflet from 'vue2-leaflet';
-export default Vue2Leaflet;
+import 'leaflet/dist/leaflet.css'
+export * from 'vue2-leaflet';
