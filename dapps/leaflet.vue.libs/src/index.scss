@@ -25,10 +25,4 @@
   https://evan.network/license/
 */
 
-// map the original vue path to leaflet.vue.libs
-import { getDomainName, System } from '@evan.network/ui-dapp-browser';
-System.map['vue2-leaflet'] = `leaflet.vue.libs.${ getDomainName() }!dapp-content`;
-
-import './index.scss';
-
-export * from 'vue2-leaflet';
+@import '../../../node_modules/leaflet/dist/leaflet.css';
