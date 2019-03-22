@@ -26,3 +26,7 @@
 */
 
 @import '../../../node_modules/leaflet/dist/leaflet.css';
+
+.leaflet-shadow-pane {
+  display: none;
+}
