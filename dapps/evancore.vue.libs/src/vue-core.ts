@@ -122,7 +122,6 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     },
   });
 
-
   const vue = new Vue({
     el: options.container,
     router,
