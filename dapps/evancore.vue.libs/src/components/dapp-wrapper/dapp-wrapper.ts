@@ -316,14 +316,12 @@ export default class DAppWrapper extends Vue {
       return;
     } else {
       this.onboarding = false;
+      this.loading = false;
 
       // set the password function
       dappBrowser.lightwallet.setPasswordFunction(async () =>
         // set resolve password
-        await new Promise((resolve) => {
-          this.loading = false;
-          this.login = (password: string) => resolve(password);
-        })
+        await new Promise((resolve) => this.login = (password: string) => resolve(password))
       );
 
       // unlock the profile directly
@@ -339,8 +337,6 @@ export default class DAppWrapper extends Vue {
 
       // send logged in event
       this.$emit('loggedin', this.$store.state.runtime);
-
-      this.loading = false;
       this.login = false;
     }
   }
