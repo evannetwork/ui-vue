@@ -47,6 +47,17 @@ export default class DAppWrapperLevel2 extends Vue {
   contentElement: Element;
 
   /**
+   * Watch for dom removal of the parent element of the dapp-wrapper level 2, so we can destroy this
+   * one
+   */
+  elementObserver: any;
+
+  /**
+   * Run destoyed method only ones
+   */
+  isDestroyed = false;
+
+  /**
    * Take the current element and search for an parent wrapper level 2 container, so move the
    * current element to this element.
    */
@@ -59,10 +70,10 @@ export default class DAppWrapperLevel2 extends Vue {
       parent = parent.parentElement;
 
       // collect a list of all parent wrapper bodies, to be able to take the highest one
-      if (parent.className.indexOf('dapp-wrapper-body') !== -1) {
+      if (parent && parent.className.indexOf('dapp-wrapper-body') !== -1) {
         wrappers.push(parent);
       }
-    } while (parent !== document.body);
+    } while (parent && parent !== document.body);
 
     // if it's not the body, clear the latest wrapper-sidebar-2 element and
     if (wrappers.length > 0) {
@@ -74,6 +85,22 @@ export default class DAppWrapperLevel2 extends Vue {
 
       // append the current element
       this.highestSidebar.appendChild(this.contentElement);
+
+      // Create an observer instance to watch parentElements changes
+      this.elementObserver = new MutationObserver(() => {
+        parent = this.$el;
+
+        // check if the current element is attached to the dom, else, remove it!
+        do {
+          parent = parent.parentElement;
+          if (!parent) {
+            return this.destroy();
+          }
+        } while (parent && parent !== document.body);
+      });
+
+      // Start observing the target node for configured mutations
+      this.elementObserver.observe(this.$el.parentElement, { childList: true, subTree: true });
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');
@@ -81,12 +108,22 @@ export default class DAppWrapperLevel2 extends Vue {
   }
 
   /**
+   * Trigger destroy function
+   */
+  destroyed() {
+    this.destroy();
+  }
+
+  /**
    * When the element was destroyed, remove this element from the parent dapp-wrapper-2 container,
    * when found.
    */
-  destroyed() {
-    if (this.highestSidebar) {
+  destroy() {
+    if (this.highestSidebar && !this.isDestroyed) {
+      this.isDestroyed = true;
+
       this.highestSidebar.removeChild(this.contentElement);
+      this.elementObserver.disconnect();
     }
   }
 }
