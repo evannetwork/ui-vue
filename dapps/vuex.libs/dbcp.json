@@ -7,7 +7,7 @@
       "files": [
         "vuex.libs.js"
       ],
-      "origin": "",
+      "origin": "QmZtU6LyoQevUYZNCp6TY4XvYJULqb2SQKZJgyJC5LjW2J",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -31,6 +31,8 @@
       "library"
     ],
     "version": "3.1.0",
-    "versions": {}
+    "versions": {
+      "3.1.0": "Qmdg586RVos6YLZYKA2qwhxwJ94YMGasu83jjXi7bkesyy"
+    }
   }
 }

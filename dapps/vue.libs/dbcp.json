@@ -7,7 +7,7 @@
       "files": [
         "vue.libs.js"
       ],
-      "origin": "",
+      "origin": "QmdqD74ndDmeYruREc4cdZwyM5R5VPJxVQgtqSYnX9fa2D",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -31,6 +31,8 @@
       "library"
     ],
     "version": "2.5.2",
-    "versions": {}
+    "versions": {
+      "2.5.2": "QmdeTBg2eMJKfBvudwZMQrKxCTDe4aNvhdiGNspacTaZdE"
+    }
   }
 }

@@ -26,9 +26,10 @@
 */
 
 const { lstatSync, readdirSync } = require('fs');
+const del = require('del');
+const fs = require('fs');
 const gulp = require('gulp');
 const path = require('path');
-const del = require('del');
 const exec = require('child_process').exec;
 const dappDir = process.argv[process.argv.indexOf('--dapp') + 1];
 const { runExec, scriptsFolder, isDirectory, getDirectories } = require('../gulp/lib');
@@ -62,7 +63,6 @@ gulp.task('build', async function () {
         `${ dappDir }/src/**/*.css`,
       ])
       .pipe(gulp.dest(`${ dappDir }/dist`))
-      .pipe(gulp.dest(runtimeFolder))
       .on('end', () => resolve());
   });
 
@@ -73,9 +73,14 @@ gulp.task('build', async function () {
         `${ dappDir }/src/assets/**`,
       ])
       .pipe(gulp.dest(`${ dappDir }/dist/assets`))
-      .pipe(gulp.dest(runtimeFolder))
       .on('end', () => resolve());
   });
+
+  // create dbcp origin path json
+  fs.writeFileSync(
+    `${ dappDir }/dist/dbcpPath.json`,
+    JSON.stringify({ dbcpPath: `${ dappDir }/dbcp.json` })
+  );
 
   // copy the build files into the runtimeFolder
   await new Promise((resolve, reject) => {

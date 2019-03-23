@@ -7,7 +7,7 @@
       "files": [
         "axios.vue.libs.js"
       ],
-      "origin": "",
+      "origin": "QmVk6Zo67qjo4cUBdBudzHRJxCzWE6C2Q5Qx5E5Lni71yz",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -31,6 +31,8 @@
       "library"
     ],
     "version": "0.18.0",
-    "versions": {}
+    "versions": {
+      "0.18.0": "QmQfpHBSg83Q3dcqsxs1R54nwFsBoVqww3qzHi5zNTvDzf"
+    }
   }
 }

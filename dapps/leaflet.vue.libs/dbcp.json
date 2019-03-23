@@ -8,7 +8,7 @@
         "leaflet.vue.libs.js",
         "leaflet.vue.libs.css"
       ],
-      "origin": "",
+      "origin": "QmcDpHcvQrG1gQNsYYdQgxfgQLJp89FsDbvAB3urFh7mPJ",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -32,6 +32,8 @@
       "library"
     ],
     "version": "3.1.0",
-    "versions": {}
+    "versions": {
+      "3.1.0": "QmXGG123guZvybRFZxH6aaEn1KV85ZZhn2VmDzDCWpzBK1"
+    }
   }
 }
