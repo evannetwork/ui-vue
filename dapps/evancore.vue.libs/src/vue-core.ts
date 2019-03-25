@@ -29,6 +29,7 @@
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
+import VueMoment from 'vue-moment';
 
 // import evan libs
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
@@ -75,11 +76,12 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       options,
       uiLibBaseUrl,
       dapp: dappToLoad,
-      ...options.state
+      ...options.state,
     },
   });
 
-  // set the i18n values
+  // set the i18n values and moment js
+  Vue.use(VueMoment);
   Vue.use(vuexI18n.plugin, store);
 
   // add all i18n definitions

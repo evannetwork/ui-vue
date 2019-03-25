@@ -25,33 +25,24 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+<template>
+  <div>
+    <template v-if="isRendered">
+      <div class="dropdown-menu p-0"
+        v-on:click.prevent=""
+        :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
+        :style="{ 'width': width }">
+       <slot name="content"></slot>
+      </div>
+      <div class="fullscreen"
+        @click="hide($event)">
+      </div>  
+    </template>
+  </div>
+</template>
 
-// evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
+<script lang="ts">
+  import Component from './dropdown.ts';
+  export default Component;
+</script>
 
-@Component({ })
-export default class EvanLogoutComponent extends Vue {
-  /**
-   * Dont show any button
-   */
-  @Prop({ default: false }) disableButton;
-
-  /**
-   * Show the logout modal
-   */
-  logout() {
-    (<any>this.$refs.logoutModal).show();
-  }
-
-  /**
-   * Logout the user.
-   */
-  runLogout() {
-    dappBrowser.core.logout();
-  }
-}

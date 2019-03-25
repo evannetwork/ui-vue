@@ -39,26 +39,26 @@ export default class ModalComponent extends Vue {
   /**
    * shows the dom elements of the modal
    */
-  render = false;
+  isRendered = false;
 
   /**
    * animate them
    */
-  show = false;
+  isShown = false;
 
   /**
    * Renders the modal element and shows it animated.
    */
-  showModal() {
-    this.render = true;
-    this.$nextTick(() => this.show = true);
+  show() {
+    this.isRendered = true;
+    this.$nextTick(() => this.isShown = true);
   }
 
   /**
    * Remove the modal element and hide it animated.
    */
-  hideModal() {
-    this.show = false;
-    this.$nextTick(() => this.render = false);
+  hide() {
+    this.isShown = false;
+    this.$nextTick(() => this.isRendered = false);
   }
 }

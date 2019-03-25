@@ -38,15 +38,15 @@
       </template>
       <template v-slot:footer>
         <button type="button" class="btn btn-rounded btn-primary font-weight-normal"
-          @click="logout()">
+          @click="runLogout()">
           {{ '_evan.logout' | translate }}
         </button>
       </template>
     </evan-modal>
 
-    <slot name="button">
+    <slot name="button" v-if="!disableButton">
       <button type="submit" class="btn btn-outline-secondary btn-rounded"
-        @click="showLogoutModal()">
+        @click="logout()">
         <span>{{ '_evan.logout' | translate }}</span>
       </button>
     </slot>

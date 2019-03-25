@@ -36,6 +36,13 @@ export default {
       "profile": "Profile"
     },
     "cancel": "close",
+    "dapp-wrapper": {
+      "all-messages": "All messages",
+      "my-contacts": "My Contacts",
+      "my-mailbox": "My Messages",
+      "my-profile": "My Profile",
+      "new-mails": "You have {newMailCount} new messages"
+    },
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",

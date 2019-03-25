@@ -33,11 +33,12 @@ import DAppLoader from './dapp-loader/dapp-loader.vue';
 import DAppLoading from './loading/loading.vue';
 import DAppWrapper from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
+import Dropdown from './dropdown/dropdown.vue';
+import EvanIframe from './iframe/iframe.vue';
 import Login from './login/login.vue';
 import Logout from './logout/logout.vue';
 import Modal from './modal/modal.vue';
 import Success from './success/success.vue';
-import EvanIframe from './iframe/iframe.vue';
 
 // export them all, so other applications can access them
 export {
@@ -45,6 +46,7 @@ export {
   DAppLoading,
   DAppWrapper,
   DAppWrapperSidebarLevel2,
+  Dropdown,
   EvanIframe,
   Login,
   Logout,
@@ -57,6 +59,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-loader', component: DAppLoader },
   { name: 'evan-dapp-wrapper', component: DAppWrapper },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },
+  { name: 'evan-dropdown', component: Dropdown },
   { name: 'evan-iframe', component: EvanIframe },
   { name: 'evan-loading', component: DAppLoading },
   { name: 'evan-login', component: Login },

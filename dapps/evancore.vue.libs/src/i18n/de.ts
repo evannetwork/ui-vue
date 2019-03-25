@@ -29,13 +29,17 @@
 export default {
   "_evan": {
     "_routes": {
-      "contacts": "Contacts",
-      "favorites": "Favorites",
+      "contacts": "Kontakten",
+      "favorites": "Favoriten",
       "identities": "Identities",
-      "mailbox": "Messages",
-      "profile": "Profile"
+      "mailbox": "Nachrichten",
+      "profile": "Mein Profil"
     },
     "cancel": "schließen",
+    "dapp-wrapper": {
+      "all-messages": "Alle Nachrichten",
+      "new-mails": "Sie haben {newMailCount} neue Nachrichten"
+    },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",

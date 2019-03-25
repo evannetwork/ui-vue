@@ -24,34 +24,9 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+// map the original vue path to moment.vue.libs
+import { getDomainName, System } from '@evan.network/ui-dapp-browser';
+System.map['vue-moment'] = `moment.vue.libs.${ getDomainName() }!dapp-content`;
 
-// vue imports
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
-// evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
-
-@Component({ })
-export default class EvanLogoutComponent extends Vue {
-  /**
-   * Dont show any button
-   */
-  @Prop({ default: false }) disableButton;
-
-  /**
-   * Show the logout modal
-   */
-  logout() {
-    (<any>this.$refs.logoutModal).show();
-  }
-
-  /**
-   * Logout the user.
-   */
-  runLogout() {
-    dappBrowser.core.logout();
-  }
-}
+import vueMoment from 'vue-moment';
+export default vueMoment;

@@ -39,7 +39,7 @@
         <evan-logout ref="evanLogout">
           <template v-slot:button>
             <button type="button" class="btn"
-              @click="$refs.evanLogout.showLogoutModal()">
+              @click="$refs.evanLogout.logout()">
               <i class="fas fa-sign-out-alt"></i>
             </button>
           </template>

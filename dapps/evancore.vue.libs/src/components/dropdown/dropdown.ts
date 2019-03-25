@@ -35,23 +35,37 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class EvanLogoutComponent extends Vue {
-  /**
-   * Dont show any button
-   */
-  @Prop({ default: false }) disableButton;
+export default class Dropdown extends Vue {
+  @Prop({ default: 'left' }) alignment: string;
+  @Prop({ default: 'auto' }) width: string;
 
   /**
-   * Show the logout modal
+   * shows the dom elements of the modal
    */
-  logout() {
-    (<any>this.$refs.logoutModal).show();
+  isRendered = false;
+
+  /**
+   * animate them
+   */
+  isShown = false;
+
+  /**
+   * Renders the modal element and shows it animated.
+   */
+  show() {
+    this.isRendered = true;
+    this.$nextTick(() => this.isShown = true);
   }
 
   /**
-   * Logout the user.
+   * Remove the modal element and hide it animated.
    */
-  runLogout() {
-    dappBrowser.core.logout();
+  hide($event) {
+    this.isShown = false;
+    this.$nextTick(() => this.isRendered = false);
+
+    if ($event) {
+      $event.stopPropagation();
+    }
   }
 }

@@ -25,33 +25,12 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
-// evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
-
-@Component({ })
-export default class EvanLogoutComponent extends Vue {
-  /**
-   * Dont show any button
-   */
-  @Prop({ default: false }) disableButton;
-
-  /**
-   * Show the logout modal
-   */
-  logout() {
-    (<any>this.$refs.logoutModal).show();
-  }
-
-  /**
-   * Logout the user.
-   */
-  runLogout() {
-    dappBrowser.core.logout();
-  }
-}
+// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
+module.exports = require('../../vue/webpack.config')(
+  require('./dbcp.json').public.name,
+  require('path').resolve(__dirname, './dist'),
+  {
+    '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
+  },
+  true
+);

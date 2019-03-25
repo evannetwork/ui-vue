@@ -74,9 +74,9 @@ export default class DAppWrapper extends Vue {
       return [
         { title: `${ i18nPref }.identities`, path: `identities.${ domainName }`, icon: 'fas fa-id-card' },
         { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'fas fa-bookmark' },
-        { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
+        // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
         { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'fas fa-address-book' },
-        { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'fas fa-user' },
+        // { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'fas fa-user' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
@@ -151,6 +151,33 @@ export default class DAppWrapper extends Vue {
    * the process.
    */
   hashChangeWatcher: any;
+
+  /**
+   * current user informations
+   */
+  userInfo: any = {
+    addressBook: { },
+    alias: '',
+    loading: false,
+    mails: '',
+    newMailCount: '',
+    readMails: [ ],
+  };
+
+  /**
+   * Set interval to reload mails each 30 seconds
+   */
+  mailsWatcher: any;
+
+  /**
+   * Core routes that will be displayed in the top right user dropdown
+   */
+  coreRoutes = [
+    { name: `favorites`, icon: 'fas fa-bookmark' },
+    { name: `mailbox`, icon: 'fas fa-envelope' },
+    { name: `contacts`, icon: 'fas fa-address-book' },
+    { name: `profile`, icon: 'fas fa-user' },
+  ];
 
   /**
    * Returns the i18n title key for the active route.
@@ -239,6 +266,10 @@ export default class DAppWrapper extends Vue {
     if (this.hashChangeWatcher) {
       // remove the hash change listener
       window.removeEventListener('hashchange', this.hashChangeWatcher);
+    }
+
+    if (this.mailsWatcher) {
+      window.clearInterval(this.mailsWatcher);
     }
   }
 
@@ -338,6 +369,9 @@ export default class DAppWrapper extends Vue {
       // send logged in event
       this.$emit('loggedin', this.$store.state.runtime);
       this.login = false;
+
+      // load the user infos like alias, mails, dispatchers ...
+      this.loadUserSpecific();
     }
   }
 
@@ -348,5 +382,54 @@ export default class DAppWrapper extends Vue {
     if (!this.onboarding) {
       this.$router.push({ path: (<any>this).activeDApp().baseHash })
     }
+  }
+
+  /**
+   * Load the users specific data.
+   */
+  async loadUserSpecific() {
+    this.userInfo.loading = true;
+    this.userInfo.address = dappBrowser.core.activeAccount();
+
+    // load alias from addressbook
+    this.userInfo.addressBook = await this.$store.state.runtime.profile.getAddressBook();
+    this.userInfo.alias = this.userInfo.addressBook.profile[dappBrowser.core.activeAccount()].alias;
+
+    // load mail information and initialize and mail watcher
+    this.loadMails();
+    this.mailsWatcher = setInterval(() => this.loadMails);
+
+    this.userInfo.loading = false;
+  }
+
+  /**
+   * Load the mail informations for the current user
+   */
+  async loadMails() {
+    this.userInfo.mailsLoading = true;
+
+    // load mail inbox informations, load 10 for checking for +9 new mails
+    const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(10);
+    this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || [ ]);
+    this.userInfo.newMailCount = 8;
+
+    // map all the mails in to an mail array and show only 5
+    this.userInfo.mails = Object.keys(mailResult.mails)
+      .map((mailAddress: string) => {
+        const mail = mailResult.mails[mailAddress].content;
+        mail.address = mailAddress;
+
+        return mail;
+      })
+      .slice(0, 5);
+
+    // check last 10 mails if they are already readed
+    this.userInfo.readMails.forEach(readMail => {
+      if (!mailResult.mails[readMail]) {
+        this.userInfo.newMailCount += 1;
+      }
+    });
+
+    this.userInfo.mailsLoading = false;
   }
 }

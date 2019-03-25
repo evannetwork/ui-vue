@@ -27,16 +27,16 @@
 
 <template>
   <div>
-    <template v-if="render">
+    <template v-if="isRendered">
       <div class="modal fade" tabindex="-1"
-        :class="{ 'show': show }"
-        @click="hideModal()">
+        :class="{ 'show': isShown }"
+        @click="hide()">
         <div class="modal-dialog" role="document">
           <div class="modal-content" v-on:click.stop>
             <div class="modal-header">
               <slot name="header"></slot>
               <button type="button" class="close" aria-label="Close"
-                @click="hideModal()">
+                @click="hide()">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary btn-rounded"
-                @click="hideModal()">
+                @click="hide()">
                 {{ '_evan.cancel' | translate }}
               </button>
               <slot name="footer"></slot>
@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="modal-backdrop fade"
-        :class="{ 'show': show }">
+        :class="{ 'show': isShown }">
       </div>
     </template>
   </div>

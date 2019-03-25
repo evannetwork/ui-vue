@@ -177,8 +177,9 @@ export async function getNextDApp(dappEnsOrContract?: string) {
   }
 
   return {
-    contractAddress,
-    ens: ensParts[dappIndex],
     baseHash,
+    contractAddress,
+    domainName: dappBrowser.getDomainName(),
+    ens: ensParts[dappIndex],
   };
 }

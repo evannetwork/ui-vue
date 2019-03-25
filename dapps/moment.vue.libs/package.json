@@ -1,0 +1,19 @@
+{
+  "author": "evan GmbH",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "API",
+    "VueJS",
+    "DApp",
+    "CSS"
+  ],
+  "main": "dist/index.js",
+  "name": "@evan.network/vuex-i18n",
+  "scripts": {
+    "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
+  },
+  "typings": "dist/index.d.ts",
+  "version": "2.5.2"
+}

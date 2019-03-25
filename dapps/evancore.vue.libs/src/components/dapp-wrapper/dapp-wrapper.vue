@@ -28,6 +28,7 @@
 <template>
   <div class="evan-dapp-wrapper"
     :class="{ 'small-toolbar': smallToolbar }">
+    <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
     <nav class="navbar" v-if="enableNav">
       <div class="navbar-brand"
         :class="{ 'clickable': !onboarding }"
@@ -43,14 +44,95 @@
         </div>
 
         <div class="mr-3">
-          <button class="btn btn-sm">
-            <img class="mr-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgV1cokAhUc_f0ljJt88_Jf4K9RaRgZSvGuUCBV6Up4SS9wo--">
-            User XYZ
-            <i class="fas fa-chevron-down ml-2"></i>
-          </button>
-          <button class="btn btn-sm">
-            <i class="far fa-envelope"></i>
-          </button>
+          <div class="spinner-border spinner-border-sm bg-text-inverted mr-3"
+            v-if="userInfo.loading">
+          </div>
+          <template v-if="!userInfo.loading">
+            <button class="btn btn-sm position-relative"
+              @click="$refs.userDropdown.show()">
+             <img class="mr-2 rounded-circle"
+                v-if="userInfo.img"
+                :src="userInfo.img">
+              <i class="fas fa-user rounded-circle p-3 mr-2 bg-secondary bg-text-secondary"
+                v-else>
+              </i>
+              {{ userInfo.alias }}
+              <i class="fas fa-chevron-down ml-2"></i>
+
+              <evan-dropdown ref="userDropdown"
+                :alignment="'right'"
+                :width="'250px'">
+                <template v-slot:content>
+                  <div class="p-3 d-flex flex-row">
+                    <div class="flex-shrink-0">
+                      <img class="mr-2 rounded-circle"
+                        v-if="userInfo.img"
+                        :src="userInfo.img">
+                      <i class="fas fa-user rounded-circle p-3 mr-2 bg-secondary bg-text-secondary"
+                        v-else>
+                      </i>
+                    </div>
+                    <div class="pl-1 d-flex flex-column justify-content-center">
+                      <h4 class="m-0 text-truncate">{{ userInfo.alias }}</h4>
+                      <small class="text-muted text-truncate">{{ userInfo.address }}</small>
+                    </div>
+                  </div>
+                  <div class="border-top pb-3 pt-3">
+                    <a class="dropdown-item pt-2 pb-2 pl-3 pr-3"
+                      v-for="(coreRoute, index) in coreRoutes"
+                      @click="evanNavigate(`${ coreRoute.name }.${ $store.state.dapp.domainName }`); $refs.userDropdown.hide($event)">
+                      <i :class="`${ coreRoute.icon } mr-3`" style="width: 16px;"></i>
+                      {{ `_evan._routes.${ coreRoute.name }` | translate }}
+                    </a>
+                  </div>
+                  <a class="dropdown-item pt-2 pb-2 pl-3 pr-3 border-top"
+                    @click="$refs.evanLogout.logout()">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    {{ '_evan.logout' | translate }}
+                  </a>
+                </template>
+              </evan-dropdown>
+            </button>
+            <button class="btn btn-sm position-relative"
+              @click="$refs.mailDropdown.show()">
+              <i class="far fa-envelope">
+                <span v-if="newMailCount > 0 && newMailCount < 10">{{ newMailCount }}</span>
+                <span v-if="newMailCount > 9">9+</span>
+              </i>
+              <evan-dropdown ref="mailDropdown"
+                :alignment="'right'"
+                :width="'250px'">
+                <template v-slot:content>
+                  <div class="p-3">
+                    <h4 class="m-0 text-truncate" v-if="userInfo.newMailCount !== 0">
+                      {{ $t('_evan.dapp-wrapper.new-mails', userInfo) | translate }}
+                    </h4>
+                    <h4 class="m-0 text-truncate" v-if="userInfo.newMailCount === 0">
+                      {{ '_evan.dapp-wrapper.my-mailbox' | translate }}
+                    </h4>
+                  </div>
+                  <a class="dropdown-item border-top pt-2 pb-2 pl-3 pr-3 font-size-85"
+                    v-for="(mail, index) in userInfo.mails"
+                    :class="{ 'opacity-60': userInfo.readMails.indexOf(mail.address) !== -1 }"
+                    @click="evanNavigate(`mailbox.${ $store.state.dapp.domainName }/${ mail.address }`); $refs.mailDropdown.hide($event)">
+                    <h5 class="m-0 font-weight-bold"
+                      :class="{ 'text-primary': userInfo.readMails.indexOf(mail.address) === -1 }">
+                      {{ mail.title }}
+                    </h5>
+                    <span class="d-block mt-1">{{ mail.title }}</span>
+                    <small class="font-italic d-block">{{ mail.sent | moment('from') }}</small>
+                  </a>
+                  <a class="dropdown-item clickable border-top pt-2 pb-2 pl-3 pr-3 d-flex justify-content-center"
+                    @click="evanNavigate(`mailbox.${ $store.state.dapp.domainName }`); $refs.userDropdown.hide($event)">
+                    {{ '_evan.dapp-wrapper.all-messages' | translate }}
+                    <span class="mx-auto"></span>
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </template>
+              </evan-dropdown>
+            </button>
+          </template>
+
           <button class="btn btn-sm">
             <i class="fas fa-tasks"></i>
           </button>
