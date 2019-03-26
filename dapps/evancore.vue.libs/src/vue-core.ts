@@ -94,36 +94,6 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   // hide the initial loading screen
   dappBrowser.loading.finishDAppLoading();
 
-  Vue.mixin({
-    methods: {
-      /**
-       * Specify a custom navigation method for evan vue projects.
-       */
-      evanNavigate: function(path) {
-        window.location.hash = `${ dappToLoad.baseHash }/${ path }`;
-      },
-
-      /**
-       * Returns the active dapp object, including the current contract address, route base hash and
-       * ens address
-       *
-       * @return     {any}  routing.getNextDApp result
-       */
-      activeDApp: function() {
-        return dappToLoad;
-      },
-
-      /**
-       * Returns the current runtime from the state or returns an dappBrowser core runtime.
-       *
-       * @return     {any}  bcc runtime
-       */
-      getRuntime: function() {
-        return this.$store.state.runtime || dappBrowser.bccHelper.getCoreRuntime();
-      }
-    },
-  });
-
   const vue = new Vue({
     el: options.container,
     router,

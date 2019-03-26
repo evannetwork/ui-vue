@@ -33,16 +33,13 @@ declare module '*.vue' {
   import Vuex from 'vuex';
   import vuexI18n from 'vuex-i18n';
 
-  class EvanVueRouter extends VueRouter {
-    evanNavigate(path: string) {  }
-  }
-
   class EvanVue extends Vue {
     $i18n: vuexI18n;
-    $router: EvanVueRouter;
+    $router: VueRouter;
     $store: Vuex;
     $t: any;
   }
 
   export default EvanVue;
 }
+

@@ -7,7 +7,7 @@
       "files": [
         "axios.vue.libs.js"
       ],
-      "origin": "QmS1cMRK9Z8MSsgaXyu3TebZLJxD8MNmgjajJsq1LQvUqj",
+      "origin": "QmfZaA4xuUGGaNC9XkoYVLWbtEYfHoQ6K1DFJscd1wfKhE",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -32,7 +32,7 @@
     ],
     "version": "0.18.0",
     "versions": {
-      "0.18.0": "QmQkvR7JGapNMMsMivPFhzZRCT82ByA24C37vaLdg5A5pS"
+      "0.18.0": "QmdPRv8u25fKBguBYNGuKQdXEvtmnv91hZa9jPuwB3bgCv"
     }
   }
 }

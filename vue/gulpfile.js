@@ -47,6 +47,7 @@ gulp.task('build', async function () {
     `${ dappDir }/dist/**/*`,
     `!${ dappDir }/dist/build-cache`,
     `!${ dappDir }/dist/build-cache/**/*`,
+    `!${ dappDir }/dist/${ dbcp.public.name }.d.ts`,
   ];  
 
   // clear the dist folder

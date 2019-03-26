@@ -27,15 +27,16 @@
 
 // vue imports
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
+import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class DAppWrapperLevel2 extends Vue {
+export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
   /**
    * found dapp-wrapper-sidebar 2 container element, where this element can be applied to
    */
@@ -110,7 +111,7 @@ export default class DAppWrapperLevel2 extends Vue {
   /**
    * Trigger destroy function
    */
-  destroyed() {
+  beforeDestroy() {
     this.destroy();
   }
 

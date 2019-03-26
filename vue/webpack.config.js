@@ -25,6 +25,7 @@
   https://evan.network/license/
 */
 
+const DeclarationBundlerPlugin = require('./declaration-bundler-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -34,6 +35,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 
 module.exports = function(name, dist, externals, prodMode) {
+  const packageJson = require(path.resolve(`${ dist }/../package.json`));
+
   externals = externals || {
     '@evan.network/api-blockchain-core': '@evan.network/api-blockchain-core',
     '@evan.network/smart-contracts-core': '@evan.network/smart-contracts-core',
@@ -122,6 +125,10 @@ module.exports = function(name, dist, externals, prodMode) {
         filename: `${ name }.css`,
         chunkFilename: `${ name }.css`,
       }),
+      new DeclarationBundlerPlugin({
+        moduleName: `'${ packageJson.name }'`,
+        out: `${ name }.d.ts`,
+      })
     ],
     resolve: {
       extensions: ['.ts', '.js', '.vue', '.json'],

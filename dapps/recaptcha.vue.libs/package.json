@@ -9,11 +9,11 @@
     "DApp",
     "CSS"
   ],
-  "main": "dist/index.js",
+  "main": "dist/recaptcha.vue.libs.js",
   "name": "@evan.network/vue-recaptcha",
   "scripts": {
     "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/recaptcha.vue.libs.d.ts",
   "version": "2.5.2"
 }

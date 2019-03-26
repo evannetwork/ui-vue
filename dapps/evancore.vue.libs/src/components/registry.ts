@@ -29,11 +29,13 @@
 import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
+import Breadcrumbs from './breadcrumbs/breadcrumbs.vue';
 import DAppLoader from './dapp-loader/dapp-loader.vue';
 import DAppLoading from './loading/loading.vue';
 import DAppWrapper from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import Dropdown from './dropdown/dropdown.vue';
+import EvanComponent from '../component';
 import EvanIframe from './iframe/iframe.vue';
 import Login from './login/login.vue';
 import Logout from './logout/logout.vue';
@@ -42,11 +44,13 @@ import Success from './success/success.vue';
 
 // export them all, so other applications can access them
 export {
+  Breadcrumbs,
   DAppLoader,
   DAppLoading,
   DAppWrapper,
   DAppWrapperSidebarLevel2,
   Dropdown,
+  EvanComponent,
   EvanIframe,
   Login,
   Logout,
@@ -56,6 +60,7 @@ export {
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
+  { name: 'evan-breadcrumbs', component: Breadcrumbs },
   { name: 'evan-dapp-loader', component: DAppLoader },
   { name: 'evan-dapp-wrapper', component: DAppWrapper },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },

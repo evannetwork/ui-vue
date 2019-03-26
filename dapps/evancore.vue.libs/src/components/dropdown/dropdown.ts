@@ -27,15 +27,16 @@
 
 // vue imports
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
+import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class Dropdown extends Vue {
+export default class Dropdown  extends mixins(EvanComponent) {
   @Prop({ default: 'left' }) alignment: string;
   @Prop({ default: 'auto' }) width: string;
 

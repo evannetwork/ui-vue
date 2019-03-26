@@ -25,11 +25,15 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component';
-import EvanComponent from '../../component';
-import Vue from 'vue';
-import { Prop } from 'vue-property-decorator';
+const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin');
 
-@Component({ })
-export default class DAppLoading  extends mixins(EvanComponent) { }
+let buggyFunc = DeclarationBundlerPlugin.prototype.generateCombinedDeclaration;
+DeclarationBundlerPlugin.prototype.generateCombinedDeclaration = function (declarationFiles) {
+    for (var fileName in declarationFiles) {
+        let declarationFile = declarationFiles[fileName];
+        declarationFile._value = declarationFile._value || declarationFile.source();
+    }
+    return buggyFunc.call(this, declarationFiles);
+}
+
+module.exports = DeclarationBundlerPlugin;

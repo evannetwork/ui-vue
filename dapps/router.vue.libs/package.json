@@ -9,11 +9,11 @@
     "DApp",
     "CSS"
   ],
-  "main": "dist/index.js",
-  "name": "@evan.network/router.vue.libs",
+  "main": "dist/router.vue.libs.js",
+  "name": "@evan.network/vue-router",
   "scripts": {
     "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/router.vue.libs.d.ts",
   "version": "2.5.2"
 }

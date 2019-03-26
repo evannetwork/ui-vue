@@ -9,11 +9,11 @@
     "DApp",
     "CSS"
   ],
-  "main": "dist/index.js",
+  "main": "dist/leaflet.vue.libs.js",
   "name": "@evan.network/leaflet",
   "scripts": {
     "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/leaflet.vue.libs.d.ts",
   "version": "2.5.2"
 }

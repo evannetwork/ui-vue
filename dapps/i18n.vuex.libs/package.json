@@ -9,11 +9,11 @@
     "DApp",
     "CSS"
   ],
-  "main": "dist/index.js",
+  "main": "dist/i18n.vuex.libs.js",
   "name": "@evan.network/vuex-i18n",
   "scripts": {
     "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/i18n.vuex.libs.d.ts",
   "version": "2.5.2"
 }

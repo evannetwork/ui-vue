@@ -31,8 +31,10 @@
  */
 export interface RouteRegistrationInterface {
   path: string; // `**`
-  name: string; // dapp-loader
-  component: any; // DAppLoaderComponent
+  name?: string; // dapp-loader
+  component?: any; // DAppLoaderComponent
+  children?: any;
+  redirect?: any;
 }
 
 /**

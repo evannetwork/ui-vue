@@ -7,7 +7,7 @@
       "files": [
         "moment.vue.libs.js"
       ],
-      "origin": "QmXWQvkB11aq2HUFtpU9PS9C7nWrWJwFnG9BfMxMAXmEAo",
+      "origin": "QmUCgvyGZmmegzTaLT6nKHSXwLZ5jJdLMV8uqCLpEKonQv",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -31,6 +31,8 @@
       "library"
     ],
     "version": "4.0.0",
-    "versions": {}
+    "versions": {
+      "4.0.0": "QmUCgvyGZmmegzTaLT6nKHSXwLZ5jJdLMV8uqCLpEKonQv"
+    }
   }
 }

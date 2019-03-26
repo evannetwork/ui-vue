@@ -26,9 +26,10 @@ https://evan.network/license/
 */
 
 // vue imports
+import Component, { mixins } from 'vue-class-component';
+import EvanComponent from '../../component';
 import Vue from 'vue';
-import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 @Component({ })
-export default class SuccessComponent extends Vue { }
+export default class SuccessComponent extends mixins(EvanComponent) { }

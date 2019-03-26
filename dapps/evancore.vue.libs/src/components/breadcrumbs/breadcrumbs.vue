@@ -25,11 +25,25 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component';
-import EvanComponent from '../../component';
-import Vue from 'vue';
-import { Prop } from 'vue-property-decorator';
+<template>
+  <div class="evan-breadcrumbs
+      bg-level-1 border-bottom
+      d-flex p-2 align-items-center">
+    <template 
+      v-for="(breadcrumb, index) in breadcrumbs">
+      <span class="p-2" v-if="index !== 0">/</span>
+      <a class="evan-breadcrumb"
+        :href="`#${ breadcrumb.path }`"
+        :class="{ 'active': $route.path === breadcrumb.path }">
+        {{ `${ i18nScope }.${ breadcrumb.name }` | translate }}
+      </a>
+    </template>
+    <span class="mx-auto"></span>
+    <slot name="content"></slot>
+  </div>
+</template>
 
-@Component({ })
-export default class DAppLoading  extends mixins(EvanComponent) { }
+<script lang="ts">
+  import Component from './breadcrumbs.ts';
+  export default Component;
+</script>

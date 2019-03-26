@@ -34,7 +34,7 @@
         </h5>
       </template>
       <template v-slot:body>
-        <p>{{ '_evan.logout-desc' | translate }}</p>
+        <p class="m-0 mt-2 mb-2">{{ '_evan.logout-desc' | translate }}</p>
       </template>
       <template v-slot:footer>
         <button type="button" class="btn btn-rounded btn-primary font-weight-normal"

@@ -9,11 +9,11 @@
     "DApp",
     "CSS"
   ],
-  "main": "dist/index.js",
-  "name": "@evan.network/axios.vue.libs",
+  "main": "dist/axios.vue.libs.js",
+  "name": "@evan.network/axios",
   "scripts": {
     "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/axios.vue.libs.d.ts",
   "version": "2.5.2"
 }

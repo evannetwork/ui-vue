@@ -26,20 +26,21 @@
 */
 // vue imports
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
+import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { DAppWrapperRouteInterface } from '../../interfaces';
 
 // load domain name for quick usage
-const domainName = dappBrowser.getDomainName();
+const domainName = dappBrowser.domainName;
 const i18nPref = '_evan._routes';
 
 @Component({ })
-export default class DAppWrapper extends Vue {
+export default class DAppWrapper  extends mixins(EvanComponent) {
   /**
    * url to img for large sidebar (default is set in the create function using $store)
    */
@@ -160,6 +161,7 @@ export default class DAppWrapper extends Vue {
     alias: '',
     loading: false,
     mails: '',
+    mailsLoading: false,
     newMailCount: '',
     readMails: [ ],
   };
@@ -176,7 +178,6 @@ export default class DAppWrapper extends Vue {
     { name: `favorites`, icon: 'fas fa-bookmark' },
     { name: `mailbox`, icon: 'fas fa-envelope' },
     { name: `contacts`, icon: 'fas fa-address-book' },
-    { name: `profile`, icon: 'fas fa-user' },
   ];
 
   /**
@@ -246,7 +247,7 @@ export default class DAppWrapper extends Vue {
     } else {
       // else map full path to check active route states and translations
       (<any>[ ]).concat(this.routes, this.bottomRoutes || [ ])
-        .forEach((route) => route.fullPath = `${ (<any>this).activeDApp().baseHash }/${ route.path }`);
+        .forEach((route) => route.fullPath = `${ (<any>this).dapp.baseHash }/${ route.path }`);
     }
 
     // if the runtime should be created, start it up
@@ -261,7 +262,7 @@ export default class DAppWrapper extends Vue {
   /**
    * Clear the hash change watcher
    */
-  destroyed() {
+  beforeDestroy() {
     // only remove the hashChangeWatcher, when it was already bind (user was on the onboarding)
     if (this.hashChangeWatcher) {
       // remove the hash change listener
@@ -323,7 +324,7 @@ export default class DAppWrapper extends Vue {
       // set the hash change watcher, so we can check that the user finished the onboarding process
       const dappLoader = this;
       this.hashChangeWatcher = function() {
-        if (window.location.hash.indexOf(`onboarding.${ dappBrowser.getDomainName() }`) === -1) {
+        if (window.location.hash.indexOf(`onboarding.${ (<any>this).domainName }`) === -1) {
           // recheck login and onboarding
           dappLoader.handleLoginOnboarding();
         }
@@ -336,7 +337,7 @@ export default class DAppWrapper extends Vue {
         // navigate to the onboarding and apply the current hash as origin, so the onboarding can
         // navigate back their
         this.$router.push({
-          path: `${ (<any>this).activeDApp().baseHash }/onboarding.${ dappBrowser.getDomainName() }`,
+          path: `${ (<any>this).dapp.baseHash }/onboarding.${ (<any>this).domainName }`,
           query: {
             origin: this.$route.path,
             ...this.$route.query,
@@ -347,12 +348,14 @@ export default class DAppWrapper extends Vue {
       return;
     } else {
       this.onboarding = false;
-      this.loading = false;
 
       // set the password function
       dappBrowser.lightwallet.setPasswordFunction(async () =>
         // set resolve password
-        await new Promise((resolve) => this.login = (password: string) => resolve(password))
+        await new Promise((resolve) => {
+          this.loading = false;
+          this.login = (password: string) => resolve(password);
+        })
       );
 
       // unlock the profile directly
@@ -368,6 +371,7 @@ export default class DAppWrapper extends Vue {
 
       // send logged in event
       this.$emit('loggedin', this.$store.state.runtime);
+      this.loading = false;
       this.login = false;
 
       // load the user infos like alias, mails, dispatchers ...
@@ -380,7 +384,7 @@ export default class DAppWrapper extends Vue {
    */
   openRouteBaseHash() {
     if (!this.onboarding) {
-      this.$router.push({ path: (<any>this).activeDApp().baseHash })
+      this.$router.push({ path: (<any>this).dapp.baseHash })
     }
   }
 
@@ -411,7 +415,7 @@ export default class DAppWrapper extends Vue {
     // load mail inbox informations, load 10 for checking for +9 new mails
     const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(10);
     this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || [ ]);
-    this.userInfo.newMailCount = 8;
+    this.userInfo.newMailCount = 0;
 
     // map all the mails in to an mail array and show only 5
     this.userInfo.mails = Object.keys(mailResult.mails)

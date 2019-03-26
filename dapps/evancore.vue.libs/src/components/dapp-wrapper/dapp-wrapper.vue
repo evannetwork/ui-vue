@@ -61,9 +61,10 @@
 
               <evan-dropdown ref="userDropdown"
                 :alignment="'right'"
-                :width="'250px'">
+                :width="'300px'">
                 <template v-slot:content>
-                  <div class="p-3 d-flex flex-row">
+                  <div class="dropdown-item p-3 d-flex flex-row align-items-center"
+                    @click="evanNavigate(`profile.${ domainName }`); $refs.userDropdown.hide($event)">
                     <div class="flex-shrink-0">
                       <img class="mr-2 rounded-circle"
                         v-if="userInfo.img"
@@ -76,11 +77,12 @@
                       <h4 class="m-0 text-truncate">{{ userInfo.alias }}</h4>
                       <small class="text-muted text-truncate">{{ userInfo.address }}</small>
                     </div>
+                    <i class="fas fa-chevron-right pl-3 flex-shrink-0"></i>
                   </div>
                   <div class="border-top pb-3 pt-3">
                     <a class="dropdown-item pt-2 pb-2 pl-3 pr-3"
                       v-for="(coreRoute, index) in coreRoutes"
-                      @click="evanNavigate(`${ coreRoute.name }.${ $store.state.dapp.domainName }`); $refs.userDropdown.hide($event)">
+                      @click="evanNavigate(`${ coreRoute.name }.${ domainName }`); $refs.userDropdown.hide($event)">
                       <i :class="`${ coreRoute.icon } mr-3`" style="width: 16px;"></i>
                       {{ `_evan._routes.${ coreRoute.name }` | translate }}
                     </a>
@@ -94,14 +96,18 @@
               </evan-dropdown>
             </button>
             <button class="btn btn-sm position-relative"
-              @click="$refs.mailDropdown.show()">
-              <i class="far fa-envelope">
-                <span v-if="newMailCount > 0 && newMailCount < 10">{{ newMailCount }}</span>
-                <span v-if="newMailCount > 9">9+</span>
+              @click="$refs.mailDropdown.show()"
+              :disabled="userInfo.mailsLoading">
+              <i class="far fa-envelope position-relative"
+                v-if="!userInfo.mailsLoading">
+                <span class="notification-dot" v-if="userInfo.newMailCount > 0"></span>
               </i>
+              <div class="spinner-border spinner-border-sm bg-text-inverted"
+                v-if="userInfo.mailsLoading">
+              </div>
               <evan-dropdown ref="mailDropdown"
                 :alignment="'right'"
-                :width="'250px'">
+                :width="'300px'">
                 <template v-slot:content>
                   <div class="p-3">
                     <h4 class="m-0 text-truncate" v-if="userInfo.newMailCount !== 0">
@@ -114,16 +120,16 @@
                   <a class="dropdown-item border-top pt-2 pb-2 pl-3 pr-3 font-size-85"
                     v-for="(mail, index) in userInfo.mails"
                     :class="{ 'opacity-60': userInfo.readMails.indexOf(mail.address) !== -1 }"
-                    @click="evanNavigate(`mailbox.${ $store.state.dapp.domainName }/${ mail.address }`); $refs.mailDropdown.hide($event)">
-                    <h5 class="m-0 font-weight-bold"
+                    @click="evanNavigate(`mailbox.${ domainName }/${ mail.address }`); $refs.mailDropdown.hide($event)">
+                    <h5 class="m-0 font-weight-bold text-truncate"
                       :class="{ 'text-primary': userInfo.readMails.indexOf(mail.address) === -1 }">
-                      {{ mail.title }}
+                      {{ userInfo.addressBook.profile[mail.from] ? userInfo.addressBook.profile[mail.from].alias : mail.from }}
                     </h5>
-                    <span class="d-block mt-1">{{ mail.title }}</span>
-                    <small class="font-italic d-block">{{ mail.sent | moment('from') }}</small>
+                    <span class="d-block mt-1 text-truncate">{{ mail.title }}</span>
+                    <small class="font-italic d-block text-truncate">{{ mail.sent | moment('from') }}</small>
                   </a>
                   <a class="dropdown-item clickable border-top pt-2 pb-2 pl-3 pr-3 d-flex justify-content-center"
-                    @click="evanNavigate(`mailbox.${ $store.state.dapp.domainName }`); $refs.userDropdown.hide($event)">
+                    @click="evanNavigate(`mailbox.${ domainName }`); $refs.userDropdown.hide($event)">
                     {{ '_evan.dapp-wrapper.all-messages' | translate }}
                     <span class="mx-auto"></span>
                     <i class="fas fa-chevron-right"></i>

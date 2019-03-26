@@ -26,16 +26,17 @@
 */
 
 // vue imports
+import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
+import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class ModalComponent extends Vue {
+export default class ModalComponent  extends mixins(EvanComponent) {
   /**
    * shows the dom elements of the modal
    */

@@ -26,25 +26,67 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import vuexI18n from 'vuex-i18n';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
-import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class EvanIframe  extends mixins(EvanComponent) {
-  @Prop({ type: String }) src;
+export default class EvanComponent extends Vue {
+  /**
+   * active dapp that was detected by the routing lib (getNextDApp)
+   */
+  dapp: any;
 
   /**
-   * show loading indicator
+   * Active dapp browser domain name
    */
-  loading = true;
+  domainName: string;
 
-  created() {
-    setTimeout(() => this.loading = false, 1000);
+  /**
+   * Declare vue stuff
+   */
+  $i18n: vuexI18n;
+  $router: VueRouter;
+  $store: any;
+  $t: any;
+
+  constructor() {
+    super();
+
+    this.dapp = this.activeDApp();
+    this.domainName = dappBrowser.getDomainName();
+  }
+
+  /**
+   * Specify a custom navigation method for evan vue projects.
+   */
+  evanNavigate(path: string) {
+    window.location.hash = `${ this.activeDApp().baseHash }/${ path }`;
+  }
+
+  /**
+   * Returns the active dapp object, including the current contract address, route base hash and
+   * ens address
+   *
+   * @return     {any}  routing.getNextDApp result
+   */
+  activeDApp() {
+    return this.$store.state.dapp;
+  }
+
+  /**
+   * Returns the current runtime from the state or returns an dappBrowser core runtime.
+   *
+   * @return     {any}  bcc runtime
+   */
+  getRuntime() {
+    return this.$store.state.runtime || dappBrowser.bccHelper.getCoreRuntime();
   }
 }
