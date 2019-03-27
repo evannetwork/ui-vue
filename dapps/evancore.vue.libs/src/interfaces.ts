@@ -76,7 +76,7 @@ export interface EvanVueOptionsInterface {
  * Represents one generalized form control within an vue form.
  */
 export interface EvanFormControlOptions {
-  validator?: Function;
+  validate?: Function;
   name: string;
   value?: any;
 }

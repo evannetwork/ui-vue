@@ -73,41 +73,22 @@ export class EvanFormControl {
   _value: any;
 
   /**
-   * overwrite the value getter, so we automatically check for errors, when an validator was
+   * overwrite the value getter, so we automatically check for errors, when an validate was
    * applied.
    */
   set value(value) {
     this._value = value;
 
-    if (this.validator) {
-      this.error = this.validator(this.vueInstance, this);
-
-      // if the validator was a promise, resolve it asynchroniously
-      if (this.error && this.error.then) {
-        Promise.resolve(async () => {
-          this.error = await this.error;
-
-          // set parent form validity
-          if (this.form) {
-            this.form.validateControls();
-          }
-        });
-      } else {
-        // set parent form validity
-        if (this.form) {
-          this.form.validateControls();
-        }
-      }
-    }
+    this.validate();
   }
   get value() {
     return this._value;
   }
 
   /**
-   * Validator function that will be runned when the value was changed
+   * validate function that will be runned when the value was changed
    */
-  validator: Function|undefined;
+  _validate: Function|undefined;
 
   /**
    * The vue instance of for validation etc..
@@ -120,12 +101,17 @@ export class EvanFormControl {
   form: EvanForm | undefined;
 
   /**
+   * True, when an asynchronious validate function was applied and this validation is running
+   */
+  validating: boolean;
+
+  /**
    * Create the new forms instance.
    */
-  constructor(name: string, value: any, vueInstance: Vue, validator?: Function, form?: EvanForm) {
+  constructor(name: string, value: any, vueInstance: Vue, validate?: Function, form?: EvanForm) {
     this.form = form;
     this.name = name;
-    this.validator = validator;
+    this._validate = validate;
     this.vueInstance = vueInstance;
 
     if (typeof value !== 'undefined') {
@@ -138,6 +124,37 @@ export class EvanFormControl {
    */
   setDirty() {
     this.dirty = true;
+  }
+
+  /**
+   * Runs the validate function for this control
+   */
+  async validate() {
+    if (this._validate) {
+      let valid = this._validate(this.vueInstance, this.form, this);
+
+      // if the _validate was a promise, resolve it asynchroniously
+      if (valid && valid.then) {
+        this.validating = true;
+        valid = await valid;
+        this.validating = false;
+      }
+
+      // validate function will return true if valid, else it can return an error or an false
+      // boolean, so we must to invert the value for the error
+      this.error = valid === true ? false : (valid ? valid : true);
+      /**
+       * even better readable and just funny:
+       *   let truue = this._validate(this.vueInstance, this.form, this);
+       *   let truee = false;
+       *   this.error = truue === true ? truee : (truue ? truue : true)
+       */
+
+      // set parent form validity
+      if (this.form) {
+        this.form.validateControls();
+      }
+    }
   }
 }
 
@@ -199,13 +216,13 @@ export class EvanForm {
         controlKey,
         undefined,
         this.vueInstance,
-        controls[controlKey].validator,
+        controls[controlKey].validate,
         this
       );
     });
 
     // set values!
-    this.controls.forEach(controlKey => this[controlKey].value = controls[controlKey].value);
+    this.controls.forEach(controlKey => this[controlKey].value = controls[controlKey].value)
   }
 
   /**

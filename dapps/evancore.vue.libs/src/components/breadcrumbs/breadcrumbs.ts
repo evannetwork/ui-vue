@@ -60,6 +60,11 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
   wasDestroyed: boolean;
 
   /**
+   * Show the go back button
+   */
+  goBack: boolean;
+
+  /**
    * Bind the hash change watcher to track hash changes and to update the routes
    */
   async created() {
@@ -76,17 +81,27 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
 
       // iterate through all paths and create the correct translation name and path
       that.breadcrumbs = that.breadcrumbs.map((breadcrumb: string, index: number) => {
+        // remove the domain name, so we can manage simple i18n files
+        let name = breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), '');
+
+        // if the name does not starts with 0x, apply the i18nScope
+        if (name.indexOf('0x') !== 0) {
+          name = `${ that.i18nScope }.${ name }`;
+        }
+
         return {
-          // remove the domain name, so we can manage simple i18n files
-          name: breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), ''),
+          name: name,
           // build the path relative to the base hash
           path: `${ activeDApp.baseHash }/${ that.breadcrumbs.slice(0, index + 1).join('/') }`
         }
       });
 
+      // show the go back button, when the navigation is deeper than 1
+      this.goBack = that.breadcrumbs.length > 1;
+
       // add the root dapp identitfier as root element
       that.breadcrumbs.unshift({
-        name: (activeDApp.contractAddress || activeDApp.ens)
+        name: (activeDApp.contractAddress || `${ that.i18nScope }.${ activeDApp.ens }`)
           .replace(new RegExp(`.${ domainName }`, 'g'), ''),
         path: activeDApp.baseHash
       })
