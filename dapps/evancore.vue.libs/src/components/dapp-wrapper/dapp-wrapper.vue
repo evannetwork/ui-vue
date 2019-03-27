@@ -120,7 +120,7 @@
                   <a class="dropdown-item border-top pt-2 pb-2 pl-3 pr-3 font-size-85"
                     v-for="(mail, index) in userInfo.mails"
                     :class="{ 'opacity-60': userInfo.readMails.indexOf(mail.address) !== -1 }"
-                    @click="evanNavigate(`mailbox.${ domainName }/${ mail.address }`); $refs.mailDropdown.hide($event)">
+                    @click="openMail(mail, $event)">
                     <h5 class="m-0 font-weight-bold text-truncate"
                       :class="{ 'text-primary': userInfo.readMails.indexOf(mail.address) === -1 }">
                       {{ userInfo.addressBook.profile[mail.from] ? userInfo.addressBook.profile[mail.from].alias : mail.from }}

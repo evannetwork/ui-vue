@@ -61,6 +61,10 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
     // apply the correct absolute nested dapp hash origin
     clonedRoute.path = `${ dappToLoad.baseHash }/${ route.path }`
 
+    if (clonedRoute.redirect && clonedRoute.redirect.path) {
+      clonedRoute.redirect.path = `${ dappToLoad.baseHash }/${clonedRoute.redirect.path }`;
+    }
+
     // apply it to the routes
     routes.push(clonedRoute);
   });

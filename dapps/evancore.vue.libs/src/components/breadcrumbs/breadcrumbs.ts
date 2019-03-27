@@ -76,8 +76,10 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
     this.hashChangeWatcher = function() {
       that.breadcrumbs = window.location.hash
         // remove the base hash
-        .replace(`#${ activeDApp.baseHash }/`, '')
-        .split('/');
+        .replace(`#${ activeDApp.baseHash }`, '')
+        .split('/')
+        // filter empty breadcrumbs
+        .filter(breadcrumb => !!breadcrumb);
 
       // iterate through all paths and create the correct translation name and path
       that.breadcrumbs = that.breadcrumbs.map((breadcrumb: string, index: number) => {
@@ -96,8 +98,8 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
         }
       });
 
-      // show the go back button, when the navigation is deeper than 1
-      this.goBack = that.breadcrumbs.length > 1;
+      // show the go back button, when the navigation is deeper than 0
+      this.goBack = that.breadcrumbs.length > 0;
 
       // add the root dapp identitfier as root element
       that.breadcrumbs.unshift({

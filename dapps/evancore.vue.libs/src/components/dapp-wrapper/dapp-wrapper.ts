@@ -436,4 +436,20 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
     this.userInfo.mailsLoading = false;
   }
+
+  /**
+   * Opens a mail within the mailbox
+   */
+  openMail(mail: any, $event: any) {
+    // set the mail read and save it into the local store
+    if (this.userInfo.readMails.indexOf(mail.address) === -1) {
+      this.userInfo.readMails.push(mail.address);
+
+      window.localStorage['evan-mail-read'] = JSON.stringify(this.userInfo.readMails)
+    }
+
+    this.evanNavigate(`mailbox.${ this.domainName }/received/detail/${ mail.address }`);
+
+    (<any>this.$refs).mailDropdown.hide($event);
+  }
 }
