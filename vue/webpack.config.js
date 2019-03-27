@@ -26,6 +26,7 @@
 */
 
 const DeclarationBundlerPlugin = require('./declaration-bundler-webpack-plugin');
+const fs = require('fs');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -125,10 +126,6 @@ module.exports = function(name, dist, externals, prodMode) {
         filename: `${ name }.css`,
         chunkFilename: `${ name }.css`,
       }),
-      new DeclarationBundlerPlugin({
-        moduleName: `'${ packageJson.name }'`,
-        out: `${ name }.d.ts`,
-      })
     ],
     resolve: {
       extensions: ['.ts', '.js', '.vue', '.json'],
@@ -164,6 +161,15 @@ module.exports = function(name, dist, externals, prodMode) {
     ]);
   } else {
     webpackConfig.plugins.push(new HardSourceWebpackPlugin({ cacheDirectory: 'build-cache', }));
+  }
+
+  // only rebuild d.ts files when we are running in production mode or they does not exists
+  if (process.env.NODE_ENV === 'production' || prodMode ||
+    !fs.existsSync(`${ dist }/${ name }.d.ts`)) {
+    webpackConfig.plugins.push(new DeclarationBundlerPlugin({
+      moduleName: `'${ packageJson.name }'`,
+      out: `${ name }.d.ts`,
+    }));
   }
 
   return webpackConfig;

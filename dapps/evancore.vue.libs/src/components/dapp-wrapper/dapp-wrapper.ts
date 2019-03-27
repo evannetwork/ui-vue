@@ -36,7 +36,7 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { DAppWrapperRouteInterface } from '../../interfaces';
 
 // load domain name for quick usage
-const domainName = dappBrowser.domainName;
+const domainName = dappBrowser.getDomainName();
 const i18nPref = '_evan._routes';
 
 @Component({ })
@@ -333,7 +333,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       // add the hash change listener
       window.addEventListener('hashchange', this.hashChangeWatcher);
 
-      if (this.$route.path.indexOf(`/onboarding.${ domainName }`) === -1) {
+      if (this.$route.path.indexOf(`/onboarding.${ (<any>this).domainName }`) === -1) {
         // navigate to the onboarding and apply the current hash as origin, so the onboarding can
         // navigate back their
         this.$router.push({

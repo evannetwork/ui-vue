@@ -42,6 +42,10 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
     default: '_evan'
   }) i18nScope;
 
+  @Prop({
+    type: Function
+  }) enableReload;
+
   // route stack
   breadcrumbs = [ ];
 

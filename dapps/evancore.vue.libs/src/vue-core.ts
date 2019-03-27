@@ -65,7 +65,8 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   const { dappToLoad, router } = await initializeRouting(options);
 
   // load the vue evan core to get its origin and access the images
-  const vueCoreDbcp = await dappBrowser.System.import('@evan.network/ui!ens');
+  const vueCoreDbcp = await dappBrowser.System
+    .import(`ui.libs.${ dappBrowser.getDomainName() }!ens`);
   const uiLibBaseUrl = dappBrowser.dapp.getDAppBaseUrl(vueCoreDbcp,
     `${ vueCoreDbcp.name }.${ dappBrowser.getDomainName() }`);
 

@@ -27,6 +27,7 @@
 
 import Vue from 'vue';
 import { EvanFormControlOptions, } from './interfaces';
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 /**
  * One input control representation.
@@ -62,7 +63,7 @@ export class EvanFormControl {
   /**
    * form control reference
    */
-  get $ref() {
+  get $ref(): any {
     return this.vueInstance.$refs[this.name];
   }
 
@@ -161,8 +162,32 @@ export class EvanForm {
    */
   isValid: boolean;
 
-  constructor(vueInstance: Vue, controls: { [s: string]: EvanFormControl }) {
+  /**
+   * Checks for an valid email address.
+   *
+   * @param      {string}   email   email address to checkl
+   * @return     {boolean}  true / false
+   */
+  static validateEmail(email: string): boolean {
+    /* tslint:disable */
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      .test(String(email).toLowerCase());
+    /* tslint:enable */
+  }
+
+  /**
+   * Checks for an valid ethereum accoung id.
+   *
+   * @param      {string}   email   email address to checkl
+   * @return     {boolean}  true / false
+   */
+  static validEthAddress(address: string): boolean {
+    return dappBrowser.bccHelper.getCoreRuntime().web3.utils.isAddress(address);
+  }
+
+  constructor(vueInstance: any, controls: { [s: string]: EvanFormControlOptions }) {
     this.controls = Object.keys(controls);
+    this.vueInstance = vueInstance;
 
     // setup form controls
     // do not apply values initialy, set the control key first, so the validator can access the
@@ -173,7 +198,7 @@ export class EvanForm {
       this[controlKey] = new EvanFormControl(
         controlKey,
         undefined,
-        vueInstance,
+        this.vueInstance,
         controls[controlKey].validator,
         this
       );

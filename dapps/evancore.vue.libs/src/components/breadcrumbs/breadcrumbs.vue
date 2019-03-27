@@ -38,6 +38,10 @@
         {{ `${ i18nScope }.${ breadcrumb.name }` | translate }}
       </a>
     </template>
+    <i v-if="enableReload"
+      class="fas fa-sync-alt clickable ml-4"
+      @click="$emit('reload')">
+    </i>
     <span class="mx-auto"></span>
     <slot name="content"></slot>
   </div>
