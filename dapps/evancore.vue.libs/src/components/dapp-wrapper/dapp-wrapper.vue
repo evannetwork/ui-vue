@@ -181,7 +181,7 @@
                     {{ '_evan.dapp-wrapper.queue-error' | translate }}
                   </span>
                   <div class="text-center  mt-3"
-                    v-if="instance.type !== 'running'">
+                    v-if="instance.status !== 'running'">
                     <button type="button" class="btn btn-rounded btn-secondary"
                       @click="instance.start();">
                       {{ '_evan.dapp-wrapper.queue-continue' | translate }}

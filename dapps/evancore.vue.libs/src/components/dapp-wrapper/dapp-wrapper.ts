@@ -27,7 +27,7 @@
 // vue imports
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
@@ -525,12 +525,12 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
              .forEach(key => this.$i18n.add(key, dapp.translations[key]));
         }
 
-        await Promise.all(Object.keys(dispatcherObj.entries).map(async (entryId: string) => {
-          const entry = dispatcherObj.entries[entryId];
+        await Promise.all(Object.keys(dispatcherObj.entries).map(async (instanceId: string) => {
+          const entry = dispatcherObj.entries[instanceId];
 
           // apply all queu instances to the queue instance object
-          this.queueInstances[entryId] = new DispatcherInstance(queue, dispatcher,
-            runtime, entry.data, entry.stepIndex, entryId);
+          this.$set(this.queueInstances, instanceId, new DispatcherInstance(queue, dispatcher,
+            runtime, entry.data, entry.stepIndex, instanceId));
         }));
       } catch (ex) {
         runtime.logger.log(ex, 'error');
@@ -545,13 +545,15 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     if (!this.queueWatcher) {
       this.queueWatcher = Dispatcher.watch((event) => {
         const instance = event.detail.instance;
+        // const previous = this.queueInstances[instance.id];
 
         // if the instance has finished it work, remove it
         if (instance.status === 'finished') {
           delete this.queueInstances[instance.id];
         } else {
-          // else update status
-          this.queueInstances[instance.id] = instance;
+          // if the watch was already defined and it's not the incoming instance, copy only the
+          // values
+          this.$set(this.queueInstances, instance.id, instance);
         }
 
         this.queueCount = Object.keys(this.queueInstances).length;
