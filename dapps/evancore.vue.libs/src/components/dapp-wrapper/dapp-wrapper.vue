@@ -82,9 +82,9 @@
                   <div class="border-top pb-3 pt-3">
                     <a class="dropdown-item pt-2 pb-2 pl-3 pr-3"
                       v-for="(coreRoute, index) in coreRoutes"
-                      @click="evanNavigate(`${ coreRoute.name }.${ domainName }`); $refs.userDropdown.hide($event)">
+                      @click="evanNavigate(coreRoute.path); $refs.userDropdown.hide($event)">
                       <i :class="`${ coreRoute.icon } mr-3`" style="width: 16px;"></i>
-                      {{ `_evan._routes.${ coreRoute.name }` | translate }}
+                      {{ `_evan._routes.${ coreRoute.title }` | translate }}
                     </a>
                   </div>
                   <a class="dropdown-item pt-2 pb-2 pl-3 pr-3 border-top"
@@ -96,7 +96,7 @@
               </evan-dropdown>
             </button>
             <button class="btn btn-sm position-relative"
-              @click="$refs.mailDropdown.show()"
+              @click="openMailDropdown()"
               :disabled="userInfo.mailsLoading">
               <i class="far fa-envelope position-relative"
                 v-if="!userInfo.mailsLoading">
@@ -139,8 +139,57 @@
             </button>
           </template>
 
-          <button class="btn btn-sm">
-            <i class="fas fa-tasks"></i>
+          <button class="btn btn-sm position-relative"
+            @click="$refs.queueDropdown.show();"
+            :disabled="queueLoading">
+            <i class="fas fa-tasks position-relative"
+              v-if="!queueLoading">
+              <span class="notification-dot" v-if="queueCount > 0"></span>
+            </i>
+            <div class="spinner-border spinner-border-sm bg-text-inverted"
+              v-if="queueLoading">
+            </div>
+            <evan-dropdown ref="queueDropdown"
+              :alignment="'right'"
+              :width="'300px'">
+              <template v-slot:content>
+                <div class="p-3">
+                  <h4 class="m-0 text-truncate">
+                    {{ '_evan.dapp-wrapper.queue' | translate }}
+                  </h4>
+                </div>
+                <span class="p-3 d-block border-top" 
+                  v-if="queueCount === 0">
+                  {{ '_evan.dapp-wrapper.empty-queue' | translate }}
+                </span>
+                <div class="border-top p-3 font-size-85"
+                  v-for="instance in queueInstances"
+                  @click="">
+                  <h5 class="m-0 font-weight-bold mb-2">
+                    {{ instance.dispatcher.title | translate }}
+                  </h5>
+
+                  <div class="progress" style="height: 1.3em">
+                    <div class="progress-bar bg-secondary"
+                      :class="{ 'progress-bar-animated progress-bar-striped': instance.running }"
+                      :style="{ 'width': `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }">
+                      {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
+                    </div>
+                  </div>
+
+                  <span class="text-danger mt-3" v-if="instance.error">
+                    {{ '_evan.dapp-wrapper.queue-error' | translate }}
+                  </span>
+                  <div class="text-center  mt-3"
+                    v-if="instance.type !== 'running'">
+                    <button type="button" class="btn btn-rounded btn-secondary"
+                      @click="instance.start();">
+                      {{ '_evan.dapp-wrapper.queue-continue' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </template>
+            </evan-dropdown>
           </button>
         </div>
       </div>

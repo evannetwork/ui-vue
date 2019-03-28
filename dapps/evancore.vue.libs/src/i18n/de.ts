@@ -38,7 +38,14 @@ export default {
     "cancel": "schließen",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
-      "new-mails": "Sie haben {newMailCount} neue Nachrichten"
+      "empty-queue": "Alles ist synchronisiert...",
+      "my-contacts": "Meine Kontakte",
+      "my-mailbox": "Meine Nachrichten",
+      "my-profile": "Mein Profil",
+      "new-mails": "Sie haben {newMailCount} neue Nachrichten",
+      "queue": "Daten-Synchronisation",
+      "queue-continue": "fortfahren",
+      "queue-error": "Während der Sychronisation ist ein Fehler aufgetreten."
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",

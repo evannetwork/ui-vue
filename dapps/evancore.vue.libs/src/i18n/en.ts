@@ -38,10 +38,14 @@ export default {
     "cancel": "close",
     "dapp-wrapper": {
       "all-messages": "All messages",
+      "empty-queue": "Everything is synchronized...",
       "my-contacts": "My Contacts",
       "my-mailbox": "My Messages",
       "my-profile": "My Profile",
-      "new-mails": "You have {newMailCount} new messages"
+      "new-mails": "You have {newMailCount} new messages",
+      "queue": "Data-Synchronisation",
+      "queue-continue": "continue",
+      "queue-error": "An error occurred during synchronization."
     },
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",

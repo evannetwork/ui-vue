@@ -33,7 +33,10 @@ import { Prop } from 'vue-property-decorator';
 import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { DAppWrapperRouteInterface } from '../../interfaces';
+
+import { registerEvanI18N } from '../../vue-core';
 
 // load domain name for quick usage
 const domainName = dappBrowser.getDomainName();
@@ -162,9 +165,18 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     loading: false,
     mails: '',
     mailsLoading: false,
-    newMailCount: '',
+    newMailCount: 0,
     readMails: [ ],
+    totalMails: 0,
   };
+
+  /**
+   * Queue loading informations
+   */
+  queueInstances = { };
+  queueCount = 0;
+  queueLoading = false;
+  queueWatcher = null;
 
   /**
    * Set interval to reload mails each 30 seconds
@@ -175,9 +187,9 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * Core routes that will be displayed in the top right user dropdown
    */
   coreRoutes = [
-    { name: `favorites`, icon: 'fas fa-bookmark' },
-    { name: `mailbox`, icon: 'fas fa-envelope' },
-    { name: `contacts`, icon: 'fas fa-address-book' },
+    { title: `favorites`, path: `favorites.${ domainName }`, icon: 'fas fa-bookmark' },
+    { title: `mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
+    { title: `contacts`, path: `addressbook.${ domainName }`, icon: 'fas fa-address-book' },
   ];
 
   /**
@@ -269,8 +281,14 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       window.removeEventListener('hashchange', this.hashChangeWatcher);
     }
 
+    // clear mails watcher
     if (this.mailsWatcher) {
       window.clearInterval(this.mailsWatcher);
+    }
+
+    // clear queue watcher
+    if (this.userInfo && this.queueWatcher) {
+      this.queueWatcher();
     }
   }
 
@@ -399,6 +417,9 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     this.userInfo.addressBook = await this.$store.state.runtime.profile.getAddressBook();
     this.userInfo.alias = this.userInfo.addressBook.profile[dappBrowser.core.activeAccount()].alias;
 
+    // setup dispatcher data saving logic
+    this.setupQueue();
+
     // load mail information and initialize and mail watcher
     this.loadMails();
     this.mailsWatcher = setInterval(() => this.loadMails);
@@ -409,32 +430,59 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   /**
    * Load the mail informations for the current user
    */
-  async loadMails() {
+  async loadMails(mailsToReach = 5) {
     this.userInfo.mailsLoading = true;
 
     // load mail inbox informations, load 10 for checking for +9 new mails
-    const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(10);
     this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || [ ]);
     this.userInfo.newMailCount = 0;
 
-    // map all the mails in to an mail array and show only 5
-    this.userInfo.mails = Object.keys(mailResult.mails)
-      .map((mailAddress: string) => {
-        const mail = mailResult.mails[mailAddress].content;
-        mail.address = mailAddress;
+    let mails = [ ];
+    let offset = -5;
+    this.userInfo.totalMails = 0;
 
-        return mail;
-      })
-      .slice(0, 5);
+    // load until 5 mails could be decrypted or the maximum amount of mails is reached
+    while (mails.length < 5 && offset < this.userInfo.totalMails) {
+      offset += 5;
+      const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(5, offset);
 
-    // check last 10 mails if they are already readed
-    this.userInfo.readMails.forEach(readMail => {
-      if (!mailResult.mails[readMail]) {
-        this.userInfo.newMailCount += 1;
-      }
-    });
+      this.userInfo.totalMails = mailResult.totalResultCount;
+
+      // map all the mails in to an mail array and show only 5
+      mails = mails.concat(Object.keys(mailResult.mails)
+        .map((mailAddress: string) => {
+          if (mailResult.mails[mailAddress] && mailResult.mails[mailAddress].content) {
+            const mail = mailResult.mails[mailAddress].content;
+            mail.address = mailAddress;
+
+            return mail;
+          }
+        })
+        .filter(mail => !!mail)
+      );
+    }
+
+    // show a maximum of 5 mails
+    this.userInfo.mails = mails.slice(0, 5);
+
+    // check the last read mail count against the current one, to check for new mails
+    const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
+    if (previousRead < this.userInfo.totalMails) {
+      this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
+    }
 
     this.userInfo.mailsLoading = false;
+  }
+
+  /**
+   * Opens the mail preview dropdown and sets the evan-mail-read-count.
+   */
+  openMailDropdown() {
+    (<any>this.$refs.mailDropdown).show();
+
+    // set last mail read count to the current counter
+    this.userInfo.newMailCount = 0;
+    window.localStorage['evan-mail-read-count'] = this.userInfo.totalMails;
   }
 
   /**
@@ -451,5 +499,63 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     this.evanNavigate(`mailbox.${ this.domainName }/received/detail/${ mail.address }`);
 
     (<any>this.$refs).mailDropdown.hide($event);
+  }
+
+  /**
+   * Load the queue data
+   */
+  async setupQueue() {
+    this.queueLoading = true;
+
+    // load queue for the current account and load the queue entries
+    const runtime = this.$store.state.runtime;
+    const queue = await new EvanQueue(this.$store.state.runtime.activeAccount);
+    const dispatchers = await queue.load('*');
+
+    // load all dispatcher instances for this user
+    await Promise.all(dispatchers.map(async (dispatcherObj: any) => {
+      try {
+        const [ dappEns, dispatcherName ] = dispatcherObj.dispatcherId.split('|||');
+        const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
+        const dispatcher = dapp[dispatcherName];
+
+        // add translation to correctly display instance dispatcher titles
+        if (dapp.translations) {
+           Object.keys(dapp.translations)
+             .forEach(key => this.$i18n.add(key, dapp.translations[key]));
+        }
+
+        await Promise.all(Object.keys(dispatcherObj.entries).map(async (entryId: string) => {
+          const entry = dispatcherObj.entries[entryId];
+
+          // apply all queu instances to the queue instance object
+          this.queueInstances[entryId] = new DispatcherInstance(queue, dispatcher,
+            runtime, entry.data, entry.stepIndex, entryId);
+        }));
+      } catch (ex) {
+        runtime.logger.log(ex, 'error');
+      }
+    }));
+
+    // set queue count
+    this.queueCount = Object.keys(this.queueInstances).length;
+    this.queueLoading = false;
+
+    // watch for queue updates
+    if (!this.queueWatcher) {
+      this.queueWatcher = Dispatcher.watch((event) => {
+        const instance = event.detail.instance;
+
+        // if the instance has finished it work, remove it
+        if (instance.status === 'finished') {
+          delete this.queueInstances[instance.id];
+        } else {
+          // else update status
+          this.queueInstances[instance.id] = instance;
+        }
+
+        this.queueCount = Object.keys(this.queueInstances).length;
+      });
+    }
   }
 }
