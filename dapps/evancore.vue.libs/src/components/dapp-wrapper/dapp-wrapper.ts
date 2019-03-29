@@ -179,6 +179,11 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   queueWatcher = null;
 
   /**
+   * Show a modal for delete / accepting an dispatcher instance
+   */
+  instanceInteraction: any = undefined;
+
+  /**
    * Set interval to reload mails each 30 seconds
    */
   mailsWatcher: any;
@@ -393,7 +398,9 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       this.login = false;
 
       // load the user infos like alias, mails, dispatchers ...
-      this.loadUserSpecific();
+      if (this.enableNav) {
+        this.loadUserSpecific();
+      }
     }
   }
 
@@ -546,12 +553,20 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     if (!this.queueWatcher) {
       this.queueWatcher = Dispatcher.watch((event) => {
         const instance = event.detail.instance;
-        // const previous = this.queueInstances[instance.id];
 
-        // if the instance has finished it work or was deleted, remove it
-        if (instance.status === 'finished' || instance.status === 'deleted') {
-          delete this.queueInstances[instance.id];
-        } else {
+        switch (instance.status) {
+          case 'finished':
+          case 'deleted': {
+            delete this.queueInstances[instance.id];
+            break;
+          }
+          case 'accept': {
+            this.startDispatcherInstance(instance);
+            break;
+          }
+        }
+
+        if (instance.status !== 'finished' && instance.status !== 'deleted') {
           // if the watch was already defined and it's not the incoming instance, copy only the
           // values
           this.$set(this.queueInstances, instance.id, instance);
@@ -559,6 +574,21 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
         this.queueCount = Object.keys(this.queueInstances).length;
       });
+    }
+  }
+
+  /**
+   * Starts an dispatcher instances and checks for accept status.
+   *
+   * @param      {any}  instance  an dispatcher instance
+   */
+  startDispatcherInstance(instance: any) {
+    if (instance.status === 'accept') {
+      this.instanceInteraction = { type: 'accept', instance };
+
+      (<any>this.$refs).instanceInteraction.show();
+    } else {
+      instance.start();
     }
   }
 }

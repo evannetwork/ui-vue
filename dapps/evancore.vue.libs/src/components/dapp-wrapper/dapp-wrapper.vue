@@ -189,11 +189,14 @@
                     <template v-if="instance.status !== 'running' && instance.status !== 'stopping'">
                       <i class="fas fa-play ml-3 text-secondary clickable"
                         style="font-size: 1.5em"
-                        @click="instance.start();">
+                        @click="startDispatcherInstance(instance);">
                       </i>
                       <i class="fas fa-times-circle ml-3 text-danger clickable"
                         style="font-size: 1.5em"
-                        @click="deletingInstance = instance; $refs.dispatcherInstanceDelete.show();">
+                        @click="
+                          instanceInteraction = { type: 'delete', instance: instance };
+                          $refs.instanceInteraction.show();
+                        ">
                       </i>
                     </template>
                   </div>
@@ -270,21 +273,29 @@
         </template>
 
         <div class="dapp-wrapper-content">
-          <evan-modal ref="dispatcherInstanceDelete">
+          <evan-modal ref="instanceInteraction">
             <template v-slot:header>
               <h5 class="modal-title">
-                {{ `_evan.dapp-wrapper.instance-delete.title` | translate }}
+                {{ `_evan.dapp-wrapper.instance-${ instanceInteraction.type }.title` | translate }}
               </h5>
             </template>
             <template v-slot:body>
-              <p class="text-left">
-                {{ `_evan.dapp-wrapper.instance-delete.desc`  | translate }}
+              <p class="text-left"
+                v-html="$t(`_evan.dapp-wrapper.instance-${ instanceInteraction.type }.desc`,
+                  instanceInteraction.instance)">
               </p>
             </template>
             <template v-slot:footer>
-              <button type="button" class="btn btn-danger btn-rounded font-weight-normal"
-                @click="deletingInstance.delete(); $refs.dispatcherInstanceDelete.hide();">
-                {{ `_evan.dapp-wrapper.instance-delete.delete` | translate }}
+              <button type="button" class="btn btn-rounded font-weight-normal"
+                :class="{
+                  'btn-danger': instanceInteraction.type === 'delete',
+                  'btn-primary': instanceInteraction.type === 'accept',
+                }"
+                @click="
+                  instanceInteraction.instance[instanceInteraction.type]();
+                  $refs.instanceInteraction.hide();
+                ">
+                {{ `_evan.dapp-wrapper.instance-${ instanceInteraction.type }.ok` | translate }}
               </button>
             </template>
           </evan-modal>

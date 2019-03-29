@@ -60,6 +60,7 @@ export default class ModalComponent  extends mixins(EvanComponent) {
    */
   hide() {
     this.isShown = false;
+    this.$emit('close');
     this.$nextTick(() => this.isRendered = false);
   }
 }

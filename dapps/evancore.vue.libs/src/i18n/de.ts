@@ -40,9 +40,14 @@ export default {
       "all-messages": "Alle Nachrichten",
       "empty-queue": "Alles ist synchronisiert...",
       "instance-delete": {
-        "delete": "entfernen",
-        "desc": "Do you want to irrevocably remove this entry?",
-        "title": "Eintrag entfernen"
+        "ok": "löschen",
+        "desc": "Wollen Sie diesen Eintrag unwiderruflich löschen?",
+        "title": "Eintrag löschen"
+      },
+      "instance-accept": {
+        "ok": "fortfahren",
+        "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
+        "title": "Transkationsbestätigung"
       },
       "my-contacts": "Meine Kontakte",
       "my-mailbox": "Meine Nachrichten",

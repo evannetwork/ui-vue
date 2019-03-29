@@ -40,9 +40,14 @@ export default {
       "all-messages": "All messages",
       "empty-queue": "Everything is synchronized...",
       "instance-delete": {
-        "delete": "delete",
-        "desc": "Do you really want to stop the synchronization for this entry and remove it?",
+        "ok": "delete",
+        "desc": "Do you want to irrevocably remove this entry?",
         "title": "Delete Entry"
+      },
+      "instance-accept": {
+        "ok": "continue",
+        "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
+        "title": "Transaction confirmation"
       },
       "my-contacts": "My Contacts",
       "my-mailbox": "My Messages",
