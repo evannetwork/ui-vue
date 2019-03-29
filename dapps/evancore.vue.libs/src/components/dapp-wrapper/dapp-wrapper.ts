@@ -527,10 +527,11 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
         await Promise.all(Object.keys(dispatcherObj.entries).map(async (instanceId: string) => {
           const entry = dispatcherObj.entries[instanceId];
+          const instance = new DispatcherInstance(queue, dispatcher, runtime, entry.data,
+            entry.stepIndex, instanceId, entry.error);
 
           // apply all queu instances to the queue instance object
-          this.$set(this.queueInstances, instanceId, new DispatcherInstance(queue, dispatcher,
-            runtime, entry.data, entry.stepIndex, instanceId));
+          this.$set(this.queueInstances, instanceId, instance);
         }));
       } catch (ex) {
         runtime.logger.log(ex, 'error');
@@ -547,8 +548,8 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
         const instance = event.detail.instance;
         // const previous = this.queueInstances[instance.id];
 
-        // if the instance has finished it work, remove it
-        if (instance.status === 'finished') {
+        // if the instance has finished it work or was deleted, remove it
+        if (instance.status === 'finished' || instance.status === 'deleted') {
           delete this.queueInstances[instance.id];
         } else {
           // if the watch was already defined and it's not the incoming instance, copy only the

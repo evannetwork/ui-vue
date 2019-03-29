@@ -39,6 +39,11 @@ export default {
     "dapp-wrapper": {
       "all-messages": "All messages",
       "empty-queue": "Everything is synchronized...",
+      "instance-delete": {
+        "delete": "delete",
+        "desc": "Do you really want to stop the synchronization for this entry and remove it?",
+        "title": "Delete Entry"
+      },
       "my-contacts": "My Contacts",
       "my-mailbox": "My Messages",
       "my-profile": "My Profile",

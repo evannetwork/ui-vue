@@ -143,11 +143,10 @@
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
             <i class="fas fa-tasks position-relative"
-              v-if="!queueLoading">
-              <span class="notification-dot" v-if="queueCount > 0"></span>
+              v-if="!queueLoading && !queueCount">
             </i>
             <div class="spinner-border spinner-border-sm bg-text-inverted"
-              v-if="queueLoading">
+              v-if="queueLoading || queueCount">
             </div>
             <evan-dropdown ref="queueDropdown"
               :alignment="'right'"
@@ -165,28 +164,43 @@
                 <div class="border-top p-3 font-size-85"
                   v-for="instance in queueInstances"
                   @click="">
-                  <h5 class="m-0 font-weight-bold mb-2">
-                    {{ instance.dispatcher.title | translate }}
-                  </h5>
+                  <div class="d-flex align-items-end">
+                    <div class="w-100">
+                      <h5 class="m-0 font-weight-bold mb-2">
+                        {{ instance.dispatcher.title | translate }}
+                      </h5>
 
-                  <div class="progress" style="height: 1.3em">
-                    <div class="progress-bar bg-secondary"
-                      :class="{ 'progress-bar-animated progress-bar-striped': instance.running }"
-                      :style="{ 'width': `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }">
-                      {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
+                      <div class="progress" style="height: 1.3em">
+                        <div class="progress-bar bg-secondary"
+                          :class="{ 'progress-bar-animated progress-bar-striped': instance.running }"
+                          :style="{ 'width': `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }">
+                          {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
+                        </div>
+                      </div>
                     </div>
+                    <i class="fas fa-pause ml-3 text-muted clickable"
+                      style="font-size: 1.5em"
+                      v-if="instance.status === 'running' && instance.stepIndex < instance.dispatcher.steps.length - 1"
+                      @click="instance.stop()">
+                    </i>
+                    <div class="spinner-grow spinner-grow-sm ml-3 text-muted"
+                      v-if="instance.status === 'stopping' || instance.status === 'deleting'">
+                    </div>
+                    <template v-if="instance.status !== 'running' && instance.status !== 'stopping'">
+                      <i class="fas fa-play ml-3 text-secondary clickable"
+                        style="font-size: 1.5em"
+                        @click="instance.start();">
+                      </i>
+                      <i class="fas fa-times-circle ml-3 text-danger clickable"
+                        style="font-size: 1.5em"
+                        @click="deletingInstance = instance; $refs.dispatcherInstanceDelete.show();">
+                      </i>
+                    </template>
                   </div>
 
                   <span class="text-danger mt-3" v-if="instance.error">
                     {{ '_evan.dapp-wrapper.queue-error' | translate }}
                   </span>
-                  <div class="text-center  mt-3"
-                    v-if="instance.status !== 'running'">
-                    <button type="button" class="btn btn-rounded btn-secondary"
-                      @click="instance.start();">
-                      {{ '_evan.dapp-wrapper.queue-continue' | translate }}
-                    </button>
-                  </div>
                 </div>
               </template>
             </evan-dropdown>
@@ -256,6 +270,24 @@
         </template>
 
         <div class="dapp-wrapper-content">
+          <evan-modal ref="dispatcherInstanceDelete">
+            <template v-slot:header>
+              <h5 class="modal-title">
+                {{ `_evan.dapp-wrapper.instance-delete.title` | translate }}
+              </h5>
+            </template>
+            <template v-slot:body>
+              <p class="text-left">
+                {{ `_evan.dapp-wrapper.instance-delete.desc`  | translate }}
+              </p>
+            </template>
+            <template v-slot:footer>
+              <button type="button" class="btn btn-danger btn-rounded font-weight-normal"
+                @click="deletingInstance.delete(); $refs.dispatcherInstanceDelete.hide();">
+                {{ `_evan.dapp-wrapper.instance-delete.delete` | translate }}
+              </button>
+            </template>
+          </evan-modal>
           <slot name="content"></slot>
         </div>
       </template>
