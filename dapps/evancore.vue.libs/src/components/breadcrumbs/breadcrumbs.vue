@@ -37,11 +37,13 @@
     <template 
       v-for="(breadcrumb, index) in breadcrumbs">
       <span class="p-2" v-if="index !== 0">/</span>
-      <a class="evan-breadcrumb"
-        :href="`#${ breadcrumb.path }`"
-        :class="{ 'active': $route.path === breadcrumb.path }">
-        {{ breadcrumb.name | translate }}
-      </a>
+      <h4 class="mb-0">
+        <a class="evan-breadcrumb"
+          :href="`#${ breadcrumb.path }`"
+          :class="{ 'active': $route.path === breadcrumb.path }">
+          {{ breadcrumb.name | translate }}
+        </a>
+      </h4>
     </template>
     <i v-if="enableReload"
       class="fas fa-sync-alt clickable ml-4"

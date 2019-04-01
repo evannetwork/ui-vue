@@ -78,7 +78,9 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
 
     // if it's not the body, clear the latest wrapper-sidebar-2 element and
     if (wrappers.length > 0) {
-      this.highestSidebar = wrappers.pop().querySelector('.dapp-wrapper-sidebar-2');
+      let highestWrapper = wrappers.pop();
+
+      this.highestSidebar = highestWrapper.querySelector('.dapp-wrapper-sidebar-2');
       this.contentElement = (<any>this.$el).firstChild;
 
       // clear element
@@ -101,7 +103,7 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
       });
 
       // Start observing the target node for configured mutations
-      this.elementObserver.observe(this.$el.parentElement, { childList: true, subTree: true });
+      this.elementObserver.observe(highestWrapper, { childList: true, subtree: true });
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');

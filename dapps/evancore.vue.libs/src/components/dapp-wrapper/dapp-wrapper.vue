@@ -48,7 +48,7 @@
             v-if="userInfo.loading">
           </div>
           <template v-if="!userInfo.loading">
-            <button class="btn btn-sm position-relative"
+            <button class="btn position-relative"
               @click="$refs.userDropdown.show()">
              <img class="mr-2 rounded-circle"
                 v-if="userInfo.img"
@@ -95,7 +95,7 @@
                 </template>
               </evan-dropdown>
             </button>
-            <button class="btn btn-sm position-relative"
+            <button class="btn position-relative"
               @click="openMailDropdown()"
               :disabled="userInfo.mailsLoading">
               <i class="far fa-envelope position-relative"
@@ -117,7 +117,7 @@
                       {{ '_evan.dapp-wrapper.my-mailbox' | translate }}
                     </h4>
                   </div>
-                  <a class="dropdown-item border-top pt-2 pb-2 pl-3 pr-3 font-size-85"
+                  <a class="dropdown-item border-top pt-2 pb-2 pl-3 pr-3"
                     v-for="(mail, index) in userInfo.mails"
                     :class="{ 'opacity-60': userInfo.readMails.indexOf(mail.address) !== -1 }"
                     @click="openMail(mail, $event)">
@@ -139,7 +139,7 @@
             </button>
           </template>
 
-          <button class="btn btn-sm position-relative"
+          <button class="btn position-relative"
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
             <i class="fas fa-tasks position-relative"
@@ -161,7 +161,7 @@
                   v-if="queueCount === 0">
                   {{ '_evan.dapp-wrapper.empty-queue' | translate }}
                 </span>
-                <div class="border-top p-3 font-size-85"
+                <div class="border-top p-3"
                   v-for="instance in queueInstances"
                   @click="">
                   <div class="d-flex align-items-end">
@@ -171,10 +171,12 @@
                       </h5>
 
                       <div class="progress" style="height: 1.3em">
+                        <span class="text-center w-100">
+                          {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
+                        </span>
                         <div class="progress-bar bg-secondary"
                           :class="{ 'progress-bar-animated progress-bar-striped': instance.running }"
                           :style="{ 'width': `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }">
-                          {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
                         </div>
                       </div>
                     </div>

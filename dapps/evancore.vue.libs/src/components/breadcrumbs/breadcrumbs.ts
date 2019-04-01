@@ -62,7 +62,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
   /**
    * Show the go back button
    */
-  goBack: boolean;
+  goBack = false;
 
   /**
    * Bind the hash change watcher to track hash changes and to update the routes
@@ -99,7 +99,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
       });
 
       // show the go back button, when the navigation is deeper than 0
-      this.goBack = that.breadcrumbs.length > 0;
+      that.goBack = that.breadcrumbs.length > 0;
 
       // add the root dapp identitfier as root element
       that.breadcrumbs.unshift({

@@ -185,5 +185,6 @@ export async function getNextDApp(dappEnsOrContract?: string) {
     contractAddress,
     domainName: dappBrowser.getDomainName(),
     ens: ensParts[dappIndex],
+    fullUrl: window.location.href.replace(window.location.hash, `#${ baseHash }`),
   };
 }
