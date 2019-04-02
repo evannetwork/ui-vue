@@ -65,7 +65,8 @@ export default {
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "please-login": "Bitte entsperren Sie Ihr Profil um fortzufahren.",
     "use-password": "Entsperren",
-    "welcome-to-evan": "Willkommen im evan.network"
+    "welcome-to-evan": "Willkommen im evan.network",
+    "dispatcher-not-found": "Synchronisations Job nicht gefunden..."
   }
 }
 /* tslint:enable */

@@ -65,7 +65,8 @@ export default {
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
     "use-password": "Unlock",
-    "welcome-to-evan": "Welcome to the evan.network"
+    "welcome-to-evan": "Welcome to the evan.network",
+    "dispatcher-not-found": "Synchronization job not found..."
   }
 }
 /* tslint:enable */

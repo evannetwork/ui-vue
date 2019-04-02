@@ -417,6 +417,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * Load the users specific data.
    */
   async loadUserSpecific() {
+    console.log('load user specific')
     this.userInfo.loading = true;
     this.userInfo.address = dappBrowser.core.activeAccount();
 
@@ -526,6 +527,10 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
         const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
         const dispatcher = dapp[dispatcherName];
 
+        console.dir(dapp)
+        console.dir(dispatcherName)
+        console.dir(dispatcher)
+
         // add translation to correctly display instance dispatcher titles
         if (dapp.translations) {
            Object.keys(dapp.translations)
@@ -534,8 +539,16 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
         await Promise.all(Object.keys(dispatcherObj.entries).map(async (instanceId: string) => {
           const entry = dispatcherObj.entries[instanceId];
-          const instance = new DispatcherInstance(queue, dispatcher, runtime, entry.data,
-            entry.stepIndex, instanceId, entry.error);
+          const instance = new DispatcherInstance({
+            queue,
+            dispatcher,
+            runtime,
+            data: entry.data,
+            stepIndex: entry.stepIndex,
+            id: instanceId,
+            error: entry.error,
+            customPrice: entry.customPrice,
+          });
 
           // apply all queu instances to the queue instance object
           this.$set(this.queueInstances, instanceId, instance);

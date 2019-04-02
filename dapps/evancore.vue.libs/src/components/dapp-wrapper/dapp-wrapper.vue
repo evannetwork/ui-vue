@@ -165,20 +165,23 @@
                   v-for="instance in queueInstances"
                   @click="">
                   <div class="d-flex align-items-end">
-                    <div class="w-100">
+                    <div class="w-100" v-if="instance.dispatcher">
                       <h5 class="m-0 font-weight-bold mb-2">
                         {{ instance.dispatcher.title | translate }}
                       </h5>
 
                       <div class="progress" style="height: 1.3em">
-                        <span class="text-center w-100">
-                          {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
-                        </span>
                         <div class="progress-bar bg-secondary"
                           :class="{ 'progress-bar-animated progress-bar-striped': instance.running }"
                           :style="{ 'width': `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }">
+                          {{ instance.stepIndex }} / {{ instance.dispatcher.steps.length }}
                         </div>
                       </div>
+                    </div>
+                    <div v-else>
+                      <h5 class="m-0 font-weight-bold mb-2">
+                        {{ '_evan.dispatcher-not-found' | translate }}
+                      </h5>
                     </div>
                     <i class="fas fa-pause ml-3 text-muted clickable"
                       style="font-size: 1.5em"
