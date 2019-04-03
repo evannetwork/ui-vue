@@ -527,10 +527,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
         const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
         const dispatcher = dapp[dispatcherName];
 
-        console.dir(dapp)
-        console.dir(dispatcherName)
-        console.dir(dispatcher)
-
         // add translation to correctly display instance dispatcher titles
         if (dapp.translations) {
            Object.keys(dapp.translations)

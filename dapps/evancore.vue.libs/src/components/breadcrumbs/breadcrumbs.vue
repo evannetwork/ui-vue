@@ -36,7 +36,7 @@
     </i>
     <template 
       v-for="(breadcrumb, index) in breadcrumbs">
-      <span class="p-2" v-if="index !== 0">/</span>
+      <h4 class="mb-0 p-2" v-if="index !== 0">/</h4>
       <h4 class="mb-0">
         <a class="evan-breadcrumb"
           :href="`#${ breadcrumb.path }`"
