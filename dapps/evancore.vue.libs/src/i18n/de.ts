@@ -31,7 +31,7 @@ export default {
     "_routes": {
       "contacts": "Kontakten",
       "favorites": "Favoriten",
-      "identities": "Identities",
+      "identities": "Digitale Identitäten",
       "mailbox": "Nachrichten",
       "profile": "Mein Profil"
     },
