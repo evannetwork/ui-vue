@@ -430,7 +430,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
     // load mail information and initialize and mail watcher
     this.loadMails();
-    this.mailsWatcher = setInterval(() => this.loadMails);
+    this.mailsWatcher = setInterval(() => this.loadMails(), 30 * 1000);
 
     this.userInfo.loading = false;
   }

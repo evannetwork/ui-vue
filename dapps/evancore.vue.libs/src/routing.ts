@@ -77,7 +77,27 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
   });
 
   // initialize vue router using the provided routes
-  const router = new VueRouter({ base: dappToLoad.baseHash, routes: routes });
+  const router = new VueRouter({
+    base: `${ dappToLoad.baseHash }/`,
+    mode: 'hash',
+    routes: routes,
+  });
+
+  // overwrite origin router.push, to handle correct base hash handling
+  const originPush = router.push;
+  router.push = (location, onComplete, onAbort) => {
+    let newPath = typeof location === 'string' ? location : location.path;
+
+    if (newPath) {
+      if (!newPath.startsWith(dappToLoad.baseHash)) {
+        newPath = `${ dappToLoad.baseHash }/${ newPath }`;
+      }
+
+      window.location.hash = newPath;
+    } else {
+      return originPush.call(router, location, onComplete, onAbort);
+    }
+  };
 
   // start up the router!
   const windowHash = decodeURIComponent(window.location.hash);
