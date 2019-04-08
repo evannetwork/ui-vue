@@ -222,7 +222,7 @@ export class EvanForm {
     });
 
     // set values!
-    this.controls.forEach(controlKey => this[controlKey].value = controls[controlKey].value)
+    this.controls.forEach(controlKey => this[controlKey].value = controls[controlKey].value);
   }
 
   /**
@@ -232,5 +232,44 @@ export class EvanForm {
     this.isValid = this.controls
       .filter(controlKey => this[controlKey]._error)
       .length === 0;
+  }
+
+  /**
+   * Adds a single control to the current form
+   *
+   * @param      {string}                  name     name of the control
+   * @param      {EvanFormControlOptions}  control  control options
+   */
+  addControl(controlKey: string, control: EvanFormControlOptions) {
+    // remober the control list for validation purposes
+    this.controls.push(controlKey);
+
+    // create the form control
+    control.name = controlKey;
+    this[controlKey] = new EvanFormControl(
+      controlKey,
+      undefined,
+      this.vueInstance,
+      control.validate,
+      this
+    );
+
+    // set the value
+    this[controlKey].value = control.value;
+
+    // trigger control validation
+    this.validateControls();
+  }
+
+  /**
+   * Remove a control from the form.
+   *
+   * @param      {string}  controlKey    controlKey of the control
+   */
+  removeControl(controlKey: string) {
+    this.controls.splice(this.controls.indexOf(controlKey), 1);
+    delete this[controlKey];
+
+    this.validateControls();
   }
 }
