@@ -122,7 +122,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  *   2. dashboard.evan/** will be triggered and loads the dapp-loader compoment
  *   3. dapp-loader tracks the url hashes and detects the dashboard.evan/onboarding.evan route and
  *      will start this dapp in the dapp-loader
- *   4. when navigating to /dashboard.evan/identities.evan, the dapp-loader trackts the url change
+ *   4. when navigating to /dashboard.evan/digitaltwins.evan, the dapp-loader trackts the url change
  *      and 3. will be started with the new url hash
  *
  * @param      {string}  dappEnsOrContract  The dapp ens or contract (e.g.
