@@ -48,12 +48,6 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
   contentElement: Element;
 
   /**
-   * Watch for dom removal of the parent element of the dapp-wrapper level 2, so we can destroy this
-   * one
-   */
-  elementObserver: any;
-
-  /**
    * Run destoyed method only ones
    */
   isDestroyed = false;
@@ -88,25 +82,13 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
 
       // append the current element
       this.highestSidebar.appendChild(this.contentElement);
-
-      // Create an observer instance to watch parentElements changes
-      this.elementObserver = new MutationObserver(() => {
-        parent = this.$el;
-
-        // check if the current element is attached to the dom, else, remove it!
-        do {
-          parent = parent.parentElement;
-          if (!parent) {
-            return this.destroy();
-          }
-        } while (parent && parent !== document.body);
-      });
-
-      // Start observing the target node for configured mutations
-      this.elementObserver.observe(highestWrapper, { childList: true, subtree: true });
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');
+    }
+
+    if (this.isDestroyed) {
+      this.destroy();
     }
   }
 
@@ -122,11 +104,5 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
    * when found.
    */
   destroy() {
-    if (this.highestSidebar && !this.isDestroyed) {
-      this.isDestroyed = true;
-
-      this.highestSidebar.removeChild(this.contentElement);
-      this.elementObserver.disconnect();
-    }
   }
 }

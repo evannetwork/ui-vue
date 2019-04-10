@@ -41,7 +41,7 @@
         <a class="evan-breadcrumb"
           :href="`#${ breadcrumb.path }`"
           :class="{ 'active': $route.path === breadcrumb.path }">
-          {{ breadcrumb.name | translate }}
+          {{ $i18n.keyExists(breadcrumb.name) ? $t(breadcrumb.name) : breadcrumb.fallbackName }}
         </a>
       </h4>
     </template>

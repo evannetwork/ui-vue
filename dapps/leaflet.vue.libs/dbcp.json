@@ -8,7 +8,7 @@
         "leaflet.vue.libs.js",
         "leaflet.vue.libs.css"
       ],
-      "origin": "QmZzDfS2V4y1oydyzPatEjtvSQsk81N2oC7YZsCnxxqx5k",
+      "origin": "QmbWYLnfrP1t9LFRxHaPQNrgd6d81EUYintsayUzZDDQRb",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -33,7 +33,7 @@
     ],
     "version": "3.1.0",
     "versions": {
-      "3.1.0": "QmZJSVywJ8bHK321EBRXoachiDfrxzRNJEdJ5kk6A6jGWb"
+      "3.1.0": "QmdAjVDFWxLGfiXshjdczeZKwBC1Km3WKEDnaQPHTgJSwp"
     }
   }
 }

@@ -106,6 +106,10 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     }
   });
 
+  // register event handlers, so multiple vue instance and removed dom elements will be destroyed
+  // correctly
+  registerEventHandlers(vue);
+
   return vue;
 }
 
@@ -133,3 +137,36 @@ export function registerEvanI18N(Vue: any, translations: any) {
   // add all i18n definitions
   Object.keys(translations).forEach(key => Vue.i18n.add(key, translations[key]));
 };
+
+/**
+ * Bind window unload event handlers and watch for element to be removed, so we can trigger
+ * correct destroy events.
+ *
+ * @param      {Vue}  vueInstance  The vue instance
+ */
+export function registerEventHandlers(vueInstance: any) {
+  const beforeUnload = () => {
+    vueInstance.$destroy();
+  };
+
+  window.addEventListener('beforeunload', beforeUnload);
+
+  // Create an observer instance to watch parentElements changes
+  const elementObserver = new MutationObserver(() => {
+    let parent = vueInstance.$el;
+
+    // check if the current element is attached to the dom, else, destroy the vue instance
+    do {
+      parent = parent.parentElement;
+
+      if (!parent) {
+        beforeUnload();
+        elementObserver.disconnect();
+        window.removeEventListener('beforeunload', beforeUnload);
+      }
+    } while (parent && parent !== document.body);
+  });
+
+  // Start observing the target node for configured mutations
+  elementObserver.observe(vueInstance.$el.parentElement, { childList: true, });
+}

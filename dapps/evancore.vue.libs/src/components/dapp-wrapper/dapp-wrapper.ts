@@ -417,7 +417,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * Load the users specific data.
    */
   async loadUserSpecific() {
-    console.log('load user specific')
     this.userInfo.loading = true;
     this.userInfo.address = dappBrowser.core.activeAccount();
 
@@ -560,7 +559,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
     // watch for queue updates
     if (!this.queueWatcher) {
-      this.queueWatcher = Dispatcher.watch((event) => {
+      this.queueWatcher = Dispatcher.watch((event: CustomEvent) => {
         const instance = event.detail.instance;
 
         switch (instance.status) {

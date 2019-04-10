@@ -46,6 +46,8 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
     type: Function
   }) enableReload;
 
+  @Prop() baseHash;
+
   // route stack
   breadcrumbs = [ ];
 
@@ -65,26 +67,39 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
   goBack = false;
 
   /**
+   * Correctly used base hash (props should not be overwritten, so we copy the value to the
+   * _baseHash prop)
+   */
+  _baseHash = '';
+
+  /**
    * Bind the hash change watcher to track hash changes and to update the routes
    */
   async created() {
     const that = this;
-    const activeDApp = (<any>this).dapp;
     const domainName = (<any>this).domainName;
+
+    // fill empty base hash
+    this._baseHash = this.baseHash || this.dapp.baseHash;
 
     // bin the hash change watcher within the create to keep the correct function reference
     this.hashChangeWatcher = function() {
       that.breadcrumbs = window.location.hash
         // remove the base hash
-        .replace(`#${ activeDApp.baseHash }`, '')
+        .replace(`#${ that._baseHash }`, '')
         .split('/')
         // filter empty breadcrumbs
         .filter(breadcrumb => !!breadcrumb);
 
+      // add root domain as first entry
+      that.breadcrumbs.unshift((that.dapp.contractAddress || `${ that.dapp.ens }`)
+          .replace(new RegExp(`.${ domainName }`, 'g'), ''));
+
       // iterate through all paths and create the correct translation name and path
       that.breadcrumbs = that.breadcrumbs.map((breadcrumb: string, index: number) => {
         // remove the domain name, so we can manage simple i18n files
-        let name = breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), '');
+        let fallbackName = breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), '');
+        let name = fallbackName;
 
         // if the name does not starts with 0x, apply the i18nScope
         if (name.indexOf('0x') !== 0) {
@@ -93,20 +108,15 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
 
         return {
           name: name,
+          fallbackName: fallbackName,
           // build the path relative to the base hash
-          path: `${ activeDApp.baseHash }/${ that.breadcrumbs.slice(0, index + 1).join('/') }`
+          path: index === 0 ? that._baseHash :
+            `${ that._baseHash }/${ that.breadcrumbs.slice(1, index + 1).join('/') }`
         }
       });
 
       // show the go back button, when the navigation is deeper than 0
       that.goBack = that.breadcrumbs.length > 0;
-
-      // add the root dapp identitfier as root element
-      that.breadcrumbs.unshift({
-        name: (activeDApp.contractAddress || `${ that.i18nScope }.${ activeDApp.ens }`)
-          .replace(new RegExp(`.${ domainName }`, 'g'), ''),
-        path: activeDApp.baseHash
-      })
     };
 
     // set them initially

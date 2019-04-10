@@ -35,7 +35,7 @@ export default {
       "mailbox": "Nachrichten",
       "profile": "Mein Profil"
     },
-    "cancel": "schließen",
+    "cancel": "Schließen",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "empty-queue": "Alles ist synchronisiert...",
