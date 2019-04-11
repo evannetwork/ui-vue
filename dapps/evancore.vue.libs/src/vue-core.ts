@@ -160,6 +160,7 @@ export function registerEventHandlers(vueInstance: any) {
       parent = parent.parentElement;
 
       if (!parent) {
+        console.log('EVAN VUE DESTROY')
         beforeUnload();
         elementObserver.disconnect();
         window.removeEventListener('beforeunload', beforeUnload);

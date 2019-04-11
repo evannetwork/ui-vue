@@ -33,23 +33,26 @@
         @click="hide()">
         <div class="modal-dialog" role="document">
           <div class="modal-content" v-on:click.stop>
-            <div class="modal-header">
-              <slot name="header"></slot>
-              <button type="button" class="close" aria-label="Close"
-                @click="hide()">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <slot name="body"></slot>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary btn-rounded"
-                @click="hide()">
-                {{ '_evan.cancel' | translate }}
-              </button>
-              <slot name="footer"></slot>
-            </div>
+            <template v-if="!customModal">
+              <div class="modal-header">
+                <slot name="header"></slot>
+                <button type="button" class="close" aria-label="Close"
+                  @click="hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <slot name="body"></slot>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary btn-rounded"
+                  @click="hide()">
+                  {{ '_evan.cancel' | translate }}
+                </button>
+                <slot name="footer"></slot>
+              </div>
+            </template>
+            <slot name="content" v-if="customModal"></slot>
           </div>
         </div>
       </div>
