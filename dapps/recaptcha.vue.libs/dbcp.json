@@ -7,7 +7,7 @@
       "files": [
         "recaptcha.vue.libs.js"
       ],
-      "origin": "QmNmmzNCrnGyvXuXnu1B6sbqnbZqnnBEMkaUciKQqeyHZE",
+      "origin": "QmSE2Tb9CQdGv9HyKsoqi4eSiNG4sjmAQ3oGtSTNXTxcan",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -32,7 +32,7 @@
     ],
     "version": "1.1.1",
     "versions": {
-      "1.1.1": "QmSqKec8nRjKkFaSE8seSCxnCfDU33no1U7EsiPCtvkkBU"
+      "1.1.1": "Qme8uxSGYAegHDgHhRHV6pfrnGwdPwusVsKAFdGh6G9Ukn"
     }
   }
 }

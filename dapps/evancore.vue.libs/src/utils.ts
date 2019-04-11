@@ -25,15 +25,11 @@
   https://evan.network/license/
 */
 
-// map the original vue path to vue.libs
-import { System } from '@evan.network/ui-dapp-browser';
-import { getDomainName } from './utils';
-System.map['@evan.network/ui-vue-core'] = `evancore.vue.libs.${ getDomainName() }!dapp-content`;
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
-// export evan vue components, interfaces and functions
-export * from './components/registry';
-export * from './forms';
-export * from './interfaces';
-export * from './routing';
-export * from './utils';
-export * from './vue-core';
+/**
+ * Return the domain name. Wrapper function for the dapp-browser.getDomainName.
+ */
+export function getDomainName() {
+  return `vue.${ dappBrowser.getDomainName() }`;
+}

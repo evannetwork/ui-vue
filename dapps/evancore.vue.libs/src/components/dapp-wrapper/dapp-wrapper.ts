@@ -35,11 +35,11 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { DAppWrapperRouteInterface } from '../../interfaces';
-
-import { registerEvanI18N } from '../../vue-core';
+import { registerEvanI18N, } from '../../vue-core';
+import { getDomainName } from '../../utils';
 
 // load domain name for quick usage
-const domainName = dappBrowser.getDomainName();
+const domainName = getDomainName();
 const i18nPref = '_evan._routes';
 
 @Component({ })

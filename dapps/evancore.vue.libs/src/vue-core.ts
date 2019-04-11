@@ -39,6 +39,7 @@ import evanComponents from './components/registry';
 import evanTranslations from './i18n/translations';
 import { ComponentRegistrationInterface, EvanVueOptionsInterface } from './interfaces';
 import { initializeRouting } from './routing';
+import { getDomainName } from './utils';
 
 /******************************************** functions *******************************************/
 /**
@@ -66,9 +67,9 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
 
   // load the vue evan core to get its origin and access the images
   const vueCoreDbcp = await dappBrowser.System
-    .import(`ui.libs.${ dappBrowser.getDomainName() }!ens`);
+    .import(`ui.libs.${ getDomainName() }!ens`);
   const uiLibBaseUrl = dappBrowser.dapp.getDAppBaseUrl(vueCoreDbcp,
-    `${ vueCoreDbcp.name }.${ dappBrowser.getDomainName() }`);
+    `${ vueCoreDbcp.name }.${ getDomainName() }`);
 
   // initialze VueX
   Vue.use(Vuex);
@@ -171,3 +172,4 @@ export function registerEventHandlers(vueInstance: any) {
   // Start observing the target node for configured mutations
   elementObserver.observe(vueInstance.$el.parentElement, { childList: true, });
 }
+
