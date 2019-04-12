@@ -7,7 +7,7 @@
         "i18n.vuex.libs": "1.11.0",
         "moment.vue.libs": "4.0.0",
         "router.vue.libs": "^2.5.0",
-        "ui.libs": "1.0.0",
+        "ui.libs": "^1.0.0",
         "vue.libs": "^2.5.0",
         "vuex.libs": "3.1.0"
       },
