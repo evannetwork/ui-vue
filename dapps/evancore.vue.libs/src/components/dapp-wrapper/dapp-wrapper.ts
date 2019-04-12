@@ -35,11 +35,11 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { DAppWrapperRouteInterface } from '../../interfaces';
-
-import { registerEvanI18N } from '../../vue-core';
+import { registerEvanI18N, } from '../../vue-core';
+import { getDomainName } from '../../utils';
 
 // load domain name for quick usage
-const domainName = dappBrowser.getDomainName();
+const domainName = getDomainName();
 const i18nPref = '_evan._routes';
 
 @Component({ })
@@ -76,7 +76,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     type: Array,
     default: function(options) {
       return [
-        { title: `${ i18nPref }.identities`, path: `identities.${ domainName }`, icon: 'fas fa-id-card' },
+        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'fas fa-id-card' },
         { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'fas fa-bookmark' },
         // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
         { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'fas fa-address-book' },
@@ -417,7 +417,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * Load the users specific data.
    */
   async loadUserSpecific() {
-    console.log('load user specific')
     this.userInfo.loading = true;
     this.userInfo.address = dappBrowser.core.activeAccount();
 
@@ -430,7 +429,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
     // load mail information and initialize and mail watcher
     this.loadMails();
-    this.mailsWatcher = setInterval(() => this.loadMails);
+    this.mailsWatcher = setInterval(() => this.loadMails(), 30 * 1000);
 
     this.userInfo.loading = false;
   }
@@ -442,7 +441,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     this.userInfo.mailsLoading = true;
 
     // load mail inbox informations, load 10 for checking for +9 new mails
-    this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || [ ]);
+    this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
     this.userInfo.newMailCount = 0;
 
     let mails = [ ];
@@ -560,7 +559,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
     // watch for queue updates
     if (!this.queueWatcher) {
-      this.queueWatcher = Dispatcher.watch((event) => {
+      this.queueWatcher = Dispatcher.watch((event: CustomEvent) => {
         const instance = event.detail.instance;
 
         switch (instance.status) {

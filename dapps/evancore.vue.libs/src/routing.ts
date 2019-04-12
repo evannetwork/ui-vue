@@ -35,6 +35,7 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 // import vue core stuff
 import DAppLoaderComponent from './components/dapp-loader/dapp-loader';
 import { RouteRegistrationInterface, EvanVueOptionsInterface } from './interfaces';
+import { getDomainName } from './utils';
 
 /**
  * Start the routing for a vue application. Clones the original routes and sets the base routing (=
@@ -77,7 +78,27 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
   });
 
   // initialize vue router using the provided routes
-  const router = new VueRouter({ base: dappToLoad.baseHash, routes: routes });
+  const router = new VueRouter({
+    base: `${ dappToLoad.baseHash }/`,
+    mode: 'hash',
+    routes: routes,
+  });
+
+  // overwrite origin router.push, to handle correct base hash handling
+  const originPush = router.push;
+  router.push = (location, onComplete, onAbort) => {
+    let newPath = typeof location === 'string' ? location : location.path;
+
+    if (newPath) {
+      if (!newPath.startsWith(dappToLoad.baseHash)) {
+        newPath = `${ dappToLoad.baseHash }/${ newPath }`;
+      }
+
+      window.location.hash = newPath;
+    } else {
+      return originPush.call(router, location, onComplete, onAbort);
+    }
+  };
 
   // start up the router!
   const windowHash = decodeURIComponent(window.location.hash);
@@ -102,7 +123,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  *   2. dashboard.evan/** will be triggered and loads the dapp-loader compoment
  *   3. dapp-loader tracks the url hashes and detects the dashboard.evan/onboarding.evan route and
  *      will start this dapp in the dapp-loader
- *   4. when navigating to /dashboard.evan/identities.evan, the dapp-loader trackts the url change
+ *   4. when navigating to /dashboard.evan/digitaltwins.evan, the dapp-loader trackts the url change
  *      and 3. will be started with the new url hash
  *
  * @param      {string}  dappEnsOrContract  The dapp ens or contract (e.g.
@@ -115,7 +136,7 @@ export async function getNextDApp(dappEnsOrContract?: string) {
   const ensParts = currentHash.split('/');
 
   // calculated domain name for quick usage
-  const domainName = dappBrowser.getDomainName();
+  const domainName = getDomainName();
 
   // get module id
   let dappIndex;
@@ -153,7 +174,7 @@ export async function getNextDApp(dappEnsOrContract?: string) {
             break;
           }
         } catch (ex) {
-          console.log(ex);
+          // console.log(ex);
         }
       }
     }
@@ -183,8 +204,9 @@ export async function getNextDApp(dappEnsOrContract?: string) {
   return {
     baseHash,
     contractAddress,
-    domainName: dappBrowser.getDomainName(),
+    domainName: getDomainName(),
     ens: ensParts[dappIndex],
+    rootEns: ensParts[1],
     fullUrl: window.location.href.replace(window.location.hash, `#${ baseHash }`),
   };
 }

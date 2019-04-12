@@ -31,11 +31,11 @@ export default {
     "_routes": {
       "contacts": "Kontakten",
       "favorites": "Favoriten",
-      "identities": "Identities",
+      "digitaltwins": "Digitale Zwillinge",
       "mailbox": "Nachrichten",
       "profile": "Mein Profil"
     },
-    "cancel": "schließen",
+    "cancel": "Schließen",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "empty-queue": "Alles ist synchronisiert...",

@@ -37,6 +37,8 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
 export default class ModalComponent  extends mixins(EvanComponent) {
+  @Prop({ }) customModal;
+
   /**
    * shows the dom elements of the modal
    */

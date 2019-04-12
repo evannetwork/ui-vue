@@ -1,9 +1,37 @@
-# i18n.vuex.libs
+# evan.networtk library wrapper
 
-This is a evan.network DApp. To build and deploy your DApp, please visit the readme.md of your containing evan.network basic project.
+DApp wrapper for: [vuex-i18n](https://github.com/kazupon/vue-i18n)
 
-For more details about how to program DApps have a look here:
+## Build
+```
+npm run build
+```
 
-- [DApp Tutorials](https://evannetwork.github.io/dapps/basics)
-- [API Reference UI](https://ipfs.evan.network/ipns/QmReXE5YkiXviaHNG1ASfY6fFhEoiDKuSkgY4hxgZD9Gm8)
-- [API Reference blockchain-core / DBCP](https://ipfs.evan.network/ipns/QmYmsPTdPPDLig6gKB1wu1De4KJtTqAXFLF1498umYs4M6)
+
+## Usage
+- exclude `vuex-i18n` from build job
+
+- package.json
+```
+  ...
+  "dependencies": {
+    "vuex-i18n": "X.X.X"
+  },
+  ...
+```
+
+- dbcp.json
+```
+  ...
+  "dapp": {
+    "dependencies": {
+      "i18n.vuex.libs": "X.X.X"
+    },
+  }
+  ...
+```
+
+- typescript
+```
+  import i18n from 'vuex-i18n';
+```

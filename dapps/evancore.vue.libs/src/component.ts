@@ -36,6 +36,7 @@ import { Prop } from 'vue-property-decorator';
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { getDomainName } from './utils';
 
 @Component({ })
 export default class EvanComponent extends Vue {
@@ -61,14 +62,14 @@ export default class EvanComponent extends Vue {
     super();
 
     this.dapp = this.activeDApp();
-    this.domainName = dappBrowser.getDomainName();
+    this.domainName = getDomainName();
   }
 
   /**
    * Specify a custom navigation method for evan vue projects.
    */
-  evanNavigate(path: string) {
-    window.location.hash = `${ this.activeDApp().baseHash }/${ path }`;
+  evanNavigate(path: string, baseHash: string = this.activeDApp().baseHash) {
+    window.location.hash = `${ baseHash }/${ path }`;
   }
 
   /**
