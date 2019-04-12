@@ -5,16 +5,17 @@ All other dapps are constructed simply, to exclude the wanted library and map th
 
 Available libraries:
 
-| original               | ens address        |
-|------------------------|-:-:----------------|
-| axios                  | axios.vue.libs     |
-| vuex-i18n              | i18n.vuex.libs     |
-| vue-recaptcha          | recaptcha.vue.libs |
-| vue                    | vue.libs           |
-| @evan.network/ui-vue-core | evancore.vue.libs      |
-| vue-material           | material.vue.libs  |
-| vue-router             | router.vue.libs    |
-| vuex                   | vuex.libs          |
+| original          | ens address             |
+|:------------------|:------------------------|
+| axios             | axios.vue.libs.evan     |
+| evancore.vue.libs | evancore.vue.libs.evan  |
+| vuex-i18n         | i18n.vuex.libs.evan     |
+| vue2-leaflet      | leaflet.vue.libs.evan   |
+| vue-moment        | moment.vue.libs.evan    |
+| vue-recaptcha     | recaptcha.vue.libs.evan |
+| vue-router        | router.vue.libs.evan    |
+| vue               | vue.libs.evan           |
+| vuex              | vuex.libs.evan          |
 
 ## Install
 - use `yarn install` or `npm install`

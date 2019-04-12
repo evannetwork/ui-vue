@@ -1,9 +1,12 @@
 # evancore.vue.libs
 
-This is a evan.network DApp. To build and deploy your DApp, please visit the readme.md of your containing evan.network basic project.
+This project includes several handlers and components to handle evan.network dapps with vue easily.
 
-For more details about how to program DApps have a look here:
+Documentation TDB...
 
-- [DApp Tutorials](https://evannetwork.github.io/dapps/basics)
-- [API Reference UI](https://ipfs.evan.network/ipns/QmReXE5YkiXviaHNG1ASfY6fFhEoiDKuSkgY4hxgZD9Gm8)
-- [API Reference blockchain-core / DBCP](https://ipfs.evan.network/ipns/QmYmsPTdPPDLig6gKB1wu1De4KJtTqAXFLF1498umYs4M6)
+Reference Projects:
+  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/digital-twins
+  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/data-container
+  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/favorites
+  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/mailbox
+

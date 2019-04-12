@@ -44,7 +44,7 @@
     "DApp",
     "SASS"
   ],
-  "license": "Apache-2.0",
+  "license": "AGPL-3.0-only",
   "name": "ui-vue-core",
   "scripts": {
     "dapps-build": "gulp --gulpfile gulp/dapps.js dapps-build",
