@@ -31,7 +31,7 @@
       pt-2 pb-2 pr-3 pl-3
       d-flex align-items-center">
     <i v-if="goBack"
-      class="fas fa-chevron-left clickable ml-2 mr-3"
+      class="mdi mdi-chevron-left clickable ml-2 mr-3"
       @click="$router.history.go(-1)">
     </i>
     <template 
@@ -46,7 +46,7 @@
       </h4>
     </template>
     <i v-if="enableReload"
-      class="fas fa-sync-alt clickable ml-4"
+      class="mdi mdi-sync clickable ml-4"
       @click="$emit('reload')">
     </i>
     <span class="mx-auto"></span>

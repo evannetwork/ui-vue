@@ -31,5 +31,6 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
  * Return the domain name. Wrapper function for the dapp-browser.getDomainName.
  */
 export function getDomainName() {
-  return `vue.${ dappBrowser.getDomainName() }`;
+  // return `vue.${ dappBrowser.getDomainName() }`;
+  return `${ dappBrowser.getDomainName() }`;
 }
