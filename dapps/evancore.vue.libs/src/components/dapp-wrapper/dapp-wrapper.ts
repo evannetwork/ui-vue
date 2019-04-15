@@ -76,10 +76,10 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     type: Array,
     default: function(options) {
       return [
-        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-account-card-details' },
-        { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark' },
+        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-account-card-details-outline' },
+        { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
         // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
-        { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-book-multiple' },
+        { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-account-group-outline' },
         // { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'mdi mdi-account' },
       ];
     }
@@ -194,6 +194,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   coreRoutes = [
     { title: `favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark' },
     { title: `mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
+    { seperator: true },
     { title: `contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-book-multiple' },
   ];
 

@@ -25,14 +25,24 @@
   https://evan.network/license/
 */
 
-.password-dialog {
-  max-width: 100%;
+<template>
+  <div class="rounded-pill text-center"
+    :style="{ 
+      'background-color': `${ bgColor } !important`,
+      'color': `${ textColor } !important`,
+    }"
+    style="
+      width: 30px; height: 30px; line-height: 30px; padding: 0;
+      font-size: 12px; font-weight: bold;
+      display: inline-block;
+    ">
+    {{ batch }}
+  </div>
+</template>
 
-  @media(min-width: 768px) {
-    min-width: 500px;
-  }
+<script lang="ts">
+  import Component from './contact-batch.ts';
+  export default Component;
+</script>
 
-  @media(max-width: 767px) {
-    width: 90%;
-  }
-}
+

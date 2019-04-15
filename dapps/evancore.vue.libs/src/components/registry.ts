@@ -30,6 +30,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
 import Breadcrumbs from './breadcrumbs/breadcrumbs.vue';
+import ContactBatch from './contact-batch/contact-batch.vue';
 import DAppLoader from './dapp-loader/dapp-loader.vue';
 import DAppLoading from './loading/loading.vue';
 import DAppWrapper from './dapp-wrapper/dapp-wrapper.vue';
@@ -56,11 +57,13 @@ export {
   Logout,
   Modal,
   Success,
+  ContactBatch,
 }
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-breadcrumbs', component: Breadcrumbs },
+  { name: 'evan-contact-batch', component: ContactBatch },
   { name: 'evan-dapp-loader', component: DAppLoader },
   { name: 'evan-dapp-wrapper', component: DAppWrapper },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },

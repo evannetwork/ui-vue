@@ -30,8 +30,8 @@ export default {
   "_evan": {
     "_routes": {
       "contacts": "Contacts",
-      "favorites": "Favorites",
       "digitaltwins": "Digital Twins",
+      "favorites": "Favorites",
       "mailbox": "Messages",
       "profile": "Profile"
     },
@@ -39,15 +39,15 @@ export default {
     "dapp-wrapper": {
       "all-messages": "All messages",
       "empty-queue": "Everything is synchronized...",
-      "instance-delete": {
-        "ok": "delete",
-        "desc": "Do you want to irrevocably remove this entry?",
-        "title": "Delete Entry"
-      },
       "instance-accept": {
-        "ok": "continue",
         "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
+        "ok": "continue",
         "title": "Transaction confirmation"
+      },
+      "instance-delete": {
+        "desc": "Do you want to irrevocably remove this entry?",
+        "ok": "delete",
+        "title": "Delete Entry"
       },
       "my-contacts": "My Contacts",
       "my-mailbox": "My Messages",
@@ -55,8 +55,10 @@ export default {
       "new-mails": "You have {newMailCount} new messages",
       "queue": "Data-Synchronisation",
       "queue-continue": "continue",
-      "queue-error": "An error occurred during synchronization."
+      "queue-error": "An error occurred during synchronization.",
+      "sync-complete": "Complete"
     },
+    "dispatcher-not-found": "Synchronization job not found...",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
@@ -65,8 +67,8 @@ export default {
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
     "use-password": "Unlock",
-    "welcome-to-evan": "Welcome to the evan.network",
-    "dispatcher-not-found": "Synchronization job not found..."
+    "view-profile": "View Profile",
+    "welcome-to-evan": "Welcome to the evan.network"
   }
 }
 /* tslint:enable */
