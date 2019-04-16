@@ -29,7 +29,7 @@ https://evan.network/license/
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
 import Vue from 'vue';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 @Component({ })
 export default class ContactBatchComponent extends mixins(EvanComponent) {
@@ -41,25 +41,41 @@ export default class ContactBatchComponent extends mixins(EvanComponent) {
   /**
    * Short batch title (Test User => TU, Employee => EM)
    */
-  batch: string;
+  batch = '';
 
   /**
    * Batch specific random hex color code.
    */
-  bgColor: string;
+  bgColor = '';
 
   /**
    * text color for the specific background color.
    */
-  textColor: string;
+  textColor = '';
+
+  /**
+   * Watch for value changes for life updates
+   */
+  @Watch('value')
+  onChildChanged(val: string, oldVal: string) {
+    this.setupBatchColors();
+  }
 
   /**
    * Parse the incoming value and generate a hex color code.
    */
   created() {
-    let batch: any = (this.value.startsWith('0x') ?
-      this.value.slice(2, this.value.length) :
-      this.value
+    this.setupBatchColors();
+  }
+
+  /**
+   * Takes the current value and generates random colors for the batch.
+   */
+  setupBatchColors() {
+    const value = (this.value || '  ').toString();
+    let batch: any = (value.startsWith('0x') ?
+      value.slice(2, value.length) :
+      value
     ).split('.');
 
     // fill empty characters
@@ -68,7 +84,7 @@ export default class ContactBatchComponent extends mixins(EvanComponent) {
 
     this.batch = `${ batch[0][0] }${ batch[1][1] }`;
 
-    const rgb = this.getRGBForText(this.value);
+    const rgb = this.getRGBForText(value);
     this.bgColor = `rgb(${ rgb.join(', ') })`;
     this.textColor = this.getContrastColor(rgb);
   }
@@ -81,8 +97,8 @@ export default class ContactBatchComponent extends mixins(EvanComponent) {
   filledText(text = '', fallback = ''): string {
     const result = [ ];
 
-    result[0] = text[0] || fallback[0] || '?';
-    result[1] = text[1] || fallback[1] || '?';
+    result[0] = text[0] || fallback[0] || ' ';
+    result[1] = text[1] || fallback[1] || ' ';
 
     return result.join('');
   }

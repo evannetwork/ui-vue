@@ -27,6 +27,7 @@
 
 <template>
   <div class="evan-dapp-wrapper"
+    :id="id"
     :class="{ 'small-toolbar': smallToolbar }">
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
     <nav class="navbar" v-if="enableNav">
@@ -188,11 +189,11 @@
           <button class="btn position-relative gray-500"
             v-if="!userInfo.loading"
             @click="$refs.userDropdown.show()">
-           <img class="mr-2 rounded-circle"
+           <img class="rounded-circle"
               style="width: 36px; height: 36px;"
               v-if="userInfo.img"
               :src="userInfo.img">
-            <i class="mdi mdi-account rounded-circle mr-2 bg-secondary d-inline-block"
+            <i class="mdi mdi-account rounded-circle bg-secondary d-inline-block"
               style="width: 36px; height: 36px; line-height: 36px;"
               v-else>
             </i>

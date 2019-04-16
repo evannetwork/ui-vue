@@ -109,4 +109,11 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
       this.highestSidebar.removeChild(this.contentElement);
     }
   }
+
+  /**
+   * Sends the hide sidebar event.
+   */
+  hide() {
+    window.dispatchEvent(new CustomEvent('dapp-wrapper-sidebar-close'));
+  }
 }

@@ -108,6 +108,12 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   @Prop({ default: true }) createRuntime: any;
 
   /**
+   * id of this element, so child elements can be queried easier
+   */
+  id = `dappwrapper_${ Date.now() + Math.round(Math.random() * 1000000) }`;
+  sideBar2Selector = `#${ this.id } .dapp-wrapper-body > .dapp-wrapper-sidebar-2 > *`
+
+  /**
    * is the current dapp-wrapper gets initialized? => use loading to don't render dapp-loader or
    * something quickly and directly after this remove the content and show the login or onboarding
    */
@@ -189,6 +195,11 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   mailsWatcher: any;
 
   /**
+   * Watch for sidebar close events, so it can be closed from outside
+   */
+  sideBarCloseWatcher: any;
+
+  /**
    * Core routes that will be displayed in the top right user dropdown
    */
   coreRoutes = [
@@ -224,6 +235,13 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   toggleSmallToolbar() {
     if (window.innerWidth < 992) {
       this.showSideBar = !this.showSideBar;
+
+      // if sidebar 2 is used, show it directly
+      if (document.querySelectorAll(this.sideBar2Selector).length !== 0) {
+        this.showSideBar2 = true;
+      } else {
+        this.showSideBar2 = false;
+      }
     } else {
       this.smallToolbar = !this.smallToolbar;
 
@@ -243,16 +261,15 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * @param      {DAppWrapperRouteInterface}  route   route that was activated
    */
   routeActivated(route: DAppWrapperRouteInterface) {
-    (<any>this).evanNavigate(route.path);
-
-    this.$nextTick(() => {
+    // if the same route was opened, the second navigation should be displayed
+    if (this.$route.path.startsWith(<string>route.fullPath) &&
+        document.querySelectorAll(this.sideBar2Selector).length !== 0) {
       this.showSideBar2 = true;
+    } else {
+      this.showSideBar = false;
+    }
 
-      // if the same route was opened, the second navigation should be displayed
-      if (!this.$route.path.startsWith(<string>route.fullPath)) {
-        this.showSideBar = false;
-      }
-    });
+    (<any>this).evanNavigate(route.path);
   }
 
   /**
@@ -274,6 +291,9 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     } else {
       this.loading = false;
     }
+
+    this.sideBarCloseWatcher = ($event: CustomEvent) => this.showSideBar = false;
+    window.addEventListener('dapp-wrapper-sidebar-close', this.sideBarCloseWatcher);
   }
 
 
@@ -282,20 +302,14 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    */
   beforeDestroy() {
     // only remove the hashChangeWatcher, when it was already bind (user was on the onboarding)
-    if (this.hashChangeWatcher) {
-      // remove the hash change listener
-      window.removeEventListener('hashchange', this.hashChangeWatcher);
-    }
-
+    this.hashChangeWatcher && window.removeEventListener('hashchange', this.hashChangeWatcher);
     // clear mails watcher
-    if (this.mailsWatcher) {
-      window.clearInterval(this.mailsWatcher);
-    }
-
+    this.mailsWatcher && window.clearInterval(this.mailsWatcher);
     // clear queue watcher
-    if (this.userInfo && this.queueWatcher) {
-      this.queueWatcher();
-    }
+    this.userInfo && this.queueWatcher && this.queueWatcher();
+    // return the watch remove function
+    this.sideBarCloseWatcher && window.removeEventListener(`evan-queue-${ this.id }`,
+      this.sideBarCloseWatcher);
   }
 
   /**

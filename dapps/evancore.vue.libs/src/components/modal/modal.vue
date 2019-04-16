@@ -34,11 +34,11 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content" v-on:click.stop>
             <template v-if="!customModal">
-              <div class="modal-header">
+              <div class="modal-header d-flex align-items-center">
                 <slot name="header"></slot>
-                <button type="button" class="close" aria-label="Close"
+                <button class="btn p-0"
                   @click="hide()">
-                  <span aria-hidden="true">&times;</span>
+                  <i class="mdi mdi-close"></i>
                 </button>
               </div>
               <div class="modal-body">
