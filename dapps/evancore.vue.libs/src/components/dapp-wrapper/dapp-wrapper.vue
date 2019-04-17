@@ -172,7 +172,7 @@
                         </template>
                       </div>
                     </div>
-                    <span class="text-danger mt-3" v-if="instance.error">
+                    <span class="text-danger mt-3 text-wrap" v-if="instance.error">
                       {{ '_evan.dapp-wrapper.queue-error' | translate }}
                     </span>
                   </template>

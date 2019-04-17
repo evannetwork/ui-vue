@@ -16,7 +16,7 @@
         "evancore.vue.libs.js",
         "evancore.vue.libs.css"
       ],
-      "origin": "QmS9m9WqQLRLWEvbecq1SgPLs1ZmoBDiDccnSkBeZYK7mm",
+      "origin": "QmRDd7ZASHvewmjR8PYbqEBG1xR5MBkk7GttxWnWQd4v6j",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -41,7 +41,7 @@
     ],
     "version": "1.0.0",
     "versions": {
-      "1.0.0": "QmR5ZR8vADzNx7tq5AKLf81ko5vPNyTLuJ42Afc6W2AWVs"
+      "1.0.0": "QmXeKD38SpJe7bijNgBuQnn5mPidVaFJ14BLXwLkVPqAHr"
     }
   }
 }
