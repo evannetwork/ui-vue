@@ -76,7 +76,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     type: Array,
     default: function(options) {
       return [
-        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-account-card-details-outline' },
+        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-fingerprint' },
         { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
         // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
         { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-account-group-outline' },

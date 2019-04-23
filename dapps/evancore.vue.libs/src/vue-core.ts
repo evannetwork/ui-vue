@@ -147,6 +147,7 @@ export function registerEvanI18N(Vue: any, translations: any) {
  */
 export function registerEventHandlers(vueInstance: any) {
   const beforeUnload = () => {
+    window.localStorage['evan-recovery-url'] = window.location.href;
     vueInstance.$destroy();
   };
 
@@ -161,10 +162,14 @@ export function registerEventHandlers(vueInstance: any) {
       parent = parent.parentElement;
 
       if (!parent) {
-        console.log('EVAN VUE DESTROY')
-        beforeUnload();
+        // clear window.localStorage['evan-recovery-url'] when a new dapp was opened, so recovery
+        // will expire
+        delete window.localStorage['evan-recovery-url'];
+
+        // clear listeners
+        vueInstance.$destroy();
         elementObserver.disconnect();
-        window.removeEventListener('beforeunload', beforeUnload);
+        setTimeout(() => window.removeEventListener('beforeunload', beforeUnload));
       }
     } while (parent && parent !== document.body);
   });
