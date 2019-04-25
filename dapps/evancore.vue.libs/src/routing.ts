@@ -76,6 +76,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
 
     // apply correct nested dapp path
     if (clonedRoute.redirect && clonedRoute.redirect.path) {
+      clonedRoute.redirect = Object.assign({ }, clonedRoute.redirect);
       clonedRoute.redirect.path = getRouteWithDAppBase(clonedRoute.redirect.path, dappToLoad);
     }
 
@@ -92,7 +93,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
 
   // initialize vue router using the provided routes
   const router = new VueRouter({
-    base: `${ dappToLoad.baseHash }/`,
+    // base: `${ dappToLoad.baseHash }/`,
     mode: 'hash',
     routes: routes,
   });

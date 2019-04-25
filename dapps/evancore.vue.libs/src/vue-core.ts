@@ -31,6 +31,9 @@ import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
 import VueMoment from 'vue-moment';
 
+// setup moment locales
+const moment = require('moment').default;
+
 // import evan libs
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
@@ -82,16 +85,23 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     },
   });
 
+  // use defined or browser language
+  const language = window.localStorage['evan-language'] || navigator.language.split('-')[0];
+
+  // set correct moment language
+  const momentLanguages = [ 'en', 'de' ];
+  moment.locale(momentLanguages.indexOf(language) === -1 ? 'en' : language);
+
   // set the i18n values and moment js
-  Vue.use(VueMoment);
+  Vue.use(VueMoment, { moment });
   Vue.use(vuexI18n.plugin, store);
 
   // add all i18n definitions
   registerEvanI18N(Vue, evanTranslations);
   registerEvanI18N(Vue, options.translations);
 
-  // use defined or browser language
-  Vue.i18n.set(window.localStorage['evan-language'] || navigator.language.split('-')[0]);
+  // set vuex i18n locale
+  Vue.i18n.set(language);
 
   // hide the initial loading screen
   dappBrowser.loading.finishDAppLoading();
@@ -175,6 +185,7 @@ export function registerEventHandlers(vueInstance: any) {
         delete window.localStorage['evan-recovery-url'];
 
         // clear listeners
+        console.log('KILL VUE')
         vueInstance.$destroy();
         elementObserver.disconnect();
         setTimeout(() => window.removeEventListener('beforeunload', beforeUnload));
@@ -183,6 +194,6 @@ export function registerEventHandlers(vueInstance: any) {
   });
 
   // Start observing the target node for configured mutations
-  elementObserver.observe(vueInstance.$el.parentElement, { childList: true, });
+  elementObserver.observe(vueInstance.$el.parentElement, { childList: true, subtree: true });
 }
 

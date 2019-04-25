@@ -106,7 +106,10 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
   destroy() {
     if (this.highestSidebar && !this.isDestroyed) {
       this.isDestroyed = true;
-      this.contentElement && this.highestSidebar.removeChild(this.contentElement);
+
+      try {
+        this.contentElement && this.highestSidebar.removeChild(this.contentElement);
+      } catch (ex) { }
     }
   }
 
