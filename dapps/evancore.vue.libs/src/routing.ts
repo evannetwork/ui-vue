@@ -38,6 +38,18 @@ import { RouteRegistrationInterface, EvanVueOptionsInterface } from './interface
 import { getDomainName } from './utils';
 
 /**
+ * Apply the correct absolute nested dapp hash origin
+ *
+ * @param      {string}  path    route path
+ * @param      {any}     dapp    getNextDApp result
+ * @return     {string}  The route with correct application base.
+ */
+export function getRouteWithDAppBase(path: string, dapp: any) {
+  // apply the correct absolute nested dapp hash origin
+  return `${ dapp.baseHash }/${ path }`;
+}
+
+/**
  * Start the routing for a vue application. Clones the original routes and sets the base routing (=
  * current dapp that should be opened).
  *
@@ -59,11 +71,12 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
     // applied multiples times to rout.path)
     const clonedRoute = Object.assign({ }, route);
 
-    // apply the correct absolute nested dapp hash origin
-    clonedRoute.path = `${ dappToLoad.baseHash }/${ route.path }`
+    // apply correct nested dapp path
+    clonedRoute.path = getRouteWithDAppBase(clonedRoute.path, dappToLoad);
 
+    // apply correct nested dapp path
     if (clonedRoute.redirect && clonedRoute.redirect.path) {
-      clonedRoute.redirect.path = `${ dappToLoad.baseHash }/${clonedRoute.redirect.path }`;
+      clonedRoute.redirect.path = getRouteWithDAppBase(clonedRoute.redirect.path, dappToLoad);
     }
 
     // apply it to the routes
@@ -126,8 +139,8 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  *   4. when navigating to /dashboard.evan/digitaltwins.evan, the dapp-loader trackts the url change
  *      and 3. will be started with the new url hash
  *
- * @param      {string}  dappEnsOrContract  The dapp ens or contract (e.g.
- *                                          /dashboard.evan/onboarding.evan)
+ * @param      {string}   dappEnsOrContract     The dapp ens or contract (e.g.
+ *                                              /dashboard.evan/onboarding.evan)
  */
 export async function getNextDApp(dappEnsOrContract?: string) {
   // parse current route by replacing all #/ and /# to handle incorrect navigations
@@ -196,9 +209,6 @@ export async function getNextDApp(dappEnsOrContract?: string) {
     contractAddress = ensParts[dappIndex];
   } else if (dappIndex < ensParts.length - 1 && ensParts[dappIndex + 1].startsWith('0x')) {
     contractAddress = ensParts[dappIndex + 1];
-
-    // add the contract address, so the correct base url will be used
-    baseHash = `${ baseHash }/${ contractAddress }`;
   }
 
   return {

@@ -538,6 +538,8 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     await Promise.all(dispatchers.map(async (dispatcherObj: any) => {
       try {
         const [ dappEns, dispatcherName ] = dispatcherObj.dispatcherId.split('|||');
+        // load dependencies and dapp content
+        await dappBrowser.dapp.loadDAppDependencies(dappEns, false);
         const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
         const dispatcher = dapp[dispatcherName];
 

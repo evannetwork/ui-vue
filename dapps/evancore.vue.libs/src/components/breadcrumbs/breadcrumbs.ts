@@ -92,8 +92,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
         .filter(breadcrumb => !!breadcrumb);
 
       // add root domain as first entry
-      that.breadcrumbs.unshift((that.dapp.contractAddress || `${ that.dapp.ens }`)
-          .replace(new RegExp(`.${ domainName }`, 'g'), ''));
+      that.breadcrumbs.unshift(that.dapp.ens.replace(new RegExp(`.${ domainName }`, 'g'), ''));
 
       // iterate through all paths and create the correct translation name and path
       that.breadcrumbs = that.breadcrumbs.map((breadcrumb: string, index: number) => {

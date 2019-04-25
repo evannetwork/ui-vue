@@ -81,7 +81,7 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
       this.highestSidebar.innerHTML = '';
 
       // append the current element
-      this.highestSidebar.appendChild(this.contentElement);
+      this.contentElement && this.highestSidebar.appendChild(this.contentElement);
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');
@@ -106,7 +106,7 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
   destroy() {
     if (this.highestSidebar && !this.isDestroyed) {
       this.isDestroyed = true;
-      this.highestSidebar.removeChild(this.contentElement);
+      this.contentElement && this.highestSidebar.removeChild(this.contentElement);
     }
   }
 
