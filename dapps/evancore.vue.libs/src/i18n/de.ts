@@ -59,6 +59,15 @@ export default {
       "sync-complete": "Abgeschlossen"
     },
     "dispatcher-not-found": "Synchronisations Job nicht gefunden...",
+    "file-input": {
+      "description": "Ziehen Sie Ihre Datei(en) hierher, um zu beginnen<br>oder klicken Sie zum Durchsuchen",
+      "empty": "Es wurden noch keine Dateien hochgeladen...",
+      "remove-modal": {
+        "title": "Datein löschen",
+        "desc": "Möchten Sie diese Datei wirklich löschen?",
+        "action": "Löschen"
+      }
+    },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",

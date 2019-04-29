@@ -38,6 +38,7 @@ import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-
 import Dropdown from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import EvanIframe from './iframe/iframe.vue';
+import FileInputComponent from './files/files.vue';
 import Login from './login/login.vue';
 import Logout from './logout/logout.vue';
 import Modal from './modal/modal.vue';
@@ -46,6 +47,7 @@ import Success from './success/success.vue';
 // export them all, so other applications can access them
 export {
   Breadcrumbs,
+  ContactBatch,
   DAppLoader,
   DAppLoading,
   DAppWrapper,
@@ -53,11 +55,11 @@ export {
   Dropdown,
   EvanComponent,
   EvanIframe,
+  FileInputComponent,
   Login,
   Logout,
   Modal,
   Success,
-  ContactBatch,
 }
 
 // map them to element names, so they can be used within templates
@@ -68,6 +70,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-wrapper', component: DAppWrapper },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },
   { name: 'evan-dropdown', component: Dropdown },
+  { name: 'evan-file-input', component: FileInputComponent },
   { name: 'evan-iframe', component: EvanIframe },
   { name: 'evan-loading', component: DAppLoading },
   { name: 'evan-login', component: Login },

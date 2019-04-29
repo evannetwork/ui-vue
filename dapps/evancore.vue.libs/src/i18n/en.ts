@@ -59,6 +59,15 @@ export default {
       "sync-complete": "Complete"
     },
     "dispatcher-not-found": "Synchronization job not found...",
+    "file-input": {
+      "description": "Drag your file(s) here to begin<br> or click to browse",
+      "empty": "No files are available...",
+      "remove-modal": {
+        "title": "Delete file",
+        "desc": "Are you sure you want to delete this file?",
+        "action": "Delete"
+      }
+    },
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",

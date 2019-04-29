@@ -30,7 +30,7 @@
     <template v-if="isRendered">
       <div class="modal fade" tabindex="-1"
         :class="{ 'show': isShown }"
-        @click="hide()">
+        @click="hide(); $emit('canceled', { backdrop: true });">
         <div class="modal-dialog" role="document">
           <div class="modal-content" v-on:click.stop>
             <template v-if="!customModal">
@@ -46,7 +46,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary btn-rounded"
-                  @click="hide()">
+                  @click="hide(); $emit('canceled', { backdrop: false });">
                   {{ '_evan.cancel' | translate }}
                 </button>
                 <slot name="footer"></slot>
