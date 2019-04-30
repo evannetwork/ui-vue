@@ -34,7 +34,7 @@ import { Prop } from 'vue-property-decorator';
 import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
-import { FileHandler, } from '@evan.network/ui'
+import { FileHandler, } from '@evan.network/ui';
 
 @Component({ })
 export default class EvanFilesInput extends mixins(EvanComponent) {
@@ -48,7 +48,7 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
   /**
    * All selected files.
    */
-   @Prop() value: Array<File>;
+   @Prop() value: Array<FileHandler.UIContainerFile>;
 
   /**
    * Name of the input.
@@ -79,12 +79,14 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
    */
   fileRemove = -1;
 
+  blobUri = '';
+
   /**
    * Transform the input files to the correct format.
    */
   async created() {
-    await Promise.all(this.value.map(
-      async (file, index) => this.value[index] = await FileHandler.fileToContainerFile(file)
+    await Promise.all(this.value.map(async (file, index) =>
+      this.$set(this.value, index, await FileHandler.fileToContainerFile(file))
     ));
   }
 
@@ -93,12 +95,12 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
    *
    * @param      {Arrayany}  files   The files
    */
-  filesChanged(fileList: FileList) {
+  async filesChanged(fileList: FileList) {
     // make the list iteratable
     const newFiles: Array<File> = Array.from(fileList);
 
     // iterate through all files and check if they already exists, if not, add them
-    newFiles.forEach(async (newFile: File) => {
+    await Promise.all(newFiles.map(async (newFile: File) => {
       const isNew = this.value.filter((existing: File) =>
         existing.name === newFile.name &&
         existing.size === newFile.size
@@ -111,7 +113,7 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
 
         this.value.push(containerFile);
       }
-    });
+    }));
 
     // trigger update event
     this.$emit('input', this.value);
