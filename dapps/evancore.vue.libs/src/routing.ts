@@ -95,7 +95,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
   const router = new VueRouter({
     // base: `${ dappToLoad.baseHash }/`,
     mode: 'hash',
-    routes: routes,
+    routes: <any>routes,
   });
 
   // overwrite origin router.push, to handle correct base hash handling

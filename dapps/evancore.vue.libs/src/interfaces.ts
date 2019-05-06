@@ -30,10 +30,11 @@
  * Used to map routes to a route name and a specific component.
  */
 export interface RouteRegistrationInterface {
-  path: string; // `**`
-  name?: string; // dapp-loader
-  component?: any; // DAppLoaderComponent
+  beforeEnter?: Function; // optional before enter function
   children?: any;
+  component?: any; // DAppLoaderComponent
+  name?: string; // dapp-loader
+  path: string; // `**`
   redirect?: any;
 }
 

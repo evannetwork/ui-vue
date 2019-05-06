@@ -31,7 +31,8 @@
       <div class="modal fade" tabindex="-1"
         :class="{ 'show': isShown }"
         @click="hide(); $emit('canceled', { backdrop: true });">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document"
+          :style="{ 'max-width': maxWidth }">
           <div class="modal-content" v-on:click.stop>
             <template v-if="!customModal">
               <div class="modal-header d-flex align-items-center">

@@ -76,47 +76,41 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
    * Bind the hash change watcher to track hash changes and to update the routes
    */
   async created() {
-    const that = this;
     const domainName = (<any>this).domainName;
 
     // fill empty base hash
     this._baseHash = this.baseHash || this.dapp.baseHash;
 
     // bin the hash change watcher within the create to keep the correct function reference
-    this.hashChangeWatcher = function() {
-      that.breadcrumbs = window.location.hash
+    this.hashChangeWatcher = (() => {
+      this.breadcrumbs = window.location.hash
         // remove the base hash
-        .replace(`#${ that._baseHash }`, '')
+        .replace(`#${ this._baseHash }`, '')
         .split('/')
         // filter empty breadcrumbs
         .filter(breadcrumb => !!breadcrumb);
 
       // add root domain as first entry
-      that.breadcrumbs.unshift(that.dapp.ens.replace(new RegExp(`.${ domainName }`, 'g'), ''));
+      this.breadcrumbs.unshift(this.dapp.ens.replace(new RegExp(`.${ domainName }`, 'g'), ''));
 
       // iterate through all paths and create the correct translation name and path
-      that.breadcrumbs = that.breadcrumbs.map((breadcrumb: string, index: number) => {
+      this.breadcrumbs = this.breadcrumbs.map((breadcrumb: string, index: number) => {
         // remove the domain name, so we can manage simple i18n files
         let fallbackName = breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), '');
-        let name = fallbackName;
-
-        // if the name does not starts with 0x, apply the i18nScope
-        if (name.indexOf('0x') !== 0) {
-          name = `${ that.i18nScope }.${ name }`;
-        }
+        let name = `${ this.i18nScope }.${ fallbackName }`;
 
         return {
           name: name,
           fallbackName: fallbackName,
           // build the path relative to the base hash
-          path: index === 0 ? that._baseHash :
-            `${ that._baseHash }/${ that.breadcrumbs.slice(1, index + 1).join('/') }`
+          path: index === 0 ? this._baseHash :
+            `${ this._baseHash }/${ this.breadcrumbs.slice(1, index + 1).join('/') }`
         }
       });
 
       // show the go back button, when the navigation is deeper than 0
-      that.goBack = that.breadcrumbs.length > 0;
-    };
+      this.goBack = this.breadcrumbs.length > 0;
+    }).bind(this);
 
     // set them initially
     this.hashChangeWatcher();

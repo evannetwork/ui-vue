@@ -185,7 +185,6 @@ export function registerEventHandlers(vueInstance: any) {
         delete window.localStorage['evan-recovery-url'];
 
         // clear listeners
-        console.log('KILL VUE')
         vueInstance.$destroy();
         elementObserver.disconnect();
         setTimeout(() => window.removeEventListener('beforeunload', beforeUnload));
