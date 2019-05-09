@@ -74,7 +74,7 @@ export default {
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
-    "please-login": "Bitte entsperren Sie Ihr Profil um fortzufahren.",
+    "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network"

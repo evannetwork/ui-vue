@@ -300,7 +300,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   /**
    * Clear the hash change watcher
    */
-  beforeDestroy() {
+  async beforeDestroy() {
     // only remove the hashChangeWatcher, when it was already bind (user was on the onboarding)
     this.hashChangeWatcher && window.removeEventListener('hashchange', this.hashChangeWatcher);
     // clear mails watcher

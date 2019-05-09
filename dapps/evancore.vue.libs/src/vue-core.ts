@@ -101,6 +101,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   registerEvanI18N(Vue, options.translations);
 
   // set vuex i18n locale
+  Vue.i18n.fallback('en');
   Vue.i18n.set(language);
 
   // hide the initial loading screen

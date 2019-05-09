@@ -96,7 +96,8 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
       // iterate through all paths and create the correct translation name and path
       this.breadcrumbs = this.breadcrumbs.map((breadcrumb: string, index: number) => {
         // remove the domain name, so we can manage simple i18n files
-        let fallbackName = breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), '');
+        let fallbackName = decodeURIComponent(
+          breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), ''));
         let name = `${ this.i18nScope }.${ fallbackName }`;
 
         return {

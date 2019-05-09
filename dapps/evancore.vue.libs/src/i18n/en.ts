@@ -46,14 +46,14 @@ export default {
       },
       "instance-delete": {
         "desc": "Do you want to irrevocably remove this entry?",
-        "ok": "delete",
+        "ok": "Delete",
         "title": "Delete Entry"
       },
       "my-contacts": "My Contacts",
       "my-mailbox": "My Messages",
       "my-profile": "My Profile",
       "new-mails": "You have {newMailCount} new messages",
-      "queue": "Data-Synchronisation",
+      "queue": "Data-Synchronization",
       "queue-continue": "continue",
       "queue-error": "An error occurred during synchronization.",
       "sync-complete": "Complete"
