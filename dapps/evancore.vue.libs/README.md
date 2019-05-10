@@ -12,28 +12,31 @@ Reference Projects:
 
 ## HTML Selectors
 ### dapp-wrapper
-- evan-dapp-home
-- evan-dapp-digitaltwins
-- evan-dapp-favorites
-- evan-dapp-addressbook
-- evan-dapp-mailbox
-- evan-dapp-faq
-- evan-dapp-documentation
-- evan-toggle-sidebar
+- #dapp-home
+- #dapp-digitaltwins
+- #dapp-favorites
+- #dapp-addressbook
+- #dapp-mailbox
+- #dapp-faq
+- #dapp-documentation
+- #toggle-sidebar
 
-- evan-dropdown-mailbox
-  - evan-dapp-mailbox
-  - evan-dropdown-mailbox-${ index }
+- #dropdown-mailbox
+  - #dapp-mailbox
+  - #dropdown-mailbox-${ index }
 
-- evan-dropdown-queue
-  - evan-dropdown-queue-${ index }
+- #dropdown-queue
+  - #dropdown-queue-${ index }
 
-- evan-dropdown-profile
-  - evan-dapp-contacts
-  - evan-dapp-favorites
-  - evan-dapp-mailbox
-  - evan-dapp-profile
-  - evan-logout
+- #dropdown-profile
+  - #dapp-contacts
+  - #dapp-favorites
+  - #dapp-mailbox
+  - #dapp-profile
+  - #logout
 
 ### Breadcrumbs
-- evan-breadcrumb-goback
+- #breadcrumb-goback
+
+### Modals
+- #modal-cancel

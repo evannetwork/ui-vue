@@ -32,7 +32,7 @@
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
     <nav class="navbar" v-if="enableNav">
       <a class="navbar-brand"
-        id="evan-dapp-home"
+        id="dapp-home"
         :class="{ 'clickable': !onboarding }"
         :href="onboarding ? null : `${ dapp.fullUrl }`">
         <img class="brand-large" :src="$props.brandLarge">
@@ -41,7 +41,7 @@
       <div class="nav flex-nowrap" v-if="!login && !onboarding">
         <div>
           <button class="btn"
-            id="evan-toggle-sidebar"
+            id="toggle-sidebar"
             @click="toggleSmallToolbar()">
             <i class="mdi mdi-menu h2"></i>
           </button>
@@ -52,7 +52,7 @@
             v-if="userInfo.loading">
           </div>
           <button class="btn position-relative gray-500 px-3"
-            id="evan-dropdown-mailbox"
+            id="dropdown-mailbox"
             v-if="!userInfo.loading"
             @click="openMailDropdown()"
             :disabled="userInfo.mailsLoading">
@@ -104,7 +104,7 @@
                   dropdown-item text-center
                   border-top border-sm p-3
                   font-weight-bold"
-                  id="evan-dapp-mailbox"
+                  id="dapp-mailbox"
                   :href="`${ dapp.fullUrl }/mailbox.${ domainName }`"
                   @click="$refs.mailDropdown.hide($event)">
                   {{ '_evan.dapp-wrapper.all-messages' | translate }}
@@ -114,7 +114,7 @@
           </button>
 
           <button class="btn position-relative gray-500 px-3"
-            id="evan-dropdown-queue"
+            id="dropdown-queue"
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
             <div class="spinner-border spinner-border-sm bg-text-inverted"
@@ -202,7 +202,7 @@
           </button>
 
           <button class="btn position-relative gray-500"
-            id="evan-dropdown-profile"
+            id="dropdown-profile"
             v-if="!userInfo.loading"
             @click="$refs.userDropdown.show()">
            <img class="rounded-circle"
@@ -237,7 +237,7 @@
                   <div class="pl-1">
                     <p class="text-muted text-truncate mb-2">{{ userInfo.address }}</p>
                     <a class="btn btn-rounded btn-primary bg-primary px-3 py-2 small"
-                      id="evan-dapp-profile"
+                      id="dapp-profile"
                       :href="`${ dapp.fullUrl }/profile.${ domainName }`"
                       @click="$refs.userDropdown.hide($event)">
                       <small>{{ '_evan.view-profile' | translate }}</small>

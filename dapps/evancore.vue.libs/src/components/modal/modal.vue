@@ -47,6 +47,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary btn-rounded"
+                  id="modal-cancel"
                   @click="hide(); $emit('canceled', { backdrop: false });">
                   {{ '_evan.cancel' | translate }}
                 </button>
