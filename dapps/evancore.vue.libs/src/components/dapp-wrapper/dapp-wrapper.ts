@@ -181,6 +181,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    */
   queueInstances = { };
   queueCount = 0;
+  queueErrorCount = 0;
   queueLoading = false;
   queueWatcher = null;
 
@@ -571,7 +572,12 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     }));
 
     // set queue count
-    this.queueCount = Object.keys(this.queueInstances).length;
+    const setQueueCount = () => {
+      const instances = Object.keys(this.queueInstances).map(key => this.queueInstances[key]);
+      this.queueCount = instances.filter(subInstance => !subInstance.error).length;
+      this.queueErrorCount = instances.filter(subInstance => !!subInstance.error).length;
+    };
+    setQueueCount();
     this.queueLoading = false;
 
     // watch for queue updates
@@ -597,7 +603,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
           this.$set(this.queueInstances, instance.id, instance);
         }
 
-        this.queueCount = Object.keys(this.queueInstances).length;
+        setQueueCount();
       });
     }
   }

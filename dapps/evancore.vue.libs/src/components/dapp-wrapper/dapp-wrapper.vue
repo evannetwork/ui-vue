@@ -108,12 +108,17 @@
           <button class="btn position-relative gray-500 px-3"
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
-            <i class="mdi mdi-rotate-3d position-relative"
-              v-if="!queueLoading && !queueCount">
-            </i>
             <div class="spinner-border spinner-border-sm bg-text-inverted"
               v-if="queueLoading || queueCount">
             </div>
+            <template v-else>
+              <i class="mdi mdi-alert-outline text-warning position-relative"
+                v-if="queueErrorCount">
+              </i>
+              <i class="mdi mdi-rotate-3d position-relative"
+                v-else>
+              </i>
+            </template>
             <evan-dropdown ref="queueDropdown"
               :alignment="'right'"
               :width="'310px'">
@@ -124,7 +129,7 @@
                   </h6>
                 </div>
                 <span class="p-3 d-block border-top" 
-                  v-if="queueCount === 0">
+                  v-if="queueCount === 0 && queueErrorCount === 0">
                   {{ '_evan.dapp-wrapper.empty-queue' | translate }}
                 </span>
                 <div class="border-top p-3"
