@@ -270,7 +270,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       this.showSideBar = false;
     }
 
-    (<any>this).evanNavigate(route.path);
+    // (<any>this).evanNavigate(route.path);
   }
 
   /**
@@ -421,15 +421,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   }
 
   /**
-   * Navigates the user to the root page of the dapp.
-   */
-  openRouteBaseHash() {
-    if (!this.onboarding) {
-      this.$router.push({ path: (<any>this).dapp.baseHash })
-    }
-  }
-
-  /**
    * Load the users specific data.
    */
   async loadUserSpecific() {
@@ -518,8 +509,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
       window.localStorage['evan-mail-read'] = JSON.stringify(this.userInfo.readMails)
     }
-
-    this.evanNavigate(`mailbox.${ this.domainName }/received/detail/${ mail.address }`);
 
     (<any>this.$refs).mailDropdown.hide($event);
   }

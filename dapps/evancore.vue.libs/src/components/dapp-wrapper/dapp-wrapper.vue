@@ -31,15 +31,18 @@
     :class="{ 'small-toolbar': smallToolbar }">
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
     <nav class="navbar" v-if="enableNav">
-      <div class="navbar-brand"
+      <a class="navbar-brand"
+        id="evan-dapp-home"
         :class="{ 'clickable': !onboarding }"
-        @click="openRouteBaseHash()">
+        :href="onboarding ? null : `${ dapp.fullUrl }`">
         <img class="brand-large" :src="$props.brandLarge">
         <img class="brand-small" :src="$props.brandSmall">
-      </div>
+      </a>
       <div class="nav flex-nowrap" v-if="!login && !onboarding">
         <div>
-          <button class="btn" @click="toggleSmallToolbar()">
+          <button class="btn"
+            id="evan-toggle-sidebar"
+            @click="toggleSmallToolbar()">
             <i class="mdi mdi-menu h2"></i>
           </button>
         </div>
@@ -49,6 +52,7 @@
             v-if="userInfo.loading">
           </div>
           <button class="btn position-relative gray-500 px-3"
+            id="evan-dropdown-mailbox"
             v-if="!userInfo.loading"
             @click="openMailDropdown()"
             :disabled="userInfo.mailsLoading">
@@ -75,6 +79,8 @@
                 </div>
                 <a class="dropdown-item border-top border-sm py-2 px-3"
                   v-for="(mail, index) in userInfo.mails"
+                  :id="`evan-dropdown-mailbox-${ index }`"
+                  :href="`${ dapp.fullUrl }/mailbox.${ domainName }/received/detail/${ mail.address }`"
                   @click="openMail(mail, $event)">
                   <div class="d-flex">
                     <div style="width: 50px; min-width: 50px;">
@@ -98,7 +104,9 @@
                   dropdown-item text-center
                   border-top border-sm p-3
                   font-weight-bold"
-                  @click="evanNavigate(`mailbox.${ domainName }`); $refs.userDropdown.hide($event)">
+                  id="evan-dapp-mailbox"
+                  :href="`${ dapp.fullUrl }/mailbox.${ domainName }`"
+                  @click="$refs.mailDropdown.hide($event)">
                   {{ '_evan.dapp-wrapper.all-messages' | translate }}
                 </a>
               </template>
@@ -106,6 +114,7 @@
           </button>
 
           <button class="btn position-relative gray-500 px-3"
+            id="evan-dropdown-queue"
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
             <div class="spinner-border spinner-border-sm bg-text-inverted"
@@ -133,7 +142,8 @@
                   {{ '_evan.dapp-wrapper.empty-queue' | translate }}
                 </span>
                 <div class="border-top p-3"
-                  v-for="instance in queueInstances"
+                  v-for="(instance, index) in queueInstances"
+                  :id="`evan-dropdown-queue-${ index }`"
                   @click="">
                   <template v-if="instance.dispatcher">
                     <div class="d-flex">
@@ -192,6 +202,7 @@
           </button>
 
           <button class="btn position-relative gray-500"
+            id="evan-dropdown-profile"
             v-if="!userInfo.loading"
             @click="$refs.userDropdown.show()">
            <img class="rounded-circle"
@@ -225,10 +236,12 @@
                   </div>
                   <div class="pl-1">
                     <p class="text-muted text-truncate mb-2">{{ userInfo.address }}</p>
-                    <button type="button" class="btn btn-rounded btn-primary bg-primary px-3 py-2 small"
-                      @click="evanNavigate(`profile.${ domainName }`); $refs.userDropdown.hide($event)">
+                    <a class="btn btn-rounded btn-primary bg-primary px-3 py-2 small"
+                      id="evan-dapp-profile"
+                      :href="`${ dapp.fullUrl }/profile.${ domainName }`"
+                      @click="$refs.userDropdown.hide($event)">
                       <small>{{ '_evan.view-profile' | translate }}</small>
-                    </button>
+                    </a>
                   </div>
                 </div>
                 <div class="border-top border-sm py-2">
@@ -239,14 +252,16 @@
                     </div>
                     <a class="dropdown-item py-2"
                       v-if="!coreRoute.seperator"
-                      @click="evanNavigate(coreRoute.path); $refs.userDropdown.hide($event)">
-                      <!-- <i :class="`${ coreRoute.icon } mr-3`" style="width: 16px;"></i> -->
+                      :id="`evan-dapp-${ coreRoute.path.split('.')[0] }`"
+                      :href="`${ dapp.fullUrl }/${ coreRoute.path }`"
+                      @click="$refs.userDropdown.hide($event)">
                       {{ `_evan._routes.${ coreRoute.title }` | translate }}
                     </a>
                   </template>
                 </div>
                 <div class="border-top border-sm py-2">
                   <a class="dropdown-item py-2"
+                    if="evan-logout"
                     @click="$refs.evanLogout.logout()">
                     {{ '_evan.logout' | translate }}
                   </a>
@@ -285,7 +300,9 @@
                 <ul class="nav font-medium in w-100" id="main-menu">
                   <li v-for="(route, index) in routes">
                     <a
+                      :id="`evan-dapp-${ route.path.split('.')[0] }`"
                       :class="{ active: $route.path.startsWith(route.fullPath) }"
+                      :href="`${ dapp.fullUrl }/${ route.path }`"
                       @click="routeActivated(route)">
                       <i :class="route.icon" data-icon="v"></i>
                       <span class="hide-menu">{{ route.title | translate }}</span>
@@ -297,7 +314,9 @@
                   v-if="bottomRoutes">
                   <li v-for="(route, index) in bottomRoutes">
                     <a
+                      :id="`evan-dapp-${ route.path.split('.')[0] }`"
                       :class="{ active: $route.path.startsWith(route.fullPath) }"
+                      :href="`${ dapp.fullUrl }/${ route.path }`"
                       @click="routeActivated(route)">
                       <i :class="route.icon" data-icon="v"></i>
                       <span class="hide-menu">{{ route.title | translate }}</span>
