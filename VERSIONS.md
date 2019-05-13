@@ -3,6 +3,8 @@
 ## Next Version
 ### Features
 - add `evan-tooltip` component
+- `evan-loading`
+  - add className
 
 ### Fixes
 ### Deprecations
