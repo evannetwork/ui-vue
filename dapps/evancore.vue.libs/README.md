@@ -40,3 +40,11 @@ Reference Projects:
 
 ### Modals
 - #modal-cancel
+
+### evan-file-input
+- #file-input-remove-modal
+  - #file-input-remove-accept
+  - [Modals](###Modals)
+- #file-input-remove
+- #file-input-download-${ index }
+- #file-input-upload

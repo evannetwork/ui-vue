@@ -27,7 +27,9 @@
 
 <template>
   <div class="evan-file-input">
-    <evan-modal ref="removeFileModal"
+    <evan-modal
+      id="file-input-remove-modal"
+      ref="removeFileModal"
       @canceled="fileRemove = -1;">
       <template v-slot:header>
         <h5 class="modal-title">
@@ -40,7 +42,9 @@
         </p>
       </template>
       <template v-slot:footer>
-        <button type="button" class="btn btn-primary btn-rounded font-weight-normal"
+        <button
+          id="file-input-remove-accept"
+          type="button" class="btn btn-primary btn-rounded font-weight-normal"
           @click="removeFile(value[fileRemove], fileRemove)">
           {{ `_evan.file-input.remove-modal.action` | translate }}
           <i class="mdi mdi-arrow-right label ml-3"></i>
@@ -53,11 +57,14 @@
       <span>{{ file.name }}</span>
 
       <a class="btn p-0 ml-3"
+        :id="`file-input-download-${ index }`"
         :href="file.blobUri"
         :download="file.name">
         <i class="mdi mdi-download-outline"></i>
       </a>
-      <button class="btn p-0 ml-1 delete"
+      <button
+        id="file-input-remove"
+        class="btn p-0 ml-1 delete"
         v-if="!disabled"
         @click="removeFile(file, index)">
         <i class="mdi mdi-delete-outline"></i>
@@ -66,6 +73,7 @@
 
     <div class="dropzone" v-if="!disabled">
       <input
+        id="file-input-upload"
         type="file" multiple
         :accept="accept"
         :name="name"
