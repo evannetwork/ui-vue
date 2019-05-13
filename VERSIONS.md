@@ -1,6 +1,6 @@
 # ui-vue-core
 
-## Version 1.1.0
+## Next Version
 ### Features
 ### Fixes
 ### Deprecations
