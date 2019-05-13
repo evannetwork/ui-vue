@@ -1,5 +1,11 @@
 # ui-vue-core
 
+## Next Version
+### Features
+### Fixes
+### Deprecations
+
+
 ## Version 1.1.0
 ### Features
 - show warning icons on dispatcher errors
@@ -18,7 +24,6 @@
 - Add vuex.i18n fallback language
 - add decodeURIComponent to breadcrumb titles
 
-### Deprecations
 
 ## Version 1.0.0
 ### Features
