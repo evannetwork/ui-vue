@@ -1,11 +1,12 @@
 # ui-vue-core
 
-## Next Version
+## Version 1.1.0
 ### Features
 - show warning icons on dispatcher errors
 - add `recovery url` mechanism
 - `evan-file` component
 - Add modal Prop maxWidth prop
+- add html id selectors to `dapp-wrapper`, `file-input`, `evan-modal`
 
 ### Fixes
 - use material icons for vue dapps
