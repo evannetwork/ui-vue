@@ -103,11 +103,14 @@ export default class DAppLoader  extends mixins(EvanComponent) {
    * Searches for the next dapp in the url that should be started and run it
    */
   async startDApp() {
+    // clear everything, that was loaded before
+    // !IMPORTANT: clear the inner html before running getNextDApp
+    //   => it will check for elements dapp names as id's, to check which dapp was already loaded
+    //   => by forcing dapp loading under an other domain, will cause false domain loading
+    this.$el.innerHTML = '';
+
     // get module id
     this.startedDApp = await getNextDApp();
-
-    // clear everything, that was loaded before
-    this.$el.innerHTML = '';
 
     // create a new container el, vue will replace this element
     const containerEl = document.createElement('div');

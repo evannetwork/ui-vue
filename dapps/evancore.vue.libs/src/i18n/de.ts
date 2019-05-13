@@ -29,9 +29,9 @@
 export default {
   "_evan": {
     "_routes": {
-      "contacts": "Kontakten",
-      "favorites": "Favoriten",
+      "contacts": "Kontakte",
       "digitaltwins": "Digitale Zwillinge",
+      "favorites": "Favoriten",
       "mailbox": "Nachrichten",
       "profile": "Mein Profil"
     },
@@ -39,15 +39,15 @@ export default {
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "empty-queue": "Alles ist synchronisiert...",
-      "instance-delete": {
-        "ok": "löschen",
-        "desc": "Wollen Sie diesen Eintrag unwiderruflich löschen?",
-        "title": "Eintrag löschen"
-      },
       "instance-accept": {
-        "ok": "fortfahren",
         "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
+        "ok": "fortfahren",
         "title": "Transkationsbestätigung"
+      },
+      "instance-delete": {
+        "desc": "Wollen Sie diesen Eintrag unwiderruflich löschen?",
+        "ok": "löschen",
+        "title": "Eintrag löschen"
       },
       "my-contacts": "Meine Kontakte",
       "my-mailbox": "Meine Nachrichten",
@@ -55,7 +55,18 @@ export default {
       "new-mails": "Sie haben {newMailCount} neue Nachrichten",
       "queue": "Daten-Synchronisation",
       "queue-continue": "fortfahren",
-      "queue-error": "Während der Sychronisation ist ein Fehler aufgetreten."
+      "queue-error": "Während der Sychronisation ist ein Fehler aufgetreten.",
+      "sync-complete": "Abgeschlossen"
+    },
+    "dispatcher-not-found": "Synchronisations Job nicht gefunden...",
+    "file-input": {
+      "description": "Ziehen Sie Ihre Datei(en) hierher, um zu beginnen<br>oder klicken Sie zum Durchsuchen",
+      "empty": "Es wurden noch keine Dateien hochgeladen...",
+      "remove-modal": {
+        "title": "Datein löschen",
+        "desc": "Möchten Sie diese Datei wirklich löschen?",
+        "action": "Löschen"
+      }
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
@@ -63,10 +74,10 @@ export default {
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
-    "please-login": "Bitte entsperren Sie Ihr Profil um fortzufahren.",
+    "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "use-password": "Entsperren",
-    "welcome-to-evan": "Willkommen im evan.network",
-    "dispatcher-not-found": "Synchronisations Job nicht gefunden..."
+    "view-profile": "Profil anzeigen",
+    "welcome-to-evan": "Willkommen im evan.network"
   }
 }
 /* tslint:enable */

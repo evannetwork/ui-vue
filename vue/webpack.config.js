@@ -45,6 +45,7 @@ module.exports = function(name, dist, externals, prodMode) {
     '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
     '@evan.network/ui-vue-core': '@evan.network/ui-vue-core',
     'axios': 'axios',
+    'moment': 'moment',
     'vue': 'vue',
     'vue-material': 'vue-material',
     'vue-recaptcha': 'vue-recaptcha',

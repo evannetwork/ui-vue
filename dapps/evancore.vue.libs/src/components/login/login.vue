@@ -27,20 +27,21 @@
 
 <template>
   <div class="bg-level-3 w-100 h-100 d-flex align-items-center flex-column">
-    <div class="text-center mt-5 mb-3">
+    <div class="mt-3 mb-3 text-center">
       <br>
-      <p class="text-secondary font-weight-bold">{{ '_evan.welcome-to-evan' | translate }}</p>
-      <h2>{{ '_evan.please-login' | translate }}</h2>
+      <h1 class="mt-4 font-weight-semibold">{{ '_evan.welcome-to-evan' | translate }}</h1>
+      <h3 class="mt-4 font-weight-semibold text-muted">{{ '_evan.please-login' | translate }}</h3>
+      <div class="bg-secondary d-inline-block" style="width: 70px; height: 5px;"></div>
       <br>
     </div>
-    <div class="bg-level-1 mx-auto border password-dialog">
-      <div class="d-flex p-2 pt-3 pb-3 align-items-center justify-content-between border-bottom">
+    <div class="bg-level-1 mx-auto border password-dialog mt-3 mt-md-5">
+      <div class="d-flex p-2 align-items-center justify-content-between border-bottom">
         <h4 class="m-0 ml-3">{{ '_evan.login' | translate }}</h4>
         <evan-logout ref="evanLogout">
           <template v-slot:button>
             <button type="button" class="btn"
               @click="$refs.evanLogout.logout()">
-              <i class="fas fa-sign-out-alt"></i>
+              <i class="mdi mdi-logout"></i>
             </button>
           </template>
         </evan-logout>

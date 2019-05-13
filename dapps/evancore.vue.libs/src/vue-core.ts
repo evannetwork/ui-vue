@@ -31,6 +31,9 @@ import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
 import VueMoment from 'vue-moment';
 
+// setup moment locales
+const moment = require('moment').default;
+
 // import evan libs
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
@@ -82,16 +85,24 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     },
   });
 
+  // use defined or browser language
+  const language = window.localStorage['evan-language'] || navigator.language.split('-')[0];
+
+  // set correct moment language
+  const momentLanguages = [ 'en', 'de' ];
+  moment.locale(momentLanguages.indexOf(language) === -1 ? 'en' : language);
+
   // set the i18n values and moment js
-  Vue.use(VueMoment);
+  Vue.use(VueMoment, { moment });
   Vue.use(vuexI18n.plugin, store);
 
   // add all i18n definitions
   registerEvanI18N(Vue, evanTranslations);
   registerEvanI18N(Vue, options.translations);
 
-  // use defined or browser language
-  Vue.i18n.set(window.localStorage['evan-language'] || navigator.language.split('-')[0]);
+  // set vuex i18n locale
+  Vue.i18n.fallback('en');
+  Vue.i18n.set(language);
 
   // hide the initial loading screen
   dappBrowser.loading.finishDAppLoading();
@@ -104,6 +115,14 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     mounted: function () {
       // add an element id, so the dapp-loader can detect already loaded nested dapps
       this.$el.id = options.dappEnsOrContract;
+      // apply the contract address as the id, so the dapp will not be loaded duplicated, when the
+      // contract address is opened under a dapp ens
+      if (dappToLoad.contractAddress) {
+        const contractAddressEl = document.createElement('div');
+        contractAddressEl.id = `${ dappToLoad.contractAddress }`;
+        contractAddressEl.style.display = 'none';
+        this.$el.appendChild(contractAddressEl);
+      }
     }
   });
 
@@ -147,6 +166,7 @@ export function registerEvanI18N(Vue: any, translations: any) {
  */
 export function registerEventHandlers(vueInstance: any) {
   const beforeUnload = () => {
+    window.localStorage['evan-recovery-url'] = window.location.href;
     vueInstance.$destroy();
   };
 
@@ -161,15 +181,19 @@ export function registerEventHandlers(vueInstance: any) {
       parent = parent.parentElement;
 
       if (!parent) {
-        console.log('EVAN VUE DESTROY')
-        beforeUnload();
+        // clear window.localStorage['evan-recovery-url'] when a new dapp was opened, so recovery
+        // will expire
+        delete window.localStorage['evan-recovery-url'];
+
+        // clear listeners
+        vueInstance.$destroy();
         elementObserver.disconnect();
-        window.removeEventListener('beforeunload', beforeUnload);
+        setTimeout(() => window.removeEventListener('beforeunload', beforeUnload));
       }
     } while (parent && parent !== document.body);
   });
 
   // Start observing the target node for configured mutations
-  elementObserver.observe(vueInstance.$el.parentElement, { childList: true, });
+  elementObserver.observe(vueInstance.$el.parentElement, { childList: true, subtree: true });
 }
 

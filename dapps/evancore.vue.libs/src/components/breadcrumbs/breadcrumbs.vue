@@ -27,26 +27,25 @@
 
 <template>
   <div class="evan-breadcrumbs
-      bg-level-1 border-bottom
+      bg-level-1 border-bottom border-sm
       pt-2 pb-2 pr-3 pl-3
       d-flex align-items-center">
     <i v-if="goBack"
-      class="fas fa-chevron-left clickable ml-2 mr-3"
+      id="breadcrumb-goback"
+      class="mdi mdi-chevron-left clickable mr-3"
       @click="$router.history.go(-1)">
     </i>
     <template 
       v-for="(breadcrumb, index) in breadcrumbs">
-      <h4 class="mb-0 p-2" v-if="index !== 0">/</h4>
-      <h4 class="mb-0">
-        <a class="evan-breadcrumb"
-          :href="`#${ breadcrumb.path }`"
-          :class="{ 'active': $route.path === breadcrumb.path }">
-          {{ $i18n.keyExists(breadcrumb.name) ? $t(breadcrumb.name) : breadcrumb.fallbackName }}
-        </a>
-      </h4>
+      <span class="mb-0 m-2 text-muted" v-if="index !== 0">/</span>
+      <a class="evan-breadcrumb"
+        :href="`#${ breadcrumb.path }`"
+        :class="{ 'active': $route.path === breadcrumb.path }">
+        {{ $i18n.keyExists(breadcrumb.name) ? $t(breadcrumb.name) : breadcrumb.fallbackName }}
+      </a>
     </template>
     <i v-if="enableReload"
-      class="fas fa-sync-alt clickable ml-4"
+      class="mdi mdi-sync clickable ml-2 h4 mb-0"
       @click="$emit('reload')">
     </i>
     <span class="mx-auto"></span>

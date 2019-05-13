@@ -67,7 +67,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * format: [
    *    {
    *      name: 'favorites.evan',
-   *      icon: 'fas fa-bookmark',
+   *      icon: 'mdi mdi-bookmark',
    *      title: '_dashboard.routes.favorites'
    *    }
    *  ]
@@ -76,11 +76,11 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     type: Array,
     default: function(options) {
       return [
-        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'fas fa-id-card' },
-        { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'fas fa-bookmark' },
-        // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
-        { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'fas fa-address-book' },
-        // { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'fas fa-user' },
+        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-fingerprint' },
+        { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
+        // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
+        { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-account-group-outline' },
+        // { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'mdi mdi-account' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
@@ -106,6 +106,12 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * should be the runtime created? Includes onboarding & login checks.
    */
   @Prop({ default: true }) createRuntime: any;
+
+  /**
+   * id of this element, so child elements can be queried easier
+   */
+  id = `dappwrapper_${ Date.now() + Math.round(Math.random() * 1000000) }`;
+  sideBar2Selector = `#${ this.id } .dapp-wrapper-body > .dapp-wrapper-sidebar-2 > *`
 
   /**
    * is the current dapp-wrapper gets initialized? => use loading to don't render dapp-loader or
@@ -175,6 +181,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    */
   queueInstances = { };
   queueCount = 0;
+  queueErrorCount = 0;
   queueLoading = false;
   queueWatcher = null;
 
@@ -189,12 +196,18 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   mailsWatcher: any;
 
   /**
+   * Watch for sidebar close events, so it can be closed from outside
+   */
+  sideBarCloseWatcher: any;
+
+  /**
    * Core routes that will be displayed in the top right user dropdown
    */
   coreRoutes = [
-    { title: `favorites`, path: `favorites.${ domainName }`, icon: 'fas fa-bookmark' },
-    { title: `mailbox`, path: `mailbox.${ domainName }`, icon: 'fas fa-envelope' },
-    { title: `contacts`, path: `addressbook.${ domainName }`, icon: 'fas fa-address-book' },
+    { title: `favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark' },
+    { title: `mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
+    { seperator: true },
+    { title: `contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-book-multiple' },
   ];
 
   /**
@@ -223,6 +236,13 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   toggleSmallToolbar() {
     if (window.innerWidth < 992) {
       this.showSideBar = !this.showSideBar;
+
+      // if sidebar 2 is used, show it directly
+      if (document.querySelectorAll(this.sideBar2Selector).length !== 0) {
+        this.showSideBar2 = true;
+      } else {
+        this.showSideBar2 = false;
+      }
     } else {
       this.smallToolbar = !this.smallToolbar;
 
@@ -242,16 +262,15 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * @param      {DAppWrapperRouteInterface}  route   route that was activated
    */
   routeActivated(route: DAppWrapperRouteInterface) {
-    (<any>this).evanNavigate(route.path);
-
-    this.$nextTick(() => {
+    // if the same route was opened, the second navigation should be displayed
+    if (this.$route.path.startsWith(<string>route.fullPath) &&
+        document.querySelectorAll(this.sideBar2Selector).length !== 0) {
       this.showSideBar2 = true;
+    } else {
+      this.showSideBar = false;
+    }
 
-      // if the same route was opened, the second navigation should be displayed
-      if (!this.$route.path.startsWith(<string>route.fullPath)) {
-        this.showSideBar = false;
-      }
-    });
+    // (<any>this).evanNavigate(route.path);
   }
 
   /**
@@ -273,28 +292,25 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     } else {
       this.loading = false;
     }
+
+    this.sideBarCloseWatcher = ($event: CustomEvent) => this.showSideBar = false;
+    window.addEventListener('dapp-wrapper-sidebar-close', this.sideBarCloseWatcher);
   }
 
 
   /**
    * Clear the hash change watcher
    */
-  beforeDestroy() {
+  async beforeDestroy() {
     // only remove the hashChangeWatcher, when it was already bind (user was on the onboarding)
-    if (this.hashChangeWatcher) {
-      // remove the hash change listener
-      window.removeEventListener('hashchange', this.hashChangeWatcher);
-    }
-
+    this.hashChangeWatcher && window.removeEventListener('hashchange', this.hashChangeWatcher);
     // clear mails watcher
-    if (this.mailsWatcher) {
-      window.clearInterval(this.mailsWatcher);
-    }
-
+    this.mailsWatcher && window.clearInterval(this.mailsWatcher);
     // clear queue watcher
-    if (this.userInfo && this.queueWatcher) {
-      this.queueWatcher();
-    }
+    this.userInfo && this.queueWatcher && this.queueWatcher();
+    // return the watch remove function
+    this.sideBarCloseWatcher && window.removeEventListener(`evan-queue-${ this.id }`,
+      this.sideBarCloseWatcher);
   }
 
   /**
@@ -405,15 +421,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   }
 
   /**
-   * Navigates the user to the root page of the dapp.
-   */
-  openRouteBaseHash() {
-    if (!this.onboarding) {
-      this.$router.push({ path: (<any>this).dapp.baseHash })
-    }
-  }
-
-  /**
    * Load the users specific data.
    */
   async loadUserSpecific() {
@@ -503,8 +510,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       window.localStorage['evan-mail-read'] = JSON.stringify(this.userInfo.readMails)
     }
 
-    this.evanNavigate(`mailbox.${ this.domainName }/received/detail/${ mail.address }`);
-
     (<any>this.$refs).mailDropdown.hide($event);
   }
 
@@ -523,6 +528,8 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     await Promise.all(dispatchers.map(async (dispatcherObj: any) => {
       try {
         const [ dappEns, dispatcherName ] = dispatcherObj.dispatcherId.split('|||');
+        // load dependencies and dapp content
+        await dappBrowser.dapp.loadDAppDependencies(dappEns, false);
         const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
         const dispatcher = dapp[dispatcherName];
 
@@ -554,7 +561,12 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     }));
 
     // set queue count
-    this.queueCount = Object.keys(this.queueInstances).length;
+    const setQueueCount = () => {
+      const instances = Object.keys(this.queueInstances).map(key => this.queueInstances[key]);
+      this.queueCount = instances.filter(subInstance => !subInstance.error).length;
+      this.queueErrorCount = instances.filter(subInstance => !!subInstance.error).length;
+    };
+    setQueueCount();
     this.queueLoading = false;
 
     // watch for queue updates
@@ -580,7 +592,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
           this.$set(this.queueInstances, instance.id, instance);
         }
 
-        this.queueCount = Object.keys(this.queueInstances).length;
+        setQueueCount();
       });
     }
   }

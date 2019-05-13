@@ -26,6 +26,13 @@
 */
 
 .password-dialog {
-  min-width: 500px;
   max-width: 100%;
+
+  @media(min-width: 768px) {
+    min-width: 500px;
+  }
+
+  @media(max-width: 767px) {
+    width: 90%;
+  }
 }

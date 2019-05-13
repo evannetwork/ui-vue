@@ -25,12 +25,24 @@
   https://evan.network/license/
 */
 
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
+<template>
+  <div class="rounded-pill text-center"
+    :style="{ 
+      'background-color': `${ bgColor } !important`,
+      'color': `${ textColor } !important`,
+    }"
+    style="
+      width: 30px; height: 30px; line-height: 30px; padding: 0;
+      font-size: 12px; font-weight: bold;
+      display: inline-block;
+    ">
+    {{ batch }}
+  </div>
+</template>
 
-/**
- * Return the domain name. Wrapper function for the dapp-browser.getDomainName.
- */
-export function getDomainName() {
-  // return `vue.${ dappBrowser.getDomainName() }`;
-  return `${ dappBrowser.getDomainName() }`;
-}
+<script lang="ts">
+  import Component from './contact-batch.ts';
+  export default Component;
+</script>
+
+

@@ -5,9 +5,10 @@
       "dependencies": {
         "axios.vue.libs": "^0.18.0",
         "i18n.vuex.libs": "1.11.0",
+        "moment.libs": "^2.0.0",
         "moment.vue.libs": "4.0.0",
         "router.vue.libs": "^2.5.0",
-        "ui.libs": "^1.0.0",
+        "ui.libs": "^1.1.0",
         "vue.libs": "^2.5.0",
         "vuex.libs": "3.1.0"
       },
@@ -16,7 +17,7 @@
         "evancore.vue.libs.js",
         "evancore.vue.libs.css"
       ],
-      "origin": "QmS9m9WqQLRLWEvbecq1SgPLs1ZmoBDiDccnSkBeZYK7mm",
+      "origin": "QmXDwFM2V1ht4EPp5PbBvr8M9NaXXyNRGVikwvTBEwu9ht",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -39,9 +40,10 @@
       "evan",
       "library"
     ],
-    "version": "1.0.0",
+    "version": "1.1.0",
     "versions": {
-      "1.0.0": "QmR5ZR8vADzNx7tq5AKLf81ko5vPNyTLuJ42Afc6W2AWVs"
+      "1.0.0": "Qme8X3BUpiEpmsQkNR11C89HMeDnzbdVkSR3def4pSteUZ",
+      "1.1.0": "QmXJYu932D4DdW4PseJPRRiCpDfik6qUf9rRidERuDMVLy"
     }
   }
 }

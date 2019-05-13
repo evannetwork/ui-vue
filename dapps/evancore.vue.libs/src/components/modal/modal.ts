@@ -37,7 +37,17 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
 export default class ModalComponent  extends mixins(EvanComponent) {
+  /**
+   * Show custom modal content
+   */
   @Prop({ }) customModal;
+
+  /**
+   * Configurable modal width
+   */
+  @Prop({
+    default: '500px'
+  }) maxWidth;
 
   /**
    * shows the dom elements of the modal
