@@ -43,6 +43,7 @@ import Login from './login/login.vue';
 import Logout from './logout/logout.vue';
 import Modal from './modal/modal.vue';
 import Success from './success/success.vue';
+import Tooltip from './tooltip/tooltip.vue';
 
 // export them all, so other applications can access them
 export {
@@ -55,6 +56,7 @@ export {
   Dropdown,
   EvanComponent,
   EvanIframe,
+  Tooltip,
   FileInputComponent,
   Login,
   Logout,
@@ -77,6 +79,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-logout', component: Logout },
   { name: 'evan-modal', component: Modal },
   { name: 'evan-success', component: Success },
+  { name: 'evan-tooltip', component: Tooltip },
 ];
 
 export default componentRegistration;

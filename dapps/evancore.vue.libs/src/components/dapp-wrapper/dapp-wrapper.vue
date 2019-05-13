@@ -115,6 +115,11 @@
 
           <button class="btn position-relative gray-500 px-3"
             id="dropdown-queue"
+            :class="{
+              'running': queueCount !== 0,
+              'error': queueErrorCount !== 0,
+              'finished': queueErrorCount === 0 && queueCount === 0,
+            }"
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
             <div class="spinner-border spinner-border-sm bg-text-inverted"

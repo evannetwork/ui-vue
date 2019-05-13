@@ -2,6 +2,8 @@
 
 ## Next Version
 ### Features
+- add `evan-tooltip` component
+
 ### Fixes
 ### Deprecations
 
