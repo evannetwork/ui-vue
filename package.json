@@ -38,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tslint --config tslint.json \"./dapps/**/*.ts\""
+      "pre-commit": "tslint --config tslint.json \"./dapps/*/src/**/*.ts\""
     }
   },
   "keywords": [
