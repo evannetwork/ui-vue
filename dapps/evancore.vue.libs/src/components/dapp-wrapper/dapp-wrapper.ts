@@ -77,10 +77,10 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     default: function(options) {
       return [
         { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-fingerprint' },
-        { title: `${ i18nPref }.favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
-        // { title: `${ i18nPref }.mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
-        { title: `${ i18nPref }.contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-account-group-outline' },
-        // { title: `${ i18nPref }.profile`, path: `profile.${ domainName }`, icon: 'mdi mdi-account' },
+        { title: `${ i18nPref }.favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
+        // { title: `${ i18nPref }.mailbox`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-email' },
+        { title: `${ i18nPref }.contacts`, path: `addressbook.vue.${ domainName }`, icon: 'mdi mdi-account-group-outline' },
+        // { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
@@ -204,10 +204,10 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * Core routes that will be displayed in the top right user dropdown
    */
   coreRoutes = [
-    { title: `favorites`, path: `favorites.${ domainName }`, icon: 'mdi mdi-bookmark' },
-    { title: `mailbox`, path: `mailbox.${ domainName }`, icon: 'mdi mdi-email' },
+    { title: `favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-bookmark' },
+    { title: `mailbox`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-email' },
     { seperator: true },
-    { title: `contacts`, path: `addressbook.${ domainName }`, icon: 'mdi mdi-book-multiple' },
+    { title: `contacts`, path: `addressbook.vue.${ domainName }`, icon: 'mdi mdi-book-multiple' },
   ];
 
   /**
@@ -323,13 +323,13 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     // and sidebar for this dapp-wrapper
     do {
       parent = parent.parentElement;
-      if (parent !== this.$el && parent.className.indexOf('dapp-wrapper-body') !== -1) {
+      if (parent && parent !== this.$el && parent.className.indexOf('dapp-wrapper-body') !== -1) {
         this.enableNav = false;
         this.enableSidebar = false;
 
         break;
       }
-    } while (parent !== document.body);
+    } while (parent && parent !== document.body);
   }
 
   /**
@@ -363,7 +363,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       // set the hash change watcher, so we can check that the user finished the onboarding process
       const dappLoader = this;
       this.hashChangeWatcher = function() {
-        if (window.location.hash.indexOf(`onboarding.${ (<any>this).domainName }`) === -1) {
+        if (window.location.hash.indexOf(`onboarding.vue.${ (<any>this).domainName }`) === -1) {
           // recheck login and onboarding
           dappLoader.handleLoginOnboarding();
         }
@@ -372,11 +372,11 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       // add the hash change listener
       window.addEventListener('hashchange', this.hashChangeWatcher);
 
-      if (this.$route.path.indexOf(`/onboarding.${ (<any>this).domainName }`) === -1) {
+      if (this.$route.path.indexOf(`/onboarding.vue.${ (<any>this).domainName }`) === -1) {
         // navigate to the onboarding and apply the current hash as origin, so the onboarding can
         // navigate back their
         this.$router.push({
-          path: `${ (<any>this).dapp.baseHash }/onboarding.${ (<any>this).domainName }`,
+          path: `${ (<any>this).dapp.baseHash }/onboarding.vue.${ (<any>this).domainName }`,
           query: {
             origin: this.$route.path,
             ...this.$route.query,

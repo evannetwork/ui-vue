@@ -115,6 +115,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     mounted: function () {
       // add an element id, so the dapp-loader can detect already loaded nested dapps
       this.$el.id = options.dappEnsOrContract;
+      this.$el.className += ' evan-vue-dapp';
       // apply the contract address as the id, so the dapp will not be loaded duplicated, when the
       // contract address is opened under a dapp ens
       if (dappToLoad.contractAddress) {

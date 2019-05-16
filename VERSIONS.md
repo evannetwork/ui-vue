@@ -5,6 +5,7 @@
 - add `evan-tooltip` component
 - `evan-loading`
   - add className
+- Add `.vue` namespace to core vue dapps, so vue versions and angular versions exists side by side
 
 ### Fixes
 ### Deprecations

@@ -80,7 +80,7 @@
                 <a class="dropdown-item border-top border-sm py-2 px-3"
                   v-for="(mail, index) in userInfo.mails"
                   :id="`evan-dropdown-mailbox-${ index }`"
-                  :href="`${ dapp.fullUrl }/mailbox.${ domainName }/received/detail/${ mail.address }`"
+                  :href="`${ dapp.fullUrl }/mailbox.vue.${ domainName }/received/detail/${ mail.address }`"
                   @click="openMail(mail, $event)">
                   <div class="d-flex">
                     <div style="width: 50px; min-width: 50px;">
@@ -105,7 +105,7 @@
                   border-top border-sm p-3
                   font-weight-bold"
                   id="dapp-mailbox"
-                  :href="`${ dapp.fullUrl }/mailbox.${ domainName }`"
+                  :href="`${ dapp.fullUrl }/mailbox.vue.${ domainName }`"
                   @click="$refs.mailDropdown.hide($event)">
                   {{ '_evan.dapp-wrapper.all-messages' | translate }}
                 </a>
@@ -243,7 +243,7 @@
                     <p class="text-muted text-truncate mb-2">{{ userInfo.address }}</p>
                     <a class="btn btn-rounded btn-primary bg-primary px-3 py-2 small"
                       id="dapp-profile"
-                      :href="`${ dapp.fullUrl }/profile.${ domainName }`"
+                      :href="`${ dapp.fullUrl }/profile.vue.${ domainName }`"
                       @click="$refs.userDropdown.hide($event)">
                       <small>{{ '_evan.view-profile' | translate }}</small>
                     </a>
