@@ -6,6 +6,7 @@
 - `evan-loading`
   - add className
 - Add `.vue` namespace to core vue dapps, so vue versions and angular versions exists side by side
+- adjust breadcrumb back button
 
 ### Fixes
 ### Deprecations
