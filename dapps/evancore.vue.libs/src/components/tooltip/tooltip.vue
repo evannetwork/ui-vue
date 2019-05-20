@@ -27,10 +27,10 @@
 
 <template>
   <div class="tooltip evan-tooltip"
-    :class="`bs-tooltip-${ placement }`"
-    :style="{
-      'opacity': showTooltip ? 1 : 0
-    }"
+    :class="[
+      `bs-tooltip-${ placement }`,
+      { 'show-tooltip': showTooltip }
+    ]"
     role="tooltip">
     <div class="arrow"></div>
     <div class="tooltip-inner">
