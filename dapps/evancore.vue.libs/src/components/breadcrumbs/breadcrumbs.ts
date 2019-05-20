@@ -32,24 +32,42 @@ import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
+import DAppWrapperUtils from '../dapp-wrapper/utils';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
 export default class Breadcrumbs extends mixins(EvanComponent) {
+  /**
+   * Every route name will be translated using the leading i18nScope. E.g.: digitaltwins.evan =>
+   * _evan.digitaltwins
+   */
   @Prop({
     type: String,
     default: '_evan'
   }) i18nScope;
 
+  /**
+   * Should the reload button be visible?
+   */
   @Prop({
     type: Function
   }) enableReload;
 
+  /**
+   * Change the route base hash that should be navigated to
+   */
   @Prop() baseHash;
 
-  // route stack
-  breadcrumbs = [ ];
+  /**
+   * Move the breadcrumbs element to the most top level dapp-wrapper
+   */
+  @Prop() attachToDAppWrapper;
+
+  /**
+   * active route, splitted by hash and prepared using the following params: name, fallbackName, path
+   */
+  breadcrumbs: Array<{ name: string, fallbackName: string, path: string }> = [ ];
 
   /**
    * Watch for hash updates
@@ -73,6 +91,11 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
   _baseHash = '';
 
   /**
+   * found dapp-wrapper breadcrumbs container element, where this element can be applied to
+   */
+  dappWrapperBreadcrumb: Element;
+
+  /**
    * Bind the hash change watcher to track hash changes and to update the routes
    */
   async created() {
@@ -83,7 +106,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
 
     // bin the hash change watcher within the create to keep the correct function reference
     this.hashChangeWatcher = (() => {
-      this.breadcrumbs = window.location.hash
+      const breadcrumbHashes = window.location.hash
         // remove the base hash
         .replace(`#${ this._baseHash }`, '')
         .split('/')
@@ -91,10 +114,10 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
         .filter(breadcrumb => !!breadcrumb);
 
       // add root domain as first entry
-      this.breadcrumbs.unshift(this.dapp.ens.replace(new RegExp(`.${ domainName }`, 'g'), ''));
+      breadcrumbHashes.unshift(this.dapp.ens.replace(new RegExp(`.${ domainName }`, 'g'), ''));
 
       // iterate through all paths and create the correct translation name and path
-      this.breadcrumbs = this.breadcrumbs.map((breadcrumb: string, index: number) => {
+      this.breadcrumbs = breadcrumbHashes.map((breadcrumb: string, index: number) => {
         // remove the domain name, so we can manage simple i18n files
         let fallbackName = decodeURIComponent(
           breadcrumb.replace(new RegExp(`.${ domainName }`, 'g'), ''));
@@ -126,6 +149,30 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
   }
 
   /**
+   * Take the current element and search for an parent wrapper level 2 container, so move the
+   * current element to this element.
+   */
+  mounted() {
+    if (this.attachToDAppWrapper) {
+      let highestWrapper: any = DAppWrapperUtils.getActiveDAppWrapper(this.$el);
+
+      // if it's not the body, clear the latest wrapper-sidebar-2 element and
+      if (highestWrapper) {
+        this.dappWrapperBreadcrumb = highestWrapper.querySelector('.dapp-wrapper-breadcrumbs');
+
+        // clear element
+        this.dappWrapperBreadcrumb.innerHTML = '';
+
+        // append the current element
+        this.dappWrapperBreadcrumb.appendChild(this.$el);
+      } else {
+        dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
+          dapp wrapper...`, 'warning');
+      }
+    }
+  }
+
+  /**
    * Clear the hash change watcher
    */
   beforeDestroy() {
@@ -136,6 +183,13 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
     if (this.hashChangeWatcher) {
       // remove the hash change listener
       window.removeEventListener('hashchange', this.hashChangeWatcher);
+    }
+
+    // check if the breadcrumb was attached to the hihgest dapp-wrapper header
+    if (this.attachToDAppWrapper && this.dappWrapperBreadcrumb && !this.wasDestroyed) {
+      try {
+        this.dappWrapperBreadcrumb.removeChild(this.$el);
+      } catch (ex) { }
     }
   }
 }

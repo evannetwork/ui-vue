@@ -32,6 +32,7 @@ import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
+import DAppWrapperUtils from '../dapp-wrapper/utils';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
@@ -57,23 +58,10 @@ export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
    * current element to this element.
    */
   mounted() {
-    let parent: any = this.$el;
-    let wrappers: Array<any> = [ ];
-
-    // search until body or an wrapper body is reached
-    do {
-      parent = parent.parentElement;
-
-      // collect a list of all parent wrapper bodies, to be able to take the highest one
-      if (parent && parent.className.indexOf('dapp-wrapper-body') !== -1) {
-        wrappers.push(parent);
-      }
-    } while (parent && parent !== document.body);
+    let highestWrapper: any = DAppWrapperUtils.getActiveDAppWrapper(this.$el);
 
     // if it's not the body, clear the latest wrapper-sidebar-2 element and
-    if (wrappers.length > 0) {
-      let highestWrapper = wrappers.pop();
-
+    if (highestWrapper) {
       this.highestSidebar = highestWrapper.querySelector('.dapp-wrapper-sidebar-2');
       this.contentElement = (<any>this.$el).firstChild;
 
