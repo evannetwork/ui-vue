@@ -2,15 +2,18 @@
 
 ## Next Version
 ### Features
-- add `evan-tooltip` component
-- `evan-loading`
-  - add className
-- Add `.vue` namespace to core vue dapps, so vue versions and angular versions exists side by side
-- adjust breadcrumb back button
-- `dapp-wrapper`
-  - add `content-header` slot
-- `breadcrumbs`
-  - `attachToDAppWrapper` param to host breadcrumbs add to level over `dapp-wrapper-sidebar-2`
+- `evancore.vue.libs`
+  - add `evan-tooltip` component
+  - `evan-loading`
+    - add className
+  - Add `.vue` namespace to core vue dapps, so vue versions and angular versions exists side by side
+  - adjust breadcrumb back button
+  - `dapp-wrapper`
+    - add `content-header` slot
+  - `breadcrumbs`
+    - `attachToDAppWrapper` param to host breadcrumbs add to level over `dapp-wrapper-sidebar-2`
+  - add `under-development` component
+  - add `nav-tabs` component
 
 ### Fixes
 ### Deprecations

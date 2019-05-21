@@ -63,9 +63,9 @@ export default {
       "description": "Ziehen Sie Ihre Datei(en) hierher, um zu beginnen<br>oder klicken Sie zum Durchsuchen",
       "empty": "Es wurden noch keine Dateien hochgeladen...",
       "remove-modal": {
-        "title": "Datein löschen",
+        "action": "Löschen",
         "desc": "Möchten Sie diese Datei wirklich löschen?",
-        "action": "Löschen"
+        "title": "Datein löschen"
       }
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
@@ -75,6 +75,10 @@ export default {
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
+    "under-development": {
+      "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
+      "title": "In Entwicklung"
+    },
     "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network"
