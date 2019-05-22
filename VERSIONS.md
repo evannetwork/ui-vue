@@ -15,6 +15,9 @@
     - add `ignored` array to remove blank path's from breadcrumbs
   - add `under-development` component
   - add `nav-tabs` component
+  - add `renderOnlyContent` param to `evan-breadcrumb` to disable the dropdown functionality
+    (used to handle dropdowns and single buttons within the same component)
+
 
 ### Fixes
 ### Deprecations

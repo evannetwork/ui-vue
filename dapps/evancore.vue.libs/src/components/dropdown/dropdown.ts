@@ -37,8 +37,21 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
 export default class Dropdown  extends mixins(EvanComponent) {
+  /**
+   * Where should the popup should been attached?
+   */
   @Prop({ default: 'left' }) alignment: string;
+
+  /**
+   * Dropdown width specification (e.g. 100px)
+   */
   @Prop({ default: 'auto' }) width: string;
+
+  /**
+   * Disables the dropdown functionality (used to handle dropdowns and single buttons within the
+   * same component)
+   */
+  @Prop() renderOnlyContent;
 
   /**
    * shows the dom elements of the modal

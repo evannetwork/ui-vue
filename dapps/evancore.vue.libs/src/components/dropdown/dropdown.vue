@@ -27,17 +27,20 @@
 
 <template>
   <div>
-    <template v-if="isRendered">
-      <div class="dropdown-menu p-0"
-        v-on:click.prevent=""
-        :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-        :style="{ 'width': width }">
-       <slot name="content"></slot>
-      </div>
-      <div class="fullscreen"
-        @click="hide($event)">
-      </div>  
+    <template v-if="!renderOnlyContent">
+      <template v-if="isRendered">
+        <div class="dropdown-menu p-0"
+          v-on:click.prevent=""
+          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
+          :style="{ 'width': width }">
+         <slot name="content"></slot>
+        </div>
+        <div class="fullscreen"
+          @click="hide($event)">
+        </div>  
+      </template>
     </template>
+   <slot name="content" v-else></slot>
   </div>
 </template>
 
