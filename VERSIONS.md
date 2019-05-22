@@ -12,6 +12,7 @@
     - add `content-header` slot
   - `breadcrumbs`
     - `attachToDAppWrapper` param to host breadcrumbs add to level over `dapp-wrapper-sidebar-2`
+    - add `ignored` array to remove blank path's from breadcrumbs
   - add `under-development` component
   - add `nav-tabs` component
 

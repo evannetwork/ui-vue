@@ -39,7 +39,8 @@
     </button>
     
     <template 
-      v-for="(breadcrumb, index) in breadcrumbs">
+      v-for="(breadcrumb, index) in breadcrumbs"
+      v-if="ignored.indexOf(breadcrumb.id) === -1">
       <i class="mdi mdi-chevron-right font-weight-semibold mx-2"
         v-if="index !== 0">
       </i>

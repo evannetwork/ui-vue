@@ -65,6 +65,13 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
   @Prop() attachToDAppWrapper;
 
   /**
+   * Ignore specific breadcrumbs by applying the url parts that should be ignored
+   */
+  @Prop({
+    default: [ ]
+  }) ignored;
+
+  /**
    * active route, splitted by hash and prepared using the following params: name, fallbackName, path
    */
   breadcrumbs: Array<{ name: string, fallbackName: string, path: string }> = [ ];
@@ -114,7 +121,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
         .filter(breadcrumb => !!breadcrumb);
 
       // add root domain as first entry
-      breadcrumbHashes.unshift(this.dapp.ens.replace(new RegExp(`.${ domainName }`, 'g'), ''));
+      breadcrumbHashes.unshift(this.dapp.ens);
 
       // iterate through all paths and create the correct translation name and path
       this.breadcrumbs = breadcrumbHashes.map((breadcrumb: string, index: number) => {
@@ -128,7 +135,8 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
           fallbackName: fallbackName,
           // build the path relative to the base hash
           path: index === 0 ? this._baseHash :
-            `${ this._baseHash }/${ this.breadcrumbs.slice(1, index + 1).join('/') }`
+            `${ this._baseHash }/${ breadcrumbHashes.slice(1, index + 1).join('/') }`,
+          id: breadcrumb,
         }
       });
 
