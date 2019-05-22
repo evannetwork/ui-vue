@@ -38,7 +38,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "node scripts/commit-msg",
       "pre-commit": "tslint --config tslint.json \"./dapps/*/src/**/*.ts\""
     }
   },
