@@ -184,8 +184,6 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
    * Clear the hash change watcher
    */
   beforeDestroy() {
-    this.wasDestroyed = true;
-
     // only remove the hashChangeWatcher, when it was already bind (asynchronious call can take
     // longer and the dapp was switched before)
     if (this.hashChangeWatcher) {
@@ -199,5 +197,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
         this.dappWrapperBreadcrumb.removeChild(this.$el);
       } catch (ex) { }
     }
+
+    this.wasDestroyed = true;
   }
 }
