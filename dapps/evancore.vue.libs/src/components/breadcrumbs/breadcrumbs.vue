@@ -35,7 +35,7 @@
       id="breadcrumb-goback"
       class="btn btn-circle btn-outline-secondary mr-3"
       @click="$router.history.go(-1)">
-      <i class="mdi mdi-chevron-left"></i>
+      <i class="mdi mdi-arrow-left"></i>
     </button>
     
     <template 
