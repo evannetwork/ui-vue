@@ -17,7 +17,7 @@
   - add `nav-tabs` component
   - add `renderOnlyContent` param to `evan-breadcrumb` to disable the dropdown functionality
     (used to handle dropdowns and single buttons within the same component)
-
+  - add `baseUrl` to dapp routing definition
 
 ### Fixes
 ### Deprecations

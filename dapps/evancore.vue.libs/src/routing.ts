@@ -214,10 +214,11 @@ export async function getNextDApp(dappEnsOrContract?: string) {
 
   return {
     baseHash,
+    baseUrl: window.location.href.replace(window.location.hash, '#'),
     contractAddress,
     domainName: getDomainName(),
     ens: ensParts[dappIndex],
-    rootEns: ensParts[1],
     fullUrl: window.location.href.replace(window.location.hash, `#${ baseHash }`),
+    rootEns: ensParts[1],
   };
 }
