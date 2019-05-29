@@ -36,50 +36,60 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class Dropdown  extends mixins(EvanComponent) {
+export default class EvanTooltip extends mixins(EvanComponent) {
   /**
-   * Where should the popup should been attached?
+   * Tooltip placement
    */
-  @Prop({ default: 'left' }) alignment: string;
+  @Prop({ default: 'top' }) placement;
 
   /**
-   * Dropdown width specification (e.g. 100px)
+   * Timeout in ms, until the tooltip gets shown
    */
-  @Prop({ default: 'auto' }) width: string;
+  @Prop({ default: 300 }) delay;
 
   /**
-   * Disables the dropdown functionality (used to handle dropdowns and single buttons within the
-   * same component)
+   * Is it displayed?
    */
-  @Prop() renderOnlyContent;
+  showTooltip = false;
 
   /**
-   * shows the dom elements of the modal
+   * tooltip toggle functions
    */
-  isRendered = false;
+  onMouseEnter: Function;
+  onMouseLeave: Function;
 
   /**
-   * animate them
+   * bind parent element watchers
    */
-  isShown = false;
+  mounted() {
+    let showTimeout: any;
 
-  /**
-   * Renders the modal element and shows it animated.
-   */
-  show() {
-    this.isRendered = true;
-    this.$nextTick(() => this.isShown = true);
+    // show tooltip after delay ms
+    this.onMouseEnter = () => {
+      showTimeout = setTimeout(() => {
+        this.showTooltip = true;
+        this.$el.parentElement.className += ' evan-tooltip-parent';
+      }, this.delay);
+    };
+
+    // hide tooltip and clear the show timeout
+    this.onMouseLeave = () => {
+      window.clearTimeout(showTimeout);
+      this.showTooltip = false;
+      this.$el.parentElement.className = this.$el.parentElement.className
+        .replace(' evan-tooltip-parent', '');
+    };
+
+    // bind mouse events
+    this.$el.parentElement.addEventListener('mouseenter', <any>this.onMouseEnter);
+    this.$el.parentElement.addEventListener('mouseleave', <any>this.onMouseLeave);
   }
 
   /**
-   * Remove the modal element and hide it animated.
+   * unbind parent element watchers
    */
-  hide($event) {
-    this.isShown = false;
-    this.$nextTick(() => this.isRendered = false);
-
-    if ($event) {
-      $event.stopPropagation();
-    }
+  beforeDestroy() {
+    this.$el.parentElement.removeEventListener('mouseenter', <any>this.onMouseEnter);
+    this.$el.parentElement.removeEventListener('mouseleave', <any>this.onMouseLeave);
   }
 }

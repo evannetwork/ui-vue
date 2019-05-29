@@ -25,27 +25,27 @@
   https://evan.network/license/
 */
 
-<template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{ 'width': width }">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
-    </template>
-   <slot name="content" v-else></slot>
-  </div>
-</template>
+export default class DAppWrapperUtils {
+  /**
+   * Get the highest dapp-wrapper reference for a specific element.
+   *
+   * @param      {Element}  $el     Element to search for a parent from
+   * @return     {Element}  highest dapp wrapper instance or undefined
+   */
+  public static getActiveDAppWrapper($el: Element): Element|undefined {
+    let parent: any = $el;
+    let wrappers: Array<any> = [ ];
 
-<script lang="ts">
-  import Component from './dropdown.ts';
-  export default Component;
-</script>
+    // search until body or an wrapper body is reached
+    do {
+      parent = parent.parentElement;
 
+      // collect a list of all parent wrapper bodies, to be able to take the highest one
+      if (parent && parent.className.indexOf('dapp-wrapper-body') !== -1) {
+        wrappers.push(parent);
+      }
+    } while (parent && parent !== document.body);
+
+    return wrappers.pop();
+  }
+}

@@ -26,26 +26,20 @@
 */
 
 <template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{ 'width': width }">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
-    </template>
-   <slot name="content" v-else></slot>
+  <div class="tooltip evan-tooltip"
+    :class="[
+      `bs-tooltip-${ placement }`,
+      { 'show-tooltip': showTooltip }
+    ]"
+    role="tooltip">
+    <div class="arrow"></div>
+    <div class="tooltip-inner">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './dropdown.ts';
-  export default Component;
+  import Tooltip from './tooltip.ts';
+  export default Tooltip;
 </script>
-

@@ -26,8 +26,8 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
@@ -35,51 +35,75 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+interface TabInterface {
+  /**
+   * Custom color code
+   */
+  color: string;
+
+  /**
+   * Optional id that is added as tab id selector
+   */
+  id?: string;
+
+  /**
+   * i18n translation key
+   */
+  text: string;
+
+  /**
+   * Url that should be opened
+   */
+  href: string;
+}
+
 @Component({ })
-export default class Dropdown  extends mixins(EvanComponent) {
+export default class NavTabsComponent extends mixins(EvanComponent) {
   /**
-   * Where should the popup should been attached?
+   * List of tabs that should be displayed
+   *
+   * @class      Prop (name)
    */
-  @Prop({ default: 'left' }) alignment: string;
+  @Prop() tabs: Array<TabInterface>;
 
   /**
-   * Dropdown width specification (e.g. 100px)
+   * Current as active marked tab
    */
-  @Prop({ default: 'auto' }) width: string;
+  activeTab = 0;
 
   /**
-   * Disables the dropdown functionality (used to handle dropdowns and single buttons within the
-   * same component)
+   * Watch for hash updates and load digitaltwin detail, if a digitaltwin was laod
    */
-  @Prop() renderOnlyContent;
+  hashChangeWatcher: any;
 
   /**
-   * shows the dom elements of the modal
+   * Check for opened tab
    */
-  isRendered = false;
+  created() {
+    this.hashChangeWatcher = (async () => this.setTabStatus()).bind(this);
+    this.hashChangeWatcher();
 
-  /**
-   * animate them
-   */
-  isShown = false;
-
-  /**
-   * Renders the modal element and shows it animated.
-   */
-  show() {
-    this.isRendered = true;
-    this.$nextTick(() => this.isShown = true);
+    // add the hash change listener
+    window.addEventListener('hashchange', this.hashChangeWatcher);
   }
 
   /**
-   * Remove the modal element and hide it animated.
+   * Clear the hash change watcher
    */
-  hide($event) {
-    this.isShown = false;
-    this.$nextTick(() => this.isRendered = false);
+  beforeDestroy() {
+    // clear listeners
+    this.hashChangeWatcher && window.removeEventListener('hashchange', this.hashChangeWatcher);
+  }
 
-    if ($event) {
-      $event.stopPropagation();
+    /**
+   * Check the active route and set the active tab status.
+   */
+  setTabStatus() {
+    for (let i = 0; i < this.tabs.length; i++) {
+      if (this.tabs[i].href.indexOf(this.$route.path) !== -1) {
+        this.activeTab = i;
+        break;
+      }
     }
   }
 }

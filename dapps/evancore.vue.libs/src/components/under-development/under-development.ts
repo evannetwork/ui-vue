@@ -25,27 +25,25 @@
   https://evan.network/license/
 */
 
-<template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{ 'width': width }">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
-    </template>
-   <slot name="content" v-else></slot>
-  </div>
-</template>
+// vue imports
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import Component, { mixins } from 'vue-class-component';
+import EvanComponent from '../../component';
+import Vue from 'vue';
+import { Prop } from 'vue-property-decorator';
+import { getDomainName } from '../../utils';
 
-<script lang="ts">
-  import Component from './dropdown.ts';
-  export default Component;
-</script>
+@Component({ })
+export default class UnderDevelopment extends mixins(EvanComponent) {
+  /**
+   * ui.libs evan dapp base url
+   */
+  uiBaseUrl = '';
 
+  async created() {
+    const domainName = getDomainName();
+    const uiCoreDbcp = await dappBrowser.System.import(`ui.libs.${ domainName }!ens`);
+    this.uiBaseUrl = dappBrowser.dapp.getDAppBaseUrl(uiCoreDbcp,
+      `${ uiCoreDbcp.name }.${ domainName }`);
+  }
+}

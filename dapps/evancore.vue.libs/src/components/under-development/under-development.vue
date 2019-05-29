@@ -26,26 +26,25 @@
 */
 
 <template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{ 'width': width }">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
-    </template>
-   <slot name="content" v-else></slot>
+  <div class="text-center p-5">
+    <h3 class="mt-4 font-weight-semibold">
+      {{ '_evan.under-development.title' | translate }}
+    </h3>
+    <h5 class="font-weight-semibold text-muted">
+      {{ '_evan.under-development.desc' | translate }}
+    </h5>
+
+    <img class="mt-5"
+      style="
+        opacity: 0.6;
+        max-width: 100%;
+        width: 400px;
+      "
+      :src="`${ uiBaseUrl }/assets/under-construction.svg`">
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './dropdown.ts';
-  export default Component;
+  import UnderDevelopment from './under-development.ts';
+  export default UnderDevelopment;
 </script>
-

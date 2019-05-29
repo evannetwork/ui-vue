@@ -26,26 +26,22 @@
 */
 
 <template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{ 'width': width }">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
-    </template>
-   <slot name="content" v-else></slot>
+  <div class="evan-navigation-tabs">
+    <a class="evan-tab"
+      v-for="(tab, index) in tabs"
+      :id="tab.id"
+      :class="[
+        { 'active': activeTab === index },
+        `tab-${ index + 1 }`
+      ]"
+      :href="tab.href">
+      {{ tab.text | translate }}
+    </a>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './dropdown.ts';
-  export default Component;
+  import ModalComponent from './nav-tabs.ts';
+  export default ModalComponent;
 </script>
 

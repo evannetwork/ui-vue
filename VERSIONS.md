@@ -6,6 +6,26 @@
 ### Deprecations
 
 
+## Version 1.2.0
+### Features
+- `evancore.vue.libs`
+  - add `evan-tooltip` component
+  - `evan-loading`
+    - add className
+  - Add `.vue` namespace to core vue dapps, so vue versions and angular versions exists side by side
+  - adjust breadcrumb back button
+  - `dapp-wrapper`
+    - add `content-header` slot
+  - `breadcrumbs`
+    - `attachToDAppWrapper` param to host breadcrumbs add to level over `dapp-wrapper-sidebar-2`
+    - add `ignored` array to remove blank path's from breadcrumbs
+  - add `under-development` component
+  - add `nav-tabs` component
+  - add `renderOnlyContent` param to `evan-breadcrumb` to disable the dropdown functionality
+    (used to handle dropdowns and single buttons within the same component)
+  - add `baseUrl` to dapp routing definition
+
+
 ## Version 1.1.0
 ### Features
 - show warning icons on dispatcher errors

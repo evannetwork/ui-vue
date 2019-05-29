@@ -29,54 +29,63 @@
 import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
-import Breadcrumbs from './breadcrumbs/breadcrumbs.vue';
-import ContactBatch from './contact-batch/contact-batch.vue';
-import DAppLoader from './dapp-loader/dapp-loader.vue';
-import DAppLoading from './loading/loading.vue';
-import DAppWrapper from './dapp-wrapper/dapp-wrapper.vue';
-import DAppWrapperSidebarLevel2 from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
-import Dropdown from './dropdown/dropdown.vue';
+import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
+import ContactBatchComponent from './contact-batch/contact-batch.vue';
+import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
+import DAppLoadingComponent from './loading/loading.vue';
+import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
+import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
+import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
-import EvanIframe from './iframe/iframe.vue';
+import EvanIframeComponent from './iframe/iframe.vue';
 import FileInputComponent from './files/files.vue';
-import Login from './login/login.vue';
-import Logout from './logout/logout.vue';
-import Modal from './modal/modal.vue';
-import Success from './success/success.vue';
+import UnderDevelopmentComponent from './under-development/under-development.vue';
+import LoginComponent from './login/login.vue';
+import LogoutComponent from './logout/logout.vue';
+import ModalComponent from './modal/modal.vue';
+import NavTabsComponent from './nav-tabs/nav-tabs.vue';
+import SuccessComponent from './success/success.vue';
+import TooltipComponent from './tooltip/tooltip.vue';
 
 // export them all, so other applications can access them
 export {
-  Breadcrumbs,
-  ContactBatch,
-  DAppLoader,
-  DAppLoading,
-  DAppWrapper,
-  DAppWrapperSidebarLevel2,
-  Dropdown,
+  BreadcrumbsComponent,
+  ContactBatchComponent,
+  DAppLoaderComponent,
+  DAppLoadingComponent,
+  DAppWrapperComponent,
+  DAppWrapperSidebarLevel2Component,
+  DropdownComponent,
   EvanComponent,
-  EvanIframe,
+  EvanIframeComponent,
   FileInputComponent,
-  Login,
-  Logout,
-  Modal,
-  Success,
+  UnderDevelopmentComponent,
+  LoginComponent,
+  LogoutComponent,
+  ModalComponent,
+  NavTabsComponent,
+  SuccessComponent,
+  TooltipComponent,
 }
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
-  { name: 'evan-breadcrumbs', component: Breadcrumbs },
-  { name: 'evan-contact-batch', component: ContactBatch },
-  { name: 'evan-dapp-loader', component: DAppLoader },
-  { name: 'evan-dapp-wrapper', component: DAppWrapper },
-  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2 },
-  { name: 'evan-dropdown', component: Dropdown },
+  { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
+  { name: 'evan-contact-batch', component: ContactBatchComponent },
+  { name: 'evan-dapp-loader', component: DAppLoaderComponent },
+  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
+  { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
+  { name: 'evan-dropdown', component: DropdownComponent },
   { name: 'evan-file-input', component: FileInputComponent },
-  { name: 'evan-iframe', component: EvanIframe },
-  { name: 'evan-loading', component: DAppLoading },
-  { name: 'evan-login', component: Login },
-  { name: 'evan-logout', component: Logout },
-  { name: 'evan-modal', component: Modal },
-  { name: 'evan-success', component: Success },
+  { name: 'evan-iframe', component: EvanIframeComponent },
+  { name: 'evan-loading', component: DAppLoadingComponent },
+  { name: 'evan-login', component: LoginComponent },
+  { name: 'evan-logout', component: LogoutComponent },
+  { name: 'evan-modal', component: ModalComponent },
+  { name: 'evan-success', component: SuccessComponent },
+  { name: 'evan-tooltip', component: TooltipComponent },
+  { name: 'evan-nav-tabs', component: NavTabsComponent },
+  { name: 'evan-under-development', component: UnderDevelopmentComponent },
 ];
 
 export default componentRegistration;

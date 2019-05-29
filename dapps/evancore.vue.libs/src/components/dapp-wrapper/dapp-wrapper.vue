@@ -28,7 +28,11 @@
 <template>
   <div class="evan-dapp-wrapper"
     :id="id"
-    :class="{ 'small-toolbar': smallToolbar }">
+    :class="{
+      'show-sidebar': showSideBar,
+      'show-sidebar-2': showSideBar2,
+      'small-toolbar': smallToolbar,
+    }">
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
     <nav class="navbar" v-if="enableNav">
       <a class="navbar-brand"
@@ -80,7 +84,7 @@
                 <a class="dropdown-item border-top border-sm py-2 px-3"
                   v-for="(mail, index) in userInfo.mails"
                   :id="`evan-dropdown-mailbox-${ index }`"
-                  :href="`${ dapp.fullUrl }/mailbox.${ domainName }/received/detail/${ mail.address }`"
+                  :href="`${ dapp.fullUrl }/mailbox.vue.${ domainName }/received/detail/${ mail.address }`"
                   @click="openMail(mail, $event)">
                   <div class="d-flex">
                     <div style="width: 50px; min-width: 50px;">
@@ -105,7 +109,7 @@
                   border-top border-sm p-3
                   font-weight-bold"
                   id="dapp-mailbox"
-                  :href="`${ dapp.fullUrl }/mailbox.${ domainName }`"
+                  :href="`${ dapp.fullUrl }/mailbox.vue.${ domainName }`"
                   @click="$refs.mailDropdown.hide($event)">
                   {{ '_evan.dapp-wrapper.all-messages' | translate }}
                 </a>
@@ -115,6 +119,11 @@
 
           <button class="btn position-relative gray-500 px-3"
             id="dropdown-queue"
+            :class="{
+              'running': queueCount !== 0,
+              'error': queueErrorCount !== 0,
+              'finished': queueErrorCount === 0 && queueCount === 0,
+            }"
             @click="$refs.queueDropdown.show();"
             :disabled="queueLoading">
             <div class="spinner-border spinner-border-sm bg-text-inverted"
@@ -238,7 +247,7 @@
                     <p class="text-muted text-truncate mb-2">{{ userInfo.address }}</p>
                     <a class="btn btn-rounded btn-primary bg-primary px-3 py-2 small"
                       id="dapp-profile"
-                      :href="`${ dapp.fullUrl }/profile.${ domainName }`"
+                      :href="`${ dapp.fullUrl }/profile.vue.${ domainName }`"
                       @click="$refs.userDropdown.hide($event)">
                       <small>{{ '_evan.view-profile' | translate }}</small>
                     </a>
@@ -274,97 +283,105 @@
     </nav>
 
     <div class="dapp-wrapper-body"
-      v-if="!loading"
-      :class="{
-        'show-sidebar': showSideBar,
-        'show-sidebar-2': showSideBar2
-      }">
+      v-if="!loading">
       <template v-if="!login">
-        <template v-if="!onboarding">
-          <div class="dapp-wrapper-sidebar" v-if="enableSidebar">
-            <div class="sidebar-header">
-              <div class="clickable">
-                <h5
-                  v-if="showSideBar && showSideBar2"
-                  @click="showSideBar2 = false;">
-                  <i class="mdi mdi-chevron-left mr-2"></i>
-                  {{ activeRouteTitle | translate }}
-                </h5>
-              </div>
-              <h3 class="mr-2" @click="showSideBar = false;">
-                <i class="mdi mdi-close close"></i>
-              </h3>
-            </div>
-            <slot name="sidebar">
-              <div class="d-flex flex-column h-100">
-                <ul class="nav font-medium in w-100" id="main-menu">
-                  <li v-for="(route, index) in routes">
-                    <a
-                      :id="`evan-dapp-${ route.path.split('.')[0] }`"
-                      :class="{ active: $route.path.startsWith(route.fullPath) }"
-                      :href="`${ dapp.fullUrl }/${ route.path }`"
-                      @click="routeActivated(route)">
-                      <i :class="route.icon" data-icon="v"></i>
-                      <span class="hide-menu">{{ route.title | translate }}</span>
-                    </a>
-                  </li>
-                </ul>
-
-                <ul class="nav small font-medium in w-100 mb-3 mt-auto" id="main-menu"
-                  v-if="bottomRoutes">
-                  <li v-for="(route, index) in bottomRoutes">
-                    <a
-                      :id="`evan-dapp-${ route.path.split('.')[0] }`"
-                      :class="{ active: $route.path.startsWith(route.fullPath) }"
-                      :href="`${ dapp.fullUrl }/${ route.path }`"
-                      @click="routeActivated(route)">
-                      <i :class="route.icon" data-icon="v"></i>
-                      <span class="hide-menu">{{ route.title | translate }}</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </slot>
-          </div>
-
-          <!-- close side panel on medium screens -->
-          <div class="dapp-wrapper-sidebar-background"
-            @click="showSideBar = false;">
-          </div>
-
-          <div class="dapp-wrapper-sidebar-2">
-            <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
-          </div>
-        </template>
-
-        <div class="dapp-wrapper-content">
-          <evan-modal ref="instanceInteraction">
-            <template v-slot:header>
-              <h5 class="modal-title">
-                {{ `_evan.dapp-wrapper.instance-${ instanceInteraction.type }.title` | translate }}
+        <div class="dapp-wrapper-sidebar" v-if="!onboarding && enableSidebar">
+          <div class="sidebar-header">
+            <div class="clickable">
+              <h5
+                v-if="showSideBar && showSideBar2"
+                @click="showSideBar2 = false;">
+                <i class="mdi mdi-chevron-left mr-2"></i>
+                {{ activeRouteTitle | translate }}
               </h5>
+            </div>
+            <h3 class="mr-2" @click="showSideBar = false;">
+              <i class="mdi mdi-close close"></i>
+            </h3>
+          </div>
+          <slot name="sidebar">
+            <div class="d-flex flex-column h-100">
+              <ul class="nav font-medium in w-100" id="main-menu">
+                <li v-for="(route, index) in routes">
+                  <a
+                    :id="`evan-dapp-${ route.path.split('.')[0] }`"
+                    :class="{ active: $route.path.startsWith(route.fullPath) }"
+                    :href="`${ dapp.fullUrl }/${ route.path }`"
+                    @click="routeActivated(route)">
+                    <i :class="route.icon" data-icon="v"></i>
+                    <span class="hide-menu">{{ route.title | translate }}</span>
+                  </a>
+                </li>
+              </ul>
+
+              <ul class="nav small font-medium in w-100 mb-3 mt-auto" id="main-menu"
+                v-if="bottomRoutes">
+                <li v-for="(route, index) in bottomRoutes">
+                  <a
+                    :id="`evan-dapp-${ route.path.split('.')[0] }`"
+                    :class="{ active: $route.path.startsWith(route.fullPath) }"
+                    :href="`${ dapp.fullUrl }/${ route.path }`"
+                    @click="routeActivated(route)">
+                    <i :class="route.icon" data-icon="v"></i>
+                    <span class="hide-menu">{{ route.title | translate }}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </slot>
+        </div>
+
+        <div class="dapp-wrapper-main">
+          <!-- use the breadcrumb slot for fixed breadcrumbs -->
+          <div class="dapp-wrapper-content-header">
+            <div class="dapp-wrapper-breadcrumbs">
+              <!-- will be filled by using the breadcrumbs component and the attachToDAppWrapper
+                param -->
+            </div>
+            <slot name="header"></slot>
+          </div>
+          <div class="dapp-wrapper-content-wrapper flex-row">
+            <template v-if="!onboarding">
+              <!-- close side panel on medium screens -->
+              <div class="dapp-wrapper-sidebar-background"
+                @click="showSideBar = false;">
+              </div>
+
+              <div class="dapp-wrapper-sidebar-2">
+                <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
+              </div>
             </template>
-            <template v-slot:body>
-              <p class="text-left"
-                v-html="$t(`_evan.dapp-wrapper.instance-${ instanceInteraction.type }.desc`,
-                  instanceInteraction.instance)">
-              </p>
-            </template>
-            <template v-slot:footer>
-              <button type="button" class="btn btn-rounded"
-                :class="{
-                  'btn-danger': instanceInteraction.type === 'delete',
-                  'btn-primary': instanceInteraction.type === 'accept',
-                }"
-                @click="
-                  instanceInteraction.instance[instanceInteraction.type]();
-                  $refs.instanceInteraction.hide();
-                ">
-                {{ `_evan.dapp-wrapper.instance-${ instanceInteraction.type }.ok` | translate }}
-              </button>
-            </template>
-          </evan-modal>
-          <slot name="content"></slot>
+
+            <div class="dapp-wrapper-content">
+              <evan-modal ref="instanceInteraction">
+                <template v-slot:header>
+                  <h5 class="modal-title">
+                    {{ `_evan.dapp-wrapper.instance-${ instanceInteraction.type }.title` | translate }}
+                  </h5>
+                </template>
+                <template v-slot:body>
+                  <p class="text-left"
+                    v-html="$t(`_evan.dapp-wrapper.instance-${ instanceInteraction.type }.desc`,
+                      instanceInteraction.instance)">
+                  </p>
+                </template>
+                <template v-slot:footer>
+                  <button type="button" class="btn btn-rounded"
+                    :class="{
+                      'btn-danger': instanceInteraction.type === 'delete',
+                      'btn-primary': instanceInteraction.type === 'accept',
+                    }"
+                    @click="
+                      instanceInteraction.instance[instanceInteraction.type]();
+                      $refs.instanceInteraction.hide();
+                    ">
+                    {{ `_evan.dapp-wrapper.instance-${ instanceInteraction.type }.ok` | translate }}
+                  </button>
+                </template>
+              </evan-modal>
+              <slot name="content"></slot>
+            </div>
+          </div>
         </div>
       </template>
 

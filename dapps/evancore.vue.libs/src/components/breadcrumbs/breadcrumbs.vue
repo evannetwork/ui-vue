@@ -30,14 +30,20 @@
       bg-level-1 border-bottom border-sm
       pt-2 pb-2 pr-3 pl-3
       d-flex align-items-center">
-    <i v-if="goBack"
+    <button
+      v-if="goBack"
       id="breadcrumb-goback"
-      class="mdi mdi-chevron-left clickable mr-3"
+      class="btn btn-circle btn-outline-secondary mr-3"
       @click="$router.history.go(-1)">
-    </i>
+      <i class="mdi mdi-arrow-left"></i>
+    </button>
+    
     <template 
-      v-for="(breadcrumb, index) in breadcrumbs">
-      <span class="mb-0 m-2 text-muted" v-if="index !== 0">/</span>
+      v-for="(breadcrumb, index) in breadcrumbs"
+      v-if="ignored.indexOf(breadcrumb.id) === -1">
+      <i class="mdi mdi-chevron-right font-weight-semibold mx-2"
+        v-if="index !== 0">
+      </i>
       <a class="evan-breadcrumb"
         :href="`#${ breadcrumb.path }`"
         :class="{ 'active': $route.path === breadcrumb.path }">
@@ -57,3 +63,4 @@
   import Component from './breadcrumbs.ts';
   export default Component;
 </script>
+

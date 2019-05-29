@@ -63,9 +63,9 @@ export default {
       "description": "Drag your file(s) here to begin<br> or click to browse",
       "empty": "No files are available...",
       "remove-modal": {
-        "title": "Delete file",
+        "action": "Delete",
         "desc": "Are you sure you want to delete this file?",
-        "action": "Delete"
+        "title": "Delete file"
       }
     },
     "invalid-password": "The provided password is invalid.",
@@ -75,6 +75,10 @@ export default {
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
+    "under-development": {
+      "desc": "The area shown is currently under development and will be available soon.",
+      "title": "Under development"
+    },
     "use-password": "Unlock",
     "view-profile": "View Profile",
     "welcome-to-evan": "Welcome to the evan.network"
