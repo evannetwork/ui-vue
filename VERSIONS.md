@@ -2,6 +2,12 @@
 
 ## Next Version
 ### Features
+### Fixes
+### Deprecations
+
+
+## Version 1.2.0
+### Features
 - `evancore.vue.libs`
   - add `evan-tooltip` component
   - `evan-loading`
@@ -18,9 +24,6 @@
   - add `renderOnlyContent` param to `evan-breadcrumb` to disable the dropdown functionality
     (used to handle dropdowns and single buttons within the same component)
   - add `baseUrl` to dapp routing definition
-
-### Fixes
-### Deprecations
 
 
 ## Version 1.1.0
