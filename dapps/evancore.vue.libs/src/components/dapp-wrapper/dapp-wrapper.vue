@@ -30,6 +30,8 @@
     :id="id"
     :class="{
       'show-sidebar': showSideBar,
+      'show-sidebar-2': showSideBar2,
+      'small-toolbar': smallToolbar,
     }">
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
     <nav class="navbar" v-if="enableNav">
@@ -281,11 +283,7 @@
     </nav>
 
     <div class="dapp-wrapper-body"
-      v-if="!loading"
-      :class="{
-        'show-sidebar-2': showSideBar2,
-        'small-toolbar': smallToolbar,
-      }">
+      v-if="!loading">
       <template v-if="!login">
         <div class="dapp-wrapper-sidebar" v-if="!onboarding && enableSidebar">
           <div class="sidebar-header">
