@@ -2,6 +2,9 @@
 
 ## Next Version
 ### Features
+- `evancore.vue.libs`
+  - add `modalClasses` param to `EvanModal` so each modal part class can be disabled 
+
 ### Fixes
 ### Deprecations
 

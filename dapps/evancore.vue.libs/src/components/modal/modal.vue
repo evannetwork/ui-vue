@@ -35,17 +35,17 @@
           :style="{ 'max-width': maxWidth }">
           <div class="modal-content" v-on:click.stop>
             <template v-if="!customModal">
-              <div class="modal-header d-flex align-items-center">
+              <div :class="{ 'modal-header d-flex align-items-center': modalClasses.indexOf('modal-header') !== -1 }">
                 <slot name="header"></slot>
                 <button class="btn p-0"
                   @click="hide()">
                   <i class="mdi mdi-close"></i>
                 </button>
               </div>
-              <div class="modal-body">
+              <div :class="{ 'modal-body': modalClasses.indexOf('modal-body') !== -1 }">
                 <slot name="body"></slot>
               </div>
-              <div class="modal-footer">
+              <div :class="{ 'modal-footer': modalClasses.indexOf('modal-footer') !== -1 }">
                 <button type="button" class="btn btn-outline-secondary btn-rounded"
                   id="modal-cancel"
                   @click="hide(); $emit('canceled', { backdrop: false });">

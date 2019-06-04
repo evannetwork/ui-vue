@@ -49,6 +49,14 @@ export default class ModalComponent  extends mixins(EvanComponent) {
     default: '500px'
   }) maxWidth;
 
+  @Prop({
+    default: [
+      'modal-header',
+      'modal-body',
+      'modal-footer',
+    ]
+  }) modalClasses;
+
   /**
    * shows the dom elements of the modal
    */
