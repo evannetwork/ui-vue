@@ -4,6 +4,7 @@
 ### Features
 - `evancore.vue.libs`
   - add `modalClasses` param to `EvanModal` so each modal part class can be disabled 
+  - add `$emit('init')` to `evan-nav-tabs`
 
 ### Fixes
 ### Deprecations
