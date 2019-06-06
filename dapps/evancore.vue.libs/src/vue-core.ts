@@ -143,8 +143,11 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
 export function registerComponents(Vue: any, components: Array<ComponentRegistrationInterface>) {
   // include all components
   components.forEach((def: ComponentRegistrationInterface) => {
-    // register the component
-    Vue.component(def.name, def.component);
+    // do not overwrite the existing componet, only register the new component if it has changed
+    if (!Vue.options.components[def.name] || Vue.options.components[def.name] !== def.component) {
+      // register the component
+      Vue.component(def.name, def.component);
+    }
   });
 }
 
