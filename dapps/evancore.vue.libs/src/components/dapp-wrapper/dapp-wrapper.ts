@@ -445,47 +445,54 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * Load the mail informations for the current user
    */
   async loadMails(mailsToReach = 5) {
-    this.userInfo.mailsLoading = true;
+    if (!this.userInfo.mailsLoading) {
+      this.userInfo.mailsLoading = true;
 
-    // load mail inbox informations, load 10 for checking for +9 new mails
-    this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
-    this.userInfo.newMailCount = 0;
+      // load mail inbox informations, load 10 for checking for +9 new mails
+      this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
+      this.userInfo.newMailCount = 0;
 
-    let mails = [ ];
-    let offset = -5;
-    this.userInfo.totalMails = 0;
+      let mails = [ ];
+      let offset = 0;
+      let initial = true;
+      this.userInfo.totalMails = 0;
 
-    // load until 5 mails could be decrypted or the maximum amount of mails is reached
-    while (mails.length < 5 && offset < this.userInfo.totalMails) {
-      offset += 5;
-      const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(5, offset);
+      // load until 5 mails could be decrypted or the maximum amount of mails is reached
+      while (mails.length < 5 && (initial || offset < this.userInfo.totalMails)) {
+        const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(5, offset);
 
-      this.userInfo.totalMails = mailResult.totalResultCount;
+        // increase offset with amount of loaded mails
+        initial = false;
+        offset = offset + Object.keys(mailResult.mails).length;
 
-      // map all the mails in to an mail array and show only 5
-      mails = mails.concat(Object.keys(mailResult.mails)
-        .map((mailAddress: string) => {
-          if (mailResult.mails[mailAddress] && mailResult.mails[mailAddress].content) {
-            const mail = mailResult.mails[mailAddress].content;
-            mail.address = mailAddress;
+        // update the total mail count
+        this.userInfo.totalMails = mailResult.totalResultCount;
 
-            return mail;
-          }
-        })
-        .filter(mail => !!mail)
-      );
+        // map all the mails in to an mail array and show only 5
+        mails = mails.concat(Object.keys(mailResult.mails)
+          .map((mailAddress: string) => {
+            if (mailResult.mails[mailAddress] && mailResult.mails[mailAddress].content) {
+              const mail = mailResult.mails[mailAddress].content;
+              mail.address = mailAddress;
+
+              return mail;
+            }
+          })
+          .filter(mail => !!mail)
+        );
+      }
+
+      // show a maximum of 5 mails
+      this.userInfo.mails = mails.slice(0, 5);
+
+      // check the last read mail count against the current one, to check for new mails
+      const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
+      if (previousRead < this.userInfo.totalMails) {
+        this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
+      }
+
+      this.userInfo.mailsLoading = false;
     }
-
-    // show a maximum of 5 mails
-    this.userInfo.mails = mails.slice(0, 5);
-
-    // check the last read mail count against the current one, to check for new mails
-    const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
-    if (previousRead < this.userInfo.totalMails) {
-      this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
-    }
-
-    this.userInfo.mailsLoading = false;
   }
 
   /**

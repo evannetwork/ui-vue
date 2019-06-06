@@ -7,6 +7,9 @@
   - add `$emit('init')` to `evan-nav-tabs`
 
 ### Fixes
+- `evancore.vue.libs`
+  - fix endless mail loading in `DAppWrapper`
+
 ### Deprecations
 
 
