@@ -33,8 +33,7 @@ const scriptsFolder = process.cwd();
 const isDirectory = source => lstatSync(source).isDirectory();
 const getDirectories = source =>
   readdirSync(source).map(name => path.join(source, name)).filter(isDirectory);
-const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
-  process.env.NODE_ENV || 'development';
+const nodeEnv = process.argv.indexOf('--prod') !== -1 ? 'production' : 'development';
 
 /**
  * Executes and console command
