@@ -68,6 +68,13 @@ export default class ModalComponent  extends mixins(EvanComponent) {
   isShown = false;
 
   /**
+   * Send component instance to parent.
+   */
+  created() {
+    this.$emit('init', this);
+  }
+
+  /**
    * Renders the modal element and shows it animated.
    */
   show() {
