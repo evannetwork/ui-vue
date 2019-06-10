@@ -11,6 +11,7 @@
 ### Fixes
 - `evancore.vue.libs`
   - fix endless mail loading in `DAppWrapper`
+  - fix `evan-files` remove file reloads page 
 
 ### Deprecations
 

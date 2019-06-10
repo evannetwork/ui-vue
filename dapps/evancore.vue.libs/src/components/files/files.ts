@@ -122,10 +122,13 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
   /**
    * Remove a file from the value array.
    *
+   * @param      {any}                         $event  bootstrap html click event
    * @param      {FileHandlerUIContainerFile}  file    ui container file
    * @param      {number}                      index   index of the file in the value list
    */
-  removeFile(file: FileHandler.UIContainerFile, index: number) {
+  removeFile($event: any, file: FileHandler.UIContainerFile, index: number) {
+    $event.preventDefault();
+
     // if the file is new or the user has accepted the removal, remove it
     if (file.isNew || this.fileRemove === index) {
       this.value.splice(index, 1);
@@ -136,5 +139,7 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
       this.fileRemove = index;
       (<any>this.$refs.removeFileModal).show();
     }
+
+    return false;
   }
 }
