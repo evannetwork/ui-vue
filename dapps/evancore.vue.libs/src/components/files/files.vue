@@ -45,7 +45,7 @@
         <button
           id="file-input-remove-accept"
           type="button" class="btn btn-primary btn-rounded font-weight-normal"
-          @click="removeFile(value[fileRemove], fileRemove)">
+          @click="removeFile($event, value[fileRemove], fileRemove)">
           {{ `_evan.file-input.remove-modal.action` | translate }}
           <i class="mdi mdi-arrow-right label ml-3"></i>
         </button>
@@ -66,7 +66,7 @@
         id="file-input-remove"
         class="btn p-0 ml-1 delete"
         v-if="!disabled"
-        @click="removeFile(file, index)">
+        @click="removeFile($event, file, index)">
         <i class="mdi mdi-delete-outline"></i>
       </button>
     </div>

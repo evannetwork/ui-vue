@@ -85,6 +85,7 @@ export default class NavTabsComponent extends mixins(EvanComponent) {
 
     // add the hash change listener
     window.addEventListener('hashchange', this.hashChangeWatcher);
+    this.$emit('init', this);
   }
 
   /**

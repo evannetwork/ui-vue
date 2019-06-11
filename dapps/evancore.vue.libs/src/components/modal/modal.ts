@@ -49,6 +49,14 @@ export default class ModalComponent  extends mixins(EvanComponent) {
     default: '500px'
   }) maxWidth;
 
+  @Prop({
+    default: [
+      'modal-header',
+      'modal-body',
+      'modal-footer',
+    ]
+  }) modalClasses;
+
   /**
    * shows the dom elements of the modal
    */
@@ -58,6 +66,13 @@ export default class ModalComponent  extends mixins(EvanComponent) {
    * animate them
    */
   isShown = false;
+
+  /**
+   * Send component instance to parent.
+   */
+  created() {
+    this.$emit('init', this);
+  }
 
   /**
    * Renders the modal element and shows it animated.

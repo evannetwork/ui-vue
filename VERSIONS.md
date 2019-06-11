@@ -6,6 +6,20 @@
 ### Deprecations
 
 
+## Version 1.2.1
+### Features
+- `evancore.vue.libs`
+  - add `modalClasses` param to `EvanModal` so each modal part class can be disabled 
+  - add `$emit('init')` to `evan-nav-tabs`
+  - add `$emit('init')` to `evan-modal`
+
+### Fixes
+- `evancore.vue.libs`
+  - fix endless mail loading in `DAppWrapper`
+  - fix `evan-files` remove file reloads page 
+  - send `change` event when removing a file from `evan-files` component
+
+
 ## Version 1.2.0
 ### Features
 - `evancore.vue.libs`
