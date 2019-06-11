@@ -12,6 +12,7 @@
 - `evancore.vue.libs`
   - fix endless mail loading in `DAppWrapper`
   - fix `evan-files` remove file reloads page 
+  - send `change` event when removing a file from `evan-files` component
 
 ### Deprecations
 

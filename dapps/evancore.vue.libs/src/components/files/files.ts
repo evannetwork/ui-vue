@@ -134,6 +134,9 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
       this.value.splice(index, 1);
       (<any>this.$refs.removeFileModal).hide();
       this.fileRemove = -1;
+
+      // trigger update event
+      this.$emit('input', this.value);
     } else {
       // if the file is not new, ask before removal
       this.fileRemove = index;
