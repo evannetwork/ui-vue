@@ -79,8 +79,6 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
    */
   fileRemove = -1;
 
-  blobUri = '';
-
   /**
    * Transform the input files to the correct format.
    */
