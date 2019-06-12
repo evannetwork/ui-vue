@@ -3,6 +3,10 @@
 ## Next Version
 ### Features
 ### Fixes
+- `evancore.vue.libs`
+  - move mail loading indicator into dropdown
+  - only register components one time and do not overwrite previous one
+
 ### Deprecations
 
 

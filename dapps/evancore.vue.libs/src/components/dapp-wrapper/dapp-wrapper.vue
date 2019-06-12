@@ -58,20 +58,15 @@
           <button class="btn position-relative gray-500 px-3"
             id="dropdown-mailbox"
             v-if="!userInfo.loading"
-            @click="openMailDropdown()"
-            :disabled="userInfo.mailsLoading">
-            <i class="mdi mdi-email-outline position-relative"
-              v-if="!userInfo.mailsLoading">
+            @click="openMailDropdown()">
+            <i class="mdi mdi-email-outline position-relative">
               <span class="notification-dot" v-if="userInfo.newMailCount > 0"></span>
             </i>
-            <div class="spinner-border spinner-border-sm bg-text-inverted"
-              v-if="userInfo.mailsLoading">
-            </div>
             <evan-dropdown ref="mailDropdown"
               :alignment="'right'"
               :width="'280px'">
               <template v-slot:content>
-                <div class="p-3">
+                <div class="p-3 d-flex align-items-center">
                   <h6 class="m-0 text-truncate font-weight-semibold">
                     <template v-if="userInfo.newMailCount !== 0">
                       {{ $t('_evan.dapp-wrapper.new-mails', userInfo) | translate }}
@@ -80,6 +75,10 @@
                       {{ '_evan.dapp-wrapper.my-mailbox' | translate }}
                     </template>
                   </h6>
+                  <span class="mx-auto"></span>
+                  <div class="spinner-border spinner-border-sm"
+                    v-if="userInfo.mailsLoading">
+                  </div>
                 </div>
                 <a class="dropdown-item border-top border-sm py-2 px-3"
                   v-for="(mail, index) in userInfo.mails"
