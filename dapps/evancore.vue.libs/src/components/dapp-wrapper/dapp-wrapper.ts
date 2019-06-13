@@ -111,7 +111,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * id of this element, so child elements can be queried easier
    */
   id = `dappwrapper_${ Date.now() + Math.round(Math.random() * 1000000) }`;
-  sideBar2Selector = `#${ this.id } .dapp-wrapper-body > .dapp-wrapper-sidebar-2 > *`
+  sideBar2Selector = `#${ this.id } .dapp-wrapper-content-wrapper > .dapp-wrapper-sidebar-2 > *`
 
   /**
    * is the current dapp-wrapper gets initialized? => use loading to don't render dapp-loader or
