@@ -52,7 +52,7 @@
       </template>
     </evan-modal>
 
-    <div class="batch-label"
+    <div class="batch-label ml-0 mr-2 my-2"
       v-for="(file, index) in value">
       <span>{{ file.name }}</span>
 
@@ -71,7 +71,16 @@
       </button>
     </div>
 
-    <div class="dropzone" v-if="!disabled">
+    <div class="dropzone"
+      :class="{ 'border-secondary': hovered }"
+      v-if="!disabled"
+      @drag-end="hovered = false"
+      @drag-enter="hovered = true"
+      @drag-leave="hovered = false"
+      @drag-over="hovered = true"
+      @drag-start="hovered = true"
+      @drag="hovered = true"
+      @drop="hovered = false">
       <input
         id="file-input-upload"
         type="file" multiple
@@ -80,6 +89,7 @@
         @change="filesChanged($event.target.files)">
 
       <div class="centered"
+        :class="{ 'text-secondary': hovered }"
         v-html="$t(placeholder)">
       </div>
     </div>

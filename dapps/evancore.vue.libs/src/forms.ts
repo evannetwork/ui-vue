@@ -109,14 +109,11 @@ export class EvanFormControl {
    * Create the new forms instance.
    */
   constructor(name: string, value: any, vueInstance: Vue, validate?: Function, form?: EvanForm) {
+    this._validate = validate;
     this.form = form;
     this.name = name;
-    this._validate = validate;
+    this.value = value;
     this.vueInstance = vueInstance;
-
-    if (typeof value !== 'undefined') {
-      this.value = value;
-    }
   }
 
   /**
@@ -214,15 +211,17 @@ export class EvanForm {
 
       this[controlKey] = new EvanFormControl(
         controlKey,
-        undefined,
+        controls[controlKey].value,
         this.vueInstance,
-        controls[controlKey].validate,
+        undefined,
         this
       );
     });
 
-    // set values!
-    this.controls.forEach(controlKey => this[controlKey].value = controls[controlKey].value);
+    // set validate function after this, and run the validation for all fields
+    this.controls.forEach(controlKey => this[controlKey]._validate = controls[controlKey].validate);
+    this.controls.forEach(controlKey => this[controlKey].validate());
+    this.validateControls();
   }
 
   /**
