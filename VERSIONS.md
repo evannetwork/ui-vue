@@ -2,6 +2,13 @@
 
 ## Next Version
 ### Features
+
+### Fixes
+
+### Deprecations
+
+
+## Version 1.2.2
 ### Fixes
 - `evancore.vue.libs`
   - move mail loading indicator into dropdown
@@ -9,8 +16,6 @@
   - `evan-files` correct file batch text-overflow
   - `EvanForm` validate formular after all values were set, not during initial set
   - fix `dapp-wrapper-sidebar-2` style on small devices
-
-### Deprecations
 
 
 ## Version 1.2.1
