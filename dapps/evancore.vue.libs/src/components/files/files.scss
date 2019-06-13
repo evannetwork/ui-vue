@@ -36,6 +36,22 @@
     height: 50px;
     padding: 15px;
 
+    white-space: nowrap;
+
+    span {
+      display: inline-block;
+      overflow: hidden;
+
+      max-width: 230px;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    a, button {
+      vertical-align: text-bottom;
+    }
+
     &:hover * {
       color: cssVar('light');
 
@@ -67,9 +83,14 @@
     padding: 10px 10px;
 
     cursor: pointer;
+    transition: 0.5s border ease-out;
 
-    outline: 2px dashed cssVar('border-color');
+    border: 2px dashed cssVar('border-color');
     outline-offset: -10px;
+
+    div {
+      transition: 0.5s color ease-out;
+    }
 
     input {
       position: absolute;

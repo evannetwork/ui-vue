@@ -111,7 +111,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * id of this element, so child elements can be queried easier
    */
   id = `dappwrapper_${ Date.now() + Math.round(Math.random() * 1000000) }`;
-  sideBar2Selector = `#${ this.id } .dapp-wrapper-body > .dapp-wrapper-sidebar-2 > *`
+  sideBar2Selector = `#${ this.id } .dapp-wrapper-content-wrapper > .dapp-wrapper-sidebar-2 > *`
 
   /**
    * is the current dapp-wrapper gets initialized? => use loading to don't render dapp-loader or
@@ -436,7 +436,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
 
     // load mail information and initialize and mail watcher
     this.loadMails();
-    this.mailsWatcher = setInterval(() => this.loadMails(), 30 * 1000);
+    this.mailsWatcher = setInterval(() => this.loadMails(), 5 * 1000);
 
     this.userInfo.loading = false;
   }
@@ -448,47 +448,51 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     if (!this.userInfo.mailsLoading) {
       this.userInfo.mailsLoading = true;
 
-      // load mail inbox informations, load 10 for checking for +9 new mails
-      this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
-      this.userInfo.newMailCount = 0;
+      try {
+        // load mail inbox informations, load 10 for checking for +9 new mails
+        this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
+        this.userInfo.newMailCount = 0;
 
-      let mails = [ ];
-      let offset = 0;
-      let initial = true;
-      this.userInfo.totalMails = 0;
+        let mails = [ ];
+        let offset = 0;
+        let initial = true;
+        this.userInfo.totalMails = 0;
 
-      // load until 5 mails could be decrypted or the maximum amount of mails is reached
-      while (mails.length < 5 && (initial || offset < this.userInfo.totalMails)) {
-        const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(5, offset);
+        // load until 5 mails could be decrypted or the maximum amount of mails is reached
+        while (mails.length < 5 && (initial || offset < this.userInfo.totalMails)) {
+          const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(5, offset);
 
-        // increase offset with amount of loaded mails
-        initial = false;
-        offset = offset + Object.keys(mailResult.mails).length;
+          // increase offset with amount of loaded mails
+          initial = false;
+          offset = offset + Object.keys(mailResult.mails).length;
 
-        // update the total mail count
-        this.userInfo.totalMails = mailResult.totalResultCount;
+          // update the total mail count
+          this.userInfo.totalMails = mailResult.totalResultCount;
 
-        // map all the mails in to an mail array and show only 5
-        mails = mails.concat(Object.keys(mailResult.mails)
-          .map((mailAddress: string) => {
-            if (mailResult.mails[mailAddress] && mailResult.mails[mailAddress].content) {
-              const mail = mailResult.mails[mailAddress].content;
-              mail.address = mailAddress;
+          // map all the mails in to an mail array and show only 5
+          mails = mails.concat(Object.keys(mailResult.mails)
+            .map((mailAddress: string) => {
+              if (mailResult.mails[mailAddress] && mailResult.mails[mailAddress].content) {
+                const mail = mailResult.mails[mailAddress].content;
+                mail.address = mailAddress;
 
-              return mail;
-            }
-          })
-          .filter(mail => !!mail)
-        );
-      }
+                return mail;
+              }
+            })
+            .filter(mail => !!mail)
+          );
+        }
 
-      // show a maximum of 5 mails
-      this.userInfo.mails = mails.slice(0, 5);
+        // show a maximum of 5 mails
+        this.userInfo.mails = mails.slice(0, 5);
 
-      // check the last read mail count against the current one, to check for new mails
-      const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
-      if (previousRead < this.userInfo.totalMails) {
-        this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
+        // check the last read mail count against the current one, to check for new mails
+        const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
+        if (previousRead < this.userInfo.totalMails) {
+          this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
+        }
+      } catch (ex) {
+        this.$store.state.runtime.logger.log(ex.message, 'error');
       }
 
       this.userInfo.mailsLoading = false;

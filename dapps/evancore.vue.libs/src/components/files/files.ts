@@ -79,7 +79,10 @@ export default class EvanFilesInput extends mixins(EvanComponent) {
    */
   fileRemove = -1;
 
-  blobUri = '';
+  /**
+   * is dropzone hovered?
+   */
+  hovered = false;
 
   /**
    * Transform the input files to the correct format.
