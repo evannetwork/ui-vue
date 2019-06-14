@@ -147,6 +147,11 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   showSideBar2 = true;
 
   /**
+   * Move (but not remove) sidebar level 2 to show main navigation
+   */
+  visibleSideBar2 = false;
+
+  /**
    * login function that was applied by the setPasswordFunction
    */
   login: Function|boolean = false;
@@ -240,8 +245,10 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       // if sidebar 2 is used, show it directly
       if (document.querySelectorAll(this.sideBar2Selector).length !== 0) {
         this.showSideBar2 = true;
+        this.visibleSideBar2 = true;
       } else {
         this.showSideBar2 = false;
+        this.visibleSideBar2 = false;
       }
     } else {
       this.smallToolbar = !this.smallToolbar;
@@ -262,15 +269,7 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
    * @param      {DAppWrapperRouteInterface}  route   route that was activated
    */
   routeActivated(route: DAppWrapperRouteInterface) {
-    // if the same route was opened, the second navigation should be displayed
-    if (this.$route.path.startsWith(<string>route.fullPath) &&
-        document.querySelectorAll(this.sideBar2Selector).length !== 0) {
-      this.showSideBar2 = true;
-    } else {
-      this.showSideBar = false;
-    }
-
-    // (<any>this).evanNavigate(route.path);
+    this.showSideBar = false;
   }
 
   /**

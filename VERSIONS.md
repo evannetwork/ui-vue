@@ -4,6 +4,8 @@
 ### Features
 
 ### Fixes
+- `evancore.vue.libs`
+  - fix `evan-dapp-wrapper` level 2 responsive
 
 ### Deprecations
 

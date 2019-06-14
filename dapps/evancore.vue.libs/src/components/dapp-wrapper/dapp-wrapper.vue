@@ -30,7 +30,7 @@
     :id="id"
     :class="{
       'show-sidebar': showSideBar,
-      'show-sidebar-2': showSideBar2,
+      'show-sidebar-2': showSideBar2 && visibleSideBar2,
       'small-toolbar': smallToolbar,
     }">
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
@@ -285,16 +285,21 @@
       v-if="!loading">
       <template v-if="!login">
         <div class="dapp-wrapper-sidebar" v-if="!onboarding && enableSidebar">
-          <div class="sidebar-header">
+          <div class="sidebar-header"
+            :class="{
+              'border-bottom border-sm bg-level-3': showSideBar && showSideBar2
+            }">
             <div class="clickable">
               <h5
+                class="m-0"
                 v-if="showSideBar && showSideBar2"
-                @click="showSideBar2 = false;">
-                <i class="mdi mdi-chevron-left mr-2"></i>
+                @click="visibleSideBar2 = !visibleSideBar2;">
+                <i class="mdi mdi-chevron-left mr-2" v-if="visibleSideBar2"></i>
+                <i class="mdi mdi-chevron-right mr-2" v-if="!visibleSideBar2"></i>
                 {{ activeRouteTitle | translate }}
               </h5>
             </div>
-            <h3 class="mr-2" @click="showSideBar = false;">
+            <h3 class="m-0" @click="showSideBar = false;">
               <i class="mdi mdi-close close"></i>
             </h3>
           </div>
