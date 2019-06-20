@@ -5,7 +5,7 @@
 
 ### Fixes
 - `evancore.vue.libs`
-  - fix `evan-dapp-wrapper` new mail reload time interval
+  - fix `evan-dapp-wrapper` new mail reload time interval and flickering notification icon
 
 ### Deprecations
 
