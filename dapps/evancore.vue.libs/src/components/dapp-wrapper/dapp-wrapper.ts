@@ -450,7 +450,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
       try {
         // load mail inbox informations, load 10 for checking for +9 new mails
         this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
-        this.userInfo.newMailCount = 0;
 
         let mails = [ ];
         let offset = 0;
