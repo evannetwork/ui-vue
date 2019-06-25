@@ -33,7 +33,6 @@ npm i @evan.network/ui-vue-core
 The [vue-core.ts](https://github.com/evannetwork/ui-vue/blob/master/dapps/evancore.vue.libs/src/vue-core.ts) is the main entry point for all vue applications. For a detailed usage explanation have a look at the [evannnetwork wiki](https://evannetwork.github.io/docs/developers/ui/vue).
 
 ```ts
-/*
 import Vue from 'vue';
 import { initializeVue } from '@evan.network/ui-vue-core';
 
