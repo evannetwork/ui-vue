@@ -1,18 +1,28 @@
 # ui-vue-core
 
-The evancore for vue includes several evan.network specific vue components, helper functions and utilities. 
+The ui-vue-core for evan.network includes specific vue components, helper functions and utilities. By using the vue initialization helper functions, it's very easy to setup a vue application including everything:
 
-- [UI API Doc](https://ui-docs.readthedocs.io/en/latest/vue/evancore.vue.libs.html)
+- global vue components
+- i18n
+- routing
+- Form building
+- evan.network blockchain-core runtime integration
+- DApp initialization && nested DApp loading
+- Sidebar integrations
+- login / logout mechanisms
 
-Reference Projects:
-  - [addressbook.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/addressbook.vue)
-  - [digital-twin](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin)
-  - [digital-twin.data-container](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin.data-container)
-  - [digital-twin.lib](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin.lib)
-  - [digital-twins](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twins)
-  - [favorites.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/favorites.vue)
-  - [mailbox.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/mailbox.vue)
-  - [onboarding.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/onboarding.vue)
+- documentation
+  - [Wiki](https://evannetwork.github.io/docs/developers/ui/vue.html)
+  - [UI API Doc](https://ui-docs.readthedocs.io/en/latest/vue/evancore.vue.libs.html)
+  - Reference Projects:
+    - [addressbook.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/addressbook.vue)
+    - [digital-twin](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin)
+    - [digital-twin.data-container](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin.data-container)
+    - [digital-twin.lib](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin.lib)
+    - [digital-twins](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twins)
+    - [favorites.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/favorites.vue)
+    - [mailbox.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/mailbox.vue)
+    - [onboarding.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/onboarding.vue)
 
 ## Installation
 ```sh
