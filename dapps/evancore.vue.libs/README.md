@@ -2,17 +2,17 @@
 
 The ui-vue-core for evan.network includes specific vue components, helper functions and utilities. By using the vue initialization helper functions, it's very easy to setup a vue application including everything:
 
-- global vue components
-- i18n
-- routing
-- Form building
-- evan.network blockchain-core runtime integration
-- DApp initialization && nested DApp loading
-- Sidebar integrations
-- login / logout mechanisms
-
+- features
+  - global vue components
+  - i18n
+  - routing
+  - Form building
+  - evan.network blockchain-core runtime integration
+  - DApp initialization && nested DApp loading
+  - Sidebar integrations
+  - login / logout mechanisms
 - documentation
-  - [Wiki](https://evannetwork.github.io/docs/developers/ui/vue.html)
+  - How to use it for creating DApps: [Wiki](https://evannetwork.github.io/docs/developers/ui/vue.html)
   - [UI API Doc](https://ui-docs.readthedocs.io/en/latest/vue/evancore.vue.libs.html)
   - Reference Projects:
     - [addressbook.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/addressbook.vue)
