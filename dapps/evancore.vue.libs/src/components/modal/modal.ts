@@ -36,7 +36,7 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 @Component({ })
-export default class ModalComponent  extends mixins(EvanComponent) {
+export default class ModalComponent extends mixins(EvanComponent) {
   /**
    * Show custom modal content
    */

@@ -38,6 +38,11 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { getDomainName } from './utils';
 
+/**
+ * Evan.network component wrapper for easily accessing blockchain runtime data and active DApp information.
+ *
+ * @class      EvanComponent
+ */
 @Component({ })
 export default class EvanComponent extends Vue {
   /**
@@ -66,7 +71,11 @@ export default class EvanComponent extends Vue {
   }
 
   /**
-   * Specify a custom navigation method for evan vue projects.
+   * Custom navigation method for evan vue projects. Always navigates using window.location.hash to
+   * force hash chaning on nested DApps.
+   *
+   * @param      {string}  path      path that should be navigated to
+   * @param      {string}  baseHash  navigation base hash (e.g. dashboard.vue.evan, default = this.dapp.baseHash)
    */
   evanNavigate(path: string, baseHash: string = this.activeDApp().baseHash) {
     window.location.hash = `${ baseHash }/${ path }`;

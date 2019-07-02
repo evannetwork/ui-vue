@@ -36,8 +36,16 @@ import DAppWrapperUtils from '../dapp-wrapper/utils';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Breadcrumb component that parses the currents browser url hash and displays a breadcrumb
+ * navigation for all entries. Also, each breadcrumb can be translated or ignored. Also backwards
+ * and reload buttons can be enabled.
+ *
+ * @class         Breadcrumbs
+ * @selector      evan-breadcrumbs
+ */
 @Component({ })
-export default class Breadcrumbs extends mixins(EvanComponent) {
+export default class EvanBreadcrumbs extends mixins(EvanComponent) {
   /**
    * Every route name will be translated using the leading i18nScope. E.g.: digitaltwins.evan =>
    * _evan.digitaltwins
@@ -51,7 +59,7 @@ export default class Breadcrumbs extends mixins(EvanComponent) {
    * Should the reload button be visible?
    */
   @Prop({
-    type: Function
+    type: boolean
   }) enableReload;
 
   /**

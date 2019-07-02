@@ -36,8 +36,14 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Dynamic component that loads the next not loaded dapp within the window location hash.
+ *
+ * @class         DAppLoaderComponent
+ * @selector      evan-dapp-loader
+ */
 @Component({ })
-export default class DAppLoader  extends mixins(EvanComponent) {
+export default class DAppLoaderComponent extends mixins(EvanComponent) {
   /**
    * save the latest dapp path that was started, so we can check on an hash change, if the dapp for
    * this dapp loader has been changed.

@@ -35,8 +35,14 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Bootstrap dropdown menu wrapper in evan.network style.
+ *
+ * @class         EvanDropdown
+ * @selector      evan-dropdown
+ */
 @Component({ })
-export default class Dropdown  extends mixins(EvanComponent) {
+export default class EvanDropdown extends mixins(EvanComponent) {
   /**
    * Where should the popup should been attached?
    */

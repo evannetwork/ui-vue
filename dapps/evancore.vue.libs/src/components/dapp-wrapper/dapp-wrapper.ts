@@ -42,8 +42,22 @@ import { getDomainName } from '../../utils';
 const domainName = getDomainName();
 const i18nPref = '_evan._routes';
 
+/**
+ * Each DApp must be wrapped with the evan-dapp-wrapper component. This component will handle the
+ * complete login process and it is nessecary to use the ``getRuntime`` that is included into the
+ * `EvanComponent <../js/components.html>`__ function. It also provides this UI interactions:
+ * Dispatcher Interaction, Mailbox Notifications, Profile, Addressbook, Favorites, Mailbox Links…,
+ * Top Panel, Left Panel, Login & Logout.
+ *
+ * It also provides content containers for a second left panel tree and a persistent breadcrumb
+ * navigation, that can be applied by every component. Have a look at the breadcrumbs /
+ * dapp-wrapper-level-2 component.
+ *
+ * @class         DAppWrapper
+ * @selector      evan-dapp-wrapper
+ */
 @Component({ })
-export default class DAppWrapper  extends mixins(EvanComponent) {
+export default class DAppWrapper extends mixins(EvanComponent) {
   /**
    * url to img for large sidebar (default is set in the create function using $store)
    */
@@ -92,7 +106,6 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
     type: Array,
   }) bottomRoutes: Array<DAppWrapperRouteInterface>;
 
-
   /**
    * base url of the vue component that uses the dapp-wrapper (e.g.: dashboard.evan)
    */
@@ -105,12 +118,16 @@ export default class DAppWrapper  extends mixins(EvanComponent) {
   /**
    * should be the runtime created? Includes onboarding & login checks.
    */
-  @Prop({ default: true }) createRuntime: any;
+  @Prop({ default: true }) createRuntime: boolean;
 
   /**
    * id of this element, so child elements can be queried easier
    */
   id = `dappwrapper_${ Date.now() + Math.round(Math.random() * 1000000) }`;
+
+  /**
+   * selector for the side bar 2
+   */
   sideBar2Selector = `#${ this.id } .dapp-wrapper-content-wrapper > .dapp-wrapper-sidebar-2 > *`
 
   /**
