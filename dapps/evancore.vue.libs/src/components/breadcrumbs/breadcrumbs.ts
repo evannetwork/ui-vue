@@ -41,11 +41,11 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
  * navigation for all entries. Also, each breadcrumb can be translated or ignored. Also backwards
  * and reload buttons can be enabled.
  *
- * @class         Breadcrumbs
+ * @class         BreadcrumbsComponent
  * @selector      evan-breadcrumbs
  */
 @Component({ })
-export default class EvanBreadcrumbs extends mixins(EvanComponent) {
+export default class BreadcrumbsComponent extends mixins(EvanComponent) {
   /**
    * Every route name will be translated using the leading i18nScope. E.g.: digitaltwins.evan =>
    * _evan.digitaltwins

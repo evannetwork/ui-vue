@@ -35,6 +35,12 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Bootstrap tooltip wrapper.
+ *
+ * @class         SuccessComponent
+ * @selector      evan-success
+ */
 @Component({ })
 export default class EvanTooltip extends mixins(EvanComponent) {
   /**

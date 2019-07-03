@@ -44,11 +44,11 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
  * dapp-wrapper component. The content will be overwritten, when another DAppWrapperLevel2 component
  * will be started or, if this included dapp was destroyed.
  *
- * @class         DAppWrapperLevel2
+ * @class         DAppWrapperLevel2Component
  * @selector      evan-dapp-wrapper-level-2
  */
 @Component({ })
-export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
+export default class DAppWrapperLevel2Component extends mixins(EvanComponent) {
   /**
    * found dapp-wrapper-sidebar 2 container element, where this element can be applied to
    */

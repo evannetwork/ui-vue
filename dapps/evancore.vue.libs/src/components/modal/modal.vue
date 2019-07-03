@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-  import ModalComponent from './modal.ts';
-  export default ModalComponent;
+  import Component from './modal.ts';
+  export default Component;
 </script>
 

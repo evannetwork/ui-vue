@@ -35,8 +35,17 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Dynamic iframe wrapper component. Primarily used to show iframes within routes.
+ *
+ * @class         IframeComponent
+ * @selector      evan-iframe
+ */
 @Component({ })
-export default class EvanIframe  extends mixins(EvanComponent) {
+export default class IframeComponent extends mixins(EvanComponent) {
+  /**
+   * The iframes src that should be rendered
+   */
   @Prop({ type: String }) src;
 
   /**

@@ -101,8 +101,8 @@
 </template>
 
 <script lang="ts">
-  import EvanFilesInput from './files.ts';
-  export default EvanFilesInput;
+  import Component from './files.ts';
+  export default Component;
 </script>
 
 <style lang="scss" scoped>

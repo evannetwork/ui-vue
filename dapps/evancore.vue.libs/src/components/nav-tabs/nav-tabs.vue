@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-  import ModalComponent from './nav-tabs.ts';
-  export default ModalComponent;
+  import Component from './nav-tabs.ts';
+  export default Component;
 </script>
 

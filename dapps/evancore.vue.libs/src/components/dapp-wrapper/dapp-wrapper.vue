@@ -402,6 +402,6 @@
 </template>
 
 <script lang="ts">
-  import DAppWrapper from './dapp-wrapper.ts';
-  export default DAppWrapper;
+  import Component from './dapp-wrapper.ts';
+  export default Component;
 </script>

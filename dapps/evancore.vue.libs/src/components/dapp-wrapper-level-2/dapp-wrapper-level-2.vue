@@ -32,8 +32,8 @@
 </template>
 
 <script lang="ts">
-  import DAppWrapperLevel2 from './dapp-wrapper-level-2.ts';
-  export default DAppWrapperLevel2;
+  import Component from './dapp-wrapper-level-2.ts';
+  export default Component;
 </script>
 
 <style lang="scss" scoped>

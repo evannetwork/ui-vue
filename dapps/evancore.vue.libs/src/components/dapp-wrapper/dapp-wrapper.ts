@@ -53,11 +53,11 @@ const i18nPref = '_evan._routes';
  * navigation, that can be applied by every component. Have a look at the breadcrumbs /
  * dapp-wrapper-level-2 component.
  *
- * @class         DAppWrapper
+ * @class         DAppWrapperComponent
  * @selector      evan-dapp-wrapper
  */
 @Component({ })
-export default class DAppWrapper extends mixins(EvanComponent) {
+export default class DAppWrapperComponent extends mixins(EvanComponent) {
   /**
    * url to img for large sidebar (default is set in the create function using $store)
    */

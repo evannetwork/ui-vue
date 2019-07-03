@@ -33,6 +33,13 @@ import Vue from 'vue';
 import { Prop } from 'vue-property-decorator';
 import { getDomainName } from '../../utils';
 
+/**
+ * Shows a ``under-development`` placeholder for enabling empty routes with maintenance or something
+ * else.
+ *
+ * @class         UnderDevelopment
+ * @selector      evan-under-development
+ */
 @Component({ })
 export default class UnderDevelopment extends mixins(EvanComponent) {
   /**

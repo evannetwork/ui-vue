@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-  import EvanLogoutComponent from './logout.ts';
-  export default EvanLogoutComponent;
+  import Component from './logout.ts';
+  export default Component;
 </script>
 

@@ -40,6 +40,6 @@
 </template>
 
 <script lang="ts">
-  import Tooltip from './tooltip.ts';
-  export default Tooltip;
+  import Component from './tooltip.ts';
+  export default Component;
 </script>

@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts">
-  import SuccessComponent from './success.ts';
-  export default SuccessComponent;
+  import Component from './success.ts';
+  export default Component;
 </script>
 
 <style lang="scss" scoped>

@@ -37,6 +37,6 @@
 </template>
 
 <script lang="ts">
-  import EvanIframe from './iframe.ts';
-  export default EvanIframe;
+  import Component from './iframe.ts';
+  export default Component;
 </script>

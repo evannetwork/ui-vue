@@ -35,11 +35,14 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Describes each tab that can be provided to the NavTabsComponent
+ */
 interface TabInterface {
   /**
    * Custom color code
    */
-  color: string;
+  color?: string;
 
   /**
    * Optional id that is added as tab id selector
@@ -57,6 +60,13 @@ interface TabInterface {
   href: string;
 }
 
+/**
+ * Displays tabs in evan.network design using vue router integration for checking active and
+ * activating tabs.
+ *
+ * @class         NavTabsComponent
+ * @selector      evan-nav-tabs
+ */
 @Component({ })
 export default class NavTabsComponent extends mixins(EvanComponent) {
   /**

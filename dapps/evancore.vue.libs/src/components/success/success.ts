@@ -31,5 +31,11 @@ import EvanComponent from '../../component';
 import Vue from 'vue';
 import { Prop } from 'vue-property-decorator';
 
+/**
+ * Shows a animated "check" icon.
+ *
+ * @class         SuccessComponent
+ * @selector      evan-success
+ */
 @Component({ })
 export default class SuccessComponent extends mixins(EvanComponent) { }

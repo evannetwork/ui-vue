@@ -38,7 +38,7 @@ import { Prop, Watch } from 'vue-property-decorator';
  * @selector      evan-batch-component
  */
 @Component({ })
-export default class EvanContactBatchComponent extends mixins(EvanComponent) {
+export default class ContactBatchComponent extends mixins(EvanComponent) {
   /**
    * String for that the batch should be generated
    */
