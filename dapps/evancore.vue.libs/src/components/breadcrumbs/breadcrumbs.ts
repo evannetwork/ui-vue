@@ -51,16 +51,13 @@ export default class BreadcrumbsComponent extends mixins(EvanComponent) {
    * _evan.digitaltwins
    */
   @Prop({
-    type: String,
     default: '_evan'
   }) i18nScope;
 
   /**
    * Should the reload button be visible?
    */
-  @Prop({
-    type: boolean
-  }) enableReload;
+  @Prop() enableReload;
 
   /**
    * Change the route base hash that should be navigated to

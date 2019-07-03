@@ -32,7 +32,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ContactBatchComponent from './contact-batch/contact-batch.vue';
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
-import DAppLoaderComponent from './loading/loading.vue';
+import DAppLoadingComponent from './loading/loading.vue';
 import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import DropdownComponent from './dropdown/dropdown.vue';
@@ -52,7 +52,7 @@ export {
   BreadcrumbsComponent,
   ContactBatchComponent,
   DAppLoaderComponent,
-  DAppLoaderComponent,
+  DAppLoadingComponent,
   DAppWrapperComponent,
   DAppWrapperSidebarLevel2Component,
   DropdownComponent,
