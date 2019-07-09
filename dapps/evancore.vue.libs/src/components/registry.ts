@@ -78,7 +78,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dropdown', component: DropdownComponent },
   { name: 'evan-file-input', component: FileInputComponent },
   { name: 'evan-iframe', component: IframeComponent },
-  { name: 'evan-loading', component: DAppLoaderComponent },
+  { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },
   { name: 'evan-logout', component: LogoutComponent },
   { name: 'evan-modal', component: ModalComponent },

@@ -2,7 +2,9 @@
 
 ## Next Version
 ### Features
-
+- `evancore.vue.libs`
+  - add organizations as default dapp
+  
 ### Fixes
 
 ### Deprecations
