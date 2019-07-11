@@ -4,6 +4,7 @@
 ### Features
 - `evancore.vue.libs`
   - add organizations as default dapp
+  - add missing id's for login tests
   
 ### Fixes
 

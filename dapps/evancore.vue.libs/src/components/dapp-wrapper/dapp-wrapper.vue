@@ -269,7 +269,7 @@
                 </div>
                 <div class="border-top border-sm py-2">
                   <a class="dropdown-item py-2"
-                    if="evan-logout"
+                    id="evan-logout"
                     @click="$refs.evanLogout.logout()">
                     {{ '_evan.logout' | translate }}
                   </a>
