@@ -33,6 +33,7 @@ export default {
       "digitaltwins": "Digitale Zwillinge",
       "favorites": "Favoriten",
       "mailbox": "Nachrichten",
+      "organizations": "Organisationen",
       "profile": "Mein Profil"
     },
     "cancel": "Schließen",

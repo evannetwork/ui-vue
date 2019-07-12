@@ -36,8 +36,19 @@ import DAppWrapperUtils from '../dapp-wrapper/utils';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * The dapp-warpper has the functionality, that a custom second level navigation can be applied.
+ * Using this component, this content container does not must be filled directly, it can be filled
+ * from every child component, even from nested, fully seperated dapps. The content that will be
+ * applied to the dapp-wrapper-level-2 component, will be moved to the highest available
+ * dapp-wrapper component. The content will be overwritten, when another DAppWrapperLevel2 component
+ * will be started or, if this included dapp was destroyed.
+ *
+ * @class         DAppWrapperLevel2Component
+ * @selector      evan-dapp-wrapper-level-2
+ */
 @Component({ })
-export default class DAppWrapperLevel2  extends mixins(EvanComponent) {
+export default class DAppWrapperLevel2Component extends mixins(EvanComponent) {
   /**
    * found dapp-wrapper-sidebar 2 container element, where this element can be applied to
    */

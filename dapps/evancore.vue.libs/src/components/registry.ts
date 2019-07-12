@@ -37,7 +37,7 @@ import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
-import EvanIframeComponent from './iframe/iframe.vue';
+import IframeComponent from './iframe/iframe.vue';
 import FileInputComponent from './files/files.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
 import LoginComponent from './login/login.vue';
@@ -57,15 +57,15 @@ export {
   DAppWrapperSidebarLevel2Component,
   DropdownComponent,
   EvanComponent,
-  EvanIframeComponent,
   FileInputComponent,
-  UnderDevelopmentComponent,
+  IframeComponent,
   LoginComponent,
   LogoutComponent,
   ModalComponent,
   NavTabsComponent,
   SuccessComponent,
   TooltipComponent,
+  UnderDevelopmentComponent,
 }
 
 // map them to element names, so they can be used within templates
@@ -77,7 +77,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
   { name: 'evan-dropdown', component: DropdownComponent },
   { name: 'evan-file-input', component: FileInputComponent },
-  { name: 'evan-iframe', component: EvanIframeComponent },
+  { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },
   { name: 'evan-logout', component: LogoutComponent },

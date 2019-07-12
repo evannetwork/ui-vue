@@ -22,7 +22,7 @@
   of it on other blockchains than evan.network.
 
   For more information, please contact evan GmbH at this address:
-https://evan.network/license/
+  https://evan.network/license/
 */
 
 // vue imports
@@ -31,10 +31,16 @@ import EvanComponent from '../../component';
 import Vue from 'vue';
 import { Prop, Watch } from 'vue-property-decorator';
 
+/**
+ * Displays a small colored batch for previewing a users account / name.
+ *
+ * @class         ContactBatchComponent
+ * @selector      evan-batch-component
+ */
 @Component({ })
 export default class ContactBatchComponent extends mixins(EvanComponent) {
   /**
-   * User alias that should be generated
+   * String for that the batch should be generated
    */
   @Prop() value: string;
 

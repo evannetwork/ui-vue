@@ -46,7 +46,7 @@ import { getDomainName } from './utils';
 
 /******************************************** functions *******************************************/
 /**
- * Stats an evan vue dapp and wraps all start functinalities.
+ * Starts an evan vue dapp and wraps all start functionallities.
  *
  * @param      {EvanVueOptions}  options  vue options passed by the dapp
  */
@@ -138,7 +138,8 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
  * Registers the components within Vue. If a name is specified, register it also as component, not
  * only for routing.
  *
- * @param      {any}     Vue     vue prototype
+ * @param      {any}                                  Vue         vue prototype
+ * @param      {ArrayComponentRegistrationInterface}  components  components that should be registered
  */
 export function registerComponents(Vue: any, components: Array<ComponentRegistrationInterface>) {
   // include all components
@@ -164,10 +165,12 @@ export function registerEvanI18N(Vue: any, translations: any) {
 };
 
 /**
- * Bind window unload event handlers and watch for element to be removed, so we can trigger
- * correct destroy events.
+ * Vue does not trigger correct destroy events when a vue application is removed from the dom or
+ * when the browser is freshed. This will cause uncleared watchers and memory leaks. This function
+ * binds window unload event handlers and a vue base element MutationObserver, so we can trigger
+ * correct vue destroy events when DApps are removed from the dom.
  *
- * @param      {Vue}  vueInstance  The vue instance
+ * @param      {Vue}  vueInstance  initialized vue instance
  */
 export function registerEventHandlers(vueInstance: any) {
   const beforeUnload = () => {

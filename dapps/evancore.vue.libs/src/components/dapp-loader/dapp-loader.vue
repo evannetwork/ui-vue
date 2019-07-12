@@ -32,6 +32,6 @@
 </template>
 
 <script lang="ts">
-  import DAppLoader from './dapp-loader.ts';
-  export default DAppLoader;
+  import Component from './dapp-loader.ts';
+  export default Component;
 </script>

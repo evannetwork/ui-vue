@@ -38,6 +38,7 @@
       </template>
       <template v-slot:footer>
         <button type="button" class="btn btn-rounded btn-primary font-weight-normal"
+          id="submit-logout"
           @click="runLogout()">
           {{ '_evan.logout' | translate }}
         </button>
@@ -46,6 +47,7 @@
 
     <slot name="button" v-if="!disableButton">
       <button type="submit" class="btn btn-outline-secondary btn-rounded"
+        id="submit-logout"
         @click="logout()">
         <span>{{ '_evan.logout' | translate }}</span>
       </button>
@@ -54,7 +56,7 @@
 </template>
 
 <script lang="ts">
-  import EvanLogoutComponent from './logout.ts';
-  export default EvanLogoutComponent;
+  import Component from './logout.ts';
+  export default Component;
 </script>
 

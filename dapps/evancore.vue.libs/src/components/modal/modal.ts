@@ -35,10 +35,16 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Bootstrap modal wrapper in evan custom design.
+ *
+ * @class         EvanModal
+ * @selector      evan-modal
+ */
 @Component({ })
-export default class ModalComponent  extends mixins(EvanComponent) {
+export default class EvanModal extends mixins(EvanComponent) {
   /**
-   * Show custom modal content
+   * Removes the normal content containers and enables the ``<slot name="content" v-if="customModal"></slot>`` slot.
    */
   @Prop({ }) customModal;
 
@@ -49,6 +55,10 @@ export default class ModalComponent  extends mixins(EvanComponent) {
     default: '500px'
   }) maxWidth;
 
+  /**
+   * Enable or disable evna specific modal part classes. E.g. by removing the modal-header class,
+   * the header will loose it's style, so you can use usal html & css withou evan design.
+   */
   @Prop({
     default: [
       'modal-header',

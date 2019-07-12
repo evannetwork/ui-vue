@@ -74,8 +74,8 @@
 </template>
 
 <script lang="ts">
-  import LoginComponent from './login.ts';
-  export default LoginComponent;
+  import Component from './login.ts';
+  export default Component;
 </script>
 
 <style lang="scss" scoped>

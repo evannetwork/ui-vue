@@ -36,8 +36,15 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { FileHandler, } from '@evan.network/ui';
 
+/**
+ * Wrapper for HTML 5 file upload. Uses the ui-core File utils, load load, return and format files
+ * to handle the correct format.
+ *
+ * @class         FilesInputComponent
+ * @selector      evan-file-input
+ */
 @Component({ })
-export default class EvanFilesInput extends mixins(EvanComponent) {
+export default class FilesInputComponent extends mixins(EvanComponent) {
   /**
    * input accept options
    */

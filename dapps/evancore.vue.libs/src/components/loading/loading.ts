@@ -31,5 +31,11 @@ import EvanComponent from '../../component';
 import Vue from 'vue';
 import { Prop } from 'vue-property-decorator';
 
+/**
+ * Shows a full screen loading symbol.
+ *
+ * @class         DAppLoadingComponent
+ * @selector      evan-loading
+ */
 @Component({ })
-export default class DAppLoading  extends mixins(EvanComponent) { }
+export default class DAppLoadingComponent extends mixins(EvanComponent) { }

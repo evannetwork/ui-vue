@@ -38,7 +38,7 @@ import { RouteRegistrationInterface, EvanVueOptionsInterface } from './interface
 import { getDomainName } from './utils';
 
 /**
- * Apply the correct absolute nested dapp hash origin
+ * Uses the dapps.basehash and appends the given path.
  *
  * @param      {string}  path    route path
  * @param      {any}     dapp    getNextDApp result

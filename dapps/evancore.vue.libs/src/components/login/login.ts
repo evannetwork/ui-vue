@@ -35,14 +35,24 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Handles the password input of a user and checks, if it's correct and it's profile can be
+ * encrypted with that password. Used by the dapp-wrapper to login the current user if needed. Will
+ * send an `logged-in` event including the users provided password.
+ *
+ * @class         LoginComponent
+ * @selector      evan-login
+ */
 @Component({ })
-export default class LoginComponent  extends mixins(EvanComponent) {
+export default class LoginComponent extends mixins(EvanComponent) {
   /**
    * preload accountId
    */
   accountId = dappBrowser.core.activeAccount();
 
-  // is the current mnemonic / password is currently checking?
+  /**
+   * is the current mnemonic / password is currently checking?
+   */
   checkingPassword = false;
 
   /**

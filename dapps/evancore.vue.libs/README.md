@@ -1,16 +1,64 @@
-# evancore.vue.libs
+# ui-vue-core
 
-This project includes several handlers and components to handle evan.network dapps with vue easily.
+The ui-vue-core for evan.network includes specific vue components, helper functions and utilities. By using the vue initialization helper functions, it's very easy to setup a vue application including everything:
 
-Documentation TDB...
+- features
+  - global vue components
+  - i18n
+  - routing
+  - Form building
+  - evan.network blockchain-core runtime integration
+  - DApp initialization && nested DApp loading
+  - Sidebar integrations
+  - login / logout mechanisms
+- documentation
+  - How to use it for creating DApps: [Wiki](https://evannetwork.github.io/docs/developers/ui/vue.html)
+  - [UI API Doc](https://ui-docs.readthedocs.io/en/latest/vue/evancore.vue.libs.html)
+  - Reference Projects:
+    - [addressbook.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/addressbook.vue)
+    - [digital-twin](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin)
+    - [digital-twin.data-container](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin.data-container)
+    - [digital-twin.lib](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twin.lib)
+    - [digital-twins](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/digital-twins)
+    - [favorites.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/favorites.vue)
+    - [mailbox.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/mailbox.vue)
+    - [onboarding.vue](https://github.com/evannetwork/ui-core-dapps/tree/master/dapps/onboarding.vue)
 
-Reference Projects:
-  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/digital-twins
-  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/data-container
-  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/favorites
-  - https://github.com/evannetwork/ui-core-dapps/tree/feature/vue/dapps/mailbox
+## Installation
+```sh
+npm i @evan.network/ui-vue-core
+```
 
-## HTML Selectors
+## Usage
+The [vue-core.ts](https://github.com/evannetwork/ui-vue/blob/master/dapps/evancore.vue.libs/src/vue-core.ts) is the main entry point for all vue applications. For a detailed usage explanation have a look at the [evannnetwork wiki](https://evannetwork.github.io/docs/developers/ui/vue).
+
+```ts
+import Vue from 'vue';
+import { initializeVue } from '@evan.network/ui-vue-core';
+
+import Main from './components/root/root.vue';
+import translations from './i18n/translations';
+import routes from './routes';
+import components from './components/registry';
+
+export async function startDApp(container: any, dbcpName: any, dappEnsOrContract: any, dappBaseUrl: any) {
+  await initializeVue({
+    components,
+    container,
+    dappBaseUrl,
+    dappEnsOrContract,
+    dbcpName,
+    RootComponent: Main,
+    routes,
+    state: { },
+    translations: translations,
+    Vue: Vue,
+  });
+}
+
+```
+
+## HTML Selectors for tests
 ### dapp-wrapper
 - #dapp-home
 - #dapp-digitaltwins

@@ -30,9 +30,9 @@ import { EvanFormControlOptions, } from './interfaces';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 /**
- * One input control representation.
+ * Represents one formular input and handles dirty and error flags, also runs validations.
  *
- * @class      EvanFormControl (name)
+ * @class      EvanFormControl
  */
 export class EvanFormControl {
   /**
@@ -91,7 +91,7 @@ export class EvanFormControl {
   _validate: Function|undefined;
 
   /**
-   * The vue instance of for validation etc..
+   * Original vue instance to directly access component references within the control
    */
   vueInstance: Vue;
 
@@ -156,7 +156,9 @@ export class EvanFormControl {
 }
 
 /**
- * Generalized data representation for a formular.
+ * Generalized data representation for a evan.network formular. Handles full validation and error
+ * handling logic. Uses the EvanFormControls to handle all controls seperated and calculates them
+ * into one status detail into this class.
  *
  * @class      EvanForm
  */
@@ -199,6 +201,14 @@ export class EvanForm {
     return dappBrowser.bccHelper.getCoreRuntime().web3.utils.isAddress(address);
   }
 
+  /**
+   * Create new EvanForm instance.
+   *
+   * @param      {any}                                    vueInstance  Parent vueInstance to
+   *                                                                   directly accessing input refs
+   * @param      {{ [s: string]: EvanFormControlOptions}  }            controls   object of controls
+   *                                                                   that should be added directly
+   */
   constructor(vueInstance: any, controls: { [s: string]: EvanFormControlOptions }) {
     this.controls = Object.keys(controls);
     this.vueInstance = vueInstance;
@@ -225,7 +235,7 @@ export class EvanForm {
   }
 
   /**
-   * Check all controls if they are valid.
+   * Iterate through all controls, checks if they are valid and sets the form `isValid` parameter.
    */
   validateControls() {
     this.isValid = this.controls
@@ -234,10 +244,11 @@ export class EvanForm {
   }
 
   /**
-   * Adds a single control to the current form
+   * Adds a single control to the current form and runs the validateControls functions to check
+   * directly the current fiorm validity
    *
-   * @param      {string}                  name     name of the control
-   * @param      {EvanFormControlOptions}  control  control options
+   * @param      {string}                  controlKey  The control key
+   * @param      {EvanFormControlOptions}  control     control options
    */
   addControl(controlKey: string, control: EvanFormControlOptions) {
     // remober the control list for validation purposes

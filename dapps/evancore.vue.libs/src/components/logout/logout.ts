@@ -35,8 +35,16 @@ import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+/**
+ * Handles user logout. Directly provides a button, that triggers a logout accept modal. Logs out
+ * the user, if modal gets accepted. Optionally, the button can be disabled and the modal can be
+ * triggered using vue refs.
+ *
+ * @class         EvanLogout
+ * @selector      evan-logout
+ */
 @Component({ })
-export default class EvanLogoutComponent  extends mixins(EvanComponent) {
+export default class EvanLogout extends mixins(EvanComponent) {
   /**
    * Dont show any button
    */

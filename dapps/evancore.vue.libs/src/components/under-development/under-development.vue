@@ -45,6 +45,6 @@
 </template>
 
 <script lang="ts">
-  import UnderDevelopment from './under-development.ts';
-  export default UnderDevelopment;
+  import Component from './under-development.ts';
+  export default Component;
 </script>
