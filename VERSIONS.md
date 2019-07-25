@@ -2,12 +2,17 @@
 
 ## Next Version
 ### Features
-- `evancore.vue.libs`
-  - add organizations as default dapp
   
 ### Fixes
 
 ### Deprecations
+
+
+## Version 1.3.0
+### Features
+- `evancore.vue.libs`
+  - add organizations as default dapp
+  - add missing id's for login tests
 
 
 ## Version 1.2.4
