@@ -54,6 +54,7 @@
               <div :class="{ 'modal-footer': modalClasses.indexOf('modal-footer') !== -1 }">
                 <button type="button" class="btn btn-outline-secondary btn-rounded"
                   id="modal-cancel"
+                  v-if="!hideFooterButton"
                   @click="hide();">
                   {{ '_evan.cancel' | translate }}
                 </button>

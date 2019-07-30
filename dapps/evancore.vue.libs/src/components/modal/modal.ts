@@ -49,6 +49,13 @@ export default class EvanModal extends mixins(EvanComponent) {
   @Prop({ }) customModal;
 
   /**
+   * Set true, to prevent hiding when click started inside modal, e.g. during text selection
+   */
+  @Prop({
+    default: false
+  }) hideFooterButton;
+
+  /**
    * Configurable modal width
    */
   @Prop({
