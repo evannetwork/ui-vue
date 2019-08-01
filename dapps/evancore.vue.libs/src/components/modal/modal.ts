@@ -49,7 +49,7 @@ export default class EvanModal extends mixins(EvanComponent) {
   @Prop({ }) customModal;
 
   /**
-   * Set true, to prevent hiding when click started inside modal, e.g. during text selection
+   * Set true, to hide the default cancel button in footer.
    */
   @Prop({
     default: false
