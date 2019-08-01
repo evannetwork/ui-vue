@@ -4,20 +4,12 @@
     "dapp": {
       "dependencies": {
         "axios.vue.libs": "^0.18.0",
-<<<<<<< HEAD
         "bcc": "^2.9.0",
-=======
-        "bcc": "^2.8.3",
->>>>>>> b9c27e98027437665bfb713fa6be144eca0ae302
         "i18n.vuex.libs": "1.11.0",
         "moment.libs": "^2.0.0",
         "moment.vue.libs": "4.0.0",
         "router.vue.libs": "^2.5.0",
-<<<<<<< HEAD
         "ui.libs": "^1.7.0",
-=======
-        "ui.libs": "^1.6.0",
->>>>>>> b9c27e98027437665bfb713fa6be144eca0ae302
         "vue.libs": "^2.5.0",
         "vuex.libs": "3.1.0"
       },
