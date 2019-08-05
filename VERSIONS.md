@@ -3,6 +3,7 @@
 ## Next Version
 ### Features
 - update versions of `lodash`, `typescript`
+- remove organizations as default dapp
   
 ### Fixes
 
