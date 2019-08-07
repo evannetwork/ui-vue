@@ -3,9 +3,11 @@
 ## Next Version
 ### Features
 - update versions of `lodash`, `typescript`
-- remove organizations as default dapp
   
 ### Fixes
+- `evancore.vue.libs`
+  - remove organizations as default dapp
+  - fix `nav-tabs` active recognition for nested routes loaded within tabs
 
 ### Deprecations
 

@@ -111,7 +111,7 @@ export default class NavTabsComponent extends mixins(EvanComponent) {
    */
   setTabStatus() {
     for (let i = 0; i < this.tabs.length; i++) {
-      if (this.tabs[i].href.indexOf(this.$route.path) !== -1) {
+      if (window.location.href.indexOf(this.tabs[i].href) !== -1) {
         this.activeTab = i;
         break;
       }
