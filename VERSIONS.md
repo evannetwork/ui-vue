@@ -3,6 +3,8 @@
 ## Next Version
 ### Features
 - update versions of `lodash`, `typescript`
+- `evancore.vue.libs`
+  - add `evan-test-mode` local storage configuration and extend `EvanComponent` with `testtestMode` flag
   
 ### Fixes
 - `evancore.vue.libs`
