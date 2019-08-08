@@ -49,6 +49,13 @@ export default class EvanModal extends mixins(EvanComponent) {
   @Prop({ }) customModal;
 
   /**
+   * Set true, to hide the default cancel button in footer.
+   */
+  @Prop({
+    default: false
+  }) hideFooterButton;
+
+  /**
    * Configurable modal width
    */
   @Prop({
@@ -78,6 +85,11 @@ export default class EvanModal extends mixins(EvanComponent) {
   isShown = false;
 
   /**
+   * Set true, to prevent hiding when click started inside modal, e.g. during text selection
+   */
+  preventHide = false;
+
+  /**
    * Send component instance to parent.
    */
   created() {
@@ -96,6 +108,12 @@ export default class EvanModal extends mixins(EvanComponent) {
    * Remove the modal element and hide it animated.
    */
   hide() {
+    if (this.preventHide) {
+      this.preventHide = false
+
+      return
+    }
+
     this.isShown = false;
     this.$emit('close');
     this.$nextTick(() => this.isRendered = false);

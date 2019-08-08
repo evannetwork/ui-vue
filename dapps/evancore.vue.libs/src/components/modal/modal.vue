@@ -30,15 +30,21 @@
     <template v-if="isRendered">
       <div class="modal fade" tabindex="-1"
         :class="{ 'show': isShown }"
-        @click="hide(); $emit('canceled', { backdrop: true });">
-        <div class="modal-dialog" role="document"
-          :style="{ 'max-width': maxWidth }">
+        @click="hide();">
+        <div
+          class="modal-dialog"
+          role="document"
+          :style="{ 'max-width': maxWidth }"
+          @mousedown="preventHide=true;"
+          @mouseup="preventHide=false;"
+        >
           <div class="modal-content" v-on:click.stop>
             <template v-if="!customModal">
               <div :class="{ 'modal-header d-flex align-items-center': modalClasses.indexOf('modal-header') !== -1 }">
                 <slot name="header"></slot>
                 <button class="btn p-0"
-                  @click="hide()">
+                  @click="hide()"
+                >
                   <i class="mdi mdi-close"></i>
                 </button>
               </div>
@@ -48,7 +54,8 @@
               <div :class="{ 'modal-footer': modalClasses.indexOf('modal-footer') !== -1 }">
                 <button type="button" class="btn btn-outline-secondary btn-rounded"
                   id="modal-cancel"
-                  @click="hide(); $emit('canceled', { backdrop: false });">
+                  v-if="!hideFooterButton"
+                  @click="hide();">
                   {{ '_evan.cancel' | translate }}
                 </button>
                 <slot name="footer"></slot>

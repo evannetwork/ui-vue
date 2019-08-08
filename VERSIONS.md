@@ -2,10 +2,20 @@
 
 ## Next Version
 ### Features
+### Fixes
+### Deprecations
+
+
+## Version 1.4.0
+### Features
+- update versions of `lodash`, `typescript`
+- `evancore.vue.libs`
+  - add `evan-test-mode` local storage configuration and extend `EvanComponent` with `testtestMode` flag
   
 ### Fixes
-
-### Deprecations
+- `evancore.vue.libs`
+  - remove organizations as default dapp
+  - fix `nav-tabs` active recognition for nested routes loaded within tabs
 
 
 ## Version 1.3.0

@@ -63,11 +63,17 @@ export default class EvanComponent extends Vue {
   $store: any;
   $t: any;
 
+  /**
+   * Are currently automated test running?
+   */
+  testMode = false;
+
   constructor() {
     super();
 
     this.dapp = this.activeDApp();
     this.domainName = getDomainName();
+    this.testMode = !!window.localStorage['evan-test-mode'];
   }
 
   /**
