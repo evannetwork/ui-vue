@@ -4,12 +4,12 @@
     "dapp": {
       "dependencies": {
         "axios.vue.libs": "^0.18.0",
-        "bcc": "^2.9.0",
+        "bcc": "^2.10.0",
         "i18n.vuex.libs": "1.11.0",
         "moment.libs": "^2.0.0",
         "moment.vue.libs": "4.0.0",
         "router.vue.libs": "^2.5.0",
-        "ui.libs": "^1.7.0",
+        "ui.libs": "^1.8.0",
         "vue.libs": "^2.5.0",
         "vuex.libs": "3.1.0"
       },
@@ -18,7 +18,7 @@
         "evancore.vue.libs.js",
         "evancore.vue.libs.css"
       ],
-      "origin": "QmYSWwYxWKJkBsE5aZMxSLe9EeqRAMW6t7LngCGDsoGhsv",
+      "origin": "QmSsTXwiLir7M7u8vm29FXnE94hhUJsmBW2MUiHrh6J3WP",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -41,7 +41,7 @@
       "evan",
       "library"
     ],
-    "version": "1.3.0",
+    "version": "1.4.0",
     "versions": {
       "1.0.0": "Qme8X3BUpiEpmsQkNR11C89HMeDnzbdVkSR3def4pSteUZ",
       "1.1.0": "QmU5gbcwomosnsbG826GgM1Y6qs8RQ2qh2HybzZKMg42oU",
@@ -50,7 +50,8 @@
       "1.2.2": "QmWjw3G41cRsrhq7XoWyoZov9EhumAy5Yun6TnWJCfvihJ",
       "1.2.3": "QmX3PgVhDS19WqCoFEYW9pj4gUxj3t7WzyFEcTNauZ8Xhp",
       "1.2.4": "QmWEKyyCWuihajBS4FKMgawfrjCJmXLNdRT7EujBY43wRc",
-      "1.3.0": "QmfL1TLaRQmZLYcfMmBeWm39JJmNNZ5oYi3MawLMwMZWPG"
+      "1.3.0": "QmfL1TLaRQmZLYcfMmBeWm39JJmNNZ5oYi3MawLMwMZWPG",
+      "1.4.0": "Qmam1wb8VDX3Rm3aa8eGjvatmLMaxpSMHDDCrz1qMRb5mZ"
     }
   }
 }
