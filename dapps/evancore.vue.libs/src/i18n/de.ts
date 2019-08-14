@@ -36,6 +36,10 @@ export default {
       "organizations": "Organisationen",
       "profile": "Mein Profil"
     },
+    "browser-not-supported": {
+      "desc": "Bitte gehen Sie sicher, dass Sie einen der folgenden Browsern verwenden:<ul><li>Chrome</li><li>Edge</li><li>Firefox (kein privater Modus!)</li><li>Opera</li><li>Safari</li></ul>",
+      "title": "Ihr Browser wird nicht unterstützt"
+    },
     "cancel": "Schließen",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",

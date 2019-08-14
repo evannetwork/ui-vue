@@ -234,6 +234,11 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   ];
 
   /**
+   * Is the current browser supported? Else show info dialog and stop everything.
+   */
+  supportedBrowser: any;
+
+  /**
    * Returns the i18n title key for the active route.
    *
    * @return     {string}  active route i18n or route path
@@ -303,11 +308,21 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
         .forEach((route) => route.fullPath = `${ (<any>this).dapp.baseHash }/${ route.path }`);
     }
 
-    // if the runtime should be created, start it up
-    if (this.createRuntime) {
-      await this.handleLoginOnboarding();
+    // check if the current browser is allowed
+    if (dappBrowser.utils.browserName === 'Firefox' && dappBrowser.utils.isPrivateMode) {
+      this.supportedBrowser = false;
     } else {
+      this.supportedBrowser = [
+        'Opera',  'Firefox', 'Safari', 'Chrome', 'Edge', 'Blink',
+      ].indexOf(dappBrowser.utils.browserName) !== -1;
+    }
+
+    // hide loading and stop anything, when browser is not supported
+    if (!this.supportedBrowser || !this.createRuntime) {
       this.loading = false;
+      // if the runtime should be created, start it up
+    } else {
+      await this.handleLoginOnboarding();
     }
 
     this.sideBarCloseWatcher = ($event: CustomEvent) => this.showSideBar = false;

@@ -32,7 +32,11 @@
         <div class="dropdown-menu p-0"
           v-on:click.prevent=""
           :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{ 'width': width }">
+          :style="{
+            'width': width,
+            'left': left,
+            'right': right,
+          }">
          <slot name="content"></slot>
         </div>
         <div class="fullscreen"
