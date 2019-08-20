@@ -312,8 +312,8 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     if (dappBrowser.utils.browserName === 'Firefox' && dappBrowser.utils.isPrivateMode) {
       this.supportedBrowser = false;
     } else {
-      this.supportedBrowser = [
-        'Opera',  'Firefox', 'Safari', 'Chrome', 'Edge', 'Blink',
+      this.supportedBrowser = !dappBrowser.utils.browserName || [
+        'Opera',  'Firefox', 'Safari', 'Chrome', 'Edge', 'Blink', 'Cordova',
       ].indexOf(dappBrowser.utils.browserName) !== -1;
     }
 
