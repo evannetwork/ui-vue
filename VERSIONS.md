@@ -5,6 +5,7 @@
 - `evancore.vue.libs`
   - add `right` / `left` property to `DropdownComponent`
   - check for browser support and block not supported browsers
+  - add `agent-executor` provider support
 
 ### Fixes
 ### Deprecations

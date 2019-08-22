@@ -420,24 +420,51 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     } else {
       this.onboarding = false;
 
-      // set the password function
-      dappBrowser.lightwallet.setPasswordFunction(async () =>
-        // set resolve password
-        await new Promise((resolve) => {
-          this.loading = false;
-          this.login = (password: string) => resolve(password);
-        })
-      );
+      let encryptionKey, privateKey, executor;
 
-      // unlock the profile directly
-      const vault = await dappBrowser.lightwallet.loadUnlockedVault();
+      // if agent-exutor is passed to the dapp-browser, do not try to unlock the current vault
+      const provider = dappBrowser.core.getCurrentProvider();
+      if (provider !== 'agent-executor') {
+        // set the password function
+        dappBrowser.lightwallet.setPasswordFunction(async () =>
+          // set resolve password
+          await new Promise((resolve) => {
+            this.loading = false;
+            this.login = (password: string) => resolve(password);
+          })
+        );
+
+        // unlock the profile directly
+        const vault = await dappBrowser.lightwallet.loadUnlockedVault();
+        encryptionKey = vault.encryptionKey;
+        privateKey = dappBrowser.lightwallet.getPrivateKey(vault, activeAccount);
+      } else {
+        const agentExecutor = await dappBrowser.core.getAgentExecutor();
+        const coreRuntime = dappBrowser.bccHelper.getCoreRuntime();
+
+        encryptionKey = agentExecutor.key;
+        executor = new bcc.ExecutorAgent({
+          agentUrl: agentExecutor.agentUrl,
+          config: {},
+          contractLoader: coreRuntime.contractLoader,
+          logLog: bcc.logLog,
+          logLogLevel: bcc.logLogLevel,
+          signer: coreRuntime.signer,
+          token: agentExecutor.token,
+          web3: coreRuntime.web3,
+        });
+      }
 
       // setup runtime and save it to the axios store
       this.$store.state.runtime = await dappBrowser.bccHelper.createDefaultRuntime(
         bcc,
         activeAccount,
-        vault.encryptionKey,
-        dappBrowser.lightwallet.getPrivateKey(vault, activeAccount)
+        encryptionKey,
+        privateKey,
+        JSON.parse(JSON.stringify(dappBrowser.config)),
+        null,
+        null,
+        { executor },
       );
 
       // send logged in event
