@@ -39,15 +39,16 @@ const nodeEnv = process.argv.indexOf('--prod') !== -1 ?'production' :
 /**
  * Executes and console command
  *
- * @param      {string}       command        command to execute
- * @param      {string}       runtimeFolder  path for runtime folder
+ * @param      {string}       command            command to execute
+ * @param      {string}       runtimeFolder      path for runtime folder
+ * @param      {string}       [result='stdout']  result that should be returned
  * @return     {Promise<any}  resolved when command is finished
  */
-async function runExec(command, runtimeFolder) {
+async function runExec(command, runtimeFolder, result = 'stdout') {
   return new Promise((resolve, reject) => {
     exec(command, { cwd: runtimeFolder, NODE_ENV: nodeEnv }, async (err, stdout, stderr) => {
       if (err) {
-        reject(stdout);
+        reject(result === 'stdout' ? stdout : stderr);
       } else {
         resolve(stdout);
       }

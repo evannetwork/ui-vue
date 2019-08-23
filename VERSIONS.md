@@ -6,6 +6,7 @@
   - add `right` / `left` property to `DropdownComponent`
   - check for browser support and block not supported browsers
   - add `agent-executor` provider support
+- increase build time for dapp only apps that does not needs a d.ts file
 
 ### Fixes
 ### Deprecations
