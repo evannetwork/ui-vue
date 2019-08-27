@@ -25,31 +25,27 @@
   https://evan.network/license/
 */
 
-<template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="{
-            'width': width,
-            'left': left,
-            'right': right,
-          }">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
-    </template>
-   <slot name="content" v-else></slot>
-  </div>
-</template>
-
-<script lang="ts">
-  import Component from './dropdown.ts';
-  export default Component;
-</script>
-
+/**
+ * Returns the default webpack vue externals.
+ *
+ * @param      {any}     customExcludes  object with custom externals
+ * @return     {Object}  object with all externals
+ */
+module.exports = function(customExcludes) {
+  return {
+    '@evan.network/api-blockchain-core': '@evan.network/api-blockchain-core',
+    '@evan.network/smart-contracts-core': '@evan.network/smart-contracts-core',
+    '@evan.network/ui': '@evan.network/ui',
+    '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
+    '@evan.network/ui-vue-core': '@evan.network/ui-vue-core',
+    'axios': 'axios',
+    'moment': 'moment',
+    'vue': 'vue',
+    'vue-material': 'vue-material',
+    'vue-recaptcha': 'vue-recaptcha',
+    'vue-router': 'vue-router',
+    'vuex': 'vuex',
+    'vuex-i18n': 'vuex-i18n',
+    ...(customExcludes || { }) 
+  };
+}
