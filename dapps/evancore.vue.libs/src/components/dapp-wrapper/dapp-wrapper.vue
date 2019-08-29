@@ -30,7 +30,6 @@
     :id="id"
     :class="{
       'show-sidebar': showSideBar,
-      'show-sidebar-2': showSideBar2 && visibleSideBar2,
     }">
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
 
@@ -53,38 +52,142 @@
       <template v-else-if="!login">
         <div class="dapp-wrapper-sidebar" v-if="!onboarding && enableSidebar">
           <slot name="sidebar">
-            <div class="d-flex flex-column h-100">
-              <ul class="nav font-medium in w-100" id="main-menu">
-                <li v-for="(route, index) in routes">
-                  <a
-                    :id="`evan-dapp-${ route.path.split('.')[0] }`"
-                    :class="{ active: route.path && $route.path.startsWith(route.fullPath) }"
-                    :href="route.path ? `${ dapp.fullUrl }/${ route.path }` : null"
-                    @click="routeActivated(route)">
-                    <i :class="route.icon" data-icon="v"></i>
-                    <evan-tooltip :placement="'right'">
-                      {{ route.title | translate }}
-                    </evan-tooltip>
-                  </a>
-                </li>
-              </ul>
+            <ul class="nav">
+              <li v-for="(route, index) in routes">
+                <a
+                  :id="`evan-dapp-${ (route.path || route.id).split('.')[0] }`"
+                  :class="{ active: route.path && $route.path.startsWith(route.fullPath) }"
+                  :href="route.path ? `${ dapp.fullUrl }/${ route.path }` : null"
+                  @click="routeActivated(route)">
+                  <i :class="route.icon" data-icon="v"></i>
+                  <evan-tooltip :placement="'right'">
+                    {{ route.title | translate }}
+                  </evan-tooltip>
+                </a>
+              </li>
+            </ul>
+            <span class="my-md-auto"></span>
+            <ul class="nav mb-2"
+              v-if="bottomRoutes">
+              <li
+                v-for="(route, index) in bottomRoutes"
+                :style="{ order: index * 10 }">
+                <a
+                  :id="`evan-dapp-${ (route.path || route.id).split('.')[0] }`"
+                  :class="{ active: route.path && $route.path.startsWith(route.fullPath) }"
+                  :href="route.path ? `${ dapp.fullUrl }/${ route.path }` : null"
+                  @click="routeActivated(route)">
+                  <i class="position-relative" :class="route.icon">
+                    <span class="notification-dot"
+                      v-if="route.path.startsWith('mailbox.vue') && userInfo.newMailCount !== 0">
+                    </span>
+                  </i>
+                  <evan-tooltip :placement="'right'">
+                    {{ route.title | translate }}
+                  </evan-tooltip>
+                </a>
+              </li>
 
-              <ul class="nav small font-medium in w-100 mb-3 mt-auto" id="main-menu"
-                v-if="bottomRoutes">
-                <li v-for="(route, index) in bottomRoutes">
-                  <a
-                    :id="`evan-dapp-${ route.path.split('.')[0] }`"
-                    :class="{ active: route.path && $route.path.startsWith(route.fullPath) }"
-                    :href="route.path ? `${ dapp.fullUrl }/${ route.path }` : null"
-                    @click="routeActivated(route)">
-                    <i :class="route.icon" data-icon="v"></i>
-                    <evan-tooltip :placement="'right'">
-                      {{ route.title | translate }}
-                    </evan-tooltip>
-                  </a>
-                </li>
-              </ul>
-            </div>
+              <li style="order: 5">
+                <a
+                  :id="`evan-dapp-synchronisation`"
+                  :class="{ active: $refs.queueDropdown && $refs.queueDropdown.isShown }"
+                  @click="$refs.queueDropdown.show()">
+                  <div class="spinner-border spinner-border-sm"
+                    v-if="queueLoading || queueCount">
+                  </div>
+                  <template v-else>
+                    <i class="mdi mdi-alert text-secondary"
+                      v-if="queueErrorCount">
+                    </i>
+                    <i class="mdi mdi-sync"
+                      v-else>
+                    </i>
+                  </template>
+                  <evan-tooltip :placement="'right'">
+                    {{ '_evan._routes.synchronisation' | translate }}
+                  </evan-tooltip>
+                </a>
+                <evan-dropdown ref="queueDropdown"
+                  class="queue-dropdown">
+                  <template v-slot:content>
+                    <div class="p-3 d-flex align-items-center">
+                      <h6 class="m-0 text-truncate">
+                        {{ '_evan.dapp-wrapper.queue' | translate }}
+                      </h6>
+                      <span class="mx-auto"></span>
+                      <div>
+                        <button class="btn p-0">
+                          <i class="mdi mdi-close"
+                            @click="$refs.queueDropdown.hide()">
+                          </i>
+                        </button>
+                      </div>
+                    </div>
+                    <span class="p-3 d-block" 
+                      v-if="queueCount === 0 && queueErrorCount === 0">
+                      {{ '_evan.dapp-wrapper.empty-queue' | translate }}
+                    </span>
+                    <div class="p-3"
+                      v-for="(instance, index) in queueInstances"
+                      :id="`evan-dropdown-queue-${ index }`"
+                      @click="">
+                      <template v-if="instance.dispatcher">
+                        <div class="d-flex">
+                          <strong class="d-block mb-2">
+                            {{ instance.dispatcher.title | translate }}
+                          </strong>
+                          <span class="mx-auto"></span>
+                          <span>
+                            {{ `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }}
+                          </span>
+                        </div>
+
+                        <div class="d-flex align-items-end">
+                          <div class="w-100 d-flex align-items-center" v-if="instance.dispatcher">
+                            <div class="progress w-100" style="height: 1.3em">
+                              <div class="progress-bar bg-primary"
+                                :class="{ 'progress-bar-animated progress-bar-striped': instance.running }"
+                                :style="{ 'width': `${ (instance.stepIndex / instance.dispatcher.steps.length) * 100 }%` }">
+                              </div>
+                            </div>
+                            <i class="mdi mdi-pause ml-3 text-muted clickable"
+                              style="font-size: 1.5em"
+                              v-if="instance.status === 'running' && instance.stepIndex < instance.dispatcher.steps.length - 1"
+                              @click="instance.stop()">
+                            </i>
+                            <div class="spinner-grow spinner-grow-sm ml-3"
+                              v-if="instance.status === 'running' || instance.status === 'stopping'">
+                            </div>
+                            <template v-if="instance.status !== 'running' && instance.status !== 'stopping'">
+                              <i class="mdi mdi-play ml-3 text-primary clickable"
+                                style="font-size: 1.5em"
+                                @click="startDispatcherInstance(instance);">
+                              </i>
+                              <i class="mdi mdi-close-circle ml-3 text-light clickable"
+                                style="font-size: 1.5em"
+                                @click="
+                                  instanceInteraction = { type: 'delete', instance: instance };
+                                  $refs.instanceInteraction.show();
+                                ">
+                              </i>
+                            </template>
+                          </div>
+                        </div>
+                        <span class="text-secondary mt-3 text-wrap" v-if="instance.error">
+                          {{ '_evan.dapp-wrapper.queue-error' | translate }}
+                        </span>
+                      </template>
+                      <div v-else>
+                        <strong class="m-0 font-weight-bold mb-2">
+                          {{ '_evan.dispatcher-not-found' | translate }}
+                        </strong>
+                      </div>
+                    </div>
+                  </template>
+                </evan-dropdown>
+              </li>
+            </ul>
           </slot>
         </div>
 
@@ -99,11 +202,6 @@
           </div>
           <div class="dapp-wrapper-content-wrapper flex-row">
             <template v-if="!onboarding">
-              <!-- close side panel on medium screens -->
-              <div class="dapp-wrapper-sidebar-background"
-                @click="showSideBar = false;">
-              </div>
-
               <div class="dapp-wrapper-sidebar-2">
                 <!-- will be filled by using the dapp-wrapper-sidebar-level-2 component -->
               </div>

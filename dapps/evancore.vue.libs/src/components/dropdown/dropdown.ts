@@ -54,14 +54,9 @@ export default class DropdownComponent extends mixins(EvanComponent) {
   @Prop({ default: 'auto' }) width: string;
 
   /**
-   * Custom position left position (e.g. 80px)
+   * Custom style object
    */
-  @Prop({ }) left: string;
-
-  /**
-   * Custom position right position (e.g. 80px)
-   */
-  @Prop({ }) right: string;
+  @Prop({ }) customStyle: string;
 
   /**
    * Disables the dropdown functionality (used to handle dropdowns and single buttons within the

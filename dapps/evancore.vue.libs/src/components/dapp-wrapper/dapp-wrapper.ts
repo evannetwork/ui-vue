@@ -106,8 +106,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     default: function(options) {
       return [
         { title: `${ i18nPref }.actions`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-format-list-checks' },
-        { title: `${ i18nPref }.synchronisation`, path: '', icon: 'mdi mdi-sync' },
-        { title: `${ i18nPref }.help`, path: `documentation`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
+        { title: `${ i18nPref }.help`, path: `help.vue.${ domainName }`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
         { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account-outline' },
       ];
     }
@@ -159,16 +158,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    * show sidebar on small / medium devices?
    */
   showSideBar = false;
-
-  /**
-   * show second level navigation on small devices?
-   */
-  showSideBar2 = true;
-
-  /**
-   * Move (but not remove) sidebar level 2 to show main navigation
-   */
-  visibleSideBar2 = false;
 
   /**
    * login function that was applied by the setPasswordFunction
@@ -223,16 +212,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    * Watch for sidebar close events, so it can be closed from outside
    */
   sideBarCloseWatcher: any;
-
-  /**
-   * Core routes that will be displayed in the top right user dropdown
-   */
-  coreRoutes = [
-    { title: `favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-bookmark' },
-    { title: `mailbox`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-email' },
-    { seperator: true },
-    { title: `contacts`, path: `addressbook.vue.${ domainName }`, icon: 'mdi mdi-book-multiple' },
-  ];
 
   /**
    * Is the current browser supported? Else show info dialog and stop everything.

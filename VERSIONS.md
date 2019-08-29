@@ -2,6 +2,8 @@
 
 ## Next Version
 ### Features
+- `evan-dropdown` allows inner `customStyle` param (left, right props are removed)
+- new `dapp-wrapper` design
 
 ### Fixes
 
