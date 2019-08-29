@@ -90,12 +90,10 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     type: Array,
     default: function(options) {
       return [
-        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-fingerprint' },
-        { title: `${ i18nPref }.favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
-        { title: `${ i18nPref }.contacts`, path: `addressbook.vue.${ domainName }`, icon: 'mdi mdi-account-group-outline' },
-        // { title: `${ i18nPref }.organizations`, path: `organizations.${ domainName }`, icon: 'mdi mdi-domain' },
-        // { title: `${ i18nPref }.mailbox`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-email' },
-        // { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account' },
+        { title: `${ i18nPref }.favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-apps text-primary' },
+        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-cube-outline' },
+        { title: `${ i18nPref }.verifications`, path: `verifications.vue.${ domainName }`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
+        { title: `${ i18nPref }.explorer`, path: `explorer.vue.${ domainName }`, icon: 'mdi mdi-magnify' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
@@ -105,6 +103,14 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    */
   @Prop({
     type: Array,
+    default: function(options) {
+      return [
+        { title: `${ i18nPref }.actions`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-format-list-checks' },
+        { title: `${ i18nPref }.synchronisation`, path: '', icon: 'mdi mdi-sync' },
+        { title: `${ i18nPref }.help`, path: `documentation`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
+        { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account-outline' },
+      ];
+    }
   }) bottomRoutes: Array<DAppWrapperRouteInterface>;
 
   /**
@@ -136,11 +142,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    * something quickly and directly after this remove the content and show the login or onboarding
    */
   loading = true;
-
-  /**
-   * is the small toolbar shown on large devices?
-   */
-  smallToolbar: boolean = window.localStorage['evan-small-toolbar'] ? true : false;
 
   /**
    * Is the sidebar enabled and should be shown? Per defaul enabled, but when no routes are defined
@@ -255,34 +256,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     }
 
     return this.$route.path;
-  }
-
-  /**
-   * Toggles the toolbar large and small on big screens, on medium screens show hide the toolbar, on
-   * small screens, show / hide both toolbars.
-   */
-  toggleSmallToolbar() {
-    if (window.innerWidth < 992) {
-      this.showSideBar = !this.showSideBar;
-
-      // if sidebar 2 is used, show it directly
-      if (document.querySelectorAll(this.sideBar2Selector).length !== 0) {
-        this.showSideBar2 = true;
-        this.visibleSideBar2 = true;
-      } else {
-        this.showSideBar2 = false;
-        this.visibleSideBar2 = false;
-      }
-    } else {
-      this.smallToolbar = !this.smallToolbar;
-
-      // set or clear the localStorage variable
-      if (this.smallToolbar) {
-        window.localStorage['evan-small-toolbar'] = true;
-      } else {
-        delete window.localStorage['evan-small-toolbar'];
-      }
-    }
   }
 
   /**
