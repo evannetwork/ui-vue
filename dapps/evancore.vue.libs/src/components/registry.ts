@@ -30,15 +30,17 @@ import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
+import ButtonComponent from './button/button.vue';
 import ContactBatchComponent from './contact-batch/contact-batch.vue';
+import ComponentsOverview from './components-overview/components-overview.vue';
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
 import DAppLoadingComponent from './loading/loading.vue';
 import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
-import IframeComponent from './iframe/iframe.vue';
 import FileInputComponent from './files/files.vue';
+import IframeComponent from './iframe/iframe.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
@@ -50,7 +52,9 @@ import TooltipComponent from './tooltip/tooltip.vue';
 // export them all, so other applications can access them
 export {
   BreadcrumbsComponent,
+  ButtonComponent,
   ContactBatchComponent,
+  ComponentsOverview,
   DAppLoaderComponent,
   DAppLoadingComponent,
   DAppWrapperComponent,
@@ -71,7 +75,9 @@ export {
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
+  { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-contact-batch', component: ContactBatchComponent },
+  { name: 'evan-components-overview', component: ComponentsOverview },
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },

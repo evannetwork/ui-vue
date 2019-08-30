@@ -36,7 +36,7 @@ export default {
       "organizations": "Organizations",
       "profile": "Profile"
     },
-    "cancel": "Close",
+    "cancel": "Cancel",
     "dapp-wrapper": {
       "all-messages": "All messages",
       "empty-queue": "Everything is synchronized...",
