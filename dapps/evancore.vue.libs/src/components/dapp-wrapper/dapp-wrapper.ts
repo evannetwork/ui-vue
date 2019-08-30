@@ -106,7 +106,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     default: function(options) {
       return [
         { title: `${ i18nPref }.actions`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-format-list-checks' },
-        { title: `${ i18nPref }.help`, path: `help.vue.${ domainName }`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
+        { title: `${ i18nPref }.help`, path: `help.vue.${ domainName }`, icon: 'mdi mdi-help-circle-outline' },
         { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account-outline' },
       ];
     }
@@ -153,6 +153,11 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    * or onboarding process.
    */
   enableNav = true;
+
+  /**
+   * Is the sidebar-level-2 enabled?
+   */
+  enabledSideBar2 = false;
 
   /**
    * show sidebar on small / medium devices?
@@ -214,9 +219,20 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   sideBarCloseWatcher: any;
 
   /**
+   * Watch for sidebar enable events, so we can enable and disable menu button on small devices
+   */
+  sidebar2EnableWatcher: any;
+  sidebar2DisableWatcher: any;
+
+  /**
    * Is the current browser supported? Else show info dialog and stop everything.
    */
   supportedBrowser: any;
+
+  /**
+   * Used to hide / display queue panel
+   */
+  showQueuePanel = false;
 
   /**
    * Returns the i18n title key for the active route.
@@ -278,7 +294,11 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     }
 
     this.sideBarCloseWatcher = ($event: CustomEvent) => this.showSideBar = false;
+    this.sidebar2EnableWatcher = ($event: CustomEvent) => this.enabledSideBar2 = true;
+    this.sidebar2DisableWatcher = ($event: CustomEvent) => this.enabledSideBar2 = false;
     window.addEventListener('dapp-wrapper-sidebar-close', this.sideBarCloseWatcher);
+    window.addEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
+    window.addEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
   }
 
 
@@ -292,9 +312,12 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     this.mailsWatcher && window.clearInterval(this.mailsWatcher);
     // clear queue watcher
     this.userInfo && this.queueWatcher && this.queueWatcher();
-    // return the watch remove function
+    // remove the watch function
     this.sideBarCloseWatcher && window.removeEventListener(`evan-queue-${ this.id }`,
       this.sideBarCloseWatcher);
+    // unbind dapp-wrapper-sidebar level handlers
+    window.removeEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
+    window.removeEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
   }
 
   /**
