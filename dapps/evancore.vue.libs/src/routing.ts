@@ -100,7 +100,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
 
   // overwrite origin router.push, to handle correct base hash handling
   const originPush = router.push;
-  router.push = (location, onComplete, onAbort) => {
+  (<any>router).push = (location, onComplete, onAbort) => {
     let newPath = typeof location === 'string' ? location : location.path;
 
     if (newPath) {

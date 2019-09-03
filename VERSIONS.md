@@ -2,8 +2,19 @@
 
 ## Next Version
 ### Features
+
 ### Fixes
+
 ### Deprecations
+
+
+## Version 1.5.0
+### Features
+- `evancore.vue.libs`
+  - add `right` / `left` property to `DropdownComponent`
+  - check for browser support and block not supported browsers
+  - add `agent-executor` provider support
+- increase build time for dapp only apps that does not needs a d.ts file
 
 
 ## Version 1.4.0
