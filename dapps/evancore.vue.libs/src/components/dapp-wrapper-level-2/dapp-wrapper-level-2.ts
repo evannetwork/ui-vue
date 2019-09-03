@@ -81,6 +81,9 @@ export default class DAppWrapperLevel2Component extends mixins(EvanComponent) {
 
       // append the current element
       this.contentElement && this.highestSidebar.appendChild(this.contentElement);
+
+      // enable sidebar level 2 handler on small devices for displaying menu button
+      window.dispatchEvent(new CustomEvent('dapp-wrapper-sidebar-2-enable'));
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');
@@ -109,6 +112,9 @@ export default class DAppWrapperLevel2Component extends mixins(EvanComponent) {
       try {
         this.contentElement && this.highestSidebar.removeChild(this.contentElement);
       } catch (ex) { }
+
+      // disable sidebar level 2 handler on small devices for removing menu button
+      window.dispatchEvent(new CustomEvent('dapp-wrapper-sidebar-2-disable'));
     }
   }
 

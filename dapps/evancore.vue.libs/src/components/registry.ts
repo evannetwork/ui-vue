@@ -46,6 +46,7 @@ import ModalComponent from './modal/modal.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
 import SuccessComponent from './success/success.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
+import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 
 // export them all, so other applications can access them
 export {
@@ -64,6 +65,7 @@ export {
   ModalComponent,
   NavTabsComponent,
   SuccessComponent,
+  SwipePanelComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
 }
@@ -82,9 +84,10 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-login', component: LoginComponent },
   { name: 'evan-logout', component: LogoutComponent },
   { name: 'evan-modal', component: ModalComponent },
-  { name: 'evan-success', component: SuccessComponent },
-  { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
+  { name: 'evan-success', component: SuccessComponent },
+  { name: 'evan-swipe-panel', component: SwipePanelComponent },
+  { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
 ];
 

@@ -29,12 +29,14 @@
 export default {
   "_evan": {
     "_routes": {
-      "contacts": "Kontakte",
+      "actions": "Aktionen",
       "digitaltwins": "Digitale Zwillinge",
-      "favorites": "Favoriten",
-      "mailbox": "Nachrichten",
-      "organizations": "Organisationen",
-      "profile": "Mein Profil"
+      "explorer": "Explorer",
+      "favorites": "DApps",
+      "help": "Hilfe",
+      "profile": "Profil",
+      "synchronisation": "Synchronisation",
+      "verifications": "Verifikations-Center"
     },
     "browser-not-supported": {
       "desc": "Bitte gehen Sie sicher, dass Sie einen der folgenden Browsern verwenden:<ul><li>Chrome</li><li>Edge</li><li>Firefox (kein privater Modus!)</li><li>Opera</li><li>Safari</li></ul>",
