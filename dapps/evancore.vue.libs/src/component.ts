@@ -30,7 +30,7 @@ import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import vuexI18n from 'vuex-i18n';
+import any from 'vuex-i18n';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
@@ -58,8 +58,9 @@ export default class EvanComponent extends Vue {
   /**
    * Declare vue stuff
    */
-  $i18n: vuexI18n;
+  $i18n: any;
   $router: VueRouter;
+  $route: any;
   $store: any;
   $t: any;
 
