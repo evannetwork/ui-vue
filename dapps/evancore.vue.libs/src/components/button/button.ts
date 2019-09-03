@@ -42,12 +42,12 @@ export default class Button extends mixins(EvanComponent) {
   /**
    * Button Label.
    */
-  @Prop({ type: String }) label : String;
+  @Prop({ type: String }) label: String;
 
   /**
    * disabled option, passed to html button element
    */
-  @Prop({ type: Boolean, default: false }) disabled : Boolean;
+  @Prop({ type: Boolean, default: false }) disabled: Boolean;
 
   /**
    * The class name for the material design icon, without prefixed 'mdi'.
