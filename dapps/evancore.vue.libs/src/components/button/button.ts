@@ -56,7 +56,7 @@ export default class Button extends mixins(EvanComponent) {
    */
   @Prop({
     type: String,
-    validator: value => value.slice(0,3) === 'mdi' // TODO: validator seems not to be called
+    validator: value => value.slice(0, 3) === 'mdi' // TODO: validator seems not to be called
   }) icon: String;
 
   /**
