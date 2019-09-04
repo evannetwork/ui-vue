@@ -2,6 +2,10 @@
 
 ## Next Version
 ### Features
+- `evancore.vue.libs`
+  - `evan-dropdown` allows inner `customStyle` param (left, right props are removed)
+  - new `dapp-wrapper` design
+  - add `evan-swipe-panel` component
 
 ### Fixes
 

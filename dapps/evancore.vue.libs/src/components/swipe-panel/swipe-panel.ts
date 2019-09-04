@@ -38,31 +38,20 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 /**
  * Bootstrap dropdown menu wrapper in evan.network style.
  *
- * @class         DropdownComponent
+ * @class         SidePanelComponent
  * @selector      evan-dropdown
  */
 @Component({ })
-export default class DropdownComponent extends mixins(EvanComponent) {
+export default class SidePanelComponent extends mixins(EvanComponent) {
   /**
-   * Where should the popup should been attached?
+   * Where should the popup should been attached? (left / right)
+   */
+  @Prop({ default: '400px' }) width: string;
+
+  /**
+   * Where should the popup should been attached? (left / right)
    */
   @Prop({ default: 'left' }) alignment: string;
-
-  /**
-   * Dropdown width specification (e.g. 100px)
-   */
-  @Prop({ default: 'auto' }) width: string;
-
-  /**
-   * Custom style object
-   */
-  @Prop({ }) customStyle: string;
-
-  /**
-   * Disables the dropdown functionality (used to handle dropdowns and single buttons within the
-   * same component)
-   */
-  @Prop() renderOnlyContent;
 
   /**
    * shows the dom elements of the modal
@@ -75,11 +64,23 @@ export default class DropdownComponent extends mixins(EvanComponent) {
   isShown = false;
 
   /**
+   * Wait until the swipe panel is rendered, so it can be shown using animation.
+   */
+  waitForRendered;
+
+  /**
    * Renders the modal element and shows it animated.
    */
   show() {
     this.isRendered = true;
-    this.$nextTick(() => this.isShown = true);
+
+    // wait until swipe panel is rendered and show it
+    this.waitForRendered = setInterval(() => {
+      if (this.$el.querySelectorAll('.evan-swipe-panel').length > 0) {
+        clearInterval(this.waitForRendered);
+        setTimeout(() => this.isShown = true);
+      }
+    }, 10);
   }
 
   /**
@@ -87,7 +88,11 @@ export default class DropdownComponent extends mixins(EvanComponent) {
    */
   hide($event) {
     this.isShown = false;
-    this.$nextTick(() => this.isRendered = false);
+    // it the panel was faster closed than opened, remov the wait for rendered watcher
+    clearInterval(this.waitForRendered);
+
+    // remove the swipe panel content
+    setTimeout(() => this.isRendered = false, 400);
 
     if ($event) {
       $event.stopPropagation();

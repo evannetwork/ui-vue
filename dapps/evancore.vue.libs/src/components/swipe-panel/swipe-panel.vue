@@ -26,26 +26,23 @@
 */
 
 <template>
-  <div>
-    <template v-if="!renderOnlyContent">
-      <template v-if="isRendered">
-        <div class="dropdown-menu p-0"
-          v-on:click.prevent=""
-          :class="`${ isShown ? 'show' : '' } ${ alignment ? 'dropdown-menu-' + alignment : '' }`"
-          :style="customStyle">
-         <slot name="content"></slot>
-        </div>
-        <div class="fullscreen"
-          @click="hide($event)">
-        </div>  
-      </template>
+  <div :style="`--evan-swipe-panel-size: ${ width }`">
+    <template v-if="isRendered">
+      <div class="evan-swipe-panel"
+        v-on:click.prevent=""
+        :class="`${ isShown ? 'show' : '' } ${ alignment ? 'alignment-' + alignment : '' }`"
+        :style="customStyle">
+        <slot></slot>
+      </div>
+      <div class="fullscreen"
+        @click="hide($event)">
+      </div>  
     </template>
-   <slot name="content" v-else></slot>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './dropdown.ts';
+  import Component from './swipe-panel.ts';
   export default Component;
 </script>
 
