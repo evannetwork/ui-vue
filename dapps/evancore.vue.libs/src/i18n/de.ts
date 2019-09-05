@@ -35,7 +35,7 @@ export default {
       "favorites": "DApps",
       "help": "Hilfe",
       "profile": "Profil",
-      "synchronisation": "Synchronisation",
+      "synchronization": "Synchronisation",
       "verifications": "Verifikations-Center"
     },
     "browser-not-supported": {
