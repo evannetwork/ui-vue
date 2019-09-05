@@ -68,7 +68,7 @@ export default class Button extends mixins(EvanComponent) {
    * added as usual bootstrap buttons.
    */
   knownTypes = {
-    'icon': 'btn-icon-primary',
+    'icon': 'btn-icon-secondary',
     'icon-primary': 'btn-icon-primary',
     'icon-secondary': 'btn-icon-secondary',
     'link': 'btn-link',

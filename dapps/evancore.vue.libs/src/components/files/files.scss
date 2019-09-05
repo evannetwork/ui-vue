@@ -49,7 +49,11 @@
     }
 
     a, button {
+      height: auto;
+
       vertical-align: text-bottom;
+
+      box-shadow: none !important;
     }
 
     &:hover * {
