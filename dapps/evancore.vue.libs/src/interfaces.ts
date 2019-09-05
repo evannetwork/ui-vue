@@ -44,7 +44,7 @@ export interface RouteRegistrationInterface {
 export interface DAppWrapperRouteInterface {
   fullPath?: string; // '/dashboard.evan/favorites.evan'
   icon: string; // 'mdi mdi-bookmark'
-  id?: string; // 'synchronisation'
+  id?: string; // 'synchronization'
   path?: string; // 'favorites.evan'
   title: string; // '_dashboard.routes.favorites'
 }

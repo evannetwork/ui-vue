@@ -149,7 +149,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   enableSidebar = true;
 
   /**
-   * Enables the nav bar icons including mailbox, synchronisation, .... Will be disabled uring login
+   * Enables the nav bar icons including mailbox, synchronization, .... Will be disabled uring login
    * or onboarding process.
    */
   enableNav = true;

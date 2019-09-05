@@ -98,7 +98,7 @@
 
               <li style="order: 15">
                 <a
-                  id="evan-dapp-synchronisation"
+                  id="evan-dapp-synchronization"
                   :class="{ active: $refs.queuePanel && $refs.queuePanel.isShown }"
                   @click="$refs.queuePanel.show();">
                   <div class="spinner-border spinner-border-sm"
@@ -113,7 +113,7 @@
                     </i>
                   </template>
                   <evan-tooltip :placement="'right'">
-                    {{ '_evan._routes.synchronisation' | translate }}
+                    {{ '_evan._routes.synchronization' | translate }}
                   </evan-tooltip>
                 </a>
                 <evan-swipe-panel ref="queuePanel" :alignment="'left'">
@@ -132,7 +132,7 @@
                   </span>
                   <div class="p-3"
                     v-for="(instance, index) in queueInstances"
-                    :id="`evan-dropdown-queue-${ index }`"
+                    :id="`evan-panel-queue-${ index }`"
                     @click="">
                     <template v-if="instance.dispatcher">
                       <div class="d-flex">
