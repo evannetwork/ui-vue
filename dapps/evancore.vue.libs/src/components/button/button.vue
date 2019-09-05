@@ -26,30 +26,19 @@
 */
 
 <template>
-  <div class="wrapper">
-    <button
-      type="button"
-      @click="$emit('click', $event)"
-      :class="[{[`btn-${type}`]: type}, 'btn']"
-      :disabled="disabled"
-    >
-      <template v-if="icon && !label">
-        <i :class="['mdi', icon, 'centered']"></i>
-      </template>
-      <template v-else>
-        <i v-if="icon && iconPosition === 'left'" :class="['mdi', icon, 'label', 'left']"></i>
-        <span>{{label}}</span>
-        <i v-if="icon && iconPosition === 'right'" :class="['mdi', icon, 'label', 'right']"></i>
-      </template>
-    </button>
-  </div>
+  <button class="btn"
+    :class="[
+      { [ knownTypes[type] ]: knownTypes[type] },
+      { [ `btn-${ type }` ]: !knownTypes[type] },
+      { [ `btn-${ size }` ]: size !== 'normal'  },
+    ]"
+    :disabled="disabled"
+    @click="$emit('click', $event)">
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts">
   import Button from './button';
   export default Button;
 </script>
-
-<style lang="scss" scoped>
-  @import './button.scss';
-</style>

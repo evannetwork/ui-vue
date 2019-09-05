@@ -40,45 +40,42 @@ import { Prop, Watch } from 'vue-property-decorator';
 @Component({ })
 export default class Button extends mixins(EvanComponent) {
   /**
-   * Button Label.
-   */
-  @Prop({ type: String }) label: String;
-
-  /**
    * disabled option, passed to html button element
    */
-  @Prop({ type: Boolean, default: false }) disabled: Boolean;
+  @Prop({
+    type: Boolean,
+    default: false,
+  }) disabled: boolean;
 
   /**
-   * The class name for the material design icon, without prefixed 'mdi'.
-   *
-   * @see: https://materialdesignicons.com/cdn/2.0.46/
+   * size of the button (lg, normal, sm)
    */
   @Prop({
     type: String,
-    validator: value => value.slice(0, 3) === 'mdi' // TODO: validator seems not to be called
-  }) icon: String;
+    default: 'normal',
+  }) size: string;
 
   /**
-   * Button type. Currently 'primary', 'secondary' and 'danger' are supported.
-   * TODO: 'icon', 'text', 'link'
+   * Evan specific button type (have a look at known types) + bootstrap definitions
    */
   @Prop({
     type: String,
     default: 'secondary',
-    validator: (value: string) => {
-      return ['primary', 'secondary'].indexOf(value) !== -1 // TODO: validator seems not to be called
-    }
-  }) type: String
+  }) type: string;
 
   /**
-   * Defines whether the icon is shown before or after the label.
+   * Evan specific button definitions mapped to it's classes. By applying other types, they will be
+   * added as usual bootstrap buttons.
    */
-  @Prop({
-    type: String,
-    default: 'right',
-    validator: (value: string) => {
-      return ['left', 'right'].indexOf(value) !== -1 // TODO: validator seems not to be called
-    }
-  }) iconPosition;
+  knownTypes = {
+    'icon': 'btn-icon-primary',
+    'icon-primary': 'btn-icon-primary',
+    'icon-secondary': 'btn-icon-secondary',
+    'link': 'btn-link',
+    'primary': 'btn-primary',
+    'secondary': 'btn-outline-primary',
+    'text': 'btn-text-primary',
+    'text-primary': 'btn-text-primary',
+    'text-secondary': 'btn-text-secondary',
+  };
 }
