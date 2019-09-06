@@ -26,44 +26,34 @@
 */
 
 <template>
-  <div class="evan-nav-list">
-    <evan-logout ref="logoutComp"
-      disableButton="true"
-      v-if="showLogout">
-    </evan-logout>
-    <slot name="header">
-      <evan-profile-preview
-        :address="$store.state.runtime.activeAccount">
-      </evan-profile-preview>
-    </slot>
-    <div class="nav-entries">
-      <template
-        v-for="(entry, index) in entries">
-        <span v-if="!entry" class="my-auto"></span>
-        <a
-          v-else
-          :id="entry.id"
-          :class="[
-            { 'active': activeEntry === index },
-            `entry-${ index + 1 }`
-          ]"
-          :href="entry.href"
-          @click="entry.action && entry.action();">
-          <i class="mr-3" :class="entry.icon"></i>
-          {{ entry.text | translate }}
-        </a>
-      </template>
+  <span
+    class="evan-address"
+    :class="this.class"
+    @mouseenter="hover = true;"
+    @mouseleave="hover = false;">
+    {{ address }}
+    <div class="interactions">
+      <button class="btn btn-sm btn-icon"
+        @click="copyAddress();">
+        <i class="mdi mdi-content-copy"></i>
+        <evan-tooltip>{{ '_evan.address.copy' | translate }}</evan-tooltip>
+      </button>
+      <a class="btn btn-sm btn-icon"
+        target="_blank"
+        :href="`https://testexplorer.evan.network/address/${ address }/transactions`">
+        <i class="mdi mdi-map-marker-path"></i>
+        <evan-tooltip>{{ '_evan.address.open-in-explorer' | translate }}</evan-tooltip>
+      </a>
     </div>
-    <a id="evan-logout"
-      @click="$refs.logoutComp.logout();">
-      <i class="mr-3 mdi mdi-logout"></i>
-      {{ '_evan.logout' | translate }}
-    </a>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
-  import Component from './nav-list.ts';
+  import Component from './address.ts';
   export default Component;
 </script>
+
+<style lang="scss" scoped>
+  @import './address.scss';
+</style>
 

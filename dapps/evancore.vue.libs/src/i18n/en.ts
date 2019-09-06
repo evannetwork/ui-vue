@@ -38,6 +38,11 @@ export default {
       "synchronization": "Synchronization",
       "verifications": "Verification Center"
     },
+    "address": {
+      "copied": "Address copied...",
+      "copy": "Copy",
+      "open-in-explorer": "Open in Explorer"
+    },
     "browser-not-supported": {
       "desc": "Please be sure to use one of the following browsers:<ul><li>Chrome</li><li>Edge</li><li>Firefox (no private mode!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Your browser is not supported"
@@ -45,6 +50,16 @@ export default {
     "cancel": "Cancel",
     "dapp-wrapper": {
       "all-messages": "All messages",
+      "dispatcher-status": {
+        "deleted": "{title} Synchronization deleted",
+        "deleting": "Deleting {title} ({percentage}%)",
+        "error": "Error {title} ({percentage}%)",
+        "finished": "{title} completed",
+        "running": "{title} ({percentage}%)",
+        "stopped": "Stopped {title} ({percentage}%)",
+        "stopping": "Stopping {title} ({percentage}%)",
+        "starting": "Starting {title}"
+      },
       "empty-queue": "Everything is synchronized...",
       "instance-accept": {
         "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
@@ -82,9 +97,14 @@ export default {
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
+    "profile": {
+      "types": {
+        "unspecified": "unspecified account"
+      }
+    },
     "under-development": {
-      "desc": "The area shown is currently under development and will be available soon.",
-      "title": "Under development"
+      "desc": "The area shown is currently under construction and will be available soon.",
+      "title": "Under construction"
     },
     "use-password": "Unlock",
     "view-profile": "View Profile",

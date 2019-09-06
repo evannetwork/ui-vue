@@ -29,6 +29,7 @@
 import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
+import AddressComponent from './address/address.vue';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ButtonComponent from './button/button.vue';
 import ContactBatchComponent from './contact-batch/contact-batch.vue';
@@ -45,6 +46,7 @@ import LogoutComponent from './logout/logout.vue';
 import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
+import ProfilePreview from './profile-preview/profile-preview.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
@@ -52,6 +54,7 @@ import UnderDevelopmentComponent from './under-development/under-development.vue
 
 // export them all, so other applications can access them
 export {
+  AddressComponent,
   BreadcrumbsComponent,
   ButtonComponent,
   ContactBatchComponent,
@@ -68,6 +71,7 @@ export {
   ModalComponent,
   NavListComponent,
   NavTabsComponent,
+  ProfilePreview,
   SuccessComponent,
   SwipePanelComponent,
   TooltipComponent,
@@ -76,6 +80,7 @@ export {
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
+  { name: 'evan-address', component: AddressComponent },
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-contact-batch', component: ContactBatchComponent },
@@ -91,6 +96,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
+  { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
   { name: 'evan-tooltip', component: TooltipComponent },

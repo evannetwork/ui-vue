@@ -26,44 +26,29 @@
 */
 
 <template>
-  <div class="evan-nav-list">
-    <evan-logout ref="logoutComp"
-      disableButton="true"
-      v-if="showLogout">
-    </evan-logout>
-    <slot name="header">
-      <evan-profile-preview
-        :address="$store.state.runtime.activeAccount">
-      </evan-profile-preview>
-    </slot>
-    <div class="nav-entries">
-      <template
-        v-for="(entry, index) in entries">
-        <span v-if="!entry" class="my-auto"></span>
-        <a
-          v-else
-          :id="entry.id"
-          :class="[
-            { 'active': activeEntry === index },
-            `entry-${ index + 1 }`
-          ]"
-          :href="entry.href"
-          @click="entry.action && entry.action();">
-          <i class="mr-3" :class="entry.icon"></i>
-          {{ entry.text | translate }}
-        </a>
+  <a class="d-flex align-items-center p-4"
+    style="height: auto;"
+    :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }`">
+    <b class="text-dark d-flex mr-3 align-items-center justify-content-center"
+      style="height: 30px; width: 30px; background-color: var(--evan-gray-400)">
+      ?
+    </b>
+    <div class="d-flex flex-column justify-content-center">
+      <template v-if="loading">
+        <b class="text-dark">...</b>
+        <small class="text-muted">...</small>
+      </template>
+      <template v-else>
+        <b class="text-dark">{{ userInfo.alias }}</b>
+        <small class="text-muted">{{ `_evan.profile.types.${ userInfo.type }` | translate }}</small>
       </template>
     </div>
-    <a id="evan-logout"
-      @click="$refs.logoutComp.logout();">
-      <i class="mr-3 mdi mdi-logout"></i>
-      {{ '_evan.logout' | translate }}
-    </a>
-  </div>
+  </a>
 </template>
 
 <script lang="ts">
-  import Component from './nav-list.ts';
+  import Component from './profile-preview.ts';
   export default Component;
 </script>
+
 

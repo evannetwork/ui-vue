@@ -22,48 +22,51 @@
   of it on other blockchains than evan.network.
 
   For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
+https://evan.network/license/
 */
 
-<template>
-  <div class="evan-nav-list">
-    <evan-logout ref="logoutComp"
-      disableButton="true"
-      v-if="showLogout">
-    </evan-logout>
-    <slot name="header">
-      <evan-profile-preview
-        :address="$store.state.runtime.activeAccount">
-      </evan-profile-preview>
-    </slot>
-    <div class="nav-entries">
-      <template
-        v-for="(entry, index) in entries">
-        <span v-if="!entry" class="my-auto"></span>
-        <a
-          v-else
-          :id="entry.id"
-          :class="[
-            { 'active': activeEntry === index },
-            `entry-${ index + 1 }`
-          ]"
-          :href="entry.href"
-          @click="entry.action && entry.action();">
-          <i class="mr-3" :class="entry.icon"></i>
-          {{ entry.text | translate }}
-        </a>
-      </template>
-    </div>
-    <a id="evan-logout"
-      @click="$refs.logoutComp.logout();">
-      <i class="mr-3 mdi mdi-logout"></i>
-      {{ '_evan.logout' | translate }}
-    </a>
-  </div>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import EvanComponent from '../../component';
+import Vue from 'vue';
+import { Prop } from 'vue-property-decorator';
 
-<script lang="ts">
-  import Component from './nav-list.ts';
-  export default Component;
-</script>
+/**
+ * Shows a animated "check" icon.
+ *
+ * @class         SuccessComponent
+ * @selector      evan-success
+ */
+@Component({ })
+export default class ProfilePreviewComponent extends mixins(EvanComponent) {
+  /**
+   * Address of the specific account.
+   */
+  @Prop() address;
 
+  /**
+   * Show loading symbol
+   */
+  loading = true;
+
+  /**
+   * user information (alias, type, verification, ...)
+   */
+  userInfo = null;
+
+  /**
+   * Load user specific information
+   */
+  async created() {
+    const runtime = this.getRuntime();
+
+    // load addressbook info
+    const addressBook = await runtime.profile.getAddressBook();
+    const contact = addressBook.profile[this.address];
+
+    // TODO: load account type
+    this.userInfo = { alias: contact ? contact.alias : this.address, type: 'unspecified' };
+
+    this.loading = false;
+  }
+}
