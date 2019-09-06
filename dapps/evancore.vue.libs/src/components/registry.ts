@@ -43,6 +43,7 @@ import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
 import ModalComponent from './modal/modal.vue';
+import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
@@ -65,6 +66,7 @@ export {
   LoginComponent,
   LogoutComponent,
   ModalComponent,
+  NavListComponent,
   NavTabsComponent,
   SuccessComponent,
   SwipePanelComponent,
@@ -87,6 +89,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-login', component: LoginComponent },
   { name: 'evan-logout', component: LogoutComponent },
   { name: 'evan-modal', component: ModalComponent },
+  { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },

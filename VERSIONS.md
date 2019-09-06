@@ -5,7 +5,14 @@
 - `evancore.vue.libs`
   - `evan-dropdown` allows inner `customStyle` param (left, right props are removed)
   - new `dapp-wrapper` design
-  - add `evan-swipe-panel` component
+  - support `multiline` property in tooltips
+  - add default `<slot>` for `evan-dapp-wrapper-level-2` so template container do not must be used
+  - new components
+    - `evan-button` to handle generalized boostrap button definitions
+    - add `nav-list` component for using easy navigation in `evan-dapp-wrapper-level-2`
+    - `evan-swipe-panel` to animate side content
+    - `evan-profile` / `evan-profile-icon` to show account name and it's type
+    - `evan-account-address` to show account address with generalized interactions
 
 ### Fixes
 
