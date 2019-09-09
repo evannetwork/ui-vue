@@ -26,19 +26,19 @@
 */
 
 <template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
-    </slot>
-  </div>
+  <button class="btn"
+    :class="[
+      { [ knownTypes[type] ]: knownTypes[type] },
+      { [ `btn-${ type }` ]: !knownTypes[type] },
+      { [ `btn-${ size }` ]: size !== 'normal'  },
+    ]"
+    :disabled="disabled"
+    @click="$emit('click', $event)">
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
-  export default Component;
+  import Button from './button';
+  export default Button;
 </script>
-
-<style lang="scss" scoped>
-
-</style>
-

@@ -26,19 +26,34 @@
 */
 
 <template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
-    </slot>
-  </div>
+  <span
+    class="evan-address"
+    :class="this.class"
+    @mouseenter="hover = true;"
+    @mouseleave="hover = false;">
+    {{ address }}
+    <div class="interactions">
+      <button class="btn btn-sm btn-icon"
+        @click="copyAddress();">
+        <i class="mdi mdi-content-copy"></i>
+        <evan-tooltip>{{ '_evan.address.copy' | translate }}</evan-tooltip>
+      </button>
+      <a class="btn btn-sm btn-icon"
+        target="_blank"
+        :href="`https://testexplorer.evan.network/address/${ address }/transactions`">
+        <i class="mdi mdi-map-marker-path"></i>
+        <evan-tooltip>{{ '_evan.address.open-in-explorer' | translate }}</evan-tooltip>
+      </a>
+    </div>
+  </span>
 </template>
 
 <script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
+  import Component from './address.ts';
   export default Component;
 </script>
 
 <style lang="scss" scoped>
-
+  @import './address.scss';
 </style>
 

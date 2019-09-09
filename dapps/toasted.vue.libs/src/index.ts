@@ -24,21 +24,9 @@
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
+// map the original vue path to toasted.vue.libs
+import { getDomainName, System } from '@evan.network/ui-dapp-browser';
+System.map['vue-toasted'] = `toasted.vue.libs.${ getDomainName() }!dapp-content`;
 
-<template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
-    </slot>
-  </div>
-</template>
-
-<script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
-  export default Component;
-</script>
-
-<style lang="scss" scoped>
-
-</style>
-
+import VueRouter from 'vue-toasted';
+export default VueRouter;

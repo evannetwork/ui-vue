@@ -29,7 +29,10 @@
   <div class="tooltip evan-tooltip"
     :class="[
       `bs-tooltip-${ placement }`,
-      { 'show-tooltip': showTooltip }
+      {
+        'show-tooltip': showTooltip,
+        'multiline': multiline,
+      },
     ]"
     role="tooltip">
     <div class="arrow"></div>

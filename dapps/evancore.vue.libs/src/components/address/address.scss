@@ -25,20 +25,40 @@
   https://evan.network/license/
 */
 
-<template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
-    </slot>
-  </div>
-</template>
+@import '~@evan.network/ui/src/style/utils';
 
-<script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
-  export default Component;
-</script>
+.evan-address {
+  position: relative;
 
-<style lang="scss" scoped>
+  display: flex;
+  align-items: center;
 
-</style>
+  word-break: break-all;
 
+  .interactions {
+    position: absolute;
+    right: 0;
+
+    display: none;
+
+    margin-left: 5;
+
+    background-color: cssVar('white');
+
+    .btn {
+      line-height: 30px;
+
+      overflow: visible;
+
+      width: 30px;
+      height: 30px;
+      padding: 0;
+    }
+  }
+
+  &:hover {
+    .interactions {
+      display: block;
+    }
+  }
+}

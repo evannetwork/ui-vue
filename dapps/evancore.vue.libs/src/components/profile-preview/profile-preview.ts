@@ -22,23 +22,51 @@
   of it on other blockchains than evan.network.
 
   For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
+https://evan.network/license/
 */
 
-<template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
-    </slot>
-  </div>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import EvanComponent from '../../component';
+import Vue from 'vue';
+import { Prop } from 'vue-property-decorator';
 
-<script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
-  export default Component;
-</script>
+/**
+ * Shows a animated "check" icon.
+ *
+ * @class         SuccessComponent
+ * @selector      evan-success
+ */
+@Component({ })
+export default class ProfilePreviewComponent extends mixins(EvanComponent) {
+  /**
+   * Address of the specific account.
+   */
+  @Prop() address;
 
-<style lang="scss" scoped>
+  /**
+   * Show loading symbol
+   */
+  loading = true;
 
-</style>
+  /**
+   * user information (alias, type, verification, ...)
+   */
+  userInfo = null;
 
+  /**
+   * Load user specific information
+   */
+  async created() {
+    const runtime = this.getRuntime();
+
+    // load addressbook info
+    const addressBook = await runtime.profile.getAddressBook();
+    const contact = addressBook.profile[this.address];
+
+    // TODO: load account type
+    this.userInfo = { alias: contact ? contact.alias : this.address, type: 'unspecified' };
+
+    this.loading = false;
+  }
+}

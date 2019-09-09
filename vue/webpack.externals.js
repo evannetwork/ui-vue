@@ -44,6 +44,7 @@ module.exports = function(customExcludes) {
     'vue-material': 'vue-material',
     'vue-recaptcha': 'vue-recaptcha',
     'vue-router': 'vue-router',
+    'vue-toasted': 'vue-toasted',
     'vuex': 'vuex',
     'vuex-i18n': 'vuex-i18n',
     ...(customExcludes || { }) 

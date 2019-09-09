@@ -25,20 +25,13 @@
   https://evan.network/license/
 */
 
-<template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
-    </slot>
-  </div>
-</template>
-
-<script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
-  export default Component;
-</script>
-
-<style lang="scss" scoped>
-
-</style>
-
+// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
+module.exports = require('../../vue/webpack.config')(
+  require('./dbcp.json').public.name,
+  require('path').resolve(__dirname, './dist'),
+  true,
+  true,
+  {
+    '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
+  },
+);

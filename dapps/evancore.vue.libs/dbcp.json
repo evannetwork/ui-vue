@@ -9,6 +9,7 @@
         "moment.libs": "^2.0.0",
         "moment.vue.libs": "4.0.0",
         "router.vue.libs": "^2.5.0",
+        "toasted.vue.libs": "^1.1.27",
         "ui.libs": "^1.7.1",
         "vue.libs": "^2.5.0",
         "vuex.libs": "3.1.0"

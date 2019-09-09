@@ -42,22 +42,20 @@
             <template v-if="!customModal">
               <div :class="{ 'modal-header d-flex align-items-center': modalClasses.indexOf('modal-header') !== -1 }">
                 <slot name="header"></slot>
-                <button class="btn p-0"
-                  @click="hide()"
-                >
+                <evan-button type="icon" @click="hide()">
                   <i class="mdi mdi-close"></i>
-                </button>
+                </evan-button>
               </div>
               <div :class="{ 'modal-body': modalClasses.indexOf('modal-body') !== -1 }">
                 <slot name="body"></slot>
               </div>
               <div :class="{ 'modal-footer': modalClasses.indexOf('modal-footer') !== -1 }">
-                <button type="button" class="btn btn-outline-secondary btn-rounded"
+                <evan-button type="secondary"
                   id="modal-cancel"
                   v-if="!hideFooterButton"
                   @click="hide();">
                   {{ '_evan.cancel' | translate }}
-                </button>
+                </evan-button>
                 <slot name="footer"></slot>
               </div>
             </template>

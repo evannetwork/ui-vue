@@ -152,7 +152,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    * Enables the nav bar icons including mailbox, synchronization, .... Will be disabled uring login
    * or onboarding process.
    */
-  enableNav = true;
+  topLevel = true;
 
   /**
    * Is the sidebar-level-2 enabled?
@@ -331,7 +331,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     do {
       parent = parent.parentElement;
       if (parent && parent !== this.$el && parent.className.indexOf('dapp-wrapper-body') !== -1) {
-        this.enableNav = false;
+        this.topLevel = false;
         this.enableSidebar = false;
 
         break;
@@ -448,7 +448,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
       this.login = false;
 
       // load the user infos like alias, mails, dispatchers ...
-      if (this.enableNav) {
+      if (this.topLevel) {
         this.loadUserSpecific();
       }
     }
@@ -614,10 +614,24 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     this.queueLoading = false;
 
     // watch for queue updates
-    if (!this.queueWatcher) {
+    if (!this.queueWatcher && this.topLevel) {
       this.queueWatcher = Dispatcher.watch((event: CustomEvent) => {
         const instance = event.detail.instance;
 
+        // show user synchronisation status
+        this.$toasted.show(this.$t(
+          `_evan.dapp-wrapper.dispatcher-status.${ instance.status }`,
+          {
+            title: this.$t(instance.dispatcher.title),
+            percentage: (100 / instance.dispatcher.steps.length) * instance.stepIndex,
+          }
+        ), {
+          type: instance.status === 'finished' ? 'success' :
+                instance.status === 'error' ? 'error' :
+                'info'
+        });
+
+        // trigger special queue interactions
         switch (instance.status) {
           case 'finished':
           case 'deleted': {

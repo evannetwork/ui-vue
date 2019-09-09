@@ -105,7 +105,7 @@
                     v-if="queueLoading || queueCount">
                   </div>
                   <template v-else>
-                    <i class="mdi mdi-alert text-secondary"
+                    <i class="mdi mdi-alert text-danger"
                       v-if="queueErrorCount">
                     </i>
                     <i class="mdi mdi-sync"
@@ -137,7 +137,7 @@
                     <template v-if="instance.dispatcher">
                       <div class="d-flex">
                         <strong class="d-flex align-items-center mb-2">
-                          <i class="mdi mdi-alert text-secondary mr-2"
+                          <i class="mdi mdi-alert text-danger mr-2"
                             v-if="queueErrorCount">
                           </i>
                           {{ instance.dispatcher.title | translate }}
@@ -250,7 +250,7 @@
     </div>
     <div class="dapp-wrapper-body" v-else>
       <div class="w-100 h-100 mt-5 text-center">
-        <div class="spinner-border text-secondary" role="status"></div>
+        <div class="spinner-border text-primary" role="status"></div>
       </div>
     </div>
   </div>

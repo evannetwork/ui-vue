@@ -26,19 +26,44 @@
 */
 
 <template>
-  <div class="d-none">
-    <slot name="content">
-      <slot></slot>
+  <div class="evan-nav-list">
+    <evan-logout ref="logoutComp"
+      disableButton="true"
+      v-if="showLogout">
+    </evan-logout>
+    <slot name="header">
+      <evan-profile-preview
+        :address="$store.state.runtime.activeAccount">
+      </evan-profile-preview>
     </slot>
+    <div class="nav-entries">
+      <template
+        v-for="(entry, index) in entries">
+        <span v-if="!entry" class="my-auto"></span>
+        <a
+          v-else
+          :id="entry.id"
+          :class="[
+            { 'active': activeEntry === index },
+            `entry-${ index + 1 }`
+          ]"
+          :href="entry.href"
+          @click="entry.action && entry.action();">
+          <i class="mr-3" :class="entry.icon"></i>
+          {{ entry.text | translate }}
+        </a>
+      </template>
+    </div>
+    <a id="evan-logout"
+      @click="$refs.logoutComp.logout();">
+      <i class="mr-3 mdi mdi-logout"></i>
+      {{ '_evan.logout' | translate }}
+    </a>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
+  import Component from './nav-list.ts';
   export default Component;
 </script>
-
-<style lang="scss" scoped>
-
-</style>
 

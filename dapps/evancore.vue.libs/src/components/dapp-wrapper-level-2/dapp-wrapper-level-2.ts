@@ -36,6 +36,7 @@ import DAppWrapperUtils from '../dapp-wrapper/utils';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+
 /**
  * The dapp-warpper has the functionality, that a custom second level navigation can be applied.
  * Using this component, this content container does not must be filled directly, it can be filled
