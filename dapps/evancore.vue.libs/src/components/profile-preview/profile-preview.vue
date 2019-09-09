@@ -30,17 +30,21 @@
     style="height: auto;"
     :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }`">
     <b class="text-dark d-flex mr-3 align-items-center justify-content-center"
-      style="height: 30px; width: 30px; background-color: var(--evan-gray-400)">
+      style="height: 30px; width: 30px; background-color: var(--evan-gray-300)">
       ?
     </b>
     <div class="d-flex flex-column justify-content-center">
       <template v-if="loading">
-        <b class="text-dark">...</b>
+        <b class="text-dark" style="font-size: 13px; font-weight: 600;">...</b>
         <small class="text-muted">...</small>
       </template>
       <template v-else>
-        <b class="text-dark">{{ userInfo.alias }}</b>
-        <small class="text-muted">{{ `_evan.profile.types.${ userInfo.type }` | translate }}</small>
+        <b class="text-dark" style="font-size: 13px; font-weight: 600;">
+          {{ userInfo.alias }}
+        </b>
+        <small style="font-size: 10px; font-weight: 300;">
+          {{ `_evan.profile.types.${ userInfo.type }` | translate }}
+        </small>
       </template>
     </div>
   </a>
