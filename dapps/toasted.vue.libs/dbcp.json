@@ -7,7 +7,7 @@
       "files": [
         "toasted.vue.libs.js"
       ],
-      "origin": "QmQkChJE77pV43E6eDqdynzdq5LKHhPdwwUs45RH7is3Ue",
+      "origin": "Qmb6yk8WHxXWXvhxtFAKpWKh7xghAoUYEHJ7PjfdqHJMUh",
       "primaryColor": "",
       "secondaryColor": "#f9f9ff",
       "standalone": false,
@@ -31,6 +31,8 @@
       "library"
     ],
     "version": "1.1.27",
-    "versions": {}
+    "versions": {
+      "1.1.27": "Qmb6yk8WHxXWXvhxtFAKpWKh7xghAoUYEHJ7PjfdqHJMUh"
+    }
   }
 }

@@ -11,7 +11,7 @@
     - `evan-button` to handle generalized boostrap button definitions
     - add `nav-list` component for using easy navigation in `evan-dapp-wrapper-level-2`
     - `evan-swipe-panel` to animate side content
-    - `evan-profile` to show account name and it's type
+    - `evan-profile-preview` to show account name and it's type
     - `evan-account-address` to show account address with generalized interactions
   - add `vue-toasted` and show toast messaged for address copy and running dispatchers
 

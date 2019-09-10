@@ -94,6 +94,9 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
     // remove the swipe panel content
     setTimeout(() => this.isRendered = false, 400);
 
+    // tell parent component, that the swipe-panel is closing
+    this.$emit('close');
+
     if ($event) {
       $event.stopPropagation();
     }

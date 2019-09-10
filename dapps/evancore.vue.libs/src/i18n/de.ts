@@ -99,7 +99,7 @@ export default {
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
       "types": {
-        "unspecified": "unspezifierter Account"
+        "unspecified": "unspezifizierter Account"
       }
     },
     "under-development": {
