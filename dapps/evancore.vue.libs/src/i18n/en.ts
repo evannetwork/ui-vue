@@ -102,6 +102,7 @@ export default {
         "unspecified": "unspecified account"
       }
     },
+    "share": "Share",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"

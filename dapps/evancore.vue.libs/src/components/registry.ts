@@ -32,6 +32,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 import AddressComponent from './address/address.vue';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ButtonComponent from './button/button.vue';
+import ActionButtonComponent from './action-button/action-button.vue';
 import ContactBatchComponent from './contact-batch/contact-batch.vue';
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
 import DAppLoadingComponent from './loading/loading.vue';
@@ -40,6 +41,7 @@ import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapp
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import FileInputComponent from './files/files.vue';
+import FormDatatWrapperComponent from './form-data-wrapper/form-data-wrapper.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
@@ -57,6 +59,7 @@ export {
   AddressComponent,
   BreadcrumbsComponent,
   ButtonComponent,
+  ActionButtonComponent,
   ContactBatchComponent,
   DAppLoaderComponent,
   DAppLoadingComponent,
@@ -65,6 +68,7 @@ export {
   DropdownComponent,
   EvanComponent,
   FileInputComponent,
+  FormDatatWrapperComponent,
   IframeComponent,
   LoginComponent,
   LogoutComponent,
@@ -83,12 +87,14 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-address', component: AddressComponent },
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
+  { name: 'evan-action-button', component: ActionButtonComponent },
   { name: 'evan-contact-batch', component: ContactBatchComponent },
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
   { name: 'evan-dropdown', component: DropdownComponent },
   { name: 'evan-file-input', component: FileInputComponent },
+  { name: 'evan-form-data-wrapper', component: FormDatatWrapperComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },

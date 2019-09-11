@@ -1,0 +1,21 @@
+@import '~@evan.network/ui/src/style/utils';
+
+.form-data-wrapper {
+  div:first-child {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+.form-data-wrapper.edit-mode {
+  div:first-child {
+    border-bottom: 1px solid cssVar('primary');
+
+    h5 {
+      color: cssVar('primary');
+    }
+  }
+
+  .content {
+    
+  }
+}

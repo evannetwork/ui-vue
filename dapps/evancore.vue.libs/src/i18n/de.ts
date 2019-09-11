@@ -102,6 +102,7 @@ export default {
         "unspecified": "unspezifizierter Account"
       }
     },
+    "share": "Freigeben",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"
