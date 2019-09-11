@@ -26,16 +26,18 @@
 */
 
 <template>
-  <button class="btn"
+  <component class="btn"
+    :is="href ? 'a' : 'button'"
     :class="[
       { [ knownTypes[type] ]: knownTypes[type] },
       { [ `btn-${ type }` ]: !knownTypes[type] },
       { [ `btn-${ size }` ]: size !== 'normal'  },
     ]"
     :disabled="disabled"
+    :href="href"
     @click="$emit('click', $event)">
     <slot></slot>
-  </button>
+  </component>
 </template>
 
 <script lang="ts">

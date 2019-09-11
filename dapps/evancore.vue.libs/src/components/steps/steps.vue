@@ -25,39 +25,31 @@
   https://evan.network/license/
 */
 
-@import '~@evan.network/ui/src/style/utils';
+<template>
+  <div class="evan-steps" v-if="steps && steps.length !== 0">
+    <div :class="`evan-step-header${ minimal ? '-sm' : '' }`">
+      <button class="btn"
+        v-for="(step, index) of steps"
+        :disabled="step.disabled"
+        @click="gotoStep(index)">
+        <span class="stepper-circle"
+          :class="{
+            'active': activeStep === index,
+          }">
+          <template v-if="!minimal">{{ index + 1 }}</template>
+        </span>
+        <component
+          :is="minimal ? 'evan-tooltip' : 'span'">
+          {{ step.title | translate }}
+        </component>
+      </button>
+    </div>
+  </div>
+</template>
 
-.evan-address {
-  position: relative;
+<script lang="ts">
+  import Component from './steps';
+  export default Component;
+</script>
 
-  display: flex;
-  align-items: center;
 
-  max-height: 20px;
-
-  word-break: break-all;
-
-  .interactions {
-    display: none;
-
-    margin-left: 20px;
-
-    .btn {
-      line-height: 25px;
-
-      width: 25px !important;
-      height: 25px !important;
-      padding: 0;
-
-      i {
-        font-size: 16px;
-      }
-    }
-  }
-
-  &:hover {
-    .interactions {
-      display: block;
-    }
-  }
-}
