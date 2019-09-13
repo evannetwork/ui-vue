@@ -1,4 +1,4 @@
-.action-button-wrapper {
+.button-wrapper {
   position: relative;
 
   .hidden {
@@ -7,5 +7,9 @@
 
   .spinner {
     position: absolute;
+  }
+
+  span {
+    color: inherit;
   }
 }

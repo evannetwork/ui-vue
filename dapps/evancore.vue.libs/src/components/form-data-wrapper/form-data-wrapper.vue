@@ -32,6 +32,7 @@
         <i class="mdi mr-2" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
         {{title}}
       </h5>
+      <!-- TODO: add share action to button: -->
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate}}</evan-button>
     </div>
     <div class="pt-4">
@@ -49,7 +50,7 @@
         <i class="mdi mdi-information-outline mr-2" />
         {{ '_evan.transaction_costs_hint' | translate }}
       </a><br />
-      <evan-action-button
+      <evan-button
         type="primary"
         @click="save"
         :isLoading="isLoading"
