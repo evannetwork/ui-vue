@@ -25,59 +25,62 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component';
-import EvanComponent from '../../component';
 import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
+
+import EvanComponent from '../../component';
 
 /**
- * Wrapper component for button elements.
- *
- * @class         ComponentsOverview
- * @selector      evan-components-overview
+ * Shape of each step object
+ */
+interface Step {
+  title: string;
+  disabled: boolean;
+}
+
+/**
+ * Steps indicator component shows current step highlighted.
  */
 @Component({ })
-export default class Button extends mixins(EvanComponent) {
+export default class StepsComponent extends mixins(EvanComponent) {
   /**
-   * disabled option, passed to html button element
+   * activeStep defines the current outlined step
    */
   @Prop({
-    type: Boolean,
-    default: false,
-  }) disabled: boolean;
+    type: Number,
+    default: 0
+  }) activeStep: number
 
   /**
-   * size of the button (lg, normal, sm)
+   * The steps array, with the shape of Step interface:
+   *  { title: String, disabled: boolean }
    */
   @Prop({
-    type: String,
-    default: 'normal',
-  }) size: string;
+    type: Array,
+    default: []
+  }) steps: Array<Step>;
 
   /**
-   * Evan specific button type (have a look at known types) + bootstrap definitions
+   * Use a minimal design and show only small step indicators.
    */
-  @Prop({
-    type: String,
-    default: 'secondary',
-  }) type: string;
+  @Prop() minimal: boolean;
 
-  @Prop() href: string;
+  created() {
+    if (this.steps.length === 0) {
+      console.warn('no steps ');
+    }
+  }
 
   /**
-   * Evan specific button definitions mapped to it's classes. By applying other types, they will be
-   * added as usual bootstrap buttons.
+   * Activate a specific step
+   *
+   * @param      {number}  index     steps index
    */
-  knownTypes = {
-    'icon': 'btn-icon-secondary',
-    'icon-primary': 'btn-icon-primary',
-    'icon-secondary': 'btn-icon-secondary',
-    'link': 'btn-link',
-    'primary': 'btn-primary',
-    'secondary': 'btn-outline-primary',
-    'text': 'btn-text-primary',
-    'text-primary': 'btn-text-primary',
-    'text-secondary': 'btn-text-secondary',
-  };
+  gotoStep(index: number) {
+    if (!this.steps[index].disabled) {
+      this.activeStep = index;
+      this.$emit('stepChange', index);
+    }
+  }
 }

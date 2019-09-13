@@ -51,6 +51,7 @@ import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
+import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
@@ -80,6 +81,7 @@ export {
   NavListComponent,
   NavTabsComponent,
   ProfilePreview,
+  StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
   TooltipComponent,
@@ -109,6 +111,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
+  { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
   { name: 'evan-tooltip', component: TooltipComponent },

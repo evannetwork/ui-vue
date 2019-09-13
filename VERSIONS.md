@@ -13,6 +13,7 @@
     - `evan-swipe-panel` to animate side content
     - `evan-profile-preview` to show account name and it's type
     - `evan-account-address` to show account address with generalized interactions
+    - `evan-steps` to show step by step content
   - add `vue-toasted` and show toast messaged for address copy and running dispatchers
 
 ### Fixes
