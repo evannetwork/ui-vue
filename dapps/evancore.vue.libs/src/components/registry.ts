@@ -32,6 +32,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 import AddressComponent from './address/address.vue';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ButtonComponent from './button/button.vue';
+import CardComponent from './card/card.vue';
 import ContactBatchComponent from './contact-batch/contact-batch.vue';
 import DAppLoaderComponent from './dapp-loader/dapp-loader.vue';
 import DAppLoadingComponent from './loading/loading.vue';
@@ -58,6 +59,7 @@ export {
   AddressComponent,
   BreadcrumbsComponent,
   ButtonComponent,
+  CardComponent,
   ContactBatchComponent,
   DAppLoaderComponent,
   DAppLoadingComponent,
@@ -85,6 +87,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-address', component: AddressComponent },
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
+  { name: 'evan-card', component: CardComponent },
   { name: 'evan-contact-batch', component: ContactBatchComponent },
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },

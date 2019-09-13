@@ -25,10 +25,37 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  true,
-);
+// vue imports
+import Vue from 'vue';
+import Component, { mixins } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
+
+// evan.network imports
+import * as bcc from '@evan.network/api-blockchain-core';
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import EvanComponent from '../../component';
+
+/**
+ * Wrapper for profile verifications.
+ */
+@Component({ })
+export default class CardComponent extends mixins(EvanComponent) {
+  /**
+   * Card type that should be used (transparent, outline, filled)
+   */
+  @Prop({
+    default: 'filled'
+  }) type: string;
+
+  /**
+   * Optional href, to transform the card into a link element.
+   */
+  @Prop() href: string;
+
+  /**
+   * Add hover shadow and size effect
+   */
+  @Prop({
+    default: true,
+  }) highlight: boolean;
+}

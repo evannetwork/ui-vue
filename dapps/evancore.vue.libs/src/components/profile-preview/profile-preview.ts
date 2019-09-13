@@ -45,6 +45,13 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   @Prop() address;
 
   /**
+   * Size of the profile preview (sm, lg)
+   */
+  @Prop({
+    default: 'sm'
+  }) size;
+
+  /**
    * Show loading symbol
    */
   loading = true;
@@ -65,7 +72,10 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     const contact = addressBook.profile[this.address];
 
     // TODO: load account type
-    this.userInfo = { alias: contact ? contact.alias : this.address, type: 'unspecified' };
+    this.userInfo = {
+      alias: contact ? contact.alias : this.address,
+      type: 'unspecified',
+    };
 
     this.loading = false;
   }

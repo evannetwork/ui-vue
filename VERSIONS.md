@@ -14,6 +14,7 @@
     - `evan-profile-preview` to show account name and it's type
     - `evan-account-address` to show account address with generalized interactions
     - `evan-steps` to show step by step content
+    - `evan-card` to show generalized cards with highlight parameters
   - add `vue-toasted` and show toast messaged for address copy and running dispatchers
 
 ### Fixes
