@@ -90,6 +90,7 @@ export default {
         "title": "Datein löschen"
       }
     },
+    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",

@@ -32,77 +32,34 @@ import Vue from 'vue'
 import { Prop, Watch } from 'vue-property-decorator'
 
 /**
- * Wrapper component for button elements.
+ * Base component for input element.
  *
- * @class         ComponentsOverview
- * @selector      evan-components-overview
+ * @class         FormDataInput
+ * @selector      evan-form-data-select
  */
-@Component({ })
-class FormDataWrapper extends mixins(EvanComponent) {
+@Component({})
+class FormDataInput extends mixins(EvanComponent) {
   /**
-   * Form title
+   * The value for the input field.
+   */
+  @Prop({
+    type: String
+  }) value: string
+
+  /**
+   *  The label for the input field.
+   */
+  @Prop({
+    type: String
+  }) label: string
+
+  /**
+   * The id for the input field.
    */
   @Prop({
     type: String,
-    required: true,
-  }) title: string
-
-  /**
-   * Sets editmode to active or inactive.
-   */
-  @Prop({
-    type: Boolean,
-    default: false,
-  }) isPublic: boolean
-
-  /**
-   * Function performed, when save button is clicked.
-   */
-  @Prop({
-    type: Function,
-    required: true,
-  }) handleSave: (event: Event) => any
-
-  /**
-   * Function performed, when cancel button is clicked.
-   */
-  @Prop({
-    type: Function,
-    required: true,
-  }) handleCancel: (event: Event) => any
-
-  editMode = false
-  isLoading = false
-
-  created() {
-    this.$on('setFocus', () => {
-      this.setEditMode(true)
-    })
-  }
-
-  beforeDestroy() {
-    this.$off('setFocus')
-  }
-
-  setEditMode(active: boolean): void {
-    this.editMode = active
-  }
-
-  async save (ev: Event) {
-    this.isLoading = true
-
-    await this.handleSave(ev)
-    this.isLoading = false
-    this.editMode = false
-  }
-
-  cancel(ev: Event) {
-    if (typeof this.handleCancel === 'function') {
-      this.handleCancel(ev)
-    }
-
-    this.editMode = false
-  }
+    required: true
+  }) id: string
 }
 
-export default FormDataWrapper
+export default FormDataInput

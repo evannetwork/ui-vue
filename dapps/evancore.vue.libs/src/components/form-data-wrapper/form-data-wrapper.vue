@@ -26,22 +26,36 @@
 */
 
 <template>
-  <div class="form-data-wrapper" :class="{'edit-mode': editMode}">
+  <div class="form-data-wrapper mt-2 mb-8" :class="{'edit-mode': editMode}">
     <div class="d-flex justify-content-between align-items-center pb-1">
-      <h5 class="align-self-stretch">
-        <i class="mdi" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
+      <h5 class="my-0 py-0 text-uppercase font-weight-bold">
+        <i class="mdi mr-2" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
         {{title}}
       </h5>
-      <evan-button type="secondary">{{ '_evan.share' | translate}}</evan-button>
+      <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate}}</evan-button>
     </div>
-    <div class="pb-4 pt-4">
+    <div class="pt-4">
       <slot
         v-bind:setEditMode="setEditMode"
       ></slot>
     </div>
     <template v-if="editMode">
-      <span><i class="mdi mdi-information-outline" />{{ 'transaction_costs_hint' || translate }}</span>
-      <evan-action-button type="primary" @click="save" :isLoading="isLoading" label="save"/>
+      <a
+        class="text-muted mt-4 mb-3 d-inline-block"
+        href="https://evannetwork.github.io/docs/other/glossary.html#e"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="mdi mdi-information-outline mr-2" />
+        {{ '_evan.transaction_costs_hint' | translate }}
+      </a><br />
+      <evan-action-button
+        type="primary"
+        @click="save"
+        :isLoading="isLoading"
+        label="save"
+        class="mr-3"
+      />
       <evan-button v-if="!isLoading" type="secondary" @click="cancel">
         {{ '_evan.cancel' | translate }}
       </evan-button>

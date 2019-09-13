@@ -1,13 +1,18 @@
 @import '~@evan.network/ui/src/style/utils';
 
 .form-data-wrapper {
-  div:first-child {
+  > div:first-of-type {
     border-bottom: 1px solid transparent;
+  }
+
+  /deep/ input.form-control,
+  /deep/ select.form-control {
+    background: transparent;
   }
 }
 
 .form-data-wrapper.edit-mode {
-  div:first-child {
+  > div:first-of-type {
     border-bottom: 1px solid cssVar('primary');
 
     h5 {
@@ -15,7 +20,8 @@
     }
   }
 
-  .content {
-    
+  /deep/ input.form-control,
+  /deep/ select.form-control {
+    background: cssVar('white');
   }
 }

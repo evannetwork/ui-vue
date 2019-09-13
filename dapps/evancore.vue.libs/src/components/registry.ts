@@ -41,6 +41,8 @@ import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapp
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import FileInputComponent from './files/files.vue';
+import FormDataInputComponent from './form-data-input/form-data-input.vue';
+import FormDataSelectComponent from './form-data-select/form-data-select.vue';
 import FormDatatWrapperComponent from './form-data-wrapper/form-data-wrapper.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
@@ -68,6 +70,8 @@ export {
   DropdownComponent,
   EvanComponent,
   FileInputComponent,
+  FormDataInputComponent,
+  FormDataSelectComponent,
   FormDatatWrapperComponent,
   IframeComponent,
   LoginComponent,
@@ -94,6 +98,8 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
   { name: 'evan-dropdown', component: DropdownComponent },
   { name: 'evan-file-input', component: FileInputComponent },
+  { name: 'evan-form-data-input', component: FormDataInputComponent },
+  { name: 'evan-form-data-select', component: FormDataSelectComponent },
   { name: 'evan-form-data-wrapper', component: FormDatatWrapperComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },

@@ -42,12 +42,12 @@ export default class ActionButton extends mixins(EvanComponent) {
   /**
    * Button Label.
    */
-  @Prop({ type: String }) label : String;
+  @Prop({ type: String }) label: String;
 
   /**
    * disabled option, passed to html button element
    */
-  @Prop({ type: Boolean, default: false }) disabled : Boolean;
+  @Prop({ type: Boolean, default: false }) disabled: Boolean;
 
   /**
    * The class name for the material design icon, without prefixed 'mdi'.
@@ -56,7 +56,7 @@ export default class ActionButton extends mixins(EvanComponent) {
    */
   @Prop({
     type: String,
-    validator: value => value.slice(0,3) === 'mdi' // TODO: validator seems not to be called
+    validator: value => value.slice(0, 3) === 'mdi' // TODO: validator seems not to be called
   }) icon: String;
 
   /**
@@ -85,5 +85,5 @@ export default class ActionButton extends mixins(EvanComponent) {
   /**
    * Loading state of the component.
    */
-  @Prop({ type: Boolean, default: false }) isLoading : Boolean;
+  @Prop({ type: Boolean, default: false }) isLoading: Boolean;
 }

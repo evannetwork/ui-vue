@@ -31,78 +31,47 @@ import EvanComponent from '../../component'
 import Vue from 'vue'
 import { Prop, Watch } from 'vue-property-decorator'
 
+interface Option {
+  label: string,
+  value: any
+}
+
 /**
  * Wrapper component for button elements.
  *
- * @class         ComponentsOverview
- * @selector      evan-components-overview
+ * @class         FormDataSelect
+ * @selector      evan-form-data-select
  */
-@Component({ })
-class FormDataWrapper extends mixins(EvanComponent) {
+@Component({})
+class FormDataSelect extends mixins(EvanComponent) {
   /**
-   * Form title
+   * The value for the select element.
+   */
+  @Prop({
+    type: String
+  }) value: string
+
+  /**
+   * The label for the select element.
+   */
+  @Prop({
+    type: String
+  }) label: string
+
+  /**
+   * The id for the select element.
    */
   @Prop({
     type: String,
-    required: true,
-  }) title: string
+    required: true
+  }) id: string
 
   /**
-   * Sets editmode to active or inactive.
+   * The selectable options. Can be an array of label-value pairs or an array of strings.
    */
   @Prop({
-    type: Boolean,
-    default: false,
-  }) isPublic: boolean
-
-  /**
-   * Function performed, when save button is clicked.
-   */
-  @Prop({
-    type: Function,
-    required: true,
-  }) handleSave: (event: Event) => any
-
-  /**
-   * Function performed, when cancel button is clicked.
-   */
-  @Prop({
-    type: Function,
-    required: true,
-  }) handleCancel: (event: Event) => any
-
-  editMode = false
-  isLoading = false
-
-  created() {
-    this.$on('setFocus', () => {
-      this.setEditMode(true)
-    })
-  }
-
-  beforeDestroy() {
-    this.$off('setFocus')
-  }
-
-  setEditMode(active: boolean): void {
-    this.editMode = active
-  }
-
-  async save (ev: Event) {
-    this.isLoading = true
-
-    await this.handleSave(ev)
-    this.isLoading = false
-    this.editMode = false
-  }
-
-  cancel(ev: Event) {
-    if (typeof this.handleCancel === 'function') {
-      this.handleCancel(ev)
-    }
-
-    this.editMode = false
-  }
+    type: Object
+  }) options: Option[] | string[]
 }
 
-export default FormDataWrapper
+export default FormDataSelect

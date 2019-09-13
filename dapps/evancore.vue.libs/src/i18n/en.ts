@@ -90,6 +90,7 @@ export default {
         "title": "Delete file"
       }
     },
+    "transaction_costs_hint": "This will cause transaction fees.",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
