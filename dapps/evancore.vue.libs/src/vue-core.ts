@@ -131,11 +131,11 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
         contractAddressEl.style.display = 'none';
         this.$el.appendChild(contractAddressEl);
       }
+
+      // move toast container
+      this.$el.appendChild(this.$toasted.container);
     }
   });
-
-  // move toast container
-  vue.$el.appendChild(vue.$toasted.container);
 
   // register event handlers, so multiple vue instance and removed dom elements will be destroyed
   // correctly

@@ -25,10 +25,21 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  true,
-);
+<template>
+  <component
+    class="evan-card"
+    :class="{
+      'bg-level-1 border': type === 'filled',
+      'border': type === 'outline',
+      'evan-highlight clickable': highlight,
+    }"
+    :is="href ? 'a' : 'div'"
+    :href="href">
+    <slot></slot>
+  </component>
+</template>
+
+<script lang="ts">
+  import Component from './card.ts';
+  export default Component;
+</script>

@@ -235,6 +235,12 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   showQueuePanel = false;
 
   /**
+   * List of loaded dispatchers, so dispatcher updates, that were not registered before within this
+   * dispatcher, will be loaded.
+   */
+  loadedDispatchers: Array<string> = [ ];
+
+  /**
    * Returns the i18n title key for the active route.
    *
    * @return     {string}  active route i18n or route path
@@ -558,6 +564,30 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   }
 
   /**
+   * Load dispatcher from an ens address or return thee cached one.
+   */
+  async loadDispatcher(dispatcherId: string) {
+    const [ dappEns, dispatcherName ] = dispatcherId.split('|||');
+    // load dependencies and dapp content
+    await dappBrowser.dapp.loadDAppDependencies(dappEns, false);
+    const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
+    const dispatcher = dapp[dispatcherName];
+
+    // add translation to correctly display instance dispatcher titles
+    if (dapp.translations) {
+       Object.keys(dapp.translations)
+         .forEach(key => this.$i18n.add(key, dapp.translations[key]));
+    }
+
+    // push dispatcher id into the list of already loaded, so we only need to load translations once
+    if (this.loadedDispatchers.indexOf(dispatcherId) === -1) {
+      this.loadedDispatchers.push(dispatcherId);
+    }
+
+    return dispatcher;
+  }
+
+  /**
    * Load the queue data
    */
   async setupQueue() {
@@ -571,18 +601,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     // load all dispatcher instances for this user
     await Promise.all(dispatchers.map(async (dispatcherObj: any) => {
       try {
-        const [ dappEns, dispatcherName ] = dispatcherObj.dispatcherId.split('|||');
-        // load dependencies and dapp content
-        await dappBrowser.dapp.loadDAppDependencies(dappEns, false);
-        const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
-        const dispatcher = dapp[dispatcherName];
-
-        // add translation to correctly display instance dispatcher titles
-        if (dapp.translations) {
-           Object.keys(dapp.translations)
-             .forEach(key => this.$i18n.add(key, dapp.translations[key]));
-        }
-
+        const dispatcher = this.loadDispatcher(dispatcherObj);
         await Promise.all(Object.keys(dispatcherObj.entries).map(async (instanceId: string) => {
           const entry = dispatcherObj.entries[instanceId];
           const instance = new DispatcherInstance({
@@ -596,7 +615,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
             customPrice: entry.customPrice,
           });
 
-          // apply all queu instances to the queue instance object
+          // apply all queue instances to the queue instance object
           this.$set(this.queueInstances, instanceId, instance);
         }));
       } catch (ex) {
@@ -615,8 +634,13 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
 
     // watch for queue updates
     if (!this.queueWatcher && this.topLevel) {
-      this.queueWatcher = Dispatcher.watch((event: CustomEvent) => {
+      this.queueWatcher = Dispatcher.watch(async (event: CustomEvent) => {
         const instance = event.detail.instance;
+
+        // load missing translations
+        if (this.loadedDispatchers.indexOf(instance.dispatcher.id)) {
+          await this.loadDispatcher(instance.dispatcher.id);
+        }
 
         // show user synchronisation status
         this.$toasted.show(this.$t(

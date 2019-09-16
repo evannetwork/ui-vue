@@ -33,6 +33,7 @@
     </evan-logout>
     <slot name="header">
       <evan-profile-preview
+        class="p-4"
         :address="$store.state.runtime.activeAccount">
       </evan-profile-preview>
     </slot>

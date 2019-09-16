@@ -30,12 +30,13 @@
     <div :class="`evan-step-header${ minimal ? '-sm' : '' }`">
       <button class="btn"
         v-for="(step, index) of steps"
+        :class="[
+          `evan-step-${ index }`,
+          { 'active': activeStep === index, }
+        ]"
         :disabled="step.disabled"
         @click="gotoStep(index)">
-        <span class="stepper-circle"
-          :class="{
-            'active': activeStep === index,
-          }">
+        <span class="stepper-circle">
           <template v-if="!minimal">{{ index + 1 }}</template>
         </span>
         <component

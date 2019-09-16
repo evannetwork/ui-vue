@@ -26,27 +26,38 @@
 */
 
 <template>
-  <a class="d-flex align-items-center p-4"
+  <a class="d-flex align-items-center text-decoration-none"
     style="height: auto;"
-    :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }`">
-    <b class="text-dark d-flex mr-3 align-items-center justify-content-center"
-      style="height: 30px; width: 30px; background-color: var(--evan-gray-300)">
-      ?
-    </b>
-    <div class="d-flex flex-column justify-content-center">
-      <template v-if="loading">
-        <b class="text-dark" style="font-size: 13px; font-weight: 600;">...</b>
-        <small class="text-muted">...</small>
-      </template>
-      <template v-else>
+    :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
+    <div class="d-flex mr-3 align-items-center justify-content-center bg-gray-300 text-dark"
+      :style="size === 'sm' ?
+        'height: 1.875em; width: 1.875em;' :
+        'height: 8.75em; width: 8.75em;'
+      ">
+      <div class="spinner-border spinner-border-sm" v-if="loading"></div>
+      <b v-else-if="size === 'sm'">?</b>
+      <h1 v-else-if="size === 'lg'">?</h1>
+    </div>
+    <template v-if="!loading">
+      <div class="d-flex flex-column justify-content-center"
+        v-if="size === 'sm'">
         <b class="text-dark" style="font-size: 13px; font-weight: 600;">
           {{ userInfo.alias }}
         </b>
         <small style="font-size: 10px; font-weight: 300;">
           {{ `_evan.profile.types.${ userInfo.type }` | translate }}
         </small>
-      </template>
-    </div>
+      </div>
+      <div class="d-flex flex-column justify-content-between p-3"
+        v-else-if="size === 'lg'"
+        style="height: 8.75em;">
+        <h2 class="font-weight-semibold mb-0">
+          {{ userInfo.alias }}
+        </h2>
+        <evan-address :address="address"></evan-address>
+        <b>{{ `_evan.profile.types.${ userInfo.type }` | translate }}</b>
+      </div>
+    </template>
   </a>
 </template>
 
