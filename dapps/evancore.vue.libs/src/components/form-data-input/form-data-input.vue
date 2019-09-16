@@ -32,12 +32,12 @@
     </label>
     <div class="col-md-9">
       <input
-        @focus="$parent.$emit('setFocus')"
-        :id="id"
         class="form-control"
-        v-bind:value="value"
+        :id="id"
+        @focus="$parent.$emit('setFocus')"
+        @value="value"
+        @input="$emit('input', $event.target.value)"
         v-bind="$attrs"
-        v-on:input="$emit('input', $event.target.value)"
        />
     </div>
   </div>
