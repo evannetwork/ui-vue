@@ -56,9 +56,9 @@ export default {
         "error": "Synchronisationsfehler: {title} ({percentage}%)",
         "finished": "{title} abgeschlossen",
         "running": "{title} ({percentage}%)",
+        "starting": "{title} gestartet",
         "stopped": "Wird gestoppt {title} ({percentage}%)",
-        "stopping": "Gestoppt {title} ({percentage}%)",
-        "starting": "{title} gestartet"
+        "stopping": "Gestoppt {title} ({percentage}%)"
       },
       "empty-queue": "Alles ist synchronisiert...",
       "instance-accept": {
@@ -99,6 +99,9 @@ export default {
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
       "types": {
+        "choose": "Profiltyp spezifieren",
+        "company": "Unternehmen",
+        "device": "Gerät",
         "unspecified": "unspezifizierter Account"
       }
     },

@@ -56,9 +56,9 @@ export default {
         "error": "Error {title} ({percentage}%)",
         "finished": "{title} completed",
         "running": "{title} ({percentage}%)",
+        "starting": "Starting {title}",
         "stopped": "Stopped {title} ({percentage}%)",
-        "stopping": "Stopping {title} ({percentage}%)",
-        "starting": "Starting {title}"
+        "stopping": "Stopping {title} ({percentage}%)"
       },
       "empty-queue": "Everything is synchronized...",
       "instance-accept": {
@@ -99,6 +99,9 @@ export default {
     "please-login": "Please unlock your profile to continue.",
     "profile": {
       "types": {
+        "choose": "Specify Account Type",
+        "company": "Company",
+        "device": "Device",
         "unspecified": "unspecified account"
       }
     },

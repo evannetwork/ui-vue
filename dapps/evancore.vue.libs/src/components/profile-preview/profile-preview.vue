@@ -55,7 +55,14 @@
           {{ userInfo.alias }}
         </h2>
         <evan-address :address="address"></evan-address>
-        <b>{{ `_evan.profile.types.${ userInfo.type }` | translate }}</b>
+        <b class="text-primary"
+          v-if="address === $store.state.runtime.activeAccount"
+          @click="$emit('typeClick')">
+          {{ `_evan.profile.types.${ userInfo.type === 'unspecified' ? 'choose' : userInfo.type }` | translate }}
+        </b>
+         <b v-else>
+          {{ `_evan.profile.types.${ userInfo.type }` | translate }}
+        </b>
       </div>
     </template>
   </a>
