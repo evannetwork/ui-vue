@@ -63,7 +63,41 @@ export default class Button extends mixins(EvanComponent) {
     default: 'secondary',
   }) type: string;
 
+  /**
+   * Href property for link button
+   */
   @Prop() href: string;
+
+  /**
+   * Button Label.
+   */
+  @Prop({ type: String }) label: String;
+
+  /**
+   * The class name for the material design icon, without prefixed 'mdi'.
+   *
+   * @see: https://materialdesignicons.com/cdn/2.0.46/
+   */
+  @Prop({
+    type: String,
+    validator: value => value.slice(0, 3) === 'mdi' // TODO: validator seems not to be called
+  }) icon: String;
+
+  /**
+   * Defines whether the icon is shown before or after the label.
+   */
+  @Prop({
+    type: String,
+    default: 'right',
+    validator: (value: string) => {
+      return ['left', 'right'].indexOf(value) !== -1 // TODO: validator seems not to be called
+    }
+  }) iconPosition;
+
+  /**
+   * Loading state of the component.
+   */
+  @Prop({ type: Boolean, default: false }) isLoading: Boolean;
 
   /**
    * Evan specific button definitions mapped to it's classes. By applying other types, they will be

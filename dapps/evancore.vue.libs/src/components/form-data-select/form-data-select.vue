@@ -26,38 +26,29 @@
 */
 
 <template>
-  <component class="btn button-wrapper"
-    :is="href ? 'a' : 'button'"
-    :class="[
-      { [ knownTypes[type] ]: knownTypes[type] },
-      { [ `btn-${ type }` ]: !knownTypes[type] },
-      { [ `btn-${ size }` ]: size !== 'normal'  },
-    ]"
-    :disabled="disabled"
-    :href="href"
-    @click="$emit('click', $event)">
-    <template v-if="!$slots.default">
-      <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
-      <div :class="{'hidden': isLoading}" >
-        <template v-if="icon && !label">
-          <i :class="[icon, 'centered']" />
-        </template>
-        <template v-else>
-          <i v-if="icon && iconPosition === 'left'" :class="[icon, 'label', 'left']" />
-          <span>{{label}}</span>
-          <i v-if="icon && iconPosition === 'right'" :class="[icon, 'label', 'right']" />
-        </template>
-      </div>
-    </template>
-    <slot></slot>
-  </component>
+  <div class="form-group row">
+    <label :for="id" class="col-md-3 col-form-label">
+      {{ label }}
+    </label>
+    <div class="col-md-9">
+      <select
+        @focus="$parent.$emit('setFocus')" class="form-control"
+        :id="id"
+        v-bind:value="value"
+        v-bind="$attrs"
+        v-on:input="$emit('input', $event.target.value)"
+      >
+        <option v-for="option in options"
+          :value="option.value || option"
+          :key="option.value || option">{{option.label || option}}
+        </option>
+      </select>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-  import Button from './button';
-  export default Button;
+  import FormDataSelect from './form-data-select'
+  export default FormDataSelect
 </script>
 
-<style lang="scss" scoped>
-  @import './button.scss'
-</style>

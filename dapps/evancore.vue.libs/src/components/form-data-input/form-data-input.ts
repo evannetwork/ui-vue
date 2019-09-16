@@ -25,39 +25,41 @@
   https://evan.network/license/
 */
 
-<template>
-  <component class="btn button-wrapper"
-    :is="href ? 'a' : 'button'"
-    :class="[
-      { [ knownTypes[type] ]: knownTypes[type] },
-      { [ `btn-${ type }` ]: !knownTypes[type] },
-      { [ `btn-${ size }` ]: size !== 'normal'  },
-    ]"
-    :disabled="disabled"
-    :href="href"
-    @click="$emit('click', $event)">
-    <template v-if="!$slots.default">
-      <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
-      <div :class="{'hidden': isLoading}" >
-        <template v-if="icon && !label">
-          <i :class="[icon, 'centered']" />
-        </template>
-        <template v-else>
-          <i v-if="icon && iconPosition === 'left'" :class="[icon, 'label', 'left']" />
-          <span>{{label}}</span>
-          <i v-if="icon && iconPosition === 'right'" :class="[icon, 'label', 'right']" />
-        </template>
-      </div>
-    </template>
-    <slot></slot>
-  </component>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component'
+import EvanComponent from '../../component'
+import Vue from 'vue'
+import { Prop, Watch } from 'vue-property-decorator'
 
-<script lang="ts">
-  import Button from './button';
-  export default Button;
-</script>
+/**
+ * Base component for input element.
+ *
+ * @class         FormDataInput
+ * @selector      evan-form-data-select
+ */
+@Component({})
+class FormDataInput extends mixins(EvanComponent) {
+  /**
+   * The value for the input field.
+   */
+  @Prop({
+    type: String
+  }) value: string
 
-<style lang="scss" scoped>
-  @import './button.scss'
-</style>
+  /**
+   *  The label for the input field.
+   */
+  @Prop({
+    type: String
+  }) label: string
+
+  /**
+   * The id for the input field.
+   */
+  @Prop({
+    type: String,
+    required: true
+  }) id: string
+}
+
+export default FormDataInput

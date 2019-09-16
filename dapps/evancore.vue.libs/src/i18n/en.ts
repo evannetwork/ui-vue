@@ -90,6 +90,7 @@ export default {
         "title": "Delete file"
       }
     },
+    "transaction_costs_hint": "This will cause transaction fees.",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
@@ -105,6 +106,7 @@ export default {
         "unspecified": "unspecified account"
       }
     },
+    "share": "Share",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"

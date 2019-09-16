@@ -90,6 +90,7 @@ export default {
         "title": "Datein löschen"
       }
     },
+    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
@@ -105,6 +106,7 @@ export default {
         "unspecified": "unspezifizierter Account"
       }
     },
+    "share": "Freigeben",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"

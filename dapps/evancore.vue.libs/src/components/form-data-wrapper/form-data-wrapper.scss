@@ -1,0 +1,27 @@
+@import '~@evan.network/ui/src/style/utils';
+
+.form-data-wrapper {
+  > div:first-of-type {
+    border-bottom: 1px solid transparent;
+  }
+
+  /deep/ input.form-control,
+  /deep/ select.form-control {
+    background: transparent;
+  }
+}
+
+.form-data-wrapper.edit-mode {
+  > div:first-of-type {
+    border-bottom: 1px solid cssVar('primary');
+
+    h5 {
+      color: cssVar('primary');
+    }
+  }
+
+  /deep/ input.form-control,
+  /deep/ select.form-control {
+    background: cssVar('white');
+  }
+}

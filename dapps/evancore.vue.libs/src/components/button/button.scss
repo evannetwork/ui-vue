@@ -1,0 +1,15 @@
+.button-wrapper {
+  position: relative;
+
+  .hidden {
+    opacity: 0;
+  }
+
+  .spinner {
+    position: absolute;
+  }
+
+  span {
+    color: inherit;
+  }
+}
