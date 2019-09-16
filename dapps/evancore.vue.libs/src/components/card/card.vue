@@ -34,8 +34,15 @@
       'evan-highlight clickable': highlight,
     }"
     :is="href ? 'a' : 'div'"
-    :href="href">
-    <slot></slot>
+    :href="href"
+    @click="$emit('click', $event)">
+    <slot>
+      <i v-if="icon" :class="icon"></i>
+      <h5>{{ title }}</h5>
+      <small class="mb-2">{{ subTitle }}</small>
+      <small class="text-muted">{{ description }}</small>
+      <slot name="actions" />
+    </slot>
   </component>
 </template>
 
