@@ -37,15 +37,15 @@
     :href="href"
     @click="$emit('click', $event)">
     <template v-if="!$slots.default">
-    <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
+      <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
       <div :class="{'hidden': isLoading}" >
         <template v-if="icon && !label">
-          <i :class="['mdi', icon, 'centered']" />
+          <i :class="[icon, 'centered']" />
         </template>
         <template v-else>
-          <i v-if="icon && iconPosition === 'left'" :class="['mdi', icon, 'label', 'left']" />
+          <i v-if="icon && iconPosition === 'left'" :class="[icon, 'label', 'left']" />
           <span>{{label}}</span>
-          <i v-if="icon && iconPosition === 'right'" :class="['mdi', icon, 'label', 'right']" />
+          <i v-if="icon && iconPosition === 'right'" :class="[icon, 'label', 'right']" />
         </template>
       </div>
     </template>
