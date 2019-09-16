@@ -26,20 +26,18 @@
 */
 
 <template>
-  <component
-    class="evan-card"
-    :class="{
-      'bg-level-1 border': type === 'filled',
-      'border': type === 'outline',
-      'evan-highlight clickable': highlight,
-    }"
-    :is="href ? 'a' : 'div'"
-    :href="href">
-    <slot></slot>
-  </component>
+  <div class="profile-picture">
+    <div class="mask">
+      <img src="https://placehold.it/140x140" alt="">
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-  import Component from './card';
+  import Component from './profile-picture';
   export default Component;
 </script>
+
+<style scoped>
+  @import url('./profile-picture.scss');
+</style>

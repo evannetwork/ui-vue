@@ -25,21 +25,37 @@
   https://evan.network/license/
 */
 
-<template>
-  <component
-    class="evan-card"
-    :class="{
-      'bg-level-1 border': type === 'filled',
-      'border': type === 'outline',
-      'evan-highlight clickable': highlight,
-    }"
-    :is="href ? 'a' : 'div'"
-    :href="href">
-    <slot></slot>
-  </component>
-</template>
+// vue imports
+import Vue from 'vue';
+import Component, { mixins } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 
-<script lang="ts">
-  import Component from './card';
-  export default Component;
-</script>
+// evan.network imports
+import * as bcc from '@evan.network/api-blockchain-core';
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import EvanComponent from '../../component';
+
+/**
+ * Wrapper for profile verifications.
+ */
+@Component({ })
+export default class CardComponent extends mixins(EvanComponent) {
+  /**
+   * Card type that should be used (transparent, outline, filled)
+   */
+  @Prop({
+    default: 'filled'
+  }) type: string;
+
+  /**
+   * Optional href, to transform the card into a link element.
+   */
+  @Prop() href: string;
+
+  /**
+   * Add hover shadow and size effect
+   */
+  @Prop({
+    default: true,
+  }) highlight: boolean;
+}
