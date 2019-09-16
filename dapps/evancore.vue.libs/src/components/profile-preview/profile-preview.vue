@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './profile-preview.ts';
+  import Component from './profile-preview';
   export default Component;
 </script>
 
