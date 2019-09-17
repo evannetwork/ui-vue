@@ -27,43 +27,77 @@
 
 @import "~@evan.network/ui/src/style/utils";
 
-.profile-picture {
-  background: cssVar("border-color");
+@mixin masks($size) {
+  --size: #{$size}px;
 
+  width: var(--size);
+  height: var(--size);
   .mask {
-    position: relative;
+    width: var(--size);
+    height: var(--size);
 
-    img {
-      position: absolute;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &.user,
+    &.unknown {
+      img {
+        width: calc(var(--size) - 2px);
+        height: calc(var(--size) - 2px);
+        border-radius: 50%;
+      }
     }
-
-    &.device {
-      width: 100px;
-      height: 55px;
-      background: red;
-      position: relative;
+    &.unknown {
+      img {
+        display: none;
+      }
     }
     &.device:before {
       content: "";
       position: absolute;
-      top: -25px;
       left: 0;
+      top: 0;
       width: 0;
       height: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-bottom: 25px solid red;
+      border-top: calc(var(--size) * 0.22) solid transparent;
+      border-left: calc(var(--size) * 0.5) solid cssVar("border-color");
+      border-right: calc(var(--size) * 0.5) solid cssVar("border-color");
+      transform: rotate(180deg);
     }
     &.device:after {
       content: "";
       position: absolute;
-      bottom: -25px;
       left: 0;
+      bottom: 0;
       width: 0;
       height: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-top: 25px solid red;
+      border-top: calc(var(--size) * 0.22) solid transparent;
+      border-left: calc(var(--size) * 0.5) solid cssVar("border-color");
+      border-right: calc(var(--size) * 0.5) solid cssVar("border-color");
     }
+  }
+}
+
+.profile-picture {
+  background: cssVar("border-color");
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.medium {
+    @include masks(140);
+  }
+
+  &.large {
+    @include masks(210);
+  }
+
+  &.small {
+    @include masks(50);
   }
 }

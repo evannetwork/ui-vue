@@ -26,19 +26,19 @@
 */
 
 <template>
-  <div class="profile-picture">
-    <h5>Ich bin in der Komponente</h5>
-    <!-- <div class="mask" :class="type">
+  <div class="profile-picture" :class="size">
+    <div class="mask" :class="type">
       <img v-bind="$attrs">
-    </div> -->
+    </div>
+    <!-- TODO: show verified button -->
   </div>
 </template>
 
 <script lang="ts">
-  // import Component from './profile-picture';
-  // export default Component;
+  import Component from './profile-picture';
+  export default Component;
 </script>
 
 <style lang="scss" scoped>
-  // @import './profile-picture.scss';
+  @import './profile-picture.scss';
 </style>

@@ -48,7 +48,14 @@ class ProfilePicture extends mixins(EvanComponent) {
   }) type: string;
 
   /**
-   * Is Profile verified 
+   * Profile type that should be used (unknown, user, company, device)
+   */
+  @Prop({
+    default: 'medium'
+  }) size: string;
+
+  /**
+   * Is Profile verified
    */
   @Prop({
     default: false,
