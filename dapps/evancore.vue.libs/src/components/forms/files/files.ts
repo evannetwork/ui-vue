@@ -92,7 +92,6 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
    * Transform the input files to the correct format.
    */
   async created() {
-    this.stacked = true;
     await Promise.all(this.value.map(async (file, index) =>
       this.$set(this.value, index, await FileHandler.fileToContainerFile(file))
     ));

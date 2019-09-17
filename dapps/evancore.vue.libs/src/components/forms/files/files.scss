@@ -60,8 +60,6 @@
     }
 
     &:hover * {
-      color: cssVar('light');
-
       .btn.delete:hover i {
         color: cssVar('danger');
       }
