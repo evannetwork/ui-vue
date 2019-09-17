@@ -154,8 +154,8 @@ class FormDataWrapper extends mixins(EvanComponent) {
     }
 
     // return directly specified translation
-    if (control.uiSpecs && control.uiSpecs[type]) {
-      return this.$t(control.uiSpecs[type]);
+    if (control.uiSpecs && control.uiSpecs.attr && control.uiSpecs.attr[type]) {
+      return this.$t(control.uiSpecs.attr[type]);
     }
 
     // return default translation

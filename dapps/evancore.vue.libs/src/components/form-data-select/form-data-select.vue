@@ -31,8 +31,9 @@
       {{ label }}
     </label>
     <div class="col-md-9">
-      <select
-        @focus="$parent.$emit('setFocus')" class="form-control"
+      <select class="form-control"
+        @blur="$emit('blur')"
+        @focus="$parent.$emit('setFocus')"
         :id="id"
         v-bind:value="value"
         v-bind="$attrs"

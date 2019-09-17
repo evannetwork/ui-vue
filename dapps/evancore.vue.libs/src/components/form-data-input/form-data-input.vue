@@ -32,6 +32,7 @@
     </label>
     <div class="col-md-9">
       <input class="form-control"
+        @blur="$emit('blur')"
         @focus="$parent.$emit('setFocus')"
         :id="id"
         :class="{ 'is-invalid' : error }"
@@ -39,9 +40,9 @@
         v-bind="$attrs"
         v-on:input="$emit('input', $event.target.value)"
        />
-    </div>
-    <div class="invalid-feedback" v-if="error">
-      {{ error | translate }}
+      <div class="invalid-feedback" v-if="error">
+        {{ error | translate }}
+      </div>
     </div>
   </div>
 </template>

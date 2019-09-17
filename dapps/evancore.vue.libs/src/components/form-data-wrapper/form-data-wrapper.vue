@@ -36,8 +36,9 @@
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate}}</evan-button>
     </div>
     <div class="pt-4">
-      <slot v-bind:setEditMode="setEditMode">
-        <form v-if="form">
+      <slot v-bind:setEditMode="setEditMode"></slot>
+      <slot name="form" v-if="form">
+        <form @submit="$emit('submit')">
           <template v-for="(controlName) in form.controls">
             <slot :name="`control-${ controlName }`">
               <component
@@ -46,9 +47,9 @@
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"
-                :value="form[controlName].value"
+                v-model="form[controlName].value"
                 v-bind="form[controlName].uiSpecs && form[controlName].uiSpecs.attr ? form[controlName].uiSpecs.attr : { }"
-                @input="form[controlName].value = $event;"
+                @blur="form[controlName].setDirty()"
               />
             </slot>
           </template>
