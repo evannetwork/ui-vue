@@ -28,7 +28,7 @@
 @import "~@evan.network/ui/src/style/utils";
 
 @mixin masks($size) {
-  --size: #{$size}px;
+  --size: #{$size};
 
   width: var(--size);
   height: var(--size);
@@ -90,14 +90,14 @@
   }
 
   &.medium {
-    @include masks(140);
+    @include masks(140px);
   }
 
   &.large {
-    @include masks(210);
+    @include masks(210px);
   }
 
   &.small {
-    @include masks(50);
+    @include masks(50px);
   }
 }
