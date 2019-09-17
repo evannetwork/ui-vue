@@ -41,15 +41,14 @@
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate }}</evan-button>
     </div>
     <div class="px-0 pt-4" :class="{ 'container': stacked }">
-      <form :class="{ 'row': stacked }"
-        @submit="$emit('submit')">
+      <form :class="{ 'row': stacked }" @submit="save">
         <slot v-bind:setEditMode="setEditMode"></slot>
         <slot name="form" v-if="form">
           <template v-for="(controlName) in form.controls">
             <slot :name="`form-control-${ controlName }`">
               <component
                 :disabled="isLoading"
-                :error="getTranslation(form[controlName], 'error')"
+                :error="(onlyForm || editMode && !onlyForm) ? getTranslation(form[controlName], 'error') : false"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"

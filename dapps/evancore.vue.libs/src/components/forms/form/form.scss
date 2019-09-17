@@ -22,15 +22,22 @@
 
 @import '~@evan.network/ui/src/style/utils';
 
+$controlSelectors: (
+  '.evan-file-input .batch-label',
+  '.evan-file-input .dropzone',
+  'input.form-control',
+  'select.form-control'
+);
+
 .form-data-wrapper {
   > div:first-of-type {
     border-bottom: 1px solid transparent;
   }
 
-  /deep/ input.form-control,
-  /deep/ select.form-control,
-  /deep/ .evan-file-input .dropzone {
-    background: transparent;
+  @each $control in $controlSelectors {
+    /deep/ #{ $control } {
+      background: transparent;
+    }
   }
 }
 
@@ -43,9 +50,9 @@
     }
   }
 
-  /deep/ input.form-control,
-  /deep/ select.form-control,
-  /deep/ .evan-file-input .dropzone {
+  @each $control in $controlSelectors {
+    /deep/ #{ $control } {
     background: cssVar('bg-level-1');
+    }
   }
 }
