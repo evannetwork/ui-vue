@@ -48,6 +48,7 @@ export default {
       "title": "Ihr Browser wird nicht unterstützt"
     },
     "cancel": "Abbrechen",
+    "save": "Speichern",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "dispatcher-status": {
@@ -56,9 +57,9 @@ export default {
         "error": "Synchronisationsfehler: {title} ({percentage}%)",
         "finished": "{title} abgeschlossen",
         "running": "{title} ({percentage}%)",
+        "starting": "{title} gestartet",
         "stopped": "Wird gestoppt {title} ({percentage}%)",
-        "stopping": "Gestoppt {title} ({percentage}%)",
-        "starting": "{title} gestartet"
+        "stopping": "Gestoppt {title} ({percentage}%)"
       },
       "empty-queue": "Alles ist synchronisiert...",
       "instance-accept": {
@@ -90,6 +91,7 @@ export default {
         "title": "Datein löschen"
       }
     },
+    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
@@ -99,9 +101,13 @@ export default {
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
       "types": {
+        "choose": "Profiltyp spezifieren",
+        "company": "Unternehmen",
+        "device": "Gerät",
         "unspecified": "unspezifizierter Account"
       }
     },
+    "share": "Freigeben",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"

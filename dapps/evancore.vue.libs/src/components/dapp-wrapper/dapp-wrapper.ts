@@ -601,7 +601,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     // load all dispatcher instances for this user
     await Promise.all(dispatchers.map(async (dispatcherObj: any) => {
       try {
-        const dispatcher = this.loadDispatcher(dispatcherObj);
+        const dispatcher = await this.loadDispatcher(dispatcherObj.dispatcherId);
         await Promise.all(Object.keys(dispatcherObj.entries).map(async (instanceId: string) => {
           const entry = dispatcherObj.entries[instanceId];
           const instance = new DispatcherInstance({

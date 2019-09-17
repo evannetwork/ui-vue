@@ -25,10 +25,66 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  false,
-);
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
+import { Prop, Watch } from 'vue-property-decorator';
+
+import EvanComponent from '../../../component';
+
+/**
+ * Base component for input element.
+ *
+ * @class         FormDataInput
+ * @selector      evan-form-control-input
+ */
+@Component({})
+export default class ControlComponent extends mixins(EvanComponent) {
+  /**
+   * The value for the input field.
+   */
+  @Prop({
+    type: String
+  }) value: string;
+
+  /**
+   *  The label for the input field.
+   */
+  @Prop({
+    type: String
+  }) label: string;
+
+  /**
+   * The id for the input field.
+   */
+  @Prop({
+    type: String,
+    required: true
+  }) id: string;
+
+  /**
+   * Mark the input invalid
+   */
+  @Prop({
+    type: String,
+  }) error: string;
+
+  /**
+   * Disable the input field
+   */
+  @Prop() disabled: boolean;
+
+  /**
+   * Enable stacked to show labels and inputs not on oneline.
+   */
+  @Prop({
+    default: false,
+  }) stacked: boolean;
+
+  /**
+   * Bootstrap grid size
+   */
+  @Prop({
+    default: 12,
+  }) size: boolean;
+}

@@ -75,10 +75,23 @@ export interface EvanVueOptionsInterface {
 }
 
 /**
+ * Used to describe the evan form control automatic rendering.
+ */
+export interface EvanFormControlUISpecs {
+  error?: string;
+  label?: string;
+  options?: { label: string, value: any };
+  placeholder?: string;
+  type: string;
+}
+
+/**
  * Represents one generalized form control within an vue form.
  */
 export interface EvanFormControlOptions {
-  validate?: Function;
   name: string;
+  uiSpecs?: EvanFormControlUISpecs;
+  validate?: Function;
   value?: any;
 }
+

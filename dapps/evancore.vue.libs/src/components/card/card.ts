@@ -58,4 +58,25 @@ export default class CardComponent extends mixins(EvanComponent) {
   @Prop({
     default: true,
   }) highlight: boolean;
+
+  /**
+   * Card icon
+   */
+  @Prop() icon: string;
+
+  /**
+   * Card title
+   */
+  @Prop() title: string;
+
+  /**
+   * Card title
+   */
+  @Prop() subTitle: string;
+
+
+  /**
+   * Card small text
+   */
+  @Prop() description: string;
 }

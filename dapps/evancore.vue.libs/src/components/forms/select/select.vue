@@ -25,10 +25,25 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  false,
-);
+<template>
+  <evan-form-control v-bind="$props">
+    <select class="form-control"
+      :id="id"
+      :value="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.value)"
+      v-bind="$attrs">
+      <option v-for="option in options"
+        :value="option.value || option"
+        :key="option.value || option">
+        {{ (option.label || option) | translate }}
+      </option>
+    </select>
+  </evan-form-control>
+</template>
+
+<script lang="ts">
+  import FormDataSelect from './select'
+  export default FormDataSelect
+</script>

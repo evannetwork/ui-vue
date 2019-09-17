@@ -25,10 +25,25 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  false,
-);
+<template>
+  <div class="form-group"
+    :class="`${ stacked ? '' : 'row' }${ stacked ? ' col-' + size : '' }`">
+    <label class="col-form-label"
+      :class="{ 'col-md-3': !stacked }"
+      :for="id"
+      v-if="label">
+      {{ label }}
+    </label>
+    <div :class="{ 'col-md-9': !stacked }">
+      <slot></slot>
+      <div class="invalid-feedback" v-if="error">
+        {{ error | translate }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+  import FormDataInput from './control'
+  export default FormDataInput
+</script>

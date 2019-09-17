@@ -25,10 +25,20 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  false,
-);
+<template>
+  <evan-form-control v-bind="$props">
+    <input class="form-control"
+      :class="{ 'is-invalid' : error }"
+      :id="id"
+      :value="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.value)"
+    />
+  </evan-form-control>
+</template>
+
+<script lang="ts">
+  import FormDataInput from './input'
+  export default FormDataInput
+</script>

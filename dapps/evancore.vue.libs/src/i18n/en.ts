@@ -48,6 +48,7 @@ export default {
       "title": "Your browser is not supported"
     },
     "cancel": "Cancel",
+    "save": "Save",
     "dapp-wrapper": {
       "all-messages": "All messages",
       "dispatcher-status": {
@@ -56,9 +57,9 @@ export default {
         "error": "Error {title} ({percentage}%)",
         "finished": "{title} completed",
         "running": "{title} ({percentage}%)",
+        "starting": "Starting {title}",
         "stopped": "Stopped {title} ({percentage}%)",
-        "stopping": "Stopping {title} ({percentage}%)",
-        "starting": "Starting {title}"
+        "stopping": "Stopping {title} ({percentage}%)"
       },
       "empty-queue": "Everything is synchronized...",
       "instance-accept": {
@@ -90,6 +91,7 @@ export default {
         "title": "Delete file"
       }
     },
+    "transaction_costs_hint": "This will cause transaction fees.",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
@@ -99,9 +101,13 @@ export default {
     "please-login": "Please unlock your profile to continue.",
     "profile": {
       "types": {
+        "choose": "Specify Account Type",
+        "company": "Company",
+        "device": "Device",
         "unspecified": "unspecified account"
       }
     },
+    "share": "Share",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"

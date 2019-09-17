@@ -40,7 +40,11 @@ import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
-import FileInputComponent from './files/files.vue';
+import FormComponent from './forms/form/form.vue';
+import FormControlComponent from './forms/control/control.vue';
+import FormControlFilesComponent from './forms/files/files.vue';
+import FormControlInputComponent from './forms/input/input.vue';
+import FormControlSelectComponent from './forms/select/select.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
@@ -68,7 +72,11 @@ export {
   DAppWrapperSidebarLevel2Component,
   DropdownComponent,
   EvanComponent,
-  FileInputComponent,
+  FormComponent,
+  FormControlComponent,
+  FormControlFilesComponent,
+  FormControlInputComponent,
+  FormControlSelectComponent,
   IframeComponent,
   LoginComponent,
   LogoutComponent,
@@ -95,7 +103,12 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
   { name: 'evan-dropdown', component: DropdownComponent },
-  { name: 'evan-file-input', component: FileInputComponent },
+  { name: 'evan-file-input', component: FormControlFilesComponent },
+  { name: 'evan-form', component: FormComponent },
+  { name: 'evan-form-control', component: FormControlComponent },
+  { name: 'evan-form-control-files', component: FormControlFilesComponent },
+  { name: 'evan-form-control-input', component: FormControlInputComponent },
+  { name: 'evan-form-control-select', component: FormControlSelectComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },

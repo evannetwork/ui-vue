@@ -25,10 +25,18 @@
   https://evan.network/license/
 */
 
-// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
-module.exports = require('../../vue/webpack.config')(
-  require('./dbcp.json').public.name,
-  require('path').resolve(__dirname, './dist'),
-  true,
-  false,
-);
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
+import { Prop, Watch } from 'vue-property-decorator';
+
+import EvanControlComponent from '../control/control';
+
+/**
+ * Base component for input element.
+ *
+ * @class         FormDataInput
+ * @selector      evan-form-control-input
+ */
+@Component({})
+export default class InputComponent extends mixins(EvanControlComponent) { }
