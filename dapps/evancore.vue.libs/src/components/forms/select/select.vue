@@ -36,7 +36,8 @@
       v-bind="$attrs">
       <option v-for="option in options"
         :value="option.value || option"
-        :key="option.value || option">{{option.label || option}}
+        :key="option.value || option">
+        {{ (option.label || option) | translate }}
       </option>
     </select>
   </evan-form-control>

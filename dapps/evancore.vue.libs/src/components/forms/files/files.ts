@@ -123,6 +123,7 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
     }));
 
     // trigger update event
+    this.$parent.$emit('setFocus', true);
     this.$emit('input', this.value);
   }
 
@@ -143,6 +144,7 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
       this.fileRemove = -1;
 
       // trigger update event
+      this.$parent.$emit('setFocus', true);
       this.$emit('input', this.value);
     } else {
       // if the file is not new, ask before removal
