@@ -96,6 +96,11 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   }) stacked: boolean;
 
   /**
+   * Render only the formular without adding the formular wrapper.
+   */
+  @Prop() onlyForm: boolean;
+
+  /**
    * Is the formular currently enabled?
    */
   editMode = false;
@@ -109,16 +114,17 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
    * Bind event handlers
    */
   created() {
-    this.$on('setFocus', () => {
-      this.setEditMode(true)
-    })
+    this.$on('setFocus', () => this.setEditMode(true));
+
+    // activate edit mode directly if only form is specified
+    this.onlyForm && this.setEditMode(true);
   }
 
   /**
    * Remove event handlers
    */
   beforeDestroy() {
-    this.$off('setFocus')
+    this.$off('setFocus');
   }
 
   /**

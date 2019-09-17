@@ -26,17 +26,22 @@
 */
 
 <template>
-  <div class="form-data-wrapper mt-2 mb-8" :class="{'edit-mode': editMode}">
-    <div class="d-flex justify-content-between align-items-center pb-1">
+  <div class="mt-2 mb-8"
+    :class="{
+      'edit-mode': editMode && !onlyForm,
+      'form-data-wrapper': !onlyForm,
+    }">
+    <div class="d-flex justify-content-between align-items-center pb-1"
+      v-if="!onlyForm">
       <h5 class="my-0 py-0 text-uppercase font-weight-bold">
         <i class="mdi mr-2" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
         {{ title }}
       </h5>
       <!-- TODO: add share action to button: -->
-      <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate}}</evan-button>
+      <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate }}</evan-button>
     </div>
-    <div class="container px-0 pt-4">
-      <form class="row"
+    <div class="px-0 pt-4" :class="{ 'container': stacked }">
+      <form :class="{ 'row': stacked }"
         @submit="$emit('submit')">
         <slot v-bind:setEditMode="setEditMode"></slot>
         <slot name="form" v-if="form">
@@ -58,7 +63,7 @@
         </slot>
       </form>
     </div>
-    <template v-if="editMode">
+    <template v-if="editMode && !onlyForm">
       <a
         class="text-muted mt-4 mb-3 d-inline-block"
         href="https://evannetwork.github.io/docs/other/glossary.html#e"

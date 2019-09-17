@@ -27,7 +27,7 @@
 
 <template>
   <div class="form-group"
-    :class="`${ stacked ? '' : 'row ' }col-${ stacked ? size : 12 }`">
+    :class="`${ stacked ? '' : 'row ' }${ stacked ? 'col-' + size : '' }`">
     <label class="col-form-label"
       :class="{ 'col-md-3': !stacked }"
       :for="id"
