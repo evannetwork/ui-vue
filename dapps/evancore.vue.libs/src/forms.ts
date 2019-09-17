@@ -106,12 +106,18 @@ export class EvanFormControl {
   validating: boolean;
 
   /**
+   * Optional specifications that describes the control rendering.
+   */
+  uiSpecs: any;
+
+  /**
    * Create the new forms instance.
    */
-  constructor(name: string, value: any, vueInstance: Vue, validate?: Function, form?: EvanForm) {
+  constructor(name: string, value: any, vueInstance: Vue, validate?: Function, form?: EvanForm, uiSpecs?: any) {
     this._validate = validate;
     this.form = form;
     this.name = name;
+    this.uiSpecs = uiSpecs;
     this.value = value;
     this.vueInstance = vueInstance;
   }
@@ -217,14 +223,17 @@ export class EvanForm {
     // do not apply values initialy, set the control key first, so the validator can access the
     // controls
     this.controls.forEach(controlKey => {
-      controls[controlKey].name = controlKey;
+      const control = controls[controlKey];
+
+      control.name = controlKey;
 
       this[controlKey] = new EvanFormControl(
         controlKey,
-        controls[controlKey].value,
+        control.value,
         this.vueInstance,
         undefined,
-        this
+        this,
+        control.uiSpecs,
       );
     });
 

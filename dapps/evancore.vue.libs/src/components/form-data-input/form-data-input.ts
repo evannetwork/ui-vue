@@ -44,14 +44,14 @@ class FormDataInput extends mixins(EvanComponent) {
    */
   @Prop({
     type: String
-  }) value: string
+  }) value: string;
 
   /**
    *  The label for the input field.
    */
   @Prop({
     type: String
-  }) label: string
+  }) label: string;
 
   /**
    * The id for the input field.
@@ -59,7 +59,14 @@ class FormDataInput extends mixins(EvanComponent) {
   @Prop({
     type: String,
     required: true
-  }) id: string
+  }) id: string;
+
+  /**
+   * Mark the input invalid
+   */
+  @Prop({
+    type: String,
+  }) error: string;
 }
 
 export default FormDataInput

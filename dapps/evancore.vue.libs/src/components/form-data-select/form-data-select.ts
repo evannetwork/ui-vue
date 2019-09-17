@@ -49,14 +49,14 @@ class FormDataSelect extends mixins(EvanComponent) {
    */
   @Prop({
     type: String
-  }) value: string
+  }) value: string;
 
   /**
    * The label for the select element.
    */
   @Prop({
     type: String
-  }) label: string
+  }) label: string;
 
   /**
    * The id for the select element.
@@ -64,14 +64,21 @@ class FormDataSelect extends mixins(EvanComponent) {
   @Prop({
     type: String,
     required: true
-  }) id: string
+  }) id: string;
 
   /**
    * The selectable options. Can be an array of label-value pairs or an array of strings.
    */
   @Prop({
     type: Object
-  }) options: Option[] | string[]
+  }) options: Option[] | string[];
+
+  /**
+   * Mark the input invalid
+   */
+  @Prop({
+    type: String,
+  }) error: string;
 }
 
 export default FormDataSelect

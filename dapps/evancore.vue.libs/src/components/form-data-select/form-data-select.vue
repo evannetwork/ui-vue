@@ -43,6 +43,9 @@
           :key="option.value || option">{{option.label || option}}
         </option>
       </select>
+      <div class="invalid-feedback" v-if="error">
+        {{ error | translate }}
+      </div>
     </div>
   </div>
 </template>

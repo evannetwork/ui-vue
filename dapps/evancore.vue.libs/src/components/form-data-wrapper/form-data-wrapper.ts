@@ -26,10 +26,12 @@
 */
 
 // vue imports
-import Component, { mixins } from 'vue-class-component'
-import EvanComponent from '../../component'
-import Vue from 'vue'
-import { Prop, Watch } from 'vue-property-decorator'
+import Component, { mixins } from 'vue-class-component';
+import EvanComponent from '../../component';
+import Vue from 'vue';
+import { Prop, Watch } from 'vue-property-decorator';
+
+import { EvanForm, EvanFormControl } from '../../forms';
 
 /**
  * Wrapper component for button elements.
@@ -45,7 +47,7 @@ class FormDataWrapper extends mixins(EvanComponent) {
   @Prop({
     type: String,
     required: true,
-  }) title: string
+  }) title: string;
 
   /**
    * Sets editmode to active or inactive.
@@ -53,55 +55,126 @@ class FormDataWrapper extends mixins(EvanComponent) {
   @Prop({
     type: Boolean,
     default: false,
-  }) isPublic: boolean
+  }) isPublic: boolean;
 
   /**
-   * Function performed, when save button is clicked.
+   * Show the loading symbol and disable the accept button.
    */
   @Prop({
-    type: Function,
-    required: true,
-  }) handleSave: (event: Event) => any
+    type: Boolean,
+    default: false,
+  }) isLoading: boolean;
 
   /**
-   * Function performed, when cancel button is clicked.
+   * Disable the save button
    */
   @Prop({
-    type: Function,
-    required: true,
-  }) handleCancel: (event: Event) => any
+    type: Boolean,
+    default: false,
+  }) disabled: boolean;
 
-  editMode = false
-  isLoading = false
+  /**
+   * Optional evan formular, that will automatically generate slot content formular. For custom
+   * forms just overwrite the full content slot, or each generated field slot.
+   */
+  @Prop() form: EvanForm;
 
+  /**
+   * If the evan form is used to generate automatic inputs, all the input titles, descriptions and
+   * errors will be translated using this i18n scope.
+   */
+  @Prop({
+    default: '_evan',
+  }) i18nScope: string;
+
+  /**
+   * Is the formular currently enabled?
+   */
+  editMode = false;
+
+  /**
+   * Bind event handlers
+   */
   created() {
     this.$on('setFocus', () => {
       this.setEditMode(true)
     })
   }
 
+  /**
+   * Remove event handlers
+   */
   beforeDestroy() {
     this.$off('setFocus')
   }
 
+  /**
+   * Set the current edit mode.
+   *
+   * @param      {boolean}  active  true / false
+   */
   setEditMode(active: boolean): void {
-    this.editMode = active
+    this.editMode = active;
   }
 
-  async save (ev: Event) {
-    this.isLoading = true
-
-    await this.handleSave(ev)
-    this.isLoading = false
-    this.editMode = false
+  /**
+   * Trigger the save function and wait for resolve.
+   *
+   * @param      {Event}  ev      save event args
+   */
+  async save(ev: Event) {
+    await this.$emit('save', ev);
+    this.editMode = false;
   }
 
+  /**
+   * Cancel edit and send the corresponding event
+   *
+   * @param      {Event}  ev      event args to send
+   */
   cancel(ev: Event) {
-    if (typeof this.handleCancel === 'function') {
-      this.handleCancel(ev)
+    this.$emit('cancel', ev);
+    this.editMode = false;
+  }
+
+  /**
+   * Return the translation for a control specific text (label, placeholder, error)
+   *
+   * @param      {EvanFormControl}  control  control that should be translated
+   * @param      {string}           type     text that should be translated (label, placeholder, error)
+   */
+  getTranslation(control: EvanFormControl, type: string) {
+    // if manual error text was specified, translate it and return it directly
+    if (type === 'error') {
+      if (typeof control.error !== 'boolean') {
+        return this.$t(control.error);
+      } else if (!control.error) {
+        return control.error;
+      }
     }
 
-    this.editMode = false
+    // return directly specified translation
+    if (control.uiSpecs && control.uiSpecs[type]) {
+      return this.$t(control.uiSpecs[type]);
+    }
+
+    // return default translation
+    return this.$t(`${ this.i18nScope }.${ control.name }.${ type }`);
+  }
+
+  /**
+   * Get the form-data type component string for a control.
+   *
+   * @param      {EvanFormControl}  control  control that should be translated
+   */
+  getControlComponentName(control: EvanFormControl) {
+    let type = 'input';
+
+    if (control.uiSpecs) {
+      type = control.uiSpecs.type || 'input';
+    }
+
+    return `evan-form-data-${ type }`;
   }
 }
 

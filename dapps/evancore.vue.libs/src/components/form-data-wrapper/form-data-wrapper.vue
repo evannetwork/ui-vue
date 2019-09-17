@@ -30,36 +30,52 @@
     <div class="d-flex justify-content-between align-items-center pb-1">
       <h5 class="my-0 py-0 text-uppercase font-weight-bold">
         <i class="mdi mr-2" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
-        {{title}}
+        {{ title }}
       </h5>
       <!-- TODO: add share action to button: -->
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate}}</evan-button>
     </div>
     <div class="pt-4">
-      <slot
-        v-bind:setEditMode="setEditMode"
-      ></slot>
+      <slot v-bind:setEditMode="setEditMode">
+        <form v-if="form">
+          <template v-for="(controlName) in form.controls">
+            <slot :name="`control-${ controlName }`">
+              <component
+                :disabled="isLoading"
+                :error="getTranslation(form[controlName], 'error')"
+                :is="getControlComponentName(form[controlName])"
+                :label="getTranslation(form[controlName], 'label')"
+                :placeholder="getTranslation(form[controlName], 'placeholder')"
+                :value="form[controlName].value"
+                v-bind="form[controlName].uiSpecs && form[controlName].uiSpecs.attr ? form[controlName].uiSpecs.attr : { }"
+                @input="form[controlName].value = $event;"
+              />
+            </slot>
+          </template>
+        </form>
+      </slot>
     </div>
     <template v-if="editMode">
       <a
         class="text-muted mt-4 mb-3 d-inline-block"
         href="https://evannetwork.github.io/docs/other/glossary.html#e"
         target="_blank"
-        rel="noopener noreferrer"
-      >
+        rel="noopener noreferrer">
         <i class="mdi mdi-information-outline mr-2" />
         {{ '_evan.transaction_costs_hint' | translate }}
-      </a><br />
-      <evan-button
-        type="primary"
-        @click="save"
+      </a>
+      <br />
+      <evan-button type="primary" class="mr-3"
+        :disabled="isLoading || disabled || (form && !form.isValid)"
         :isLoading="isLoading"
-        label="save"
-        class="mr-3"
+        :label="'_evan.save' | translate"
+        @click="save"
       />
-      <evan-button v-if="!isLoading" type="secondary" @click="cancel">
-        {{ '_evan.cancel' | translate }}
-      </evan-button>
+      <evan-button type="secondary"
+        v-if="!isLoading"
+        @click="cancel"
+        :label="'_evan.cancel' | translate"
+      />
     </template>
   </div>
 </template>

@@ -48,6 +48,7 @@ export default {
       "title": "Ihr Browser wird nicht unterstützt"
     },
     "cancel": "Abbrechen",
+    "save": "Speichern",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "dispatcher-status": {

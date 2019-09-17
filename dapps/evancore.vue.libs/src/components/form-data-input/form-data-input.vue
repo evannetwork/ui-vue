@@ -31,14 +31,17 @@
       {{ label }}
     </label>
     <div class="col-md-9">
-      <input
+      <input class="form-control"
         @focus="$parent.$emit('setFocus')"
         :id="id"
-        class="form-control"
+        :class="{ 'is-invalid' : error }"
         v-bind:value="value"
         v-bind="$attrs"
         v-on:input="$emit('input', $event.target.value)"
        />
+    </div>
+    <div class="invalid-feedback" v-if="error">
+      {{ error | translate }}
     </div>
   </div>
 </template>
