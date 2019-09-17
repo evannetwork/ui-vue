@@ -38,6 +38,9 @@
 
     white-space: nowrap;
 
+    border: 2px solid cssVar('border-color');
+    background: cssVar('bg-level-1');
+
     span {
       display: inline-block;
       overflow: hidden;
@@ -91,6 +94,7 @@
 
     border: 2px dashed cssVar('border-color');
     outline-offset: -10px;
+    background-color: cssVar('bg-level-1');
 
     div {
       transition: 0.5s color ease-out;

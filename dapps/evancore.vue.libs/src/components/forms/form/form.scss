@@ -28,7 +28,8 @@
   }
 
   /deep/ input.form-control,
-  /deep/ select.form-control {
+  /deep/ select.form-control,
+  /deep/ .evan-file-input .dropzone {
     background: transparent;
   }
 }
@@ -43,7 +44,8 @@
   }
 
   /deep/ input.form-control,
-  /deep/ select.form-control {
-    background: cssVar('white');
+  /deep/ select.form-control,
+  /deep/ .evan-file-input .dropzone {
+    background: cssVar('bg-level-1');
   }
 }
