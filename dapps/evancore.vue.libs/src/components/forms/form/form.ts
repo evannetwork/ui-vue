@@ -27,20 +27,21 @@
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import EvanComponent from '../../component';
 import Vue from 'vue';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { EvanForm, EvanFormControl } from '../../forms';
+import EvanComponent from '../../../component';
+import { EvanForm, EvanFormControl } from '../../../forms';
 
 /**
- * Wrapper component for button elements.
+ * Formular wrapper for handling evan.network specific formulars including an visible scope icon,
+ * loading indicators, EvanForm and EvanFormControl support.
  *
- * @class         ComponentsOverview
- * @selector      evan-components-overview
+ * @class         EvanFormComponent
+ * @selector      evan-form
  */
 @Component({ })
-class FormDataWrapper extends mixins(EvanComponent) {
+export default class EvanFormComponent extends mixins(EvanComponent) {
   /**
    * Form title
    */
@@ -88,9 +89,21 @@ class FormDataWrapper extends mixins(EvanComponent) {
   }) i18nScope: string;
 
   /**
+   * Display inputs with labels in oneline or stacked.
+   */
+  @Prop({
+    default: false,
+  }) stacked: boolean;
+
+  /**
    * Is the formular currently enabled?
    */
   editMode = false;
+
+  /**
+   * Latest values of the evan form, when editMode gets enabled.
+   */
+  formDataBackup: any = null;
 
   /**
    * Bind event handlers
@@ -114,6 +127,11 @@ class FormDataWrapper extends mixins(EvanComponent) {
    * @param      {boolean}  active  true / false
    */
   setEditMode(active: boolean): void {
+    // save latest data, so we can restore it on cancelation
+    if (!this.editMode && active && this.form) {
+      this.formDataBackup = this.form.toObject();
+    }
+
     this.editMode = active;
   }
 
@@ -133,6 +151,13 @@ class FormDataWrapper extends mixins(EvanComponent) {
    * @param      {Event}  ev      event args to send
    */
   cancel(ev: Event) {
+    // restore old data, when the edit mode is cancled
+    if (this.form && this.formDataBackup) {
+      Object.keys(this.formDataBackup).forEach(controlKey => {
+        this.form[controlKey].value = this.formDataBackup[controlKey];
+      });
+    }
+
     this.$emit('cancel', ev);
     this.editMode = false;
   }
@@ -174,8 +199,6 @@ class FormDataWrapper extends mixins(EvanComponent) {
       type = control.uiSpecs.type || 'input';
     }
 
-    return `evan-form-data-${ type }`;
+    return `evan-form-control-${ type }`;
   }
 }
-
-export default FormDataWrapper

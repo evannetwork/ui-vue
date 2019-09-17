@@ -291,4 +291,13 @@ export class EvanForm {
 
     this.validateControls();
   }
+
+  /**
+   * Returns a object representation of the form values.
+   */
+  toObject() {
+    const ret = { };
+    this.controls.forEach(controlKey => ret[controlKey] = this[controlKey].value);
+    return ret;
+  }
 }

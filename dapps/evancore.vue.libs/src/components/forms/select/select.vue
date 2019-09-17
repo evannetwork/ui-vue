@@ -25,48 +25,24 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component'
-import EvanComponent from '../../component'
-import Vue from 'vue'
-import { Prop, Watch } from 'vue-property-decorator'
+<template>
+  <evan-form-control v-bind="$props">
+    <select class="form-control"
+      :id="id"
+      :value="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.value)"
+      v-bind="$attrs">
+      <option v-for="option in options"
+        :value="option.value || option"
+        :key="option.value || option">{{option.label || option}}
+      </option>
+    </select>
+  </evan-form-control>
+</template>
 
-/**
- * Base component for input element.
- *
- * @class         FormDataInput
- * @selector      evan-form-data-select
- */
-@Component({})
-class FormDataInput extends mixins(EvanComponent) {
-  /**
-   * The value for the input field.
-   */
-  @Prop({
-    type: String
-  }) value: string;
-
-  /**
-   *  The label for the input field.
-   */
-  @Prop({
-    type: String
-  }) label: string;
-
-  /**
-   * The id for the input field.
-   */
-  @Prop({
-    type: String,
-    required: true
-  }) id: string;
-
-  /**
-   * Mark the input invalid
-   */
-  @Prop({
-    type: String,
-  }) error: string;
-}
-
-export default FormDataInput
+<script lang="ts">
+  import FormDataSelect from './select'
+  export default FormDataSelect
+</script>

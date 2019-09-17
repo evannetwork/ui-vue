@@ -31,10 +31,11 @@ import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
-import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { FileHandler, } from '@evan.network/ui';
+
+import ControlComponent from '../control/control';
 
 /**
  * Wrapper for HTML 5 file upload. Uses the ui-core File utils, load load, return and format files
@@ -42,20 +43,16 @@ import { FileHandler, } from '@evan.network/ui';
  *
  * @class         FilesInputComponent
  * @selector      evan-file-input
+ * @selector      evan-form-control-files
  */
 @Component({ })
-export default class FilesInputComponent extends mixins(EvanComponent) {
+export default class FilesInputComponent extends mixins(ControlComponent) {
   /**
    * input accept options
    */
   @Prop({
     default: '*'
   }) accept: string;
-
-  /**
-   * All selected files.
-   */
-   @Prop() value: Array<FileHandler.UIContainerFile>;
 
   /**
    * Name of the input.
@@ -95,6 +92,7 @@ export default class FilesInputComponent extends mixins(EvanComponent) {
    * Transform the input files to the correct format.
    */
   async created() {
+    this.stacked = true;
     await Promise.all(this.value.map(async (file, index) =>
       this.$set(this.value, index, await FileHandler.fileToContainerFile(file))
     ));

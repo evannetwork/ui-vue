@@ -25,60 +25,25 @@
   https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component'
-import EvanComponent from '../../component'
-import Vue from 'vue'
-import { Prop, Watch } from 'vue-property-decorator'
+<template>
+  <div class="form-group"
+    :class="`${ stacked ? '' : 'row ' }col-${ stacked ? size : 12 }`">
+    <label class="col-form-label"
+      :class="{ 'col-md-3': !stacked }"
+      :for="id"
+      v-if="label">
+      {{ label }}
+    </label>
+    <div :class="{ 'col-md-9': !stacked }">
+      <slot></slot>
+      <div class="invalid-feedback" v-if="error">
+        {{ error | translate }}
+      </div>
+    </div>
+  </div>
+</template>
 
-interface Option {
-  label: string,
-  value: any
-}
-
-/**
- * Wrapper component for button elements.
- *
- * @class         FormDataSelect
- * @selector      evan-form-data-select
- */
-@Component({})
-class FormDataSelect extends mixins(EvanComponent) {
-  /**
-   * The value for the select element.
-   */
-  @Prop({
-    type: String
-  }) value: string;
-
-  /**
-   * The label for the select element.
-   */
-  @Prop({
-    type: String
-  }) label: string;
-
-  /**
-   * The id for the select element.
-   */
-  @Prop({
-    type: String,
-    required: true
-  }) id: string;
-
-  /**
-   * The selectable options. Can be an array of label-value pairs or an array of strings.
-   */
-  @Prop({
-    type: Object
-  }) options: Option[] | string[];
-
-  /**
-   * Mark the input invalid
-   */
-  @Prop({
-    type: String,
-  }) error: string;
-}
-
-export default FormDataSelect
+<script lang="ts">
+  import FormDataInput from './control'
+  export default FormDataInput
+</script>

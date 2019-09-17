@@ -35,26 +35,28 @@
       <!-- TODO: add share action to button: -->
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate}}</evan-button>
     </div>
-    <div class="pt-4">
-      <slot v-bind:setEditMode="setEditMode"></slot>
-      <slot name="form" v-if="form">
-        <form @submit="$emit('submit')">
+    <div class="container px-0 pt-4">
+      <form class="row"
+        @submit="$emit('submit')">
+        <slot v-bind:setEditMode="setEditMode"></slot>
+        <slot name="form" v-if="form">
           <template v-for="(controlName) in form.controls">
-            <slot :name="`control-${ controlName }`">
+            <slot :name="`form-control-${ controlName }`">
               <component
                 :disabled="isLoading"
                 :error="getTranslation(form[controlName], 'error')"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"
+                :stacked="stacked"
                 v-model="form[controlName].value"
                 v-bind="form[controlName].uiSpecs && form[controlName].uiSpecs.attr ? form[controlName].uiSpecs.attr : { }"
                 @blur="form[controlName].setDirty()"
               />
             </slot>
           </template>
-        </form>
-      </slot>
+        </slot>
+      </form>
     </div>
     <template v-if="editMode">
       <a
@@ -82,11 +84,10 @@
 </template>
 
 <script lang="ts">
-  import FormDataWrapper from './form-data-wrapper'
+  import FormDataWrapper from './form'
   export default FormDataWrapper
 </script>
 
 <style lang="scss" scoped>
-  @import './form-data-wrapper.scss'
+  @import './form.scss'
 </style>
-

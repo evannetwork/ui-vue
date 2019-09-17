@@ -25,34 +25,30 @@
   https://evan.network/license/
 */
 
-<template>
-  <div class="form-group row">
-    <label :for="id" class="col-md-3 col-form-label">
-      {{ label }}
-    </label>
-    <div class="col-md-9">
-      <select class="form-control"
-        :id="id"
-        @blur="$emit('blur')"
-        @focus="$parent.$emit('setFocus')"
-        @input="$emit('input', $event.target.value)"
-        @value="value"
-        v-bind="$attrs"
-      >
-        <option v-for="option in options"
-          :value="option.value || option"
-          :key="option.value || option">{{option.label || option}}
-        </option>
-      </select>
-      <div class="invalid-feedback" v-if="error">
-        {{ error | translate }}
-      </div>
-    </div>
-  </div>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
+import { Prop, Watch } from 'vue-property-decorator';
 
-<script lang="ts">
-  import FormDataSelect from './form-data-select'
-  export default FormDataSelect
-</script>
+import EvanControlComponent from '../control/control';
 
+interface Option {
+  label: string,
+  value: any
+}
+
+/**
+ * Wrapper component for button elements.
+ *
+ * @class         SelectComponent
+ * @selector      evan-form-control-select
+ */
+@Component({})
+export default class SelectComponent extends mixins(EvanControlComponent) {
+  /**
+   * The selectable options. Can be an array of label-value pairs or an array of strings.
+   */
+  @Prop({
+    type: Object
+  }) options: Option[] | string[];
+}

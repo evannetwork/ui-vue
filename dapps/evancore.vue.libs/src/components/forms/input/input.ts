@@ -25,29 +25,18 @@
   https://evan.network/license/
 */
 
-<template>
-  <div class="form-group row">
-    <label :for="id" class="col-md-3 col-form-label">
-      {{ label }}
-    </label>
-    <div class="col-md-9">
-      <input class="form-control"
-        :class="{ 'is-invalid' : error }"
-        :id="id"
-        @blur="$emit('blur')"
-        @focus="$parent.$emit('setFocus')"
-        @input="$emit('input', $event.target.value)"
-        @value="value"
-       />
-      <div class="invalid-feedback" v-if="error">
-        {{ error | translate }}
-      </div>
-    </div>
-  </div>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
+import { Prop, Watch } from 'vue-property-decorator';
 
-<script lang="ts">
-  import FormDataInput from './form-data-input'
-  export default FormDataInput
-</script>
+import EvanControlComponent from '../control/control';
 
+/**
+ * Base component for input element.
+ *
+ * @class         FormDataInput
+ * @selector      evan-form-control-input
+ */
+@Component({})
+export default class InputComponent extends mixins(EvanControlComponent) { }

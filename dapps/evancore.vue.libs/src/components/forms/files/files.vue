@@ -26,7 +26,8 @@
 */
 
 <template>
-  <div class="evan-file-input">
+  <evan-form-control class="evan-file-input"
+    v-bind="$props">
     <evan-modal
       id="file-input-remove-modal"
       ref="removeFileModal"
@@ -97,7 +98,10 @@
       v-else-if="value.length === 0"
       v-html="$t(emptyText)">
     </div>
-  </div>
+    <div class="invalid-feedback" v-if="error">
+      {{ error | translate }}
+    </div>
+  </evan-form-control>
 </template>
 
 <script lang="ts">
