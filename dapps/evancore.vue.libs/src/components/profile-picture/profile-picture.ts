@@ -39,23 +39,20 @@ import EvanComponent from '../../component';
  * Wrapper for profile verifications.
  */
 @Component({ })
-export default class CardComponent extends mixins(EvanComponent) {
+class ProfilePicture extends mixins(EvanComponent) {
   /**
-   * Card type that should be used (transparent, outline, filled)
+   * Profile type that should be used (unknown, user, company, device)
    */
   @Prop({
-    default: 'filled'
+    default: 'unknown'
   }) type: string;
 
   /**
-   * Optional href, to transform the card into a link element.
-   */
-  @Prop() href: string;
-
-  /**
-   * Add hover shadow and size effect
+   * Is Profile verified 
    */
   @Prop({
-    default: true,
-  }) highlight: boolean;
+    default: false,
+  }) verified: boolean;
 }
+
+export default ProfilePicture

@@ -27,17 +27,18 @@
 
 <template>
   <div class="profile-picture">
-    <div class="mask">
-      <img src="https://placehold.it/140x140" alt="">
-    </div>
+    <h5>Ich bin in der Komponente</h5>
+    <!-- <div class="mask" :class="type">
+      <img v-bind="$attrs">
+    </div> -->
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './profile-picture';
-  export default Component;
+  // import Component from './profile-picture';
+  // export default Component;
 </script>
 
-<style scoped>
-  @import url('./profile-picture.scss');
+<style lang="scss" scoped>
+  // @import './profile-picture.scss';
 </style>

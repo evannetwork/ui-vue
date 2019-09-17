@@ -25,8 +25,45 @@
   https://evan.network/license/
 */
 
-@import '~@evan.network/ui/src/style/utils';
+@import "~@evan.network/ui/src/style/utils";
 
 .profile-picture {
-  background: cssVar('border-color')
+  background: cssVar("border-color");
+
+  .mask {
+    position: relative;
+
+    img {
+      position: absolute;
+    }
+
+    &.device {
+      width: 100px;
+      height: 55px;
+      background: red;
+      position: relative;
+    }
+    &.device:before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 25px solid red;
+    }
+    &.device:after {
+      content: "";
+      position: absolute;
+      bottom: -25px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-top: 25px solid red;
+    }
+  }
 }
