@@ -32,12 +32,12 @@
     </label>
     <div class="col-md-9">
       <select class="form-control"
+        :id="id"
         @blur="$emit('blur')"
         @focus="$parent.$emit('setFocus')"
-        :id="id"
-        v-bind:value="value"
+        @input="$emit('input', $event.target.value)"
+        @value="value"
         v-bind="$attrs"
-        v-on:input="$emit('input', $event.target.value)"
       >
         <option v-for="option in options"
           :value="option.value || option"
