@@ -54,8 +54,8 @@
     &.user,
     &.unknown {
       img {
-        width: calc(var(--size) - 2px);
-        height: calc(var(--size) - 2px);
+        width: var(--size);
+        height: var(--size);
         border-radius: 50%;
       }
 
@@ -65,42 +65,36 @@
       }
     }
     &.unknown {
+      border: 1px solid cssVar('border-color');
+      background: white;
+      border-radius: 50%;
+
       img {
         display: none;
       }
+
+      &:after {
+        content: '#';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: cssVar('border-color');
+        font-size: calc(#{$size} / 2.6);
+        font-weight: 600;
+      }
     }
 
-    // hexaeder mask
-    &.device:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 0;
-      height: 0;
-      border-top: calc(var(--size) * 0.22) solid transparent;
-      border-left: calc(var(--size) * 0.5) solid cssVar("border-color");
-      border-right: calc(var(--size) * 0.5) solid cssVar("border-color");
-      transform: rotate(180deg);
-    }
-    &.device:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 0;
-      border-top: calc(var(--size) * 0.22) solid transparent;
-      border-left: calc(var(--size) * 0.5) solid cssVar("border-color");
-      border-right: calc(var(--size) * 0.5) solid cssVar("border-color");
+    &.device img{
+      clip-path: polygon(50% 0, 100% 22.5%, 100% 77.5%, 50% 100%, 0 77.5%, 0 22.5%);
     }
   }
 }
 
+
 .profile-picture {
-  background: cssVar("border-color");
   position: relative;
-  
+
   /deep/ .btn {
     visibility: hidden;
     top: 50%;

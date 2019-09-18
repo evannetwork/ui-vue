@@ -49,7 +49,6 @@
     <evan-modal ref="pictureUploadModal" :maxWidth="'600px'">
       <template v-slot:header>
         <h5 class="modal-title">{{'Upload your profile picture here' || translate}}</h5>
-        <!-- TODO: no H5 ? */ -->
       </template>
       <template v-slot:body>
         <evan-file-input
@@ -64,10 +63,10 @@
 </template>
 
 <script lang="ts">
-import Component from "./profile-picture";
-export default Component;
+  import Component from "./profile-picture";
+  export default Component;
 </script>
 
 <style lang="scss" scoped>
-@import "./profile-picture.scss";
+  @import "./profile-picture.scss";
 </style>
