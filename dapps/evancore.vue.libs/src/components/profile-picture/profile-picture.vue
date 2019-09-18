@@ -27,14 +27,22 @@
 
 <template>
   <div>
-    <div class="profile-picture" :class="size" @click="$refs.pictureUploadModal.show()">
+    <div class="profile-picture" :class="size">
       <div class="mask" :class="type">
         <img v-bind="$attrs" />
       </div>
       <img
+        v-if="isVerified"
         class="verification-icon"
-        :src="`${ uiBaseUrl }/assets/notary-verification.svg`"
-        alt="notary verification icon"
+        :src="`${ uiBaseUrl }/assets/verification.svg`"
+        alt="verification icon"
+      />
+      <evan-button
+        v-if="isEditable"
+        @click="$refs.pictureUploadModal.show()"
+        class="m-auto"
+        type="icon"
+        icon="mdi mdi-camera"
       />
     </div>
     <!-- File upload modal -->

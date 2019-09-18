@@ -100,6 +100,17 @@
 .profile-picture {
   background: cssVar("border-color");
   position: relative;
+  
+  /deep/ .btn {
+    visibility: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover .btn {
+    visibility: visible;
+  }
 
   img {
     width: 100%;

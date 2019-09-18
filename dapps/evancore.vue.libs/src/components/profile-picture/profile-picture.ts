@@ -65,6 +65,13 @@ class ProfilePicture extends mixins(EvanComponent) {
   }) isVerified: boolean;
 
   /**
+   * Is picture editable
+   */
+  @Prop({
+    default: false,
+  }) isEditable: boolean;
+
+  /**
    * Is Profile verified
    */
   @Prop({
