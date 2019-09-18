@@ -26,16 +26,32 @@
 */
 
 <template>
-  <div class="profile-picture" :class="size">
-    <div class="mask" :class="type">
-      <img v-bind="$attrs" />
+  <div>
+    <div class="profile-picture" :class="size" @click="$refs.pictureUploadModal.show()">
+      <div class="mask" :class="type">
+        <img v-bind="$attrs" />
+      </div>
+      <img
+        class="verification-icon"
+        :src="`${ uiBaseUrl }/assets/notary-verification.svg`"
+        alt="notary verification icon"
+      />
     </div>
-    <img
-      v-if="isVerified"
-      class="verification-icon"
-      :src="`${ uiBaseUrl }/assets/verification.svg`"
-      alt="verification icon"
-    />
+    <!-- File upload modal -->
+    <evan-modal ref="pictureUploadModal" :maxWidth="'600px'">
+      <template v-slot:header>
+        <h5 class="modal-title">{{'Upload your profile picture here' || translate}}</h5>
+        <!-- TODO: no H5 ? */ -->
+      </template>
+      <template v-slot:body>
+        <evan-file-input
+          v-model="fileForm.uploadModel"
+          :class="{ 'is-invalid' : fileForm.error }"
+          :accept="'image/x-png,image/png,image/gif,image/jpeg'"
+          @input="fileForm.setDirty();"
+        />
+      </template>
+    </evan-modal>
   </div>
 </template>
 
