@@ -41,6 +41,7 @@
     top: 0;
     left: 0;
 
+    // circle mask
     &.user,
     &.unknown {
       img {
@@ -54,6 +55,8 @@
         display: none;
       }
     }
+
+    // hexaeder mask
     &.device:before {
       content: "";
       position: absolute;
@@ -97,15 +100,13 @@
     height: 50px;
   }
 
-  &.medium {
-    @include masks(140px);
+  &.lg {
+    @include masks(150px);
   }
-
-  &.large {
-    @include masks(210px);
+  &.default {
+    @include masks(68px);
   }
-
-  &.small {
-    @include masks(50px);
+  &.sm {
+    @include masks(30px);
   }
 }
