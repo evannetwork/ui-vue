@@ -30,7 +30,7 @@
     <div class="mask" :class="type">
       <img v-bind="$attrs">
     </div>
-    <!-- TODO: show verified button -->
+    <img class="verification-icon" :src="`${ uiBaseUrl }/assets/notary-verification.svg`" alt="notary verification icon"/>
   </div>
 </template>
 

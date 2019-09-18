@@ -29,6 +29,7 @@
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import { getDomainName } from '../../utils';
 
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
@@ -38,7 +39,7 @@ import EvanComponent from '../../component';
 /**
  * Wrapper for profile verifications.
  */
-@Component({ })
+@Component({})
 class ProfilePicture extends mixins(EvanComponent) {
   /**
    * Profile type that should be used (unknown, user, company, device)
@@ -60,6 +61,18 @@ class ProfilePicture extends mixins(EvanComponent) {
   @Prop({
     default: false,
   }) verified: boolean;
+
+  /**
+   * ui.libs evan dapp base url
+   */
+  uiBaseUrl = '';
+
+  async created() {
+    const domainName = getDomainName();
+    const uiCoreDbcp = await dappBrowser.System.import(`ui.libs.${domainName}!ens`);
+    this.uiBaseUrl = dappBrowser.dapp.getDAppBaseUrl(uiCoreDbcp,
+      `${uiCoreDbcp.name}.${domainName}`);
+  }
 }
 
 export default ProfilePicture

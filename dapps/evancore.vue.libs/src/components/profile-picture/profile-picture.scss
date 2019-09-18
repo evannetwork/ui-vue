@@ -89,6 +89,14 @@
     height: 100%;
   }
 
+  .verification-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+  }
+
   &.medium {
     @include masks(140px);
   }
