@@ -26,10 +26,11 @@
 */
 
 <template>
-  <div class="mt-2 mb-8"
+  <div class="evan-form mt-2 mb-8"
     :class="{
       'edit-mode': editMode && !onlyForm,
       'form-data-wrapper': !onlyForm,
+      'transparent': !editMode && !onlyForm,
     }">
     <div class="d-flex justify-content-between align-items-center pb-1"
       v-if="!onlyForm">
@@ -93,6 +94,3 @@
   export default FormDataWrapper
 </script>
 
-<style lang="scss" scoped>
-  @import './form.scss'
-</style>
