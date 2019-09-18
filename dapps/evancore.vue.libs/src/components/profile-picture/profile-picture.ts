@@ -48,7 +48,7 @@ class ProfilePicture extends mixins(EvanComponent) {
   }) type: string;
 
   /**
-   * Profile type that should be used (unknown, user, company, device)
+   * Display size that should be used (small, medium, large)
    */
   @Prop({
     default: 'medium'
