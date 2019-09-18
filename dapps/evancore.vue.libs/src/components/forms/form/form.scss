@@ -21,7 +21,6 @@
 */
 
 @import '~@evan.network/ui/src/style/utils';
-
 $controlSelectors: (
   '.evan-file-input .batch-label',
   '.evan-file-input .dropzone',
@@ -29,20 +28,24 @@ $controlSelectors: (
   'select.form-control'
 );
 
+form {
+  margin: 0 -0.5em;
+}
+
 .form-data-wrapper {
-  > div:first-of-type {
+   > div:first-of-type {
     border-bottom: 1px solid transparent;
   }
 
   @each $control in $controlSelectors {
-    /deep/ #{ $control } {
+     /deep/ #{ $control } {
       background: transparent;
     }
   }
 }
 
 .form-data-wrapper.edit-mode {
-  > div:first-of-type {
+   > div:first-of-type {
     border-bottom: 1px solid cssVar('primary');
 
     h5 {
@@ -51,8 +54,8 @@ $controlSelectors: (
   }
 
   @each $control in $controlSelectors {
-    /deep/ #{ $control } {
-    background: cssVar('bg-level-1');
+     /deep/ #{ $control } {
+      background: cssVar('bg-level-1');
     }
   }
 }
