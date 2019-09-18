@@ -29,11 +29,13 @@
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { getDomainName } from '../../utils';
 
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { EvanFormControl } from '@evan.network/ui-vue-core';
+
+import { getDomainName } from '../../utils';
 import EvanComponent from '../../component';
 
 /**
@@ -61,6 +63,18 @@ class ProfilePicture extends mixins(EvanComponent) {
   @Prop({
     default: false,
   }) verified: boolean;
+
+  /**
+   * Is Profile verified
+   */
+  @Prop({
+    required: true,
+    default: {
+      fileModel: null,
+      error: false,
+      setDirty: () => {}
+    }
+  }) fileForm: EvanFormControl; // TODO: check whether this is the correct interface
 
   /**
    * ui.libs evan dapp base url
