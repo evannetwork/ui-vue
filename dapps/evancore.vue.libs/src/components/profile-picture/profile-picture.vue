@@ -28,17 +28,22 @@
 <template>
   <div class="profile-picture" :class="size">
     <div class="mask" :class="type">
-      <img v-bind="$attrs">
+      <img v-bind="$attrs" />
     </div>
-    <img class="verification-icon" :src="`${ uiBaseUrl }/assets/verification.svg`" alt="verification icon"/>
+    <img
+      v-if="isVerified"
+      class="verification-icon"
+      :src="`${ uiBaseUrl }/assets/verification.svg`"
+      alt="verification icon"
+    />
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './profile-picture';
-  export default Component;
+import Component from "./profile-picture";
+export default Component;
 </script>
 
 <style lang="scss" scoped>
-  @import './profile-picture.scss';
+@import "./profile-picture.scss";
 </style>

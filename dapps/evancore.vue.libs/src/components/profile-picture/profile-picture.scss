@@ -58,6 +58,11 @@
         height: calc(var(--size) - 2px);
         border-radius: 50%;
       }
+
+      +.verification-icon {
+        bottom: 0;
+        right: 0;
+      }
     }
     &.unknown {
       img {

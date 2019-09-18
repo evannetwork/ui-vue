@@ -60,7 +60,7 @@ class ProfilePicture extends mixins(EvanComponent) {
    */
   @Prop({
     default: false,
-  }) verified: boolean;
+  }) isVerified: boolean;
 
   /**
    * ui.libs evan dapp base url
