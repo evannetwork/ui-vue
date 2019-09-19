@@ -58,6 +58,20 @@ class ProfilePicture extends mixins(EvanComponent) {
   }) size: string;
 
   /**
+   * Display size that should be used (small, medium, large)
+   */
+  @Prop({
+    default: null
+  }) src: string;
+
+  /**
+   * The name of the user, company or IOT device. Initials will be used if no picture is uploaded.
+   */
+  @Prop({
+    default: ''
+  }) name: string;
+
+  /**
    * Is Profile verified
    */
   @Prop({
@@ -82,6 +96,14 @@ class ProfilePicture extends mixins(EvanComponent) {
       setDirty: () => {}
     }
   }) fileForm: EvanFormControl; // TODO: check whether this is the correct interface
+
+  getInitials(name: string): string {
+    if (!name) {
+      return '#';
+    }
+
+    return name.split(/\s/).splice(0, 2).map(word => word.charAt(0)).join('');
+  };
 
   async created() {
     const domainName = getDomainName();

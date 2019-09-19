@@ -53,7 +53,8 @@
     // circle mask
     &.user,
     &.unknown {
-      img {
+      img,
+      .image-placeholder {
         width: var(--size);
         height: var(--size);
         border-radius: 50%;
@@ -69,24 +70,20 @@
       background: white;
       border-radius: 50%;
 
-      img {
-        display: none;
-      }
-
-      &:after {
-        content: '#';
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+      .image-placeholder {
+        background-color: cssVar('bg-level-3');
         color: cssVar('border-color');
-        font-size: calc(#{$size} / 2.6);
-        font-weight: 600;
       }
     }
 
-    &.device img{
+    &.device img,
+    &.device .image-placeholder {
       clip-path: polygon(50% 0, 100% 22.5%, 100% 77.5%, 50% 100%, 0 77.5%, 0 22.5%);
+    }
+
+    .image-placeholder {
+      font-size: calc(#{$size} / 2.6);
+      line-height: $size;
     }
   }
 }
@@ -105,10 +102,21 @@
   &:hover .btn {
     visibility: visible;
   }
+  &:hover {
+    color: cssVar('border-color')
+  }
 
-  img {
+  img,
+  .image-placeholder {
     width: 100%;
     height: 100%;
+  }
+
+  .image-placeholder {
+    background: cssVar('border-color');
+    font-weight: 600;
+    line-height: 100%;
+    text-align: center;
   }
 
   &.lg {

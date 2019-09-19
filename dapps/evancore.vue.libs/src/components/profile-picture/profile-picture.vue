@@ -29,7 +29,14 @@
   <div>
     <div class="profile-picture" :class="size">
       <div class="mask" :class="type">
-        <img v-bind="$attrs" />
+        <img
+          v-if="src && src.length > 0"
+          v-bind="$attrs"
+          :src="typeof src === 'string' ? src : src.blobUri"
+        />
+        <div v-else class="image-placeholder">
+          {{ getInitials(name) }}
+        </div>
       </div>
       <img
         v-if="isVerified"
@@ -53,10 +60,18 @@
       <template v-slot:body>
         <evan-file-input
           stacked="true"
-          v-model="fileForm.uploadModel"
+          v-model="profilePictures"
           :class="{ 'is-invalid' : fileForm.error }"
           :accept="'image/x-png,image/png,image/gif,image/jpeg'"
-          @input="fileForm.setDirty();"
+          @input="pictureChanged"
+        />
+        <img style="width: 300px" v-if="changedPicture" :src="changedPicture.blobUri" />
+      </template>
+      <template v-slot:footer>
+        <evan-button
+          :disabled="!changedPicture"
+          @click="usePicture"
+          :label="$i18n.translate('_evan.save')"
         />
       </template>
     </evan-modal>
