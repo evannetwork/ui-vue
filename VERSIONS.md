@@ -2,6 +2,8 @@
 
 ## Next Version
 ### Features
+- `evancore.vue.libs`
+  - add automatic vue dispatcher handling that fills `vuex` store
 
 ### Fixes
 
