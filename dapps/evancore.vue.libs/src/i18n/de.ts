@@ -108,7 +108,9 @@ export default {
       }
     },
     "profile-picture": {
-      "upload": "Laden Sie hier ihr Profilbild hoch"
+      "upload": "Laden Sie hier ihr Profilbild hoch",
+      "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
+      "use-picture": "Fertig"
     },
     "share": "Freigeben",
     "under-development": {

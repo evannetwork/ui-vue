@@ -32,7 +32,7 @@
         <img
           v-if="src && src.length > 0"
           v-bind="$attrs"
-          :src="typeof src === 'string' ? src : src.blobUri"
+          :src="src"
         />
         <div v-else class="image-placeholder">
           {{ getInitials(name) }}
@@ -60,18 +60,29 @@
       <template v-slot:body>
         <evan-file-input
           stacked="true"
-          v-model="profilePictures"
+          v-model="fileForm.value"
           :class="{ 'is-invalid' : fileForm.error }"
           :accept="'image/x-png,image/png,image/gif,image/jpeg'"
           @input="pictureChanged"
+          :placeholder="$t('_evan.profile-picture.upload-dnd')"
         />
-        <img style="width: 300px" v-if="changedPicture" :src="changedPicture.blobUri" />
+        <div class="profile-picture m-auto lg" >
+          <div class="mask" :class="type">
+            <img
+              v-if="changedPicture && changedPicture.blobUri && changedPicture.blobUri.length > 0"
+              :src="changedPicture.blobUri"
+            />
+            <div v-else class="image-placeholder">
+              {{ getInitials(name) }}
+            </div>
+          </div>
+        </div>
       </template>
       <template v-slot:footer>
         <evan-button
           :disabled="!changedPicture"
           @click="usePicture"
-          :label="$i18n.translate('_evan.save')"
+          :label="$t('_evan.profile-picture.use-picture')"
         />
       </template>
     </evan-modal>

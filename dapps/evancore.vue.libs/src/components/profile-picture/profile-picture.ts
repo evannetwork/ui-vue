@@ -28,7 +28,7 @@
 // vue imports
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
@@ -62,7 +62,7 @@ class ProfilePicture extends mixins(EvanComponent) {
    */
   @Prop({
     default: null
-  }) src: string;
+  }) src: any;
 
   /**
    * The name of the user, company or IOT device. Initials will be used if no picture is uploaded.
@@ -91,11 +91,29 @@ class ProfilePicture extends mixins(EvanComponent) {
   @Prop({
     required: true,
     default: {
-      fileModel: null,
-      error: false,
-      setDirty: () => {}
+      value: []
     }
-  }) fileForm: EvanFormControl; // TODO: check whether this is the correct interface
+  }) fileForm: any;
+
+  /**
+   * Handle newly uploaded image.
+   */
+  changedPicture: any = null;
+
+  @Watch('src')
+  onChildChanged(src: any) {
+    this.src = typeof src === 'string' ? src : src.blobUri;
+  }
+
+  pictureChanged(ev) {
+    this.fileForm.value = this.fileForm.value.slice(0, 1); // skip multiple uploads // TODO: configure component
+    this.changedPicture = this.fileForm.value[0];
+  }
+
+  usePicture() {
+    this.$emit('changed', this.changedPicture);
+    (<any>this).$refs.pictureUploadModal.hide();
+  }
 
   getInitials(name: string): string {
     if (!name) {
@@ -104,11 +122,6 @@ class ProfilePicture extends mixins(EvanComponent) {
 
     return name.split(/\s/).splice(0, 2).map(word => word.charAt(0)).join('');
   };
-
-  async created() {
-    const domainName = getDomainName();
-    const uiCoreDbcp = await dappBrowser.System.import(`ui.libs.${domainName}!ens`);
-  }
 }
 
 export default ProfilePicture

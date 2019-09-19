@@ -108,7 +108,9 @@ export default {
       }
     },
     "profile-picture": {
-      "upload": "Upload your profile picture here"
+      "upload": "Upload your profile picture here",
+      "upload-dnd": "Click here or drag'n'drop your new profile picture here.",
+      "use-picture": "Use Picture"
     },
     "share": "Share",
     "under-development": {
