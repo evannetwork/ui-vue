@@ -15,6 +15,11 @@
     - `evan-account-address` to show account address with generalized interactions
     - `evan-steps` to show step by step content
     - `evan-card` to show generalized cards with highlight parameters
+    - `evan-form` components
+      - `evan-form`
+      - `evan-control-input`
+      - `evan-control-select`
+      - `evan-control-files` 
   - add `vue-toasted` and show toast messaged for address copy and running dispatchers
 
 ### Fixes
