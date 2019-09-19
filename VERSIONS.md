@@ -2,7 +2,15 @@
 
 ## Next Version
 ### Features
-- `evancore.vue.libs`
+
+### Fixes
+
+### Deprecations
+
+
+## Version 1.6.0
+### Features
+- `evancore.vue.libs` (v1.6.0)
   - `evan-dropdown` allows inner `customStyle` param (left, right props are removed)
   - new `dapp-wrapper` design
   - support `multiline` property in tooltips
@@ -21,10 +29,6 @@
       - `evan-control-select`
       - `evan-control-files` 
   - add `vue-toasted` and show toast messaged for address copy and running dispatchers
-
-### Fixes
-
-### Deprecations
 
 
 ## Version 1.5.0
