@@ -71,10 +71,18 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     const addressBook = await runtime.profile.getAddressBook();
     const contact = addressBook.profile[this.address];
 
-    // TODO: load account type
+
+    const profileContract = runtime.profile.profileContract;
+
+    const accountDetails = await runtime.dataContract.getEntry(
+      profileContract,
+      'accountDetails',
+      runtime.activeAccount
+    );
+
     this.userInfo = {
       alias: contact ? contact.alias : this.address,
-      type: 'unspecified',
+      type: accountDetails.profileType || 'unspecified',
     };
 
     this.loading = false;
