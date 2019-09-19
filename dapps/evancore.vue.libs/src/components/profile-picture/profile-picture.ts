@@ -83,16 +83,9 @@ class ProfilePicture extends mixins(EvanComponent) {
     }
   }) fileForm: EvanFormControl; // TODO: check whether this is the correct interface
 
-  /**
-   * ui.libs evan dapp base url
-   */
-  uiBaseUrl = '';
-
   async created() {
     const domainName = getDomainName();
     const uiCoreDbcp = await dappBrowser.System.import(`ui.libs.${domainName}!ens`);
-    this.uiBaseUrl = dappBrowser.dapp.getDAppBaseUrl(uiCoreDbcp,
-      `${uiCoreDbcp.name}.${domainName}`);
   }
 }
 

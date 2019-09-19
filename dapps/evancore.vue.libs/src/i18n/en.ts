@@ -107,6 +107,9 @@ export default {
         "unspecified": "unspecified account"
       }
     },
+    "profile-picture": {
+      "upload": "Upload your profile picture here"
+    },
     "share": "Share",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",

@@ -107,6 +107,9 @@ export default {
         "unspecified": "unspezifizierter Account"
       }
     },
+    "profile-picture": {
+      "upload": "Laden Sie hier ihr Profilbild hoch"
+    },
     "share": "Freigeben",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",

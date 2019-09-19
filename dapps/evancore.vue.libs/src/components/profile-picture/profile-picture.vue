@@ -34,7 +34,7 @@
       <img
         v-if="isVerified"
         class="verification-icon"
-        :src="`${ uiBaseUrl }/assets/verification.svg`"
+        :src="`${ $store.state.uiLibBaseUrl }/assets/verification.svg`"
         alt="verification icon"
       />
       <evan-button
@@ -48,10 +48,11 @@
     <!-- File upload modal -->
     <evan-modal ref="pictureUploadModal" :maxWidth="'600px'">
       <template v-slot:header>
-        <h5 class="modal-title">{{'Upload your profile picture here' || translate}}</h5>
+        <h5 class="modal-title">{{ '_evan.profile-picture.upload' | translate }}</h5>
       </template>
       <template v-slot:body>
         <evan-file-input
+          stacked="true"
           v-model="fileForm.uploadModel"
           :class="{ 'is-invalid' : fileForm.error }"
           :accept="'image/x-png,image/png,image/gif,image/jpeg'"
