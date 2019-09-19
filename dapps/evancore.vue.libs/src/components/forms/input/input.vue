@@ -28,6 +28,7 @@
 <template>
   <evan-form-control v-bind="$props">
     <input class="form-control"
+      v-bind="$props"
       :class="{ 'is-invalid' : error }"
       :id="id"
       :value="value"

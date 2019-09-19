@@ -31,8 +31,8 @@
     :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
     <div class="d-flex mr-3 align-items-center justify-content-center bg-gray-300 text-dark"
       :style="size === 'sm' ?
-        'height: 1.875em; width: 1.875em;' :
-        'height: 8.75em; width: 8.75em;'
+        'min-height: 1.875em; min-width: 1.875em;' :
+        'min-height: 8.75em; min-width: 8.75em;'
       ">
       <div class="spinner-border spinner-border-sm" v-if="loading"></div>
       <b v-else-if="size === 'sm'">?</b>
@@ -50,12 +50,13 @@
       </div>
       <div class="d-flex flex-column justify-content-between p-3"
         v-else-if="size === 'lg'"
-        style="height: 8.75em;">
+        style="min-height: 8.75em; min-width: 400px;">
         <h2 class="font-weight-semibold mb-0">
           {{ userInfo.alias }}
         </h2>
         <evan-address :address="address"></evan-address>
-        <b class="text-primary"
+        <b class="force-oneline"
+          :class="{ 'text-primary': userInfo.type === 'unspecified' }"
           v-if="address === $store.state.runtime.activeAccount"
           @click="$emit('typeClick')">
           {{ `_evan.profile.types.${ userInfo.type === 'unspecified' ? 'choose' : userInfo.type }` | translate }}
