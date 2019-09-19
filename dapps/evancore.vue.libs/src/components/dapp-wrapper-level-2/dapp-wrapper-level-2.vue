@@ -27,7 +27,9 @@
 
 <template>
   <div class="d-none">
-    <slot name="content"></slot>
+    <slot name="content">
+      <slot></slot>
+    </slot>
   </div>
 </template>
 

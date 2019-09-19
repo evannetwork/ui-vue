@@ -26,10 +26,11 @@
 */
 
 // import vue libs
+import VueMoment from 'vue-moment';
 import VueRouter from 'vue-router';
+import VueToasted from 'vue-toasted';
 import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
-import VueMoment from 'vue-moment';
 
 // setup moment locales
 const moment = require('moment').default;
@@ -107,6 +108,12 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   // hide the initial loading screen
   dappBrowser.loading.finishDAppLoading();
 
+  // add vue toaster
+  Vue.use(VueToasted, {
+    duration: 3000,
+    position: 'bottom-right',
+  });
+
   const vue = new Vue({
     el: options.container,
     router,
@@ -124,6 +131,9 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
         contractAddressEl.style.display = 'none';
         this.$el.appendChild(contractAddressEl);
       }
+
+      // move toast container
+      this.$el.appendChild(this.$toasted.container);
     }
   });
 

@@ -29,20 +29,38 @@
 export default {
   "_evan": {
     "_routes": {
-      "contacts": "Contacts",
+      "actions": "Actions",
       "digitaltwins": "Digital Twins",
-      "favorites": "Favorites",
-      "mailbox": "Messages",
-      "organizations": "Organizations",
-      "profile": "Profile"
+      "explorer": "Explorer",
+      "favorites": "DApps",
+      "help": "Help",
+      "profile": "Profile",
+      "synchronization": "Synchronization",
+      "verifications": "Verification Center"
+    },
+    "address": {
+      "copied": "Address copied...",
+      "copy": "Copy",
+      "open-in-explorer": "Open in Explorer"
     },
     "browser-not-supported": {
       "desc": "Please be sure to use one of the following browsers:<ul><li>Chrome</li><li>Edge</li><li>Firefox (no private mode!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Your browser is not supported"
     },
-    "cancel": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
     "dapp-wrapper": {
       "all-messages": "All messages",
+      "dispatcher-status": {
+        "deleted": "{title} Synchronization deleted",
+        "deleting": "Deleting {title} ({percentage}%)",
+        "error": "Error {title} ({percentage}%)",
+        "finished": "{title} completed",
+        "running": "{title} ({percentage}%)",
+        "starting": "Starting {title}",
+        "stopped": "Stopped {title} ({percentage}%)",
+        "stopping": "Stopping {title} ({percentage}%)"
+      },
       "empty-queue": "Everything is synchronized...",
       "instance-accept": {
         "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
@@ -73,6 +91,7 @@ export default {
         "title": "Delete file"
       }
     },
+    "transaction_costs_hint": "This will cause transaction fees.",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
@@ -80,9 +99,18 @@ export default {
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
+    "profile": {
+      "types": {
+        "choose": "Specify Account Type",
+        "company": "Company",
+        "device": "Device",
+        "unspecified": "unspecified account"
+      }
+    },
+    "share": "Share",
     "under-development": {
-      "desc": "The area shown is currently under development and will be available soon.",
-      "title": "Under development"
+      "desc": "The area shown is currently under construction and will be available soon.",
+      "title": "Under construction"
     },
     "use-password": "Unlock",
     "view-profile": "View Profile",

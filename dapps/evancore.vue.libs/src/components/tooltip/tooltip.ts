@@ -54,6 +54,11 @@ export default class EvanTooltip extends mixins(EvanComponent) {
   @Prop({ default: 300 }) delay;
 
   /**
+   * Should it be a large tooltip?
+   */
+  @Prop() multiline;
+
+  /**
    * Is it displayed?
    */
   showTooltip = false;

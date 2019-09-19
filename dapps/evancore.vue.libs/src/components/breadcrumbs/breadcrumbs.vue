@@ -33,7 +33,7 @@
     <button
       v-if="goBack"
       id="breadcrumb-goback"
-      class="btn btn-circle btn-outline-secondary mr-3"
+      class="btn btn-icon mr-3"
       @click="$router.history.go(-1)">
       <i class="mdi mdi-arrow-left"></i>
     </button>

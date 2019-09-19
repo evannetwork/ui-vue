@@ -90,12 +90,10 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     type: Array,
     default: function(options) {
       return [
-        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-fingerprint' },
-        { title: `${ i18nPref }.favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-bookmark-outline' },
-        { title: `${ i18nPref }.contacts`, path: `addressbook.vue.${ domainName }`, icon: 'mdi mdi-account-group-outline' },
-        // { title: `${ i18nPref }.organizations`, path: `organizations.${ domainName }`, icon: 'mdi mdi-domain' },
-        // { title: `${ i18nPref }.mailbox`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-email' },
-        // { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account' },
+        { title: `${ i18nPref }.favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-apps' },
+        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-cube-outline' },
+        { title: `${ i18nPref }.verifications`, path: `verifications.vue.${ domainName }`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
+        { title: `${ i18nPref }.explorer`, path: `explorer.vue.${ domainName }`, icon: 'mdi mdi-magnify' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
@@ -105,6 +103,13 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    */
   @Prop({
     type: Array,
+    default: function(options) {
+      return [
+        { title: `${ i18nPref }.actions`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-format-list-checks' },
+        { title: `${ i18nPref }.help`, path: `help.vue.${ domainName }`, icon: 'mdi mdi-help-circle-outline' },
+        { title: `${ i18nPref }.profile`, path: `profile.vue.${ domainName }`, icon: 'mdi mdi-account-outline' },
+      ];
+    }
   }) bottomRoutes: Array<DAppWrapperRouteInterface>;
 
   /**
@@ -138,36 +143,26 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   loading = true;
 
   /**
-   * is the small toolbar shown on large devices?
-   */
-  smallToolbar: boolean = window.localStorage['evan-small-toolbar'] ? true : false;
-
-  /**
    * Is the sidebar enabled and should be shown? Per defaul enabled, but when no routes are defined
    * or the user is within an onboarding or login process, it will be true.
    */
   enableSidebar = true;
 
   /**
-   * Enables the nav bar icons including mailbox, synchronisation, .... Will be disabled uring login
+   * Enables the nav bar icons including mailbox, synchronization, .... Will be disabled uring login
    * or onboarding process.
    */
-  enableNav = true;
+  topLevel = true;
+
+  /**
+   * Is the sidebar-level-2 enabled?
+   */
+  enabledSideBar2 = false;
 
   /**
    * show sidebar on small / medium devices?
    */
   showSideBar = false;
-
-  /**
-   * show second level navigation on small devices?
-   */
-  showSideBar2 = true;
-
-  /**
-   * Move (but not remove) sidebar level 2 to show main navigation
-   */
-  visibleSideBar2 = false;
 
   /**
    * login function that was applied by the setPasswordFunction
@@ -224,19 +219,26 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   sideBarCloseWatcher: any;
 
   /**
-   * Core routes that will be displayed in the top right user dropdown
+   * Watch for sidebar enable events, so we can enable and disable menu button on small devices
    */
-  coreRoutes = [
-    { title: `favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-bookmark' },
-    { title: `mailbox`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-email' },
-    { seperator: true },
-    { title: `contacts`, path: `addressbook.vue.${ domainName }`, icon: 'mdi mdi-book-multiple' },
-  ];
+  sidebar2EnableWatcher: any;
+  sidebar2DisableWatcher: any;
 
   /**
    * Is the current browser supported? Else show info dialog and stop everything.
    */
   supportedBrowser: any;
+
+  /**
+   * Used to hide / display queue panel
+   */
+  showQueuePanel = false;
+
+  /**
+   * List of loaded dispatchers, so dispatcher updates, that were not registered before within this
+   * dispatcher, will be loaded.
+   */
+  loadedDispatchers: Array<string> = [ ];
 
   /**
    * Returns the i18n title key for the active route.
@@ -255,34 +257,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     }
 
     return this.$route.path;
-  }
-
-  /**
-   * Toggles the toolbar large and small on big screens, on medium screens show hide the toolbar, on
-   * small screens, show / hide both toolbars.
-   */
-  toggleSmallToolbar() {
-    if (window.innerWidth < 992) {
-      this.showSideBar = !this.showSideBar;
-
-      // if sidebar 2 is used, show it directly
-      if (document.querySelectorAll(this.sideBar2Selector).length !== 0) {
-        this.showSideBar2 = true;
-        this.visibleSideBar2 = true;
-      } else {
-        this.showSideBar2 = false;
-        this.visibleSideBar2 = false;
-      }
-    } else {
-      this.smallToolbar = !this.smallToolbar;
-
-      // set or clear the localStorage variable
-      if (this.smallToolbar) {
-        window.localStorage['evan-small-toolbar'] = true;
-      } else {
-        delete window.localStorage['evan-small-toolbar'];
-      }
-    }
   }
 
   /**
@@ -326,7 +300,11 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     }
 
     this.sideBarCloseWatcher = ($event: CustomEvent) => this.showSideBar = false;
+    this.sidebar2EnableWatcher = ($event: CustomEvent) => this.enabledSideBar2 = true;
+    this.sidebar2DisableWatcher = ($event: CustomEvent) => this.enabledSideBar2 = false;
     window.addEventListener('dapp-wrapper-sidebar-close', this.sideBarCloseWatcher);
+    window.addEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
+    window.addEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
   }
 
 
@@ -340,9 +318,12 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     this.mailsWatcher && window.clearInterval(this.mailsWatcher);
     // clear queue watcher
     this.userInfo && this.queueWatcher && this.queueWatcher();
-    // return the watch remove function
+    // remove the watch function
     this.sideBarCloseWatcher && window.removeEventListener(`evan-queue-${ this.id }`,
       this.sideBarCloseWatcher);
+    // unbind dapp-wrapper-sidebar level handlers
+    window.removeEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
+    window.removeEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
   }
 
   /**
@@ -356,7 +337,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     do {
       parent = parent.parentElement;
       if (parent && parent !== this.$el && parent.className.indexOf('dapp-wrapper-body') !== -1) {
-        this.enableNav = false;
+        this.topLevel = false;
         this.enableSidebar = false;
 
         break;
@@ -473,7 +454,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
       this.login = false;
 
       // load the user infos like alias, mails, dispatchers ...
-      if (this.enableNav) {
+      if (this.topLevel) {
         this.loadUserSpecific();
       }
     }
@@ -583,6 +564,30 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   }
 
   /**
+   * Load dispatcher from an ens address or return thee cached one.
+   */
+  async loadDispatcher(dispatcherId: string) {
+    const [ dappEns, dispatcherName ] = dispatcherId.split('|||');
+    // load dependencies and dapp content
+    await dappBrowser.dapp.loadDAppDependencies(dappEns, false);
+    const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
+    const dispatcher = dapp[dispatcherName];
+
+    // add translation to correctly display instance dispatcher titles
+    if (dapp.translations) {
+       Object.keys(dapp.translations)
+         .forEach(key => this.$i18n.add(key, dapp.translations[key]));
+    }
+
+    // push dispatcher id into the list of already loaded, so we only need to load translations once
+    if (this.loadedDispatchers.indexOf(dispatcherId) === -1) {
+      this.loadedDispatchers.push(dispatcherId);
+    }
+
+    return dispatcher;
+  }
+
+  /**
    * Load the queue data
    */
   async setupQueue() {
@@ -596,18 +601,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     // load all dispatcher instances for this user
     await Promise.all(dispatchers.map(async (dispatcherObj: any) => {
       try {
-        const [ dappEns, dispatcherName ] = dispatcherObj.dispatcherId.split('|||');
-        // load dependencies and dapp content
-        await dappBrowser.dapp.loadDAppDependencies(dappEns, false);
-        const dapp = await dappBrowser.System.import(`${ dappEns }!dapp-content`);
-        const dispatcher = dapp[dispatcherName];
-
-        // add translation to correctly display instance dispatcher titles
-        if (dapp.translations) {
-           Object.keys(dapp.translations)
-             .forEach(key => this.$i18n.add(key, dapp.translations[key]));
-        }
-
+        const dispatcher = await this.loadDispatcher(dispatcherObj.dispatcherId);
         await Promise.all(Object.keys(dispatcherObj.entries).map(async (instanceId: string) => {
           const entry = dispatcherObj.entries[instanceId];
           const instance = new DispatcherInstance({
@@ -621,7 +615,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
             customPrice: entry.customPrice,
           });
 
-          // apply all queu instances to the queue instance object
+          // apply all queue instances to the queue instance object
           this.$set(this.queueInstances, instanceId, instance);
         }));
       } catch (ex) {
@@ -639,10 +633,29 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     this.queueLoading = false;
 
     // watch for queue updates
-    if (!this.queueWatcher) {
-      this.queueWatcher = Dispatcher.watch((event: CustomEvent) => {
+    if (!this.queueWatcher && this.topLevel) {
+      this.queueWatcher = Dispatcher.watch(async (event: CustomEvent) => {
         const instance = event.detail.instance;
 
+        // load missing translations
+        if (this.loadedDispatchers.indexOf(instance.dispatcher.id)) {
+          await this.loadDispatcher(instance.dispatcher.id);
+        }
+
+        // show user synchronisation status
+        this.$toasted.show(this.$t(
+          `_evan.dapp-wrapper.dispatcher-status.${ instance.status }`,
+          {
+            title: this.$t(instance.dispatcher.title),
+            percentage: (100 / instance.dispatcher.steps.length) * instance.stepIndex,
+          }
+        ), {
+          type: instance.status === 'finished' ? 'success' :
+                instance.status === 'error' ? 'error' :
+                'info'
+        });
+
+        // trigger special queue interactions
         switch (instance.status) {
           case 'finished':
           case 'deleted': {

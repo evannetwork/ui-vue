@@ -36,6 +36,7 @@ import DAppWrapperUtils from '../dapp-wrapper/utils';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
+
 /**
  * The dapp-warpper has the functionality, that a custom second level navigation can be applied.
  * Using this component, this content container does not must be filled directly, it can be filled
@@ -81,6 +82,9 @@ export default class DAppWrapperLevel2Component extends mixins(EvanComponent) {
 
       // append the current element
       this.contentElement && this.highestSidebar.appendChild(this.contentElement);
+
+      // enable sidebar level 2 handler on small devices for displaying menu button
+      window.dispatchEvent(new CustomEvent('dapp-wrapper-sidebar-2-enable'));
     } else {
       dappBrowser.utils.log(`dapp-wrapper-sidebar-2 element not included within an evan
         dapp wrapper...`, 'warning');
@@ -109,6 +113,9 @@ export default class DAppWrapperLevel2Component extends mixins(EvanComponent) {
       try {
         this.contentElement && this.highestSidebar.removeChild(this.contentElement);
       } catch (ex) { }
+
+      // disable sidebar level 2 handler on small devices for removing menu button
+      window.dispatchEvent(new CustomEvent('dapp-wrapper-sidebar-2-disable'));
     }
   }
 

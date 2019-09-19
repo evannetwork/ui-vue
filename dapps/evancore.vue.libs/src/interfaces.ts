@@ -44,7 +44,8 @@ export interface RouteRegistrationInterface {
 export interface DAppWrapperRouteInterface {
   fullPath?: string; // '/dashboard.evan/favorites.evan'
   icon: string; // 'mdi mdi-bookmark'
-  path: string; // 'favorites.evan'
+  id?: string; // 'synchronization'
+  path?: string; // 'favorites.evan'
   title: string; // '_dashboard.routes.favorites'
 }
 
@@ -74,10 +75,26 @@ export interface EvanVueOptionsInterface {
 }
 
 /**
+ * Used to describe the evan form control automatic rendering.
+ */
+export interface EvanFormControlUISpecs {
+  attr?: {
+    placeholder?: string;
+    error?: string;
+    label?: string;
+    options?: Array<{ label: string, value: any }>;
+    size?: number;
+  }
+  type: string;
+}
+
+/**
  * Represents one generalized form control within an vue form.
  */
 export interface EvanFormControlOptions {
-  validate?: Function;
   name: string;
+  uiSpecs?: EvanFormControlUISpecs;
+  validate?: Function;
   value?: any;
 }
+

@@ -74,7 +74,7 @@ export default class EvanComponent extends Vue {
 
     this.dapp = this.activeDApp();
     this.domainName = getDomainName();
-    this.testMode = !!window.localStorage['evan-test-mode'];
+    this.testMode = window.localStorage['evan-test-mode'] === 'true';
   }
 
   /**

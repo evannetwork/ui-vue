@@ -29,20 +29,38 @@
 export default {
   "_evan": {
     "_routes": {
-      "contacts": "Kontakte",
+      "actions": "Aktionen",
       "digitaltwins": "Digitale Zwillinge",
-      "favorites": "Favoriten",
-      "mailbox": "Nachrichten",
-      "organizations": "Organisationen",
-      "profile": "Mein Profil"
+      "explorer": "Explorer",
+      "favorites": "DApps",
+      "help": "Hilfe",
+      "profile": "Profil",
+      "synchronization": "Synchronisation",
+      "verifications": "Verifikations-Center"
+    },
+    "address": {
+      "copied": "Addresse kopiert...",
+      "copy": "Kopieren",
+      "open-in-explorer": "Im Explorer anzeigen"
     },
     "browser-not-supported": {
       "desc": "Bitte gehen Sie sicher, dass Sie einen der folgenden Browsern verwenden:<ul><li>Chrome</li><li>Edge</li><li>Firefox (kein privater Modus!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Ihr Browser wird nicht unterstützt"
     },
-    "cancel": "Schließen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
+      "dispatcher-status": {
+        "deleted": "{title} Synchronisation gelöscht",
+        "deleting": "Wird gelöscht: {title} ({percentage}%)",
+        "error": "Synchronisationsfehler: {title} ({percentage}%)",
+        "finished": "{title} abgeschlossen",
+        "running": "{title} ({percentage}%)",
+        "starting": "{title} gestartet",
+        "stopped": "Wird gestoppt {title} ({percentage}%)",
+        "stopping": "Gestoppt {title} ({percentage}%)"
+      },
       "empty-queue": "Alles ist synchronisiert...",
       "instance-accept": {
         "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
@@ -73,6 +91,7 @@ export default {
         "title": "Datein löschen"
       }
     },
+    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
@@ -80,6 +99,15 @@ export default {
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
+    "profile": {
+      "types": {
+        "choose": "Profiltyp spezifieren",
+        "company": "Unternehmen",
+        "device": "Gerät",
+        "unspecified": "unspezifizierter Account"
+      }
+    },
+    "share": "Freigeben",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"

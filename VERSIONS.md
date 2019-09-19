@@ -8,6 +8,29 @@
 ### Deprecations
 
 
+## Version 1.6.0
+### Features
+- `evancore.vue.libs` (v1.6.0)
+  - `evan-dropdown` allows inner `customStyle` param (left, right props are removed)
+  - new `dapp-wrapper` design
+  - support `multiline` property in tooltips
+  - add default `<slot>` for `evan-dapp-wrapper-level-2` so template container do not must be used
+  - new components
+    - `evan-button` to handle generalized boostrap button definitions
+    - add `nav-list` component for using easy navigation in `evan-dapp-wrapper-level-2`
+    - `evan-swipe-panel` to animate side content
+    - `evan-profile-preview` to show account name and it's type
+    - `evan-account-address` to show account address with generalized interactions
+    - `evan-steps` to show step by step content
+    - `evan-card` to show generalized cards with highlight parameters
+    - `evan-form` components
+      - `evan-form`
+      - `evan-control-input`
+      - `evan-control-select`
+      - `evan-control-files` 
+  - add `vue-toasted` and show toast messaged for address copy and running dispatchers
+
+
 ## Version 1.5.0
 ### Features
 - `evancore.vue.libs`

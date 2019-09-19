@@ -27,7 +27,7 @@
 
 <template>
   <div class="evan-loading w-100 h-100 pt-5 pb-5 text-center">
-    <div class="spinner-border text-secondary"></div>
+    <div class="spinner-border text-primary"></div>
   </div>
 </template>
 

@@ -31,6 +31,7 @@
     "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16",
+    "vue-toasted": "^1.1.27",
     "vue2-leaflet": "^2.0.2",
     "vuex": "^3.1.0",
     "vuex-i18n": "^1.11.0",
@@ -42,7 +43,7 @@
     "@evan.network/api-blockchain-core": "^2.3.0",
     "@evan.network/smart-contracts-core": "^2.1.1",
     "@evan.network/ui": "^1.7.1",
-    "@evan.network/ui-dapp-browser": "^2.4.0"
+    "@evan.network/ui-dapp-browser": "^2.5.0"
   },
   "husky": {
     "hooks": {
@@ -66,5 +67,5 @@
     "deploy": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/deployment.js deploy --config /Users/tschuck/projects/evan.network/ui/ui-vue-core/scripts/config/deployment.js",
     "serve": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/serve.js serve"
   },
-  "version": "1.5.0"
+  "version": "1.6.0"
 }

@@ -31,7 +31,7 @@
       <br>
       <h1 class="mt-4 font-weight-semibold">{{ '_evan.welcome-to-evan' | translate }}</h1>
       <h3 class="mt-4 font-weight-semibold text-muted">{{ '_evan.please-login' | translate }}</h3>
-      <div class="bg-secondary d-inline-block" style="width: 70px; height: 5px;"></div>
+      <div class="bg-primary d-inline-block" style="width: 70px; height: 5px;"></div>
       <br>
     </div>
     <div class="bg-level-1 mx-auto border password-dialog mt-3 mt-md-5">

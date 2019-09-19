@@ -26,7 +26,7 @@
 */
 
 import Vue from 'vue';
-import { EvanFormControlOptions, } from './interfaces';
+import { EvanFormControlOptions, EvanFormControlUISpecs, } from './interfaces';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 /**
@@ -106,12 +106,25 @@ export class EvanFormControl {
   validating: boolean;
 
   /**
+   * Optional specifications that describes the control rendering.
+   */
+  uiSpecs: EvanFormControlUISpecs;
+
+  /**
    * Create the new forms instance.
    */
-  constructor(name: string, value: any, vueInstance: Vue, validate?: Function, form?: EvanForm) {
+  constructor(
+    name: string,
+    value: any,
+    vueInstance: Vue,
+    validate?: Function,
+    form?: EvanForm,
+    uiSpecs?: EvanFormControlUISpecs
+  ) {
     this._validate = validate;
     this.form = form;
     this.name = name;
+    this.uiSpecs = uiSpecs;
     this.value = value;
     this.vueInstance = vueInstance;
   }
@@ -217,14 +230,17 @@ export class EvanForm {
     // do not apply values initialy, set the control key first, so the validator can access the
     // controls
     this.controls.forEach(controlKey => {
-      controls[controlKey].name = controlKey;
+      const control = controls[controlKey];
+
+      control.name = controlKey;
 
       this[controlKey] = new EvanFormControl(
         controlKey,
-        controls[controlKey].value,
+        control.value,
         this.vueInstance,
         undefined,
-        this
+        this,
+        control.uiSpecs,
       );
     });
 
@@ -281,5 +297,14 @@ export class EvanForm {
     delete this[controlKey];
 
     this.validateControls();
+  }
+
+  /**
+   * Returns a object representation of the form values.
+   */
+  toObject() {
+    const ret = { };
+    this.controls.forEach(controlKey => ret[controlKey] = this[controlKey].value);
+    return ret;
   }
 }

@@ -1,109 +1,37 @@
 /*
   Copyright (C) 2018-present evan GmbH.
-
   This program is free software: you can redistribute it and/or modify it
   under the terms of the GNU Affero General Public License, version 3,
   as published by the Free Software Foundation.
-
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Affero General Public License for more details.
-
   You should have received a copy of the GNU Affero General Public License
   along with this program. If not, see http://www.gnu.org/licenses/ or
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
   You can be released from the requirements of the GNU Affero General Public
   License by purchasing a commercial license.
   Buying such a license is mandatory as soon as you use this software or parts
   of it on other blockchains than evan.network.
-
   For more information, please contact evan GmbH at this address:
   https://evan.network/license/
 */
 
-@import '~@evan.network/ui/src/style/utils';
-
-.evan-file-input {
+.button-wrapper {
   position: relative;
 
-  min-height: 50px;
-
-  .batch-label {
-    height: 50px;
-    padding: 15px;
-
-    white-space: nowrap;
-
-    span {
-      display: inline-block;
-      overflow: hidden;
-
-      max-width: 230px;
-
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    a, button {
-      vertical-align: text-bottom;
-    }
-
-    &:hover * {
-      color: cssVar('light');
-
-      .btn.delete:hover i {
-        color: cssVar('danger');
-      }
-    }
+  .hidden {
+    opacity: 0;
   }
 
-  .centered {
+  .spinner {
     position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
   }
 
-  .dropzone {
-    position: relative;
-
-    min-height: 200px;
-    padding: 10px 10px;
-
-    cursor: pointer;
-    transition: 0.5s border ease-out;
-
-    border: 2px dashed cssVar('border-color');
-    outline-offset: -10px;
-
-    div {
-      transition: 0.5s color ease-out;
-    }
-
-    input {
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      width: 100%;
-
-      opacity: 0;
-      background-color: gray;
-    }
+  span {
+    color: inherit;
   }
 }
