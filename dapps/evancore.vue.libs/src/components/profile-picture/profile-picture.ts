@@ -105,13 +105,24 @@ class ProfilePicture extends mixins(EvanComponent) {
     this.src = typeof src === 'string' ? src : src.blobUri;
   }
 
-  pictureChanged(ev) {
-    this.fileForm.value = this.fileForm.value.slice(0, 1); // skip multiple uploads // TODO: configure component
+  /**
+   * Handles changing picture without propagating it to the form.
+   *  - truncate multiple uploads
+   *  - store picture temporary from form
+   *  - set form to empty again
+   */
+  pictureChanged() {
+    this.fileForm.value = this.fileForm.value.slice(0, 1);
     this.changedPicture = this.fileForm.value[0];
+    this.fileForm.value = [];
   }
 
+  /**
+   * Propagate picture change using file temporary stored before.
+   */
   usePicture() {
     this.$emit('changed', this.changedPicture);
+    this.fileForm.value.push(this.changedPicture);
     (<any>this).$refs.pictureUploadModal.hide();
   }
 
