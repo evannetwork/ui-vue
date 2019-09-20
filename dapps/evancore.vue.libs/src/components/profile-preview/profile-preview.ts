@@ -29,7 +29,15 @@ https://evan.network/license/
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
 import Vue from 'vue';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
+import { watch } from 'fs';
+
+interface UserInfoInterface {
+  accountName: string,
+  type: string,
+  isVerified: boolean,
+  pictureSrc: string
+}
 
 /**
  * Shows a animated "check" icon.
@@ -42,14 +50,14 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   /**
    * Address of the specific account.
    */
-  @Prop() address;
+  @Prop() address: string;
 
   /**
    * Size of the profile preview (sm, lg)
    */
   @Prop({
     default: 'sm'
-  }) size;
+  }) size: string;
 
   /**
    * Show loading symbol
@@ -59,8 +67,12 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   /**
    * user information (alias, type, verification, ...)
    */
-  userInfo = null;
+  userInfo: UserInfoInterface = null;
 
+  @Watch('$attrs')
+    onChildChanged(val: UserInfoInterface, oldVal: UserInfoInterface) {
+      Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src });
+    }
   /**
    * Load user specific information
    */
@@ -70,12 +82,16 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     // load addressbook info
     const addressBook = await runtime.profile.getAddressBook();
     const contact = addressBook.profile[this.address];
+    const accountName = contact && contact.alias ? contact.alias : this.address;
 
-    // TODO: load account type
     this.userInfo = {
-      alias: contact ? contact.alias : this.address,
-      type: 'unspecified',
+      accountName, // TODO: use the company / user name instead of alias
+      type: 'unspecified', // TODO: load from account
+      pictureSrc: null, // TODO: load from account
+      isVerified: false
     };
+
+    Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src }); // merge attributes when set from parent
 
     this.loading = false;
   }

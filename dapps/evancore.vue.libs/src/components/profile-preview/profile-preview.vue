@@ -29,20 +29,21 @@
   <a class="d-flex align-items-center text-decoration-none"
     style="height: auto;"
     :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
-    <div class="d-flex mr-3 align-items-center justify-content-center bg-gray-300 text-dark"
-      :style="size === 'sm' ?
-        'height: 1.875em; width: 1.875em;' :
-        'height: 8.75em; width: 8.75em;'
-      ">
-      <div class="spinner-border spinner-border-sm" v-if="loading"></div>
-      <b v-else-if="size === 'sm'">?</b>
-      <h1 v-else-if="size === 'lg'">?</h1>
-    </div>
-    <template v-if="!loading">
+
+    <div v-if="loading" class="spinner-border spinner-border-sm" />
+    <evan-profile-picture v-else
+      :src="userInfo.pictureSrc"
+      :accountName="userInfo.accountName"
+      :type="userInfo.type"
+      :isVerified="userInfo.isVerified"
+      :isEditable="address === $store.state.runtime.activeAccount"
+      :size="size"
+    />
+    <template>
       <div class="d-flex flex-column justify-content-center"
-        v-if="size === 'sm'">
+        v-if="size === 'default' || size === 'sm'">
         <b class="text-dark" style="font-size: 13px; font-weight: 600;">
-          {{ userInfo.alias }}
+          {{ userInfo.accountName }}
         </b>
         <small style="font-size: 10px; font-weight: 300;">
           {{ `_evan.profile.types.${ userInfo.type }` | translate }}
@@ -52,7 +53,7 @@
         v-else-if="size === 'lg'"
         style="height: 8.75em;">
         <h2 class="font-weight-semibold mb-0">
-          {{ userInfo.alias }}
+          {{ userInfo.accountName }}
         </h2>
         <evan-address :address="address"></evan-address>
         <b class="text-primary"
@@ -69,7 +70,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './profile-preview.ts';
+  import Component from './profile-preview';
   export default Component;
 </script>
 

@@ -34,6 +34,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { EvanFormControl } from '@evan.network/ui-vue-core';
+import { UIContainerFile } from '@evan.network/ui';
 
 import { getDomainName } from '../../utils';
 import EvanComponent from '../../component';
@@ -44,10 +45,10 @@ import EvanComponent from '../../component';
 @Component({})
 class ProfilePicture extends mixins(EvanComponent) {
   /**
-   * Profile type that should be used (unknown, user, company, device)
+   * Profile type that should be used (unspecified, user, company, device)
    */
   @Prop({
-    default: 'unknown'
+    default: 'unspecified'
   }) type: string;
 
   /**
@@ -58,18 +59,18 @@ class ProfilePicture extends mixins(EvanComponent) {
   }) size: string;
 
   /**
-   * Display size that should be used (small, medium, large)
+   * The image src. Can be an http resource or a blob object from browser files API.
    */
   @Prop({
     default: null
-  }) src: any;
+  }) src: UIContainerFile | string;
 
   /**
    * The name of the user, company or IOT device. Initials will be used if no picture is uploaded.
    */
   @Prop({
     default: ''
-  }) name: string;
+  }) accountName: string;
 
   /**
    * Is Profile verified
@@ -86,7 +87,7 @@ class ProfilePicture extends mixins(EvanComponent) {
   }) isEditable: boolean;
 
   /**
-   * Is Profile verified
+   * The file form handler for uploading a new image.
    */
   @Prop({
     required: true,
@@ -101,7 +102,7 @@ class ProfilePicture extends mixins(EvanComponent) {
   changedPicture: any = null;
 
   @Watch('src')
-  onChildChanged(src: any) {
+  onChildChanged(src: UIContainerFile | string) {
     this.src = typeof src === 'string' ? src : src.blobUri;
   }
 
@@ -126,12 +127,12 @@ class ProfilePicture extends mixins(EvanComponent) {
     (<any>this).$refs.pictureUploadModal.hide();
   }
 
-  getInitials(name: string): string {
-    if (!name) {
+  getInitials(accountName: string): string {
+    if (!accountName) {
       return '#';
     }
 
-    return name.split(/\s/).splice(0, 2).map(word => word.charAt(0)).join('');
+    return accountName.split(/\s/).splice(0, 2).map(word => word.charAt(0)).join('');
   };
 }
 

@@ -52,7 +52,7 @@
 
     // circle mask
     &.user,
-    &.unknown {
+    &.unspecified {
       img,
       .image-placeholder {
         width: var(--size);
@@ -65,7 +65,7 @@
         right: 0;
       }
     }
-    &.unknown {
+    &.unspecified {
       border: 1px solid cssVar('border-color');
       background: white;
       border-radius: 50%;

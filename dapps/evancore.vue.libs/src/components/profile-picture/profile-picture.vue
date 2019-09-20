@@ -35,7 +35,7 @@
           :src="src"
         />
         <div v-else class="image-placeholder">
-          {{ getInitials(name) }}
+          {{ getInitials(accountName) }}
         </div>
       </div>
       <img
@@ -73,7 +73,7 @@
               :src="changedPicture.blobUri"
             />
             <div v-else class="image-placeholder">
-              {{ getInitials(name) }}
+              {{ getInitials(accountName) }}
             </div>
           </div>
         </div>
