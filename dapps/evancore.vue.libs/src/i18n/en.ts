@@ -104,8 +104,14 @@ export default {
         "choose": "Specify Account Type",
         "company": "Company",
         "device": "Device",
-        "unspecified": "unspecified account"
+        "unspecified": "unspecified account",
+        "user": "User"
       }
+    },
+    "profile-picture": {
+      "upload": "Upload your profile picture here",
+      "upload-dnd": "Click here or drag'n'drop your new profile picture here.",
+      "use-picture": "Use Picture"
     },
     "share": "Share",
     "under-development": {
