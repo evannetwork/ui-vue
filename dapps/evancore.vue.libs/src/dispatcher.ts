@@ -87,6 +87,11 @@ export default class EvanVueDispatcherHandler {
   running: any = { };
 
   /**
+   * All dispatcher instances, mapped from it's full ens address to a array of dispatcher instances
+   */
+  instances: any = { };
+
+  /**
    * All dispatcher instances, mapped from it's full ens address to a array of dispatcher payload objects
    */
   data: any = { };
@@ -98,6 +103,7 @@ export default class EvanVueDispatcherHandler {
   curr: any = {
     data: { },
     error: { },
+    instances: { },
     running: { },
   };
 
@@ -196,43 +202,44 @@ export default class EvanVueDispatcherHandler {
     const isCurr = dappEns === this.dappName;
     const id = scope === this ? dispatcher.id : dispatcherName
 
-    // fill empty data
-    scope.data[id] = scope.data[id] || [ ];
+    // fill empty instances
+    scope.instances[id] = scope.instances[id] || [ ];
 
-    // search for existing dispatcher data
-    const found = scope.data[id]
+    // search for existing dispatcher instances
+    const found = scope.instances[id]
       .find(dataEntry => dataEntry.id === instance.id);
-    const foundIndex = found ? scope.data[id].indexOf(found) : -1;
+    const foundIndex = found ? scope.instances[id].indexOf(found) : -1;
 
     // if instance has finished it's work, clear it
     if (instance.status === 'finished' || instance.status === 'deleted') {
-      found && scope.data[id].splice(foundIndex, 1);
+      found && scope.instances[id].splice(foundIndex, 1);
     } else {
-      // update the data
+      // update the instances
       if (foundIndex === -1) {
-        scope.data[id].push(instance);
+        scope.instances[id].push(instance);
       } else {
-        scope.data[id][foundIndex] = instance;
+        scope.instances[id][foundIndex] = instance;
       }
     }
 
-    // clear old data from scope (this, curr)
-    if (scope.data[id].length === 0) {
-      delete scope.error[id];
-      delete scope.running[id];
-      delete scope.data[id];
+    // clear old instances from scope (this, curr)
+    if (scope.instances[id].length === 0) {
+      Vue.set(scope.data, id, [ ]);
+      Vue.set(scope.error, id, false);
+      Vue.set(scope.running, id, false);
     } else {
-      scope.running[id] = true;
-      scope.error[id] = scope.data[id]
-        .filter((data) => data.status === 'error').length !== 0;
+      Vue.set(scope.running, id, true);
+      Vue.set(
+        scope.error,
+        id,
+        scope.instances[id].filter((filterVar) => filterVar.status === 'error').length !== 0
+      );
+      Vue.set(scope.data, id, scope.instances[id].map(filterVar => filterVar.data));
     }
 
     // allow to handle nested curr object with same logic
     if (scope === this && dappEns === this.dappName) {
       this.handleDispatcherEvent(dispatcher, instance, this.curr);
-    } else {
-      // send events, so components can easily watch using $on
-      this.vue.$emit('dispatcher-update', { dispatcher, instance, status: instance.status, });
     }
   }
 }

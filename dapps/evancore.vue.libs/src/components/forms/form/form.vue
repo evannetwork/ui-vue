@@ -64,7 +64,7 @@
         </slot>
       </form>
     </div>
-    <template v-if="editMode && !onlyForm">
+    <template v-if="(editMode || isLoading) && !onlyForm">
       <a
         class="text-muted mt-4 mb-3 d-inline-block"
         href="https://evannetwork.github.io/docs/other/glossary.html#e"
