@@ -26,10 +26,11 @@
 */
 
 <template>
-  <div class="mt-2 mb-8"
+  <div class="evan-form mt-2 mb-8"
     :class="{
       'edit-mode': editMode && !onlyForm,
       'form-data-wrapper': !onlyForm,
+      'transparent': !editMode && !onlyForm,
     }">
     <div class="d-flex justify-content-between align-items-center pb-1"
       v-if="!onlyForm">
@@ -41,15 +42,15 @@
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate }}</evan-button>
     </div>
     <div class="px-0 pt-4" :class="{ 'container': stacked }">
-      <form :class="{ 'row': stacked }"
-        @submit="$emit('submit')">
+      <form class="d-flex flex-wrap flex-row justify-content-between"
+        @submit="save">
         <slot v-bind:setEditMode="setEditMode"></slot>
         <slot name="form" v-if="form">
           <template v-for="(controlName) in form.controls">
             <slot :name="`form-control-${ controlName }`">
               <component
                 :disabled="isLoading"
-                :error="getTranslation(form[controlName], 'error')"
+                :error="(onlyForm || editMode && !onlyForm) ? getTranslation(form[controlName], 'error') : false"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"
@@ -93,6 +94,3 @@
   export default FormDataWrapper
 </script>
 
-<style lang="scss" scoped>
-  @import './form.scss'
-</style>

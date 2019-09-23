@@ -87,8 +87,8 @@
         type="file" multiple
         :accept="accept"
         :name="name"
+        @focus="$parent.$emit('setFocus', true)"
         @change="filesChanged($event.target.files)">
-
       <div class="centered"
         :class="{ 'text-secondary': hovered }"
         v-html="$t(placeholder)">

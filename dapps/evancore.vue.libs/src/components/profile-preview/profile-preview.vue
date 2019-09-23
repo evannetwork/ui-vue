@@ -26,7 +26,7 @@
 */
 
 <template>
-  <a class="d-flex align-items-center text-decoration-none"
+  <a class="d-flex align-items-center text-decoration-none" :class="size"
     style="height: auto;"
     :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
 
@@ -39,8 +39,8 @@
       :isEditable="address === $store.state.runtime.activeAccount"
       :size="size"
     />
-    <template>
-      <div class="d-flex flex-column justify-content-center"
+    <template v-if="userInfo !== null">
+      <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
         <b class="text-dark" style="font-size: 13px; font-weight: 600;">
           {{ userInfo.accountName }}
@@ -51,12 +51,13 @@
       </div>
       <div class="d-flex flex-column justify-content-between p-3"
         v-else-if="size === 'lg'"
-        style="height: 8.75em;">
+        style="min-height: 8.75em; min-width: 400px;">
         <h2 class="font-weight-semibold mb-0">
           {{ userInfo.accountName }}
         </h2>
         <evan-address :address="address"></evan-address>
-        <b class="text-primary"
+        <b class="force-oneline"
+          :class="{ 'text-primary': userInfo.type === 'unspecified' }"
           v-if="address === $store.state.runtime.activeAccount"
           @click="$emit('typeClick')">
           {{ `_evan.profile.types.${ userInfo.type === 'unspecified' ? 'choose' : userInfo.type }` | translate }}

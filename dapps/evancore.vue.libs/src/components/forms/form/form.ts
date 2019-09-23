@@ -30,6 +30,10 @@ import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
 import { Prop, Watch } from 'vue-property-decorator';
 
+// evan imports
+import * as bcc from '@evan.network/api-blockchain-core';
+import { cloneDeep } from '@evan.network/ui';
+
 import EvanComponent from '../../../component';
 import { EvanForm, EvanFormControl } from '../../../forms';
 
@@ -43,7 +47,7 @@ import { EvanForm, EvanFormControl } from '../../../forms';
 @Component({ })
 export default class EvanFormComponent extends mixins(EvanComponent) {
   /**
-   * Form title
+   * Form title that is displayed at the top of the formular
    */
   @Prop({
     type: String,
@@ -51,7 +55,7 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   }) title: string;
 
   /**
-   * Sets editmode to active or inactive.
+   * Is the formular data public or protected? Will switch the top left security indicator icon.
    */
   @Prop({
     type: Boolean,
@@ -128,14 +132,16 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   }
 
   /**
-   * Set the current edit mode.
+   * Set the current edit mode. If EvanForm was specified, create a form data backup, so the data
+   * can be resetted on cancel.
    *
-   * @param      {boolean}  active  true / false
+   * @param      {boolean}  active  enable / disable editMode
    */
   setEditMode(active: boolean): void {
     // save latest data, so we can restore it on cancelation
     if (!this.editMode && active && this.form) {
-      this.formDataBackup = this.form.toObject();
+      // use clone deep to break array references (e.g. in file upload)
+      this.formDataBackup = cloneDeep(bcc.lodash, this.form.toObject());
     }
 
     this.editMode = active;

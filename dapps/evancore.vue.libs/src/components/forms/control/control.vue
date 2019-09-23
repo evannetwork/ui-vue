@@ -27,14 +27,16 @@
 
 <template>
   <div class="form-group"
-    :class="`${ stacked ? '' : 'row' }${ stacked ? ' col-' + size : '' }`">
+    :class="{ 'inline': !stacked, }"
+    :style="{
+      'min-width': size === 12 ? '100%' : `${ 100 * (size / 12) }%`,
+    }">
     <label class="col-form-label"
-      :class="{ 'col-md-3': !stacked }"
       :for="id"
       v-if="label">
       {{ label }}
     </label>
-    <div :class="{ 'col-md-9': !stacked }">
+    <div class="input-wrapper">
       <slot></slot>
       <div class="invalid-feedback" v-if="error">
         {{ error | translate }}

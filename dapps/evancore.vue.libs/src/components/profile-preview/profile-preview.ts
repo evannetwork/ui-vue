@@ -82,13 +82,19 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     // load addressbook info
     const addressBook = await runtime.profile.getAddressBook();
     const contact = addressBook.profile[this.address];
-    const accountName = contact && contact.alias ? contact.alias : this.address;
+    const profileContract = runtime.profile.profileContract;
+
+    const accountDetails = await runtime.dataContract.getEntry(
+      profileContract,
+      'accountDetails',
+      runtime.activeAccount
+    );
 
     this.userInfo = {
-      accountName, // TODO: use the company / user name instead of alias
-      type: 'unspecified', // TODO: load from account
-      pictureSrc: null, // TODO: load from account
-      isVerified: false
+      accountName: contact ? contact.alias : this.address, // TODO: use the company / user name instead of alias
+      type: accountDetails.profileType || 'unspecified',
+      pictureSrc: null, // TODO: load from profile
+      isVerified: false // TODO: load from profile
     };
 
     Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src }); // merge attributes when set from parent

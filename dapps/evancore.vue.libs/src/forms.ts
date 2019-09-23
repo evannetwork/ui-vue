@@ -26,7 +26,7 @@
 */
 
 import Vue from 'vue';
-import { EvanFormControlOptions, } from './interfaces';
+import { EvanFormControlOptions, EvanFormControlUISpecs, } from './interfaces';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 /**
@@ -108,12 +108,19 @@ export class EvanFormControl {
   /**
    * Optional specifications that describes the control rendering.
    */
-  uiSpecs: any;
+  uiSpecs: EvanFormControlUISpecs;
 
   /**
    * Create the new forms instance.
    */
-  constructor(name: string, value: any, vueInstance: Vue, validate?: Function, form?: EvanForm, uiSpecs?: any) {
+  constructor(
+    name: string,
+    value: any,
+    vueInstance: Vue,
+    validate?: Function,
+    form?: EvanForm,
+    uiSpecs?: EvanFormControlUISpecs
+  ) {
     this._validate = validate;
     this.form = form;
     this.name = name;

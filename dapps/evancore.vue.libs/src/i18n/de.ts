@@ -104,7 +104,8 @@ export default {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
         "device": "Gerät",
-        "unspecified": "unspezifizierter Account"
+        "unspecified": "unspezifizierter Account",
+        "user": "User"
       }
     },
     "profile-picture": {

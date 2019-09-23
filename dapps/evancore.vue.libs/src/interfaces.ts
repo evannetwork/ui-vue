@@ -78,10 +78,13 @@ export interface EvanVueOptionsInterface {
  * Used to describe the evan form control automatic rendering.
  */
 export interface EvanFormControlUISpecs {
-  error?: string;
-  label?: string;
-  options?: { label: string, value: any };
-  placeholder?: string;
+  attr?: {
+    placeholder?: string;
+    error?: string;
+    label?: string;
+    options?: Array<{ label: string, value: any }>;
+    size?: number;
+  }
   type: string;
 }
 
