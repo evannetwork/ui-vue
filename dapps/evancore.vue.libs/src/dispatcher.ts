@@ -232,9 +232,9 @@ export default class EvanVueDispatcherHandler {
       Vue.set(
         scope.error,
         id,
-        scope.instances[id].filter((filterVar) => filterVar.status === 'error').length !== 0
+        scope.instances[id].filter((filterInstance) => filterInstance.status === 'error').length !== 0
       );
-      Vue.set(scope.data, id, scope.instances[id].map(filterVar => filterVar.data));
+      Vue.set(scope.data, id, scope.instances[id].map(filterInstance => filterInstance.data));
     }
 
     // allow to handle nested curr object with same logic

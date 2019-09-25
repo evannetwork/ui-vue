@@ -70,11 +70,6 @@ export default class EvanComponent extends Vue {
    */
   testMode = false;
 
-  /**
-   * Current dapp's dispatcher handler, so it can be accessed easier
-   */
-  dispatcher: EvanVueDispatcherHandler = null;
-
   constructor() {
     super();
 

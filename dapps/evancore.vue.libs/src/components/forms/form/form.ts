@@ -141,7 +141,7 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
     // save latest data, so we can restore it on cancelation
     if (!this.editMode && active && this.form) {
       // use clone deep to break array references (e.g. in file upload)
-      this.formDataBackup = cloneDeep(bcc.lodash, this.form.toObject());
+      this.formDataBackup = cloneDeep(bcc.lodash, this.form.getFormData());
     }
 
     this.editMode = active;
