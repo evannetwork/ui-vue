@@ -26,10 +26,7 @@
 */
 
 <template>
-  <a class="d-flex align-items-center text-decoration-none" :class="size"
-    style="height: auto;"
-    :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
-
+  <div class="d-flex align-items-center text-decoration-none" :class="size">
     <div v-if="loading" class="spinner-border spinner-border-sm" />
     <evan-profile-picture v-else
       :src="userInfo.pictureSrc"
@@ -42,32 +39,26 @@
     <template v-if="userInfo !== null">
       <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
-        <b class="text-dark" style="font-size: 13px; font-weight: 600;">
-          {{ userInfo.accountName }}
-        </b>
+        <a :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
+          <b class="text-dark" style="font-size: 13px; font-weight: 600;">
+            {{ userInfo.accountName }}
+          </b>
+        </a>
         <small style="font-size: 10px; font-weight: 300;">
           {{ `_evan.profile.types.${ userInfo.type }` | translate }}
         </small>
       </div>
-      <div class="d-flex flex-column justify-content-between p-3"
-        v-else-if="size === 'lg'"
-        style="min-height: 8.75em; min-width: 400px;">
-        <h2 class="font-weight-semibold mb-0">
-          {{ userInfo.accountName }}
-        </h2>
-        <evan-address :address="address"></evan-address>
-        <b class="force-oneline"
-          :class="{ 'text-primary': userInfo.type === 'unspecified' }"
-          v-if="address === $store.state.runtime.activeAccount"
-          @click="$emit('typeClick')">
-          {{ `_evan.profile.types.${ userInfo.type === 'unspecified' ? 'choose' : userInfo.type }` | translate }}
-        </b>
-         <b v-else>
-          {{ `_evan.profile.types.${ userInfo.type }` | translate }}
-        </b>
+      <div v-else-if="size === 'lg'" class="d-flex flex-column justify-content-between p-3">
+        <a :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
+          <h2 class="font-weight-semibold mb-0">
+            {{ userInfo.accountName }}
+          </h2>
+        </a>
+        <evan-address v-if="address" :address="address" />
+        <b>{{ `_evan.profile.types.${ userInfo.type }` | translate }}</b>
       </div>
     </template>
-  </a>
+  </div>
 </template>
 
 <script lang="ts">
