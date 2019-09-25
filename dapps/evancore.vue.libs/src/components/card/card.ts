@@ -55,9 +55,7 @@ export default class CardComponent extends mixins(EvanComponent) {
   /**
    * Add hover shadow and size effect
    */
-  @Prop({
-    default: true,
-  }) highlight: boolean;
+  @Prop() highlight: boolean;
 
   /**
    * Card icon
