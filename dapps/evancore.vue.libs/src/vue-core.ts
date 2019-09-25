@@ -42,8 +42,8 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import evanComponents from './components/registry';
 import evanTranslations from './i18n/translations';
 import { ComponentRegistrationInterface, EvanVueOptionsInterface } from './interfaces';
-import { initializeRouting } from './routing';
 import { getDomainName } from './utils';
+import { initializeRouting } from './routing';
 
 /******************************************** functions *******************************************/
 /**
@@ -53,6 +53,13 @@ import { getDomainName } from './utils';
  */
 export async function initializeVue(options: EvanVueOptionsInterface) {
   const { Vue } = options;
+
+  // disable dev tools on prod
+  if (!dappBrowser.utils.devMode) {
+    Vue.config.devtools = false;
+    Vue.config.debug = false;
+    Vue.config.silent = true;
+  }
 
   // never replace the full container, other elements can be placed within this container directly
   //  => create new child element
@@ -120,6 +127,11 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     store,
     render: render => render(options.RootComponent),
     mounted: function () {
+      // disable dev tools on prod
+      if (!dappBrowser.utils.devMode) {
+        delete this.$el.__vue__;
+      }
+
       // add an element id, so the dapp-loader can detect already loaded nested dapps
       this.$el.id = options.dappEnsOrContract;
       this.$el.className += ' evan-vue-dapp';

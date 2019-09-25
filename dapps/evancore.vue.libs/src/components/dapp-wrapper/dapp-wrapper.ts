@@ -30,13 +30,14 @@ import Component, { mixins } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
-import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
-import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
+import EvanComponent from '../../component';
+import EvanVueDispatcherHandler from '../../dispatcher';
 import { DAppWrapperRouteInterface } from '../../interfaces';
-import { registerEvanI18N, } from '../../vue-core';
+import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { getDomainName } from '../../utils';
+import { registerEvanI18N, } from '../../vue-core';
 
 // load domain name for quick usage
 const domainName = getDomainName();
@@ -241,6 +242,11 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   loadedDispatchers: Array<string> = [ ];
 
   /**
+   * dispatcher handler, so applications can easily access dispatcher data from vuex store
+   */
+  dispatcherHandler: EvanVueDispatcherHandler = null;
+
+  /**
    * Returns the i18n title key for the active route.
    *
    * @return     {string}  active route i18n or route path
@@ -321,6 +327,8 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     // remove the watch function
     this.sideBarCloseWatcher && window.removeEventListener(`evan-queue-${ this.id }`,
       this.sideBarCloseWatcher);
+    // deletee dispatcher handler
+    this.dispatcherHandler && this.dispatcherHandler.destroy();
     // unbind dapp-wrapper-sidebar level handlers
     window.removeEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
     window.removeEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
@@ -447,6 +455,11 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
         null,
         { executor },
       );
+
+      // create and register a vue dispatcher handler, so applications can easily access dispatcher data
+      // from vuex store
+      this.dispatcherHandler = new EvanVueDispatcherHandler(this);
+      await this.dispatcherHandler.initialize();
 
       // send logged in event
       this.$emit('loggedin', this.$store.state.runtime);

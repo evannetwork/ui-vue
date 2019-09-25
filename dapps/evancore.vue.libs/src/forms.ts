@@ -302,7 +302,7 @@ export class EvanForm {
   /**
    * Returns a object representation of the form values.
    */
-  toObject() {
+  getFormData() {
     const ret = { };
     this.controls.forEach(controlKey => ret[controlKey] = this[controlKey].value);
     return ret;

@@ -36,6 +36,7 @@ import { Prop } from 'vue-property-decorator';
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import EvanVueDispatcherHandler from './dispatcher';
 import { getDomainName } from './utils';
 
 /**
@@ -74,6 +75,7 @@ export default class EvanComponent extends Vue {
 
     this.dapp = this.activeDApp();
     this.domainName = getDomainName();
+    this.dispatcher = this.$store.state.dispatcher;
     this.testMode = window.localStorage['evan-test-mode'] === 'true';
   }
 
