@@ -104,8 +104,14 @@ export default {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
         "device": "Gerät",
-        "unspecified": "unspezifizierter Account"
+        "unspecified": "unspezifizierter Account",
+        "user": "User"
       }
+    },
+    "profile-picture": {
+      "upload": "Laden Sie hier ihr Profilbild hoch",
+      "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
+      "use-picture": "Fertig"
     },
     "share": "Freigeben",
     "under-development": {

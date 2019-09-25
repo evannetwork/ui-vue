@@ -105,7 +105,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './files.ts';
+  import Component from './files';
   export default Component;
 </script>
 

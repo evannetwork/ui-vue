@@ -55,6 +55,13 @@ export default class ControlComponent extends mixins(EvanComponent) {
   }) label: string;
 
   /**
+   * Placeholder text if the input field
+   */
+  @Prop({
+    type: String
+  }) placeholder: string;
+
+  /**
    * The id for the input field.
    */
   @Prop({
