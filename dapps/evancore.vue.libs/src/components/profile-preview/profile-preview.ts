@@ -25,6 +25,8 @@
 https://evan.network/license/
 */
 
+import { Dispatcher } from '@evan.network/ui';
+
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
@@ -69,6 +71,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    */
   userInfo: UserInfoInterface = null;
 
+  /**
+   * Watch for dispatcher updates
+   */
+  listeners: Array<any> = [ ];
+
   @Watch('$attrs')
     onChildChanged(val: UserInfoInterface, oldVal: UserInfoInterface) {
       Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src });
@@ -77,7 +84,21 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Load user specific information
    */
   async created() {
-    const runtime = this.getRuntime();
+    await this.loadUserInfo();
+
+    // watch for save updates
+    this.listeners.push(Dispatcher.watch(($event: any) => {
+      if ($event.detail.status === 'finished' || $event.detail.status === 'deleted') {
+        this.loadUserInfo();
+      }
+    }, `profile.vue.${ this.domainName }`, 'updateProfileDispatcher'));
+  }
+
+  /**
+   * Load the latest user information.
+   */
+  async loadUserInfo() {
+    const runtime = (<any>this).getRuntime();
 
     // load addressbook info
     const addressBook = await runtime.profile.getAddressBook();
@@ -99,6 +120,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
 
     Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src }); // merge attributes when set from parent
 
+    this.$emit('update', this.userInfo);
     this.loading = false;
   }
 }

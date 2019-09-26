@@ -69,7 +69,8 @@
         class="text-muted mt-4 mb-3 d-inline-block"
         href="https://evannetwork.github.io/docs/other/glossary.html#e"
         target="_blank"
-        rel="noopener noreferrer">
+        rel="noopener noreferrer"
+        v-if="!isLoading">
         <i class="mdi mdi-information-outline mr-2" />
         {{ '_evan.transaction_costs_hint' | translate }}
       </a>
