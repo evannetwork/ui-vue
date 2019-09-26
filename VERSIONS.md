@@ -4,10 +4,12 @@
 ### Features
 - `evancore.vue.libs`
   - add automatic vue dispatcher handling that fills `vuex` store
-  - add card `icon` to overwrite default one
-  - set card `highlight` property's default value to false
 
 ### Fixes
+- `evancore.vue.libs`
+  - add card `icon` to overwrite default one
+  - set card `highlight` property's default value to false
+  - better profile img style
 
 ### Deprecations
 
