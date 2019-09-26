@@ -22,7 +22,7 @@
     <template v-if="isRendered">
       <div class="modal fade" tabindex="-1"
         :class="{ 'show': isShown }"
-        @click="hide();">
+        @click="!disableBackdrop && hide();">
         <div
           class="modal-dialog"
           role="document"

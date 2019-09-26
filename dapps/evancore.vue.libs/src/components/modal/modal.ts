@@ -48,6 +48,13 @@ export default class EvanModal extends mixins(EvanComponent) {
   }) hideFooterButton;
 
   /**
+   * Set true, to disable hide() function on modal backdrop click.
+   */
+  @Prop({
+    default: false
+  }) disableBackdrop;
+
+  /**
    * Configurable modal width
    */
   @Prop({
