@@ -10,6 +10,7 @@
   - add card `icon` to overwrite default one
   - set card `highlight` property's default value to false
   - better profile img style
+- remove custom agpl appendix
 
 ### Deprecations
 
