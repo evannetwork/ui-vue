@@ -88,9 +88,9 @@
   }
 }
 
-
 .profile-picture {
   position: relative;
+  text-transform: uppercase;
 
   /deep/ .btn {
     visibility: hidden;
@@ -101,9 +101,11 @@
 
   &:hover .btn {
     visibility: visible;
+    background: rgba(255,255,255,0.6);
   }
-  &:hover {
-    color: cssVar('border-color')
+
+  &:hover .btn:hover {
+    background: white;
   }
 
   img,

@@ -55,11 +55,14 @@
         </a>
       </template>
     </div>
-    <a id="evan-logout"
-      @click="$refs.logoutComp.logout();">
-      <i class="mr-3 mdi mdi-logout"></i>
-      {{ '_evan.logout' | translate }}
-    </a>
+
+    <div class="nav-entries" style="flex: 0">
+      <a id="evan-logout"
+        @click="$refs.logoutComp.logout();">
+        <i class="mr-3 mdi mdi-logout"></i>
+        {{ '_evan.logout' | translate }}
+      </a>
+    </div>
   </div>
 </template>
 
