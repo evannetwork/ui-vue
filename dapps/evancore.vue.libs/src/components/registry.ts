@@ -50,6 +50,7 @@ import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
+import vSelect from 'vue-select';
 
 // export them all, so other applications can access them
 export {
@@ -115,6 +116,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
+  { name: 'evan-v-select', component: vSelect },
 ];
 
 export default componentRegistration;

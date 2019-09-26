@@ -1,0 +1,19 @@
+{
+  "author": "evan GmbH",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "API",
+    "VueJS",
+    "DApp",
+    "CSS"
+  ],
+  "main": "dist/select.vue.libs.js",
+  "name": "@evan.network/vue-select",
+  "scripts": {
+    "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
+  },
+  "typings": "dist/select.vue.libs.d.ts",
+  "version": "3.2.0"
+}
