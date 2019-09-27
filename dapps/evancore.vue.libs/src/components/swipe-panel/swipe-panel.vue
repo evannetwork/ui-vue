@@ -28,13 +28,16 @@
       </div>
       <div class="fullscreen"
         @click="hide($event)">
-      </div>  
+      </div>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './swipe-panel.ts';
+  import Component from './swipe-panel';
   export default Component;
 </script>
 
+<style lang="scss" scoped>
+  @import './swipe-panel.scss'
+</style>

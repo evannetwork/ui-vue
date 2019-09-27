@@ -108,17 +108,14 @@
                     {{ '_evan._routes.synchronization' | translate }}
                   </evan-tooltip>
                 </a>
-                <evan-swipe-panel ref="queuePanel" :alignment="'left'">
+                <evan-swipe-panel ref="queuePanel" alignment="left">
                   <div class="d-flex align-items-center mb-5">
-                    <button class="btn p-0 mr-3"
-                      @click="$refs.queuePanel.hide()">
-                      <i class="h1 mdi mdi-arrow-left my-0"></i>
-                    </button>
+                    <evan-button type="text" @click="$refs.queuePanel.hide()" icon="mdi mdi-arrow-left" />
                     <h5 class="m-0 font-weight-bold text-truncate">
                       {{ '_evan.dapp-wrapper.queue' | translate }}
                     </h5>
                   </div>
-                  <span class="p-3 d-block" 
+                  <span class="p-3 d-block"
                     v-if="queueCount === 0 && queueErrorCount === 0">
                     {{ '_evan.dapp-wrapper.empty-queue' | translate }}
                   </span>
