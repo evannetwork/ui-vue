@@ -30,7 +30,7 @@ interface UserInfoInterface {
   accountName: string,
   profileType: string,
   isVerified: boolean,
-  picture: string
+  picture: any;
 }
 
 /**
@@ -108,7 +108,6 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   async loadUserInfo() {
     const runtime = (<any>this).getRuntime();
     const { accountDetails } = (await runtime.profile.getProfileProperties([ 'accountDetails' ]));
-
     this.userInfo = accountDetails;
     // use old alias logic
     if (!this.userInfo.accountName) {
@@ -118,11 +117,13 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
 
       this.userInfo.accountName = contact ? contact.alias : this.address;
     }
+    // fill empty picture
+    if (!this.userInfo.picture) {
+      this.userInfo.picture = { files: [ ] };
+    }
 
     // backup user info, so we can revert last changes
     this.originUserInfo = JSON.parse(JSON.stringify(this.userInfo));
-
-    Object.assign(this.userInfo, this.$attrs, { picture: this.$attrs.src }); // merge attributes when set from parent
 
     this.$emit('update', this.userInfo);
     this.loading = false;

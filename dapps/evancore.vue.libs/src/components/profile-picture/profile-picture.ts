@@ -26,7 +26,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { EvanFormControl } from '@evan.network/ui-vue-core';
-import { UIContainerFile } from '@evan.network/ui';
+import { UIContainerFile, FileHandler, } from '@evan.network/ui';
 
 import { getDomainName } from '../../utils';
 import EvanComponent from '../../component';
@@ -94,8 +94,13 @@ class ProfilePicture extends mixins(EvanComponent) {
   changedPicture: any = null;
 
   @Watch('src')
-  onChildChanged(src: UIContainerFile | string) {
-    this.src = typeof src === 'string' ? src : src.blobUri;
+  async onChildChanged(src: UIContainerFile | string) {
+    if (typeof src === 'string') {
+      this.src = src;
+    } else {
+      // ensure, that blobUri is set
+      this.src = (await FileHandler.fileToContainerFile(src)).blobUri;
+    }
   }
 
   /**
@@ -105,8 +110,12 @@ class ProfilePicture extends mixins(EvanComponent) {
    *  - set form to empty again
    */
   pictureChanged() {
-    this.changedPicture = this.fileForm.value[0];
-    this.fileForm.value = [];
+    this.changedPicture = null;
+    // force rerender
+    this.$nextTick(() => {
+      this.changedPicture = this.fileForm.value[0];
+      this.fileForm.value = [];
+    });
   }
 
   /**

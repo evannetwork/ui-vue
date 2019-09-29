@@ -20,16 +20,16 @@
 <template>
   <div class="d-flex align-items-center text-decoration-none" :class="size">
     <div v-if="loading" class="spinner-border spinner-border-sm" />
-    <evan-profile-picture v-else
-      :src="userInfo.picture"
-      :accountName="userInfo.accountName"
-      :type="userInfo.profileType"
-      :isVerified="userInfo.isVerified"
-      :isEditable="canEdit()"
-      :size="size"
-      @changed="userInfo.picture = $event; startEditing()"
-    />
-    <template v-if="userInfo !== null">
+    <template v-else-if="userInfo !== null">
+      <evan-profile-picture
+        :src="userInfo.picture.files[0]"
+        :accountName="userInfo.accountName"
+        :type="userInfo.profileType"
+        :isVerified="userInfo.isVerified"
+        :isEditable="canEdit()"
+        :size="size"
+        @changed="userInfo.picture.files[0] = $event; startEditing()"
+      />
       <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
         <a :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
