@@ -48,7 +48,6 @@ export default {
       "title": "Your browser is not supported"
     },
     "cancel": "Cancel",
-    "save": "Save",
     "dapp-wrapper": {
       "all-messages": "All messages",
       "dispatcher-status": {
@@ -91,7 +90,6 @@ export default {
         "title": "Delete file"
       }
     },
-    "transaction_costs_hint": "This will cause transaction fees.",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
@@ -100,6 +98,7 @@ export default {
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
     "profile": {
+      "account-name": "Account Name",
       "types": {
         "choose": "Specify Account Type",
         "company": "Company",
@@ -113,7 +112,9 @@ export default {
       "upload-dnd": "Click here or drag'n'drop your new profile picture here.",
       "use-picture": "Use Picture"
     },
+    "save": "Save",
     "share": "Share",
+    "transaction_costs_hint": "This will cause transaction fees.",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"

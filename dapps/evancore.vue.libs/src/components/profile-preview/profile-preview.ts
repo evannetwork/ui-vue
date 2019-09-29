@@ -36,9 +36,9 @@ import { watch } from 'fs';
 
 interface UserInfoInterface {
   accountName: string,
-  type: string,
+  profileType: string,
   isVerified: boolean,
-  pictureSrc: string
+  picture: string
 }
 
 /**
@@ -62,6 +62,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   }) size: string;
 
   /**
+   * Enable edit mode for the picture and the account name.
+   */
+  @Prop() editable: string;
+
+  /**
    * Show loading symbol
    */
   loading = true;
@@ -70,11 +75,22 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * user information (alias, type, verification, ...)
    */
   userInfo: UserInfoInterface = null;
+  originUserInfo: UserInfoInterface = null;
 
   /**
    * Watch for dispatcher updates
    */
   listeners: Array<any> = [ ];
+
+  /**
+   * Show a save button when everything has changed
+   */
+  showSave = false;
+
+  /**
+   * Replace the current Account name with an edit box and show save buttons
+   */
+  isEditMode = false;
 
   @Watch('$attrs')
     onChildChanged(val: UserInfoInterface, oldVal: UserInfoInterface) {
@@ -99,28 +115,57 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    */
   async loadUserInfo() {
     const runtime = (<any>this).getRuntime();
+    const { accountDetails } = (await runtime.profile.getProfileProperties([ 'accountDetails' ]));
 
-    // load addressbook info
-    const addressBook = await runtime.profile.getAddressBook();
-    const contact = addressBook.profile[this.address];
-    const profileContract = runtime.profile.profileContract;
+    this.userInfo = accountDetails;
+    // use old alias logic
+    if (!this.userInfo.accountName) {
+      // load addressbook info
+      const addressBook = await runtime.profile.getAddressBook();
+      const contact = addressBook.profile[this.address];
 
-    const accountDetails = await runtime.dataContract.getEntry(
-      profileContract,
-      'accountDetails',
-      runtime.activeAccount
-    );
+      this.userInfo.accountName = contact ? contact.alias : this.address;
+    }
 
-    this.userInfo = {
-      accountName: contact ? contact.alias : this.address, // TODO: use the company / user name instead of alias
-      type: accountDetails.profileType || 'unspecified',
-      pictureSrc: null, // TODO: load from profile
-      isVerified: false // TODO: load from profile
-    };
+    // backup user info, so we can revert last changes
+    this.originUserInfo = JSON.parse(JSON.stringify(this.userInfo));
 
-    Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src }); // merge attributes when set from parent
+    Object.assign(this.userInfo, this.$attrs, { picture: this.$attrs.src }); // merge attributes when set from parent
 
     this.$emit('update', this.userInfo);
     this.loading = false;
+  }
+
+  /**
+   * Can the edit modee be used?
+   */
+  async canEdit() {
+    return this.editable && this.size === 'lg' && this.address === this.$store.state.runtime.activeAccount;
+  }
+
+  /**
+   * Restore lastest user information.
+   */
+  cancelEditMode() {
+    this.userInfo = JSON.parse(JSON.stringify(this.originUserInfo));
+    this.isEditMode = false;
+  }
+
+  /**
+   * Send save event for the current userInfo
+   */
+  saveEditMode() {
+    this.originUserInfo = JSON.parse(JSON.stringify(this.userInfo));
+    this.isEditMode = false;
+    this.$emit('save', this.userInfo);
+  }
+
+  /**
+   * Start the edit mode for the account name.
+   */
+  startEditing() {
+    if (this.canEdit()) {
+      this.isEditMode = true;
+    }
   }
 }

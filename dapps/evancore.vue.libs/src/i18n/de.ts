@@ -48,7 +48,6 @@ export default {
       "title": "Ihr Browser wird nicht unterstützt"
     },
     "cancel": "Abbrechen",
-    "save": "Speichern",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "dispatcher-status": {
@@ -91,7 +90,6 @@ export default {
         "title": "Datein löschen"
       }
     },
-    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
@@ -100,6 +98,7 @@ export default {
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
+      "account-name": "Account Name",
       "types": {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
@@ -113,7 +112,9 @@ export default {
       "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
       "use-picture": "Fertig"
     },
+    "save": "Speichern",
     "share": "Freigeben",
+    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"

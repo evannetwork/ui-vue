@@ -113,7 +113,6 @@ class ProfilePicture extends mixins(EvanComponent) {
    *  - set form to empty again
    */
   pictureChanged() {
-    this.fileForm.value = this.fileForm.value.slice(0, 1);
     this.changedPicture = this.fileForm.value[0];
     this.fileForm.value = [];
   }
@@ -123,7 +122,6 @@ class ProfilePicture extends mixins(EvanComponent) {
    */
   usePicture() {
     this.$emit('changed', this.changedPicture);
-    this.fileForm.value.push(this.changedPicture);
     (<any>this).$refs.pictureUploadModal.hide();
   }
 
