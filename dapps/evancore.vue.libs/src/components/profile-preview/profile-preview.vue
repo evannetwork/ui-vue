@@ -28,7 +28,7 @@
         :isVerified="userInfo.isVerified"
         :isEditable="canEdit()"
         :size="size"
-        @changed="userInfo.picture.files[0] = $event; startEditing()"
+        @changed="userInfo.picture.files[0] = $event; startEditing();"
       />
       <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
@@ -57,6 +57,7 @@
 
         <template v-else>
           <evan-form-control-input
+            ref="accountName"
             type="text"
             :placeholder="'_evan.profile.account-name' | translate"
             v-model="userInfo.accountName"

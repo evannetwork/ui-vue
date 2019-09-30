@@ -22,9 +22,9 @@
     <div class="profile-picture" :class="size">
       <div class="mask" :class="type">
         <img
-          v-if="src && src.length > 0"
+          v-if="srcString && srcString.length > 0"
           v-bind="$attrs"
-          :src="src"
+          :src="srcString"
         />
         <div v-else class="image-placeholder">
           {{ getInitials(accountName) }}
@@ -63,6 +63,11 @@
             <img
               v-if="changedPicture && changedPicture.blobUri && changedPicture.blobUri.length > 0"
               :src="changedPicture.blobUri"
+            />
+            <img
+              v-else-if="srcString && srcString.length > 0"
+              v-bind="$attrs"
+              :src="srcString"
             />
             <div v-else class="image-placeholder">
               {{ getInitials(accountName) }}

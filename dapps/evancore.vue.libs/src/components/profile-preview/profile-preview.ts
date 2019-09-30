@@ -17,7 +17,8 @@
   the following URL: https://evan.network/license/
 */
 
-import { Dispatcher } from '@evan.network/ui';
+import { Dispatcher, cloneDeep, FileHandler, } from '@evan.network/ui';
+import * as bcc from '@evan.network/api-blockchain-core';
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
@@ -122,8 +123,13 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
       this.userInfo.picture = { files: [ ] };
     }
 
+    // transform to correct format
+    this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
+      FileHandler.fileToContainerFile(file)
+    ));
+
     // backup user info, so we can revert last changes
-    this.originUserInfo = JSON.parse(JSON.stringify(this.userInfo));
+    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
 
     this.$emit('update', this.userInfo);
     this.loading = false;
@@ -132,7 +138,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   /**
    * Can the edit modee be used?
    */
-  async canEdit() {
+  canEdit() {
     return this.editable && this.size === 'lg' && this.address === this.$store.state.runtime.activeAccount;
   }
 
@@ -140,16 +146,26 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Restore lastest user information.
    */
   cancelEditMode() {
-    this.userInfo = JSON.parse(JSON.stringify(this.originUserInfo));
+    this.userInfo = cloneDeep(bcc.lodash, this.originUserInfo);
     this.isEditMode = false;
   }
 
   /**
    * Send save event for the current userInfo
    */
-  saveEditMode() {
-    this.originUserInfo = JSON.parse(JSON.stringify(this.userInfo));
+  async saveEditMode() {
+    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
     this.isEditMode = false;
+
+    // transform img to correct size
+    this.userInfo.picture.files[0] = await FileHandler.fileToContainerFile(
+      await FileHandler.resizeImage(
+        this.userInfo.picture.files[0].blobUri,
+        // definitely match the height
+        { max_width: 1000, max_height: 160 }
+      )
+    );
+
     this.$emit('save', this.userInfo);
   }
 
