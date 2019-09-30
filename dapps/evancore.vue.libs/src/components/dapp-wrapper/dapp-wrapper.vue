@@ -108,7 +108,7 @@
                     {{ '_evan._routes.synchronization' | translate }}
                   </evan-tooltip>
                 </a>
-                <evan-swipe-panel ref="queuePanel" alignment="left">
+                <evan-swipe-panel ref="queuePanel" alignment="left" showBackdrop="true">
                   <div class="d-flex align-items-center mb-5">
                     <evan-button type="text" @click="$refs.queuePanel.hide()" icon="mdi mdi-arrow-left" />
                     <h5 class="m-0 font-weight-bold text-truncate">
@@ -200,6 +200,7 @@
               </div>
             </template>
 
+            <div v-if="topLevel" id="dapp-wrapper-sidebar-left" />
             <div class="dapp-wrapper-content">
               <evan-modal ref="instanceInteraction">
                 <template v-slot:header>
@@ -229,6 +230,7 @@
               </evan-modal>
               <slot name="content"></slot>
             </div>
+            <div v-if="topLevel" id="dapp-wrapper-sidebar-right" />
           </div>
         </div>
       </template>

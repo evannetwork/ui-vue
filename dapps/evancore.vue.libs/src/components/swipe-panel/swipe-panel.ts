@@ -46,6 +46,16 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: 'left' }) alignment: string;
 
   /**
+   * Should the backdrop be shown?
+   */
+  @Prop({ default: false }) showBackdrop: boolean;
+
+  /**
+   * Should the sidebar be fixed, or mounted as child of #mountId in in DOM flow?
+   */
+  @Prop({ default: null }) mountId: string;
+
+  /**
    * shows the dom elements of the modal
    */
   isRendered = false;
@@ -59,6 +69,20 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Wait until the swipe panel is rendered, so it can be shown using animation.
    */
   waitForRendered;
+
+  mounted() {
+    if (this.mountId) {
+      this.$el.parentNode.removeChild(this.$el);
+      const sideBar = document.getElementById(this.mountId);
+      sideBar.appendChild(this.$el);
+    }
+  }
+
+  beforeDestroy() {
+    if (this.mountId) {
+      const sideBar = document.getElementById(this.mountId).innerHTML = '';
+    }
+  }
 
   /**
    * Renders the modal element and shows it animated.
@@ -80,7 +104,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    */
   hide($event) {
     this.isShown = false;
-    // it the panel was faster closed than opened, remov the wait for rendered watcher
+    // it the panel was faster closed than opened, remove the wait for rendered watcher
     clearInterval(this.waitForRendered);
 
     // remove the swipe panel content

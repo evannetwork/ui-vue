@@ -23,16 +23,20 @@
 @import "~@evan.network/ui/src/style/utils";
 
 .evan-swipe-panel {
-  position: fixed;
   z-index: 1000;
   top: 0;
 
   width: cssVar('swipe-panel-size');
-  height: 100%;
+  height: 100vh;
   padding: 2em;
 
   background-color: cssVar('bg-inverted');
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.15);
+  position: relative;
+
+  &.fixed {
+    position: fixed;
+  }
 
   &.alignment-right {
     left: calc(100% + var(--evan-swipe-panel-size));

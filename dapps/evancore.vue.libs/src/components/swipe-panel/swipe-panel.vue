@@ -22,11 +22,11 @@
     <template v-if="isRendered">
       <div class="evan-swipe-panel"
         v-on:click.prevent=""
-        :class="`${ isShown ? 'show' : '' } ${ alignment ? 'alignment-' + alignment : '' }`"
+        :class="{ 'show' : isShown, [`alignment-${alignment}`]: true, 'fixed': !mountId }"
         :style="customStyle">
         <slot></slot>
       </div>
-      <div class="fullscreen"
+      <div v-if="showBackdrop" class="fullscreen"
         @click="hide($event)">
       </div>
     </template>
