@@ -26,7 +26,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { EvanFormControl } from '@evan.network/ui-vue-core';
-import { UIContainerFile } from '@evan.network/ui';
+import { UIContainerFile, FileHandler, } from '@evan.network/ui';
 
 import { getDomainName } from '../../utils';
 import EvanComponent from '../../component';
@@ -93,9 +93,28 @@ class ProfilePicture extends mixins(EvanComponent) {
    */
   changedPicture: any = null;
 
-  @Watch('src')
-  onChildChanged(src: UIContainerFile | string) {
-    this.src = typeof src === 'string' ? src : src.blobUri;
+  /**
+   * Src that should be used for displaying the img.
+   */
+  srcString = '';
+
+  @Watch('src', { immediate: true, deep: true })
+  async onChildChanged(src: UIContainerFile | string) {
+    this.srcString = null;
+
+    // fore rerendering, when src is set
+    if (this.src) {
+      this.$nextTick(async () => {
+        if (typeof src === 'string') {
+          this.srcString = src;
+        } else {
+          // ensure, that blobUri is set
+          this.srcString = src.blobUri ?
+            src.blobUri :
+            (await FileHandler.fileToContainerFile(src)).blobUri;
+        }
+      });
+    }
   }
 
   /**
@@ -105,9 +124,12 @@ class ProfilePicture extends mixins(EvanComponent) {
    *  - set form to empty again
    */
   pictureChanged() {
-    this.fileForm.value = this.fileForm.value.slice(0, 1);
-    this.changedPicture = this.fileForm.value[0];
-    this.fileForm.value = [];
+    this.changedPicture = null;
+    // force rerender
+    this.$nextTick(() => {
+      this.changedPicture = this.fileForm.value[0];
+      this.fileForm.value = [];
+    });
   }
 
   /**
@@ -115,7 +137,6 @@ class ProfilePicture extends mixins(EvanComponent) {
    */
   usePicture() {
     this.$emit('changed', this.changedPicture);
-    this.fileForm.value.push(this.changedPicture);
     (<any>this).$refs.pictureUploadModal.hide();
   }
 

@@ -17,6 +17,9 @@
   the following URL: https://evan.network/license/
 */
 
+import { Dispatcher, cloneDeep, FileHandler, } from '@evan.network/ui';
+import * as bcc from '@evan.network/api-blockchain-core';
+
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
@@ -26,9 +29,9 @@ import { watch } from 'fs';
 
 interface UserInfoInterface {
   accountName: string,
-  type: string,
+  profileType: string,
   isVerified: boolean,
-  pictureSrc: string
+  picture: any;
 }
 
 /**
@@ -52,6 +55,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   }) size: string;
 
   /**
+   * Enable edit mode for the picture and the account name.
+   */
+  @Prop() editable: string;
+
+  /**
    * Show loading symbol
    */
   loading = true;
@@ -60,6 +68,22 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * user information (alias, type, verification, ...)
    */
   userInfo: UserInfoInterface = null;
+  originUserInfo: UserInfoInterface = null;
+
+  /**
+   * Watch for dispatcher updates
+   */
+  listeners: Array<any> = [ ];
+
+  /**
+   * Show a save button when everything has changed
+   */
+  showSave = false;
+
+  /**
+   * Replace the current Account name with an edit box and show save buttons
+   */
+  isEditMode = false;
 
   @Watch('$attrs')
     onChildChanged(val: UserInfoInterface, oldVal: UserInfoInterface) {
@@ -69,28 +93,90 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Load user specific information
    */
   async created() {
-    const runtime = this.getRuntime();
+    await this.loadUserInfo();
 
-    // load addressbook info
-    const addressBook = await runtime.profile.getAddressBook();
-    const contact = addressBook.profile[this.address];
-    const profileContract = runtime.profile.profileContract;
+    // watch for save updates
+    this.listeners.push(Dispatcher.watch(($event: any) => {
+      if ($event.detail.status === 'finished' || $event.detail.status === 'deleted') {
+        this.loadUserInfo();
+      }
+    }, `profile.vue.${ this.domainName }`, 'updateProfileDispatcher'));
+  }
 
-    const accountDetails = await runtime.dataContract.getEntry(
-      profileContract,
-      'accountDetails',
-      runtime.activeAccount
-    );
+  /**
+   * Load the latest user information.
+   */
+  async loadUserInfo() {
+    const runtime = (<any>this).getRuntime();
+    const { accountDetails } = (await runtime.profile.getProfileProperties([ 'accountDetails' ]));
+    this.userInfo = accountDetails;
+    // use old alias logic
+    if (!this.userInfo.accountName) {
+      // load addressbook info
+      const addressBook = await runtime.profile.getAddressBook();
+      const contact = addressBook.profile[this.address];
 
-    this.userInfo = {
-      accountName: contact ? contact.alias : this.address, // TODO: use the company / user name instead of alias
-      type: accountDetails.profileType || 'unspecified',
-      pictureSrc: null, // TODO: load from profile
-      isVerified: false // TODO: load from profile
-    };
+      this.userInfo.accountName = contact ? contact.alias : this.address;
+    }
+    // fill empty picture
+    if (!this.userInfo.picture) {
+      this.userInfo.picture = { files: [ ] };
+    }
 
-    Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src }); // merge attributes when set from parent
+    // transform to correct format
+    this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
+      FileHandler.fileToContainerFile(file)
+    ));
 
+    // backup user info, so we can revert last changes
+    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
+
+    this.$emit('update', this.userInfo);
     this.loading = false;
+  }
+
+  /**
+   * Can the edit modee be used?
+   */
+  canEdit() {
+    return this.editable && this.size === 'lg' && this.address === this.$store.state.runtime.activeAccount;
+  }
+
+  /**
+   * Restore lastest user information.
+   */
+  cancelEditMode() {
+    this.userInfo = cloneDeep(bcc.lodash, this.originUserInfo);
+    this.isEditMode = false;
+  }
+
+  /**
+   * Send save event for the current userInfo
+   */
+  async saveEditMode() {
+    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
+    this.isEditMode = false;
+
+    // transform img to correct size
+    if (this.userInfo.picture.files[0]) {
+      this.userInfo.picture.files[0] = await FileHandler.fileToContainerFile(
+        await FileHandler.resizeImage(
+          this.userInfo.picture.files[0].blobUri,
+          // definitely match the height
+          { max_width: 1000, max_height: 160 }
+        )
+      );
+    }
+
+    this.$emit('save', this.userInfo);
+  }
+
+  /**
+   * Start the edit mode for the account name.
+   */
+  startEditing() {
+    if (this.canEdit()) {
+      this.isEditMode = true;
+    }
   }
 }

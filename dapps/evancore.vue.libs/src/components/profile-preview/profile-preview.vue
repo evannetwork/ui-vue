@@ -20,15 +20,16 @@
 <template>
   <div class="d-flex align-items-center text-decoration-none" :class="size">
     <div v-if="loading" class="spinner-border spinner-border-sm" />
-    <evan-profile-picture v-else
-      :src="userInfo.pictureSrc"
-      :accountName="userInfo.accountName"
-      :type="userInfo.type"
-      :isVerified="userInfo.isVerified"
-      :isEditable="address === $store.state.runtime.activeAccount"
-      :size="size"
-    />
-    <template v-if="userInfo !== null">
+    <template v-else-if="userInfo !== null">
+      <evan-profile-picture
+        :src="userInfo.picture.files[0]"
+        :accountName="userInfo.accountName"
+        :type="userInfo.profileType"
+        :isVerified="userInfo.isVerified"
+        :isEditable="canEdit()"
+        :size="size"
+        @changed="userInfo.picture.files[0] = $event; startEditing();"
+      />
       <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
         <a :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
@@ -37,17 +38,42 @@
           </b>
         </a>
         <small style="font-size: 10px; font-weight: 300;">
-          {{ `_evan.profile.types.${ userInfo.type }` | translate }}
+          {{ `_evan.profile.types.${ userInfo.profileType }` | translate }}
         </small>
       </div>
-      <div v-else-if="size === 'lg'" class="d-flex flex-column justify-content-between p-3">
-        <a :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
-          <h2 class="font-weight-semibold mb-0">
-            {{ userInfo.accountName }}
-          </h2>
-        </a>
-        <evan-address v-if="address" :address="address" />
-        <b>{{ `_evan.profile.types.${ userInfo.type }` | translate }}</b>
+      <div v-else-if="size === 'lg'" class="d-flex flex-column justify-content-between p-3 w-100">
+        <template v-if="!isEditMode">
+          <a
+            :href="canEdit() ? null : `${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`"
+            @click="startEditing();">
+            <h2 class="font-weight-semibold mb-0">
+              {{ userInfo.accountName }}
+            </h2>
+          </a>
+
+          <evan-address v-if="address" :address="address" />
+          <b>{{ `_evan.profile.types.${ userInfo.profileType }` | translate }}</b>
+        </template>
+
+        <template v-else>
+          <evan-form-control-input
+            ref="accountName"
+            type="text"
+            :placeholder="'_evan.profile.account-name' | translate"
+            v-model="userInfo.accountName"
+          />
+          <div>
+            <evan-button type="primary" class="mr-3"
+              :disabled="userInfo.accountName.length === 0"
+              :label="'_evan.save' | translate"
+              @click="saveEditMode"
+            />
+            <evan-button type="secondary"
+              :label="'_evan.cancel' | translate"
+              @click="cancelEditMode"
+            />
+          </div>
+        </template>
       </div>
     </template>
   </div>
