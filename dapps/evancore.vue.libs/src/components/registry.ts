@@ -37,6 +37,7 @@ import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
+import FormControlVSelectComponent from './forms/v-select/v-select.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
@@ -70,6 +71,7 @@ export {
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
+  FormControlVSelectComponent,
   IframeComponent,
   LoginComponent,
   LogoutComponent,
@@ -102,6 +104,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
+  { name: 'evan-form-control-v-select', component: FormControlVSelectComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },

@@ -21,5 +21,5 @@ import { getDomainName, System } from '@evan.network/ui-dapp-browser';
 System.map['vue-select'] = `select.vue.libs.${ getDomainName() }!dapp-content`;
 
 import vSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import 'vue-select/src/scss/vue-select.scss';
 export default vSelect;
