@@ -94,7 +94,9 @@ export default {
       "types": {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
+        "company-desc": "Verwalten Sie Unternehmensinformationen (Handelsregisternummer, Firmensitz, ...) und lassen Sie Ihr Unternehmen notariell auf dem evan.network bestätigen.",
         "device": "Gerät",
+        "device-desc": "Speichern Sie Geräteninformationen und Verbindungseinstellungen.",
         "unspecified": "unspezifizierter Account",
         "user": "User"
       }

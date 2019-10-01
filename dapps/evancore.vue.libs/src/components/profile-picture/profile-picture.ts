@@ -101,16 +101,20 @@ class ProfilePicture extends mixins(EvanComponent) {
   @Watch('src', { immediate: true, deep: true })
   async onChildChanged(src: UIContainerFile | string) {
     this.srcString = null;
-    this.$nextTick(async () => {
-      if (typeof src === 'string') {
-        this.srcString = src;
-      } else {
-        // ensure, that blobUri is set
-        this.srcString = src.blobUri ?
-          src.blobUri :
-          (await FileHandler.fileToContainerFile(src)).blobUri;
-      }
-    });
+
+    // fore rerendering, when src is set
+    if (this.src) {
+      this.$nextTick(async () => {
+        if (typeof src === 'string') {
+          this.srcString = src;
+        } else {
+          // ensure, that blobUri is set
+          this.srcString = src.blobUri ?
+            src.blobUri :
+            (await FileHandler.fileToContainerFile(src)).blobUri;
+        }
+      });
+    }
   }
 
   /**

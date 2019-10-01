@@ -158,13 +158,15 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     this.isEditMode = false;
 
     // transform img to correct size
-    this.userInfo.picture.files[0] = await FileHandler.fileToContainerFile(
-      await FileHandler.resizeImage(
-        this.userInfo.picture.files[0].blobUri,
-        // definitely match the height
-        { max_width: 1000, max_height: 160 }
-      )
-    );
+    if (this.userInfo.picture.files[0]) {
+      this.userInfo.picture.files[0] = await FileHandler.fileToContainerFile(
+        await FileHandler.resizeImage(
+          this.userInfo.picture.files[0].blobUri,
+          // definitely match the height
+          { max_width: 1000, max_height: 160 }
+        )
+      );
+    }
 
     this.$emit('save', this.userInfo);
   }

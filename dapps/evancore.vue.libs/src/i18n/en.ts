@@ -94,7 +94,9 @@ export default {
       "types": {
         "choose": "Specify Account Type",
         "company": "Company",
+        "company-desc": "Manage company information (register number, company headquarters, ...) and have your company notary verified on the evan.network.",
         "device": "Device",
+        "device-desc": "Save device information and connection settings.",
         "unspecified": "unspecified account",
         "user": "User"
       }
