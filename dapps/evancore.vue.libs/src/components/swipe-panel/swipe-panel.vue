@@ -22,19 +22,22 @@
     <template v-if="isRendered">
       <div class="evan-swipe-panel"
         v-on:click.prevent=""
-        :class="`${ isShown ? 'show' : '' } ${ alignment ? 'alignment-' + alignment : '' }`"
+        :class="{ 'show' : isShown, [`alignment-${alignment}`]: true, 'fixed': !mountId }"
         :style="customStyle">
         <slot></slot>
       </div>
-      <div class="fullscreen"
+      <div v-if="showBackdrop" class="fullscreen"
         @click="hide($event)">
-      </div>  
+      </div>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './swipe-panel.ts';
+  import Component from './swipe-panel';
   export default Component;
 </script>
 
+<style lang="scss" scoped>
+  @import './swipe-panel.scss'
+</style>
