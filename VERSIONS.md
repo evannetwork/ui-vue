@@ -4,6 +4,7 @@
 ### Features
 - `evancore.vue.libs`
   - add automatic vue dispatcher handling that fills `vuex` store
+  - add v-select form control for inputs and options selection as well
 
 ### Fixes
 - `evancore.vue.libs`
