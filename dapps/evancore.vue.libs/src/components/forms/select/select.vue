@@ -19,7 +19,7 @@
 
 <template>
   <evan-form-control v-bind="$props">
-    <select class="form-control"
+    <select class="form-control custom-select"
       :id="id"
       :value="value"
       @blur="$emit('blur')"
