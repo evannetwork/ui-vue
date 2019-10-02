@@ -30,6 +30,7 @@
     "vue-property-decorator": "^6.0.0",
     "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
+    "vue-select": "^3.2.0",
     "vue-template-compiler": "^2.5.16",
     "vue-toasted": "^1.1.27",
     "vue2-leaflet": "^2.0.2",

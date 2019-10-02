@@ -37,6 +37,7 @@ import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
+import FormControlVSelectComponent from './forms/v-select/v-select.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
@@ -50,6 +51,7 @@ import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
+import vSelect from 'vue-select';
 
 // export them all, so other applications can access them
 export {
@@ -69,6 +71,7 @@ export {
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
+  FormControlVSelectComponent,
   IframeComponent,
   LoginComponent,
   LogoutComponent,
@@ -101,6 +104,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
+  { name: 'evan-form-control-v-select', component: FormControlVSelectComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },
@@ -115,6 +119,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
+  { name: 'evan-v-select', component: vSelect },
 ];
 
 export default componentRegistration;

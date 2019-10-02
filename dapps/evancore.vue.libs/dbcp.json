@@ -12,7 +12,8 @@
         "toasted.vue.libs": "^1.1.27",
         "ui.libs": "^1.7.1",
         "vue.libs": "^2.5.0",
-        "vuex.libs": "3.1.0"
+        "vuex.libs": "3.1.0",
+        "select.vue.libs": "3.2.0"
       },
       "entrypoint": "evancore.vue.libs.js",
       "files": [
