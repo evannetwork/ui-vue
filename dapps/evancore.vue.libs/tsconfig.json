@@ -16,6 +16,7 @@
     "strict": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
     "target": "es5"
   },
   "exclude": [
