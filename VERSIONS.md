@@ -2,12 +2,14 @@
 
 ## Next Version
 ### Features
-- `evancore.vue.libs`
+- `evancore.vue.libs` (v1.7.0)
   - add automatic vue dispatcher handling that fills `vuex` store
   - add v-select form control for inputs and options selection as well
+- `select.vue.libs` (v3.2.0)
+  - added [v-select](https://vue-select.org/) as dapp library
 
 ### Fixes
-- `evancore.vue.libs`
+- `evancore.vue.libs` (v1.7.0)
   - add card `icon` to overwrite default one
   - set card `highlight` property's default value to false
   - better profile img style

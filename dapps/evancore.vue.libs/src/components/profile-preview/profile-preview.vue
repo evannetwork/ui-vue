@@ -18,7 +18,7 @@
 */
 
 <template>
-  <div class="d-flex align-items-center text-decoration-none" :class="size">
+  <div class="evan-profile-preview d-flex align-items-center text-decoration-none overflow-hidden" :class="size">
     <div v-if="loading" class="spinner-border spinner-border-sm" />
     <template v-else-if="userInfo !== null">
       <evan-profile-picture
@@ -32,18 +32,20 @@
       />
       <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
-        <a :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
+        <a class="force-oneline account-name"
+          :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
           <b class="text-dark" style="font-size: 13px; font-weight: 600;">
             {{ userInfo.accountName }}
           </b>
         </a>
-        <small style="font-size: 10px; font-weight: 300;">
+        <small class="force-oneline"
+          style="font-size: 10px; font-weight: 300;">
           {{ `_evan.profile.types.${ userInfo.profileType }` | translate }}
         </small>
       </div>
       <div v-else-if="size === 'lg'" class="d-flex flex-column justify-content-between p-3 w-100">
         <template v-if="!isEditMode">
-          <a
+          <a class="force-oneline account-name"
             :href="canEdit() ? null : `${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`"
             @click="startEditing();">
             <h2 class="font-weight-semibold mb-0">
@@ -51,12 +53,13 @@
             </h2>
           </a>
 
-          <evan-address v-if="address" :address="address" />
+          <evan-address class="force-oneline" v-if="address" :address="address" />
           <b>{{ `_evan.profile.types.${ userInfo.profileType }` | translate }}</b>
         </template>
 
         <template v-else>
           <evan-form-control-input
+            id="accountName"
             ref="accountName"
             type="text"
             :placeholder="'_evan.profile.account-name' | translate"
