@@ -1,0 +1,57 @@
+$transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+$transition-duration: 150ms;
+$open-indicator-size: 0.8;
+
+.vs__dropdown-toggle {
+  height: calc(1.5em + 0.8rem + 2px);
+  font-size: 0.875rem;
+  border: 1px solid var(--evan-gray-300);
+  padding: 0px;
+}
+
+.vs__selected {
+  margin: 0;
+  padding: 0.4rem 1.125rem;
+}
+
+.vs__selected-options {
+  padding: 0;
+}
+
+.vs__search,
+.vs__search:focus {
+  padding: 0;
+  text-indent: 1.125rem;
+}
+
+.vs__actions {
+  margin-right: 12px;
+  padding: 0;
+
+  .vs__open-indicator {
+    fill: var(--evan-gray-700);
+    transform: scale($open-indicator-size);
+    transition: transform $transition-duration $transition-timing-function;
+    transition-timing-function: $transition-timing-function;
+  }
+
+  button.vs__clear {
+    fill: var(--evan-gray-700);
+    margin-right: 8px;
+  }
+}
+
+//  Open State
+.vs--open .vs__open-indicator {
+  transform: rotate(180deg) scale($open-indicator-size);
+}
+
+//  Loading State
+.vs--loading .vs__open-indicator {
+  opacity: 0;
+}
+
+li.vs__dropdown-option--highlight {
+  background: var(--evan-primary);
+  color: white;
+}

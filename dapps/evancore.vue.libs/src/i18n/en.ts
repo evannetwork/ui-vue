@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 /* tslint:disable */
@@ -48,7 +40,6 @@ export default {
       "title": "Your browser is not supported"
     },
     "cancel": "Cancel",
-    "save": "Save",
     "dapp-wrapper": {
       "all-messages": "All messages",
       "dispatcher-status": {
@@ -91,7 +82,6 @@ export default {
         "title": "Delete file"
       }
     },
-    "transaction_costs_hint": "This will cause transaction fees.",
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
     "logout": "Logout",
@@ -100,14 +90,26 @@ export default {
     "password-placeholder": "Password from the original profile creation",
     "please-login": "Please unlock your profile to continue.",
     "profile": {
+      "account-name": "Account Name",
       "types": {
         "choose": "Specify Account Type",
         "company": "Company",
+        "company-desc": "Manage company information (register number, company headquarters, ...) and have your company notary verified on the evan.network.",
         "device": "Device",
-        "unspecified": "unspecified account"
+        "device-desc": "Save device information and connection settings.",
+        "undefined": "unspezifizierter Account",
+        "unspecified": "unspecified account",
+        "user": "User"
       }
     },
+    "profile-picture": {
+      "upload": "Upload your profile picture here",
+      "upload-dnd": "Click here or drag'n'drop your new profile picture here.",
+      "use-picture": "Use Picture"
+    },
+    "save": "Save",
     "share": "Share",
+    "transaction_costs_hint": "This will cause transaction fees.",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"

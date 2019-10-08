@@ -1,0 +1,89 @@
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/s
+
+  For more information, please contact evan GmbH at this address:
+  https://evan.network/license/
+*/
+
+@import "~@evan.network/ui/src/style/utils";
+
+.evan-swipe-panel {
+  z-index: 1000;
+  top: 0;
+
+  width: cssVar('swipe-panel-size');
+  height: 100vh;
+  padding: 2em;
+
+  background-color: cssVar('bg-inverted');
+  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.15);
+  position: relative;
+
+  &.fixed {
+    position: fixed;
+  }
+
+  &.alignment-right {
+    left: calc(100% + var(--evan-swipe-panel-size));
+
+    transition: 0.3s ease-out left;
+
+    &.show {
+      left: calc(100% - var(--evan-swipe-panel-size));
+    }
+  }
+
+  &.alignment-left {
+    right: calc(100% + var(--evan-swipe-panel-size));
+
+    transition: 0.3s ease-out right;
+
+    &.show {
+      right: calc(100% - var(--evan-swipe-panel-size));
+    }
+  }
+
+  & {
+    &, h1,  h2,  h3,  h4,  h5,  span,  p,  li,  b,  label,  small {
+      color: cssVar('text-color-inverted');
+    }
+  }
+
+  .light & {
+    &, h1,  h2,  h3,  h4,  h5,  span,  p,  li,  b,  label,  small {
+      background-color: cssVar('body-bg');
+      color: cssVar('text-color');
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      right: 100%;
+
+      width: 100%;
+
+      &.show {
+        right: 0;
+      }
+    }
+  }
+}
+
+.fullscreen {
+  background: rgba(0,0,0,0.3);
+}

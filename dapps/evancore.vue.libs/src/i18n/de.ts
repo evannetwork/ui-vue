@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 /* tslint:disable */
@@ -48,7 +40,6 @@ export default {
       "title": "Ihr Browser wird nicht unterstützt"
     },
     "cancel": "Abbrechen",
-    "save": "Speichern",
     "dapp-wrapper": {
       "all-messages": "Alle Nachrichten",
       "dispatcher-status": {
@@ -91,7 +82,6 @@ export default {
         "title": "Datein löschen"
       }
     },
-    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
@@ -100,14 +90,26 @@ export default {
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
+      "account-name": "Account Name",
       "types": {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
+        "company-desc": "Verwalten Sie Unternehmensinformationen (Handelsregisternummer, Firmensitz, ...) und lassen Sie Ihr Unternehmen notariell auf dem evan.network bestätigen.",
         "device": "Gerät",
-        "unspecified": "unspezifizierter Account"
+        "device-desc": "Speichern Sie Geräteninformationen und Verbindungseinstellungen.",
+        "undefined": "unspezifizierter Account",
+        "unspecified": "unspezifizierter Account",
+        "user": "User"
       }
     },
+    "profile-picture": {
+      "upload": "Laden Sie hier ihr Profilbild hoch",
+      "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
+      "use-picture": "Fertig"
+    },
+    "save": "Speichern",
     "share": "Freigeben",
+    "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"

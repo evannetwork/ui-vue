@@ -1,0 +1,126 @@
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+*/
+
+@import "~@evan.network/ui/src/style/utils";
+
+@mixin masks($size) {
+  --size: #{$size};
+
+  width: var(--size);
+  height: var(--size);
+
+  .verification-icon {
+    position: absolute;
+    right: calc(var(--size) / -15);
+    bottom: calc(var(--size) / -15);
+    width: calc(var(--size) / 3);
+    height: calc(var(--size) / 3);
+  }
+
+  .mask {
+    width: var(--size);
+    height: var(--size);
+
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    // circle mask
+    &.user,
+    &.unspecified {
+      img,
+      .image-placeholder {
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+      }
+
+      +.verification-icon {
+        bottom: 0;
+        right: 0;
+      }
+    }
+    &.unspecified {
+      border: 1px solid cssVar('border-color');
+      background: white;
+      border-radius: 50%;
+
+      .image-placeholder {
+        background-color: cssVar('bg-level-3');
+        color: cssVar('border-color');
+      }
+    }
+
+    &.device img,
+    &.device .image-placeholder {
+      clip-path: polygon(50% 0, 100% 22.5%, 100% 77.5%, 50% 100%, 0 77.5%, 0 22.5%);
+    }
+
+    .image-placeholder {
+      font-size: calc(#{$size} / 2.6);
+      line-height: $size;
+    }
+  }
+}
+
+.profile-picture {
+  position: relative;
+  text-transform: uppercase;
+
+  /deep/ .btn {
+    visibility: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover .btn {
+    visibility: visible;
+    background: rgba(255,255,255,0.6);
+  }
+
+  &:hover .btn:hover {
+    background: white;
+  }
+
+  img,
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-placeholder {
+    background: cssVar('border-color');
+    font-weight: 600;
+    line-height: 100%;
+    text-align: center;
+  }
+
+  &.lg {
+    @include masks(150px);
+  }
+  &.default {
+    @include masks(68px);
+  }
+  &.sm {
+    @include masks(30px);
+  }
+}

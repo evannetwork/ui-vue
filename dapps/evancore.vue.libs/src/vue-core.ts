@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 // import vue libs
@@ -42,8 +34,8 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import evanComponents from './components/registry';
 import evanTranslations from './i18n/translations';
 import { ComponentRegistrationInterface, EvanVueOptionsInterface } from './interfaces';
-import { initializeRouting } from './routing';
 import { getDomainName } from './utils';
+import { initializeRouting } from './routing';
 
 /******************************************** functions *******************************************/
 /**
@@ -53,6 +45,13 @@ import { getDomainName } from './utils';
  */
 export async function initializeVue(options: EvanVueOptionsInterface) {
   const { Vue } = options;
+
+  // disable dev tools on prod
+  if (!dappBrowser.utils.devMode) {
+    Vue.config.devtools = false;
+    Vue.config.debug = false;
+    Vue.config.silent = true;
+  }
 
   // never replace the full container, other elements can be placed within this container directly
   //  => create new child element
@@ -120,6 +119,11 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     store,
     render: render => render(options.RootComponent),
     mounted: function () {
+      // disable dev tools on prod
+      if (!dappBrowser.utils.devMode) {
+        delete this.$el.__vue__;
+      }
+
       // add an element id, so the dapp-loader can detect already loaded nested dapps
       this.$el.id = options.dappEnsOrContract;
       this.$el.className += ' evan-vue-dapp';

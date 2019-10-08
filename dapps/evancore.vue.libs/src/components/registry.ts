@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 // import evan libs
@@ -45,6 +37,7 @@ import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
+import FormControlVSelectComponent from './forms/v-select/v-select.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
@@ -52,11 +45,13 @@ import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
+import ProfilePicture from './profile-picture/profile-picture.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
+import vSelect from 'vue-select';
 
 // export them all, so other applications can access them
 export {
@@ -76,6 +71,7 @@ export {
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
+  FormControlVSelectComponent,
   IframeComponent,
   LoginComponent,
   LogoutComponent,
@@ -83,6 +79,7 @@ export {
   NavListComponent,
   NavTabsComponent,
   ProfilePreview,
+  ProfilePicture,
   StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
@@ -107,6 +104,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
+  { name: 'evan-form-control-v-select', component: FormControlVSelectComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },
@@ -115,11 +113,13 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
+  { name: 'evan-profile-picture', component: ProfilePicture },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
+  { name: 'evan-v-select', component: vSelect },
 ];
 
 export default componentRegistration;

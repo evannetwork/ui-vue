@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 <template>
@@ -37,7 +29,9 @@
     :href="href"
     @click="$emit('click', $event)">
     <slot>
-      <i v-if="icon" :class="icon"></i>
+      <slot name="icon">
+        <i v-if="icon" :class="icon"></i>
+      </slot>
       <h5>{{ title }}</h5>
       <small class="mb-2">{{ subTitle }}</small>
       <small class="text-muted">{{ description }}</small>
@@ -47,6 +41,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './card.ts';
+  import Component from './card';
   export default Component;
 </script>

@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 <template>
@@ -30,19 +22,22 @@
     <template v-if="isRendered">
       <div class="evan-swipe-panel"
         v-on:click.prevent=""
-        :class="`${ isShown ? 'show' : '' } ${ alignment ? 'alignment-' + alignment : '' }`"
+        :class="{ 'show' : isShown, [`alignment-${alignment}`]: true, 'fixed': !mountId }"
         :style="customStyle">
         <slot></slot>
       </div>
-      <div class="fullscreen"
+      <div v-if="showBackdrop" class="fullscreen"
         @click="hide($event)">
-      </div>  
+      </div>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './swipe-panel.ts';
+  import Component from './swipe-panel';
   export default Component;
 </script>
 
+<style lang="scss" scoped>
+  @import './swipe-panel.scss'
+</style>

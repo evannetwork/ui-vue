@@ -15,14 +15,6 @@
   write to the Free Software Foundation, Inc., 51 Franklin Street,
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
-
-  You can be released from the requirements of the GNU Affero General Public
-  License by purchasing a commercial license.
-  Buying such a license is mandatory as soon as you use this software or parts
-  of it on other blockchains than evan.network.
-
-  For more information, please contact evan GmbH at this address:
-  https://evan.network/license/
 */
 
 <template>
@@ -116,17 +108,14 @@
                     {{ '_evan._routes.synchronization' | translate }}
                   </evan-tooltip>
                 </a>
-                <evan-swipe-panel ref="queuePanel" :alignment="'left'">
+                <evan-swipe-panel ref="queuePanel" alignment="left" showBackdrop="true">
                   <div class="d-flex align-items-center mb-5">
-                    <button class="btn p-0 mr-3"
-                      @click="$refs.queuePanel.hide()">
-                      <i class="h1 mdi mdi-arrow-left my-0"></i>
-                    </button>
+                    <evan-button type="text" @click="$refs.queuePanel.hide()" icon="mdi mdi-arrow-left" />
                     <h5 class="m-0 font-weight-bold text-truncate">
                       {{ '_evan.dapp-wrapper.queue' | translate }}
                     </h5>
                   </div>
-                  <span class="p-3 d-block" 
+                  <span class="p-3 d-block"
                     v-if="queueCount === 0 && queueErrorCount === 0">
                     {{ '_evan.dapp-wrapper.empty-queue' | translate }}
                   </span>
@@ -211,6 +200,7 @@
               </div>
             </template>
 
+            <div v-if="topLevel" id="dapp-wrapper-sidebar-left" />
             <div class="dapp-wrapper-content">
               <evan-modal ref="instanceInteraction">
                 <template v-slot:header>
@@ -240,6 +230,7 @@
               </evan-modal>
               <slot name="content"></slot>
             </div>
+            <div v-if="topLevel" id="dapp-wrapper-sidebar-right" />
           </div>
         </div>
       </template>
