@@ -2,6 +2,14 @@
 
 ## Next Version
 ### Features
+
+### Fixes
+
+### Deprecations
+
+
+## Version 1.7.0
+### Features
 - `evancore.vue.libs` (v1.7.0)
   - add automatic vue dispatcher handling that fills `vuex` store
   - add v-select form control for inputs and options selection as well
