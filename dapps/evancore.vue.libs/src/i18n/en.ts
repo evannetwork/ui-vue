@@ -97,6 +97,7 @@ export default {
         "company-desc": "Manage company information (register number, company headquarters, ...) and have your company notary verified on the evan.network.",
         "device": "Device",
         "device-desc": "Save device information and connection settings.",
+        "undefined": "unspezifizierter Account",
         "unspecified": "unspecified account",
         "user": "User"
       }
