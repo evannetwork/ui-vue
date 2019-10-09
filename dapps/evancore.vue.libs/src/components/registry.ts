@@ -44,6 +44,7 @@ import LogoutComponent from './logout/logout.vue';
 import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
+import PermissionsComponent from './permissions/permissions.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
 import ProfilePicture from './profile-picture/profile-picture.vue';
 import StepsComponent from './steps/steps.vue';
@@ -78,6 +79,7 @@ export {
   ModalComponent,
   NavListComponent,
   NavTabsComponent,
+  PermissionsComponent,
   ProfilePreview,
   ProfilePicture,
   StepsComponent,
@@ -112,6 +114,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
+  { name: 'evan-permissions', component: PermissionsComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
   { name: 'evan-steps', component: StepsComponent },

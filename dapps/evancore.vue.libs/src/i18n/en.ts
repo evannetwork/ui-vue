@@ -106,6 +106,7 @@ export default {
       "upload-dnd": "Click here or drag'n'drop your new profile picture here.",
       "use-picture": "Use Picture"
     },
+    "read": "read",
     "save": "Save",
     "share": "Share",
     "transaction_costs_hint": "This will cause transaction fees.",
@@ -115,7 +116,8 @@ export default {
     },
     "use-password": "Unlock",
     "view-profile": "View Profile",
-    "welcome-to-evan": "Welcome to the evan.network"
+    "welcome-to-evan": "Welcome to the evan.network",
+    "write": "write"
   }
 }
 /* tslint:enable */

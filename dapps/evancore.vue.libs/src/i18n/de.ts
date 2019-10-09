@@ -106,6 +106,7 @@ export default {
       "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
       "use-picture": "Fertig"
     },
+    "read": "lesen",
     "save": "Speichern",
     "share": "Freigeben",
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
@@ -115,7 +116,8 @@ export default {
     },
     "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
-    "welcome-to-evan": "Willkommen im evan.network"
+    "welcome-to-evan": "Willkommen im evan.network",
+    "write": "schreiben"
   }
 }
 /* tslint:enable */

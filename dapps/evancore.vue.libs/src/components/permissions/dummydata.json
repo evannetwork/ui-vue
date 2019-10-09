@@ -1,0 +1,95 @@
+{
+  "properties": {
+    "Number of Seats": {
+      "dataSchema": {
+        "$id": "NumberofSeats_schema",
+        "type": "number",
+        "minimum": 1,
+        "maximum": 1000,
+        "default": 0
+      },
+      "permissions": {
+        "0": [
+          "set"
+        ],
+        "64": [
+          "set"
+        ]
+      },
+      "type": "entry"
+    },
+    "Manufactorer": {
+      "dataSchema": {
+        "$id": "Manufactorer_schema",
+        "type": "string",
+        "default": ""
+      },
+      "permissions": {
+        "0": [
+          "set"
+        ],
+        "65": [
+          "set"
+        ]
+      },
+      "type": "entry"
+    },
+    "Flight Log": {
+      "dataSchema": {
+        "$id": "FlightLog_schema",
+        "type": "object",
+        "properties": {
+          "DateTimeStart": {
+            "type": "string",
+            "default": ""
+          },
+          "DateTimeEnd": {
+            "type": "string",
+            "default": ""
+          },
+          "Pilot": {
+            "type": "string",
+            "default": ""
+          },
+          "Start Airport": {
+            "type": "string",
+            "default": ""
+          },
+          "Destination Airport": {
+            "type": "string",
+            "default": ""
+          }
+        }
+      },
+      "permissions": {
+        "0": [
+          "set"
+        ],
+        "66": [
+          "set"
+        ]
+      },
+      "type": "entry"
+    },
+    "Parts": {
+      "dataSchema": {
+        "$id": "Parts_schema",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "default": ""
+        }
+      },
+      "permissions": {
+        "0": [
+          "set"
+        ],
+        "67": [
+          "set"
+        ]
+      },
+      "type": "list"
+    }
+  },
+  "type": "metadata"
+}
