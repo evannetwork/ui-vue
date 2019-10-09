@@ -17,32 +17,18 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <div class="form-group"
-    :class="{ 'inline': !stacked, }"
-    :style="{
-      'min-width': size === 12 ? '100%' : `${ 100 * (size / 12) }%`,
-    }">
-    <label class="col-form-label"
-      :for="id"
-      v-if="label">
-      {{ label }}
-    </label>
-    <div class="input-wrapper">
-      <slot></slot>
-      <div class="invalid-feedback" v-if="error">
-        {{ error | translate }}
-      </div>
-    </div>
-  </div>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue';
+import { Prop, Watch } from 'vue-property-decorator';
 
-<script lang="ts">
-  import FormDataInput from './control'
-  export default FormDataInput
-</script>
+import EvanControlComponent from '../control/control';
 
-<style lang="scss" scoped>
-  @import './control.scss'
-</style>
-
+/**
+ * Base component for input element.
+ *
+ * @class         CheckboxComponent
+ * @selector      evan-form-control-checkbox
+ */
+@Component({})
+export default class CheckboxComponent extends mixins(EvanControlComponent) {}
