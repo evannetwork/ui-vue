@@ -18,14 +18,15 @@
 */
 
 <template>
-  <div class="evan-form mt-2 mb-8"
+  <div
+    class="evan-form mt-2 mb-8"
     :class="{
       'edit-mode': editMode && !onlyForm,
       'form-data-wrapper': !onlyForm,
       'transparent': !editMode && !onlyForm,
-    }">
-    <div class="d-flex justify-content-between align-items-center pb-1"
-      v-if="!onlyForm">
+    }"
+  >
+    <div class="d-flex justify-content-between align-items-center pb-1" v-if="!onlyForm">
       <h5 class="my-0 py-0 text-uppercase font-weight-bold">
         <i class="mdi mr-2" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
         {{ title }}
@@ -34,8 +35,7 @@
       <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate }}</evan-button>
     </div>
     <div class="px-0 pt-4" :class="{ 'container': stacked }">
-      <form class="d-flex flex-wrap flex-row justify-content-between"
-        @submit="save">
+      <form class="d-flex flex-wrap flex-row justify-content-between" @submit="save">
         <slot v-bind:setEditMode="setEditMode"></slot>
         <slot name="form" v-if="form">
           <template v-for="(controlName) in form.controls">
@@ -57,33 +57,42 @@
       </form>
     </div>
     <template v-if="(editMode || isLoading) && !onlyForm">
-      <a
-        class="text-muted mt-4 mb-3 d-inline-block"
-        href="https://evannetwork.github.io/docs/other/glossary.html#e"
-        target="_blank"
-        rel="noopener noreferrer"
-        v-if="!isLoading">
-        <i class="mdi mdi-information-outline mr-2" />
-        {{ '_evan.transaction_costs_hint' | translate }}
-      </a>
-      <br />
-      <evan-button type="primary" class="mr-3"
-        :disabled="isLoading || disabled || (form && !form.isValid)"
-        :isLoading="isLoading"
-        :label="'_evan.save' | translate"
-        @click="save"
-      />
-      <evan-button type="secondary"
-        v-if="!isLoading"
-        @click="cancel"
-        :label="'_evan.cancel' | translate"
-      />
+      <div class="d-flex justify-content-end">
+        <div>
+          <a
+            class="text-muted mb-3 d-block text-right"
+            href="https://evannetwork.github.io/docs/other/glossary.html#e"
+            target="_blank"
+            rel="noopener noreferrer"
+            v-if="!isLoading"
+          >
+            <i class="mdi mdi-information-outline mr-2" />
+            {{ '_evan.transaction_costs_hint' | translate }}
+          </a>
+          <div>
+            <evan-button
+              class="mr-3"
+              type="secondary"
+              v-if="!isLoading"
+              @click="cancel"
+              :label="'_evan.cancel' | translate"
+            />
+            <evan-button
+              type="primary"
+              :disabled="isLoading || disabled || (form && !form.isValid)"
+              :isLoading="isLoading"
+              :label="'_evan.save' | translate"
+              @click="save"
+            />
+          </div>
+        </div>
+      </div>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-  import FormDataWrapper from './form'
-  export default FormDataWrapper
+import FormDataWrapper from "./form";
+export default FormDataWrapper;
 </script>
 
