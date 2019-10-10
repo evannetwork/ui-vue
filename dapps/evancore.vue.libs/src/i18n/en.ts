@@ -110,6 +110,10 @@ export default {
     "read": "read",
     "save": "Save",
     "share": "Share",
+    "sharing": {
+      "update": "Update Sharing Options",
+      "selectContact": "Share with contact:"
+    },
     "transaction_costs_hint": "This will cause transaction fees.",
     "under-development": {
       "desc": "The area shown is currently under construction and will be available soon.",

@@ -110,6 +110,10 @@ export default {
     "read": "lesen",
     "save": "Speichern",
     "share": "Freigeben",
+    "sharing": {
+      "update": "Freigaben aktualisieren",
+      "selectContact": "Freigeben für Kontakt:"
+    },
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
