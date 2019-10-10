@@ -65,15 +65,15 @@
             :placeholder="'_evan.profile.account-name' | translate"
             v-model="userInfo.accountName"
           />
-          <div>
-            <evan-button type="primary" class="mr-3"
+          <div class="d-flex justify-content-end">
+            <evan-button type="secondary" class="mr-3"
+              :label="'_evan.cancel' | translate"
+              @click="cancelEditMode"
+            />
+            <evan-button type="primary"
               :disabled="userInfo.accountName.length === 0"
               :label="'_evan.save' | translate"
               @click="saveEditMode"
-            />
-            <evan-button type="secondary"
-              :label="'_evan.cancel' | translate"
-              @click="cancelEditMode"
             />
           </div>
         </template>
