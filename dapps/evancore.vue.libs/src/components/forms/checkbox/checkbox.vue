@@ -25,7 +25,7 @@
       type="checkbox"
       :class="{ 'is-invalid' : error}"
       :id="id"
-      :value="value"
+      :checked="value"
       @blur="$emit('blur')"
       @focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event.target.checked)"
