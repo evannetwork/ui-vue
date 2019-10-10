@@ -1,0 +1,44 @@
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+*/
+
+@import '~@evan.network/ui/src/style/utils';
+
+.profile-preview {
+  &.default {
+    .account-name {
+      font-size: 24px;
+    }
+
+    .profile-type {
+      font-size: 14px;
+    }
+  }
+
+  &.sm {
+    .account-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .profile-type {
+      font-size: 10px;
+      font-weight: 300;
+    }
+  }
+}

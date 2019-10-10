@@ -2,8 +2,12 @@
 
 ## Next Version
 ### Features
+- `evancore.vue.libs` (v1.8.0)
+  - add `enableCancel` parameter to forms
 
 ### Fixes
+- `evancore.vue.libs` (v1.8.0)
+  - fix profile preview default design
 
 ### Deprecations
 
