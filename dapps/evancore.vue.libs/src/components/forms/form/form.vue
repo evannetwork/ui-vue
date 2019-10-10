@@ -18,8 +18,7 @@
 */
 
 <template>
-  <div
-    class="evan-form mt-2 mb-8"
+  <div class="evan-form"
     :class="{
       'edit-mode': editMode && !onlyForm,
       'form-data-wrapper': !onlyForm,
@@ -73,7 +72,7 @@
             <evan-button
               class="mr-3"
               type="secondary"
-              v-if="!isLoading"
+              v-if="!isLoading && enableCancel"
               @click="cancel"
               :label="'_evan.cancel' | translate"
             />

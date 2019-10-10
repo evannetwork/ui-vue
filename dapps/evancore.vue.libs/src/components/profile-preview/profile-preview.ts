@@ -48,10 +48,10 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   @Prop() address: string;
 
   /**
-   * Size of the profile preview (sm, lg)
+   * Size of the profile preview (default, sm, lg)
    */
   @Prop({
-    default: 'sm'
+    default: 'default'
   }) size: string;
 
   /**

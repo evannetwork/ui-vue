@@ -34,12 +34,11 @@
         v-if="size === 'default' || size === 'sm'">
         <a class="force-oneline account-name"
           :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
-          <b class="text-dark" style="font-size: 13px; font-weight: 600;">
+          <b class="text-dark">
             {{ userInfo.accountName }}
           </b>
         </a>
-        <small class="force-oneline"
-          style="font-size: 10px; font-weight: 300;">
+        <small class="profile-type">
           {{ `_evan.profile.types.${ userInfo.profileType }` | translate }}
         </small>
       </div>
@@ -54,7 +53,7 @@
           </a>
 
           <evan-address class="force-oneline" v-if="address" :address="address" />
-          <b>{{ `_evan.profile.types.${ userInfo.profileType }` | translate }}</b>
+          <b class="profile-type">{{ `_evan.profile.types.${ userInfo.profileType }` | translate }}</b>
         </template>
 
         <template v-else>
