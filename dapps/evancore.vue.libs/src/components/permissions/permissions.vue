@@ -1,34 +1,53 @@
 <template>
   <div>
-    <table class="permissions">
+    <table class="permissions" v-if="permissions">
       <thead>
         <th>
-          <h4> {{ dataset.name }} </h4>
+          <h4> {{ label }} </h4>
         </th>
         <th>
           <small>{{ '_evan.read' | translate }}</small>
-          <evan-form-control-checkbox :id="`${dataset.key}-read-all`" />
+          <evan-form-control-checkbox
+            :id="`${dataSetId}-read-all`"
+            v-model="readAll"
+            @input="val => updateAll('read', val)"
+          />
         </th>
         <th>
           <small>{{ '_evan.write' | translate }}</small>
-          <evan-form-control-checkbox :id="`${dataset.key}-write-all`" />
+          <evan-form-control-checkbox
+            :id="`${dataSetId}-write-all`"
+            v-model="readWriteAll"
+            @input="val => updateAll('readWrite', val)"
+          />
         </th>
       </thead>
       <tbody>
-        <tr v-for="(val, property) in permissions.properties" :key="property">
+        <tr v-for="(val, property) in permissions" :key="property">
           <td class="caption">
             <span>{{ property }}</span>
-            <span>Field1, Field2, Field3, Field4, Field5</span>
+            <span>{{ val.fields ? val.fields.join(', ') : property }}</span>
           </td>
           <td>
-            <evan-form-control-checkbox :id="`${dataset.key}-${property}-read`" />
+            <evan-form-control-checkbox
+              :id="`${dataSetId}-${property}-read`"
+              :value="permissions[property].read"
+              @input="val => setRead(property, val)"
+            />
           </td>
           <td>
-            <evan-form-control-checkbox :id="`${dataset.key}-${property}-write`" />
+            <evan-form-control-checkbox
+              :id="`${dataSetId}-${property}-write`"
+              :value="permissions[property].readWrite"
+              @input="val => setReadWrite(property, val)"
+            />
           </td>
         </tr>
       </tbody>
     </table>
+    <div v-else>
+      <p class="p-6 text-error">No permisisons available to edit.</p>
+    </div>
   </div>
 </template>
 

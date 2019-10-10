@@ -17,24 +17,117 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue';
-import Component, { mixins } from 'vue-class-component';
+import Vue from 'vue'
+import Component, { mixins } from 'vue-class-component'
 
 // evan.network imports
-import EvanComponent from '../../component';
+import EvanComponent from '../../component'
 
-import { properties, type } from './dummydata.json';
+import { Prop } from 'vue-property-decorator'
+
+interface PermissionsInterface {
+  [property: string]: {
+    read: boolean,
+    readWrite: boolean,
+    fields: string[]
+  }
+}
 
 @Component({ })
 class Permissions extends mixins(EvanComponent) {
-  permissions = { properties, type }; // TODO: replace by property
+  readAll = false;
+  readWriteAll = false;
 
-  dataset = {
-    name: 'Profile Data',
-    key: 'asdfghjkl',
-    fields: [
-      'keine', 'Ahnung'
-    ]
+  /**
+   * The dataset name to be displayed.
+   */
+  @Prop({
+    default: ''
+  }) label: string;
+
+  /**
+   * The dataset id.
+   */
+  @Prop({
+    default: '',
+    required: true
+  }) dataSetId: string;
+
+  /**
+   * The permissions object.
+   */
+  @Prop({
+    default: null, // permissionsExample['0x933F8B2C639e82109468Fca14695435A1Ff62457'], // TODO, take from props,
+    required: true
+  }) permissions: PermissionsInterface;
+
+  @Prop({}) updatePermissions: Function
+
+  created() {
+    this.readAll = this.allPermissions('read');
+    this.readWriteAll = this.allPermissions('readWrite');
+  }
+
+  updated() {
+    this.readAll = this.allPermissions('read');
+    this.readWriteAll = this.allPermissions('readWrite');
+    this.updatePermissions({ dataSetId: this.dataSetId, permissions: this.permissions })
+
+    // this.$emit('updatePermissions', { key: this.key, permissions: this.permissions, changed: this.permissionChanged });
+  }
+
+  /**
+   * Set all permissions in a dataset at once.
+   *
+   * @param mode: 'read'|'readWrite'
+   * @param flag: boolean
+   */
+  updateAll(mode: 'read'|'readWrite', flag: boolean) {
+    Object.keys(this.permissions).forEach( property =>  {
+      this.permissions[property][mode] = flag
+
+      if (mode === 'readWrite' && flag) {
+        this.permissions[property].read = flag;
+      }
+    });
+  }
+
+  /**
+   * Set read property and remove write property if read permission is removed.
+   *
+   * @param property: string - the name of the property within the dataset
+   * @param val: boolean - define wether the permission is given or not
+   */
+  setRead(property: string, val: boolean) {
+    this.permissions[property].read = val;
+
+    if (!val) {
+      this.permissions[property].readWrite = val;
+    }
+  }
+
+  /**
+   * Set write property and add read property if write permission is given.
+   *
+   * @param property: string - the name of the property within the dataset
+   * @param val: boolean - define wether the permission is given or not
+   */
+  setReadWrite(property: string, val: boolean) {
+    this.permissions[property].readWrite = val
+
+    if (val) {
+      this.permissions[property].read = val;
+    }
+  }
+
+  /**
+   * Returns whether all permissions in a dataset where checked for a certain access mode.
+   *
+   * @param mode: 'read'|'readWrite' - for which access mode
+   * @param access: PermissionsInterface - The permissions object to check, default `this.permissions`
+   */
+  allPermissions(mode: 'read'|'readWrite', access = this.permissions): boolean {
+    return Object.keys(access).every(key => access[key][mode] === true)
   }
 }
 

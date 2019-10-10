@@ -1,6 +1,8 @@
 @import '~@evan.network/ui/src/style/utils';
 
 .permissions {
+  width: 100%;
+
   .form-group.checkbox {
     padding: 0;
     margin: 0 auto;
@@ -20,6 +22,7 @@
   td, th {
     padding: 8px 16px;
     text-align: center;
+    width: 65px;
 
     & > * {
       margin: auto;
@@ -28,7 +31,19 @@
 
   th:first-of-type, td:first-of-type {
     text-align: left;
-    // padding: 0 16px;
+    width: 100%;
+    padding-left: 0;
+
+    /* display three dots, when content bigger than column */
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: cssVar('gray-500');
+  }
+
+  th:last-of-type, td:last-of-type {
+    padding-right: 0;
   }
 
   .caption {
