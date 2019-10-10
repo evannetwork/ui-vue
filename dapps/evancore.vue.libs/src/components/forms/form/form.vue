@@ -69,7 +69,7 @@
             <i class="mdi mdi-information-outline mr-2" />
             {{ '_evan.transaction_costs_hint' | translate }}
           </a>
-          <div>
+          <div class="d-flex justify-content-end">
             <evan-button
               class="mr-3"
               type="secondary"
