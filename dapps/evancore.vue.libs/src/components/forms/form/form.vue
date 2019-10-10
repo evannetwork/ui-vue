@@ -92,7 +92,7 @@
 </template>
 
 <script lang="ts">
-import FormDataWrapper from "./form";
-export default FormDataWrapper;
+  import FormDataWrapper from './form';
+  export default FormDataWrapper;
 </script>
 
