@@ -17,20 +17,20 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue'
-import Component, { mixins } from 'vue-class-component'
+import Vue from 'vue';
+import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
-import EvanComponent from '../../component'
+import EvanComponent from '../../component';
 
-import { Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator';
 
 interface PermissionsInterface {
   [property: string]: {
     read: boolean,
     readWrite: boolean,
     fields: string[]
-  }
+  };
 }
 
 @Component({ })
@@ -57,11 +57,11 @@ class Permissions extends mixins(EvanComponent) {
    * The permissions object.
    */
   @Prop({
-    default: null, // permissionsExample['0x933F8B2C639e82109468Fca14695435A1Ff62457'], // TODO, take from props,
+    default: null,
     required: true
   }) permissions: PermissionsInterface;
 
-  @Prop({}) updatePermissions: Function
+  @Prop({}) updatePermissions: Function;
 
   created() {
     this.readAll = this.allPermissions('read');
@@ -71,9 +71,7 @@ class Permissions extends mixins(EvanComponent) {
   updated() {
     this.readAll = this.allPermissions('read');
     this.readWriteAll = this.allPermissions('readWrite');
-    this.updatePermissions({ dataSetId: this.dataSetId, permissions: this.permissions })
-
-    // this.$emit('updatePermissions', { key: this.key, permissions: this.permissions, changed: this.permissionChanged });
+    this.updatePermissions({ dataSetId: this.dataSetId, permissions: this.permissions });
   }
 
   /**
@@ -84,7 +82,7 @@ class Permissions extends mixins(EvanComponent) {
    */
   updateAll(mode: 'read'|'readWrite', flag: boolean) {
     Object.keys(this.permissions).forEach( property =>  {
-      this.permissions[property][mode] = flag
+      this.permissions[property][mode] = flag;
 
       if (mode === 'readWrite' && flag) {
         this.permissions[property].read = flag;
@@ -113,7 +111,7 @@ class Permissions extends mixins(EvanComponent) {
    * @param val: boolean - define wether the permission is given or not
    */
   setReadWrite(property: string, val: boolean) {
-    this.permissions[property].readWrite = val
+    this.permissions[property].readWrite = val;
 
     if (val) {
       this.permissions[property].read = val;
@@ -127,8 +125,8 @@ class Permissions extends mixins(EvanComponent) {
    * @param access: PermissionsInterface - The permissions object to check, default `this.permissions`
    */
   allPermissions(mode: 'read'|'readWrite', access = this.permissions): boolean {
-    return Object.keys(access).every(key => access[key][mode] === true)
+    return Object.keys(access).every(key => access[key][mode] === true);
   }
 }
 
-export default Permissions
+export default Permissions;

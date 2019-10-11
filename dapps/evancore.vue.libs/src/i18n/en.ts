@@ -112,7 +112,10 @@ export default {
     "share": "Share",
     "sharing": {
       "update": "Update Sharing Options",
-      "selectContact": "Share with contact:"
+      "selectContact": "Select contact to share with",
+      "defineFor": "Define the permissions for {contactName}.",
+      "permissionsTitle": "Update Permissions",
+      "noContacts": "You have no contacts in your address book. Please add a contact first to share with."
     },
     "transaction_costs_hint": "This will cause transaction fees.",
     "under-development": {

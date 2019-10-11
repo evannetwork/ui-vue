@@ -17,28 +17,32 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue'
-import Component, { mixins } from 'vue-class-component'
+import Vue from 'vue';
+import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
 import { deepEqual } from '@evan.network/ui';
-import EvanComponent from '../../component'
+import EvanComponent from '../../component';
 
-import * as dataSetExamples from './dummydata.json'
-import { Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator';
 
 interface PermissionsInterface {
   [property: string]: {
     read: boolean,
     readWrite: boolean,
     fields: string[]
-  }
+  };
 }
 
 interface DataSetInterface {
-  label: string,
-  key: string,
-  permissions: PermissionsInterface
+  label: string;
+  key: string;
+  permissions: PermissionsInterface;
+}
+
+interface ContactInterface {
+  label: string;
+  value: string;
 }
 
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
@@ -48,18 +52,42 @@ class PermissionsEditor extends mixins(EvanComponent) {
   contacts = null;
   permissionsChanged = false;
   initialPermissions: DataSetInterface[] = null;
+  isLoading = false;
 
   @Prop({
-    default: ''
-  }) selectedContact: string;
+    default: null
+  }) dataSets: DataSetInterface[];
 
+  /**
+   * Function to write the updated permissions object.
+   * Should return a promise resolving a `boolean`.
+   *
+   * - updatePermissions(permissions: DataSetInterface): Promise<boolean>
+   */
   @Prop({
-    default: dataSetExamples['0x933F8B2C639e82109468Fca14695435A1Ff62457'] // TODO: pull from bcc in HOC
-  }) dataSets: DataSetInterface[]
+    required: true
+  }) updatePermissions: Function;
+
+  /**
+   * Function to load the desired permissions object.
+   * Should return a promise resolving a `DataSetInterface`.
+   *
+   * - loadPermissions(userId: string): Promise<DataSetInterface>
+   */
+  @Prop({
+    required: true
+  }) loadPermissions: Function;
+
+  /**
+   * Initially pre-selected contact object.
+   */
+  @Prop({
+    default: null
+  }) selectedContact: ContactInterface;
 
   async created() {
     this.contacts = await this.loadAddressBook();
-    this.initialPermissions = clone(this.dataSets)
+    this.getPermissionsForContact();
   }
 
   /**
@@ -70,9 +98,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
    *  - dataSetId: the id of the dataset which was changed
    *  - permissions: the updated permissions object
    */
-  updatePermissions({dataSetId, permissions}) {
+  updateDataSetPermissions({dataSetId, permissions}) {
     this.dataSets[dataSetId].permissions = permissions;
-    this.permissionsChanged = deepEqual(this.dataSets, this.initialPermissions) === false;
+    this.permissionsChanged = !deepEqual(this.dataSets, this.initialPermissions);
   }
 
   /**
@@ -83,7 +111,41 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   /**
-   * load the addressbook for the current user
+   * Calls the `loadPermissions` function from properties with current contact id.
+   */
+  async getPermissionsForContact() {
+    if (!this.selectedContact || !this.selectedContact.value) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.dataSets = null;
+    this.dataSets = await this.loadPermissions(this.selectedContact.value)
+      .catch((e: Error) => {
+        console.log('Error loading permissions', e.message);
+        this.isLoading = false;
+      });
+
+    this.initialPermissions = this.dataSets ? clone(this.dataSets) : this.initialPermissions;
+    this.isLoading = false;
+  }
+
+  /**
+   * Calls the `updatePermissions` function from properties with the updated dataSets object.
+   */
+  async writePermissions() {
+    this.isLoading = true;
+    await this.updatePermissions(this.dataSets)
+      .catch((e: Error) => {
+        console.log('Error writing permissions', e.message);
+      });
+
+    this.initialPermissions = clone(this.dataSets);
+    this.isLoading = false;
+  }
+
+  /**
+   * Load the addressbook for the current user.
    */
   async loadAddressBook() {
     const runtime = (<any>this).getRuntime();
@@ -96,9 +158,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
       return {
         'label': addressBook[key].alias,
         'value': key
-      }
-    })
+      };
+    });
   }
 }
 
-export default PermissionsEditor
+export default PermissionsEditor;
