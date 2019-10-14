@@ -115,7 +115,7 @@ export default {
       "selectContact": "Kontakt für die Freigabe auswählen",
       "defineFor": "Setzen Sie die Zugriffsrechte für ${contactName}.",
       "permissionsTitle": "Zugriffsrechte",
-      "noContacts": "Sie haben keine Kontakte in ihrem Adressbuch, bitte fügen Sie zuerst einen Kontakt hinzu."
+      "noContacts": "Sie haben keine Kontakte in Ihrem Adressbuch, bitte fügen Sie zuerst einen Kontakt hinzu."
     },
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {
