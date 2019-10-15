@@ -1,0 +1,14 @@
+@import '~@evan.network/ui/src/style/utils';
+
+.panel-footer {
+  display: flex;
+  padding: 24px 0;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid cssVar('border-color-2');
+
+  button.btn-primary {
+    width: 100%;
+    margin-left: 20px;
+  }
+}

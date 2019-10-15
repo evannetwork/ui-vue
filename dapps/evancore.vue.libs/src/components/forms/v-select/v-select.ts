@@ -36,5 +36,5 @@ export default class VSelectComponent extends mixins(EvanControlComponent) {
   @Prop({
     type: String,
     default: 'label'
-  })optionLabel: string;
+  }) optionLabel: string;
 }

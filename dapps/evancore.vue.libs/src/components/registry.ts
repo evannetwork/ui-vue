@@ -34,6 +34,7 @@ import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import FormComponent from './forms/form/form.vue';
 import FormControlComponent from './forms/control/control.vue';
+import FormControlCheckboxComponent from './forms/checkbox/checkbox.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
@@ -44,6 +45,8 @@ import LogoutComponent from './logout/logout.vue';
 import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
+import PermissionsComponent from './permissions/permissions.vue';
+import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
 import ProfilePicture from './profile-picture/profile-picture.vue';
 import StepsComponent from './steps/steps.vue';
@@ -68,6 +71,7 @@ export {
   EvanComponent,
   FormComponent,
   FormControlComponent,
+  FormControlCheckboxComponent,
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
@@ -78,6 +82,8 @@ export {
   ModalComponent,
   NavListComponent,
   NavTabsComponent,
+  PermissionsComponent,
+  PermissionsEditorComponent,
   ProfilePreview,
   ProfilePicture,
   StepsComponent,
@@ -101,6 +107,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-file-input', component: FormControlFilesComponent },
   { name: 'evan-form', component: FormComponent },
   { name: 'evan-form-control', component: FormControlComponent },
+  { name: 'evan-form-control-checkbox', component: FormControlCheckboxComponent },
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
@@ -112,6 +119,8 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
+  { name: 'evan-permissions', component: PermissionsComponent },
+  { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
   { name: 'evan-steps', component: StepsComponent },
