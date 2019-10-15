@@ -17,6 +17,8 @@
   the following URL: https://evan.network/license/
 */
 
+import { PermissionsInterface } from './components/permissions/permissions';
+
 /******************************************** interfaces ******************************************/
 /**
  * Used to map routes to a route name and a specific component.
@@ -76,7 +78,7 @@ export interface EvanFormControlUISpecs {
     label?: string;
     options?: Array<{ label: string, value: any }>;
     size?: number;
-  }
+  };
   type: string;
 }
 
@@ -90,3 +92,30 @@ export interface EvanFormControlOptions {
   value?: any;
 }
 
+/**
+ * used for contacts in vue select component.
+ */
+export interface ContactInterface {
+  label: string;
+  value: string;
+}
+
+/**
+ * Interface for multiple dataset permissions object.
+ */
+export interface PermissionsInterface {
+  [property: string]: {
+    read: boolean,
+    readWrite: boolean,
+    fields?: string[]
+  };
+}
+
+/**
+ * Defines an object of permission interfaces representing all permission attributes of a data set.
+ */
+export interface DataSetPermissionsInterface {
+  label: string;
+  key: string;
+  permissions: PermissionsInterface;
+}

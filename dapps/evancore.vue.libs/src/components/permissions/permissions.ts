@@ -22,16 +22,9 @@ import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
 import EvanComponent from '../../component';
+import { PermissionsInterface } from '../../interfaces';
 
 import { Prop } from 'vue-property-decorator';
-
-interface PermissionsInterface {
-  [property: string]: {
-    read: boolean,
-    readWrite: boolean,
-    fields: string[]
-  };
-}
 
 @Component({ })
 class Permissions extends mixins(EvanComponent) {
@@ -42,7 +35,8 @@ class Permissions extends mixins(EvanComponent) {
    * The dataset name to be displayed.
    */
   @Prop({
-    default: ''
+    default: '',
+    required: true
   }) label: string;
 
   /**

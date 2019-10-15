@@ -2,8 +2,7 @@
   <div>
     <h3>Update Permissions</h3>
     <p>
-      To share your profile information with another contact, fill out the form below and click on
-      “Share Profile Data”
+      {{ description }}
     </p>
 
     <template v-if="contacts && contacts.length">

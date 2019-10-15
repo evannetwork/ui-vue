@@ -22,28 +22,11 @@ import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
 import { deepEqual } from '@evan.network/ui';
+import { ContactInterface, DataSetPermissionsInterface } from '../../interfaces';
 import EvanComponent from '../../component';
 
 import { Prop } from 'vue-property-decorator';
 
-interface PermissionsInterface {
-  [property: string]: {
-    read: boolean,
-    readWrite: boolean,
-    fields: string[]
-  };
-}
-
-interface DataSetInterface {
-  label: string;
-  key: string;
-  permissions: PermissionsInterface;
-}
-
-interface ContactInterface {
-  label: string;
-  value: string;
-}
 
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
 
@@ -51,18 +34,18 @@ const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
 class PermissionsEditor extends mixins(EvanComponent) {
   contacts = null;
   permissionsChanged = false;
-  initialPermissions: DataSetInterface[] = null;
+  initialPermissions: DataSetPermissionsInterface[] = null;
   isLoading = false;
 
   @Prop({
     default: null
-  }) dataSets: DataSetInterface[];
+  }) dataSets: DataSetPermissionsInterface[];
 
   /**
    * Function to write the updated permissions object.
    * Should return a promise resolving a `boolean`.
    *
-   * - updatePermissions(permissions: DataSetInterface): Promise<boolean>
+   * - updatePermissions(permissions: DataSetPermissionsInterface): Promise<boolean>
    */
   @Prop({
     required: true
@@ -70,9 +53,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
   /**
    * Function to load the desired permissions object.
-   * Should return a promise resolving a `DataSetInterface`.
+   * Should return a promise resolving a `DataSetPermissionsInterface`.
    *
-   * - loadPermissions(userId: string): Promise<DataSetInterface>
+   * - loadPermissions(userId: string): Promise<DataSetPermissionsInterface>
    */
   @Prop({
     required: true
@@ -84,6 +67,13 @@ class PermissionsEditor extends mixins(EvanComponent) {
   @Prop({
     default: null
   }) selectedContact: ContactInterface;
+
+  /**
+   * Initially pre-selected contact object.
+   */
+  @Prop({
+    default: 'To share your profile information with another contact, fill out the form below and click on “Share Profile Data”'
+  }) description: string;
 
   async created() {
     this.contacts = await this.loadAddressBook();

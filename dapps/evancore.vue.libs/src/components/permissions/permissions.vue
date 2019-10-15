@@ -46,7 +46,7 @@
       </tbody>
     </table>
     <div v-else>
-      <p class="p-6 text-error">No permisisons available to edit.</p>
+      <p class="p-6 text-error">{{ 'evan.sharing.noPermissions' | translate }}</p>
     </div>
   </div>
 </template>
