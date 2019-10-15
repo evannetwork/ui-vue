@@ -17,6 +17,8 @@
   the following URL: https://evan.network/license/
 */
 
+import { PermissionsInterface } from './components/permissions/permissions';
+
 /******************************************** interfaces ******************************************/
 /**
  * Used to map routes to a route name and a specific component.
