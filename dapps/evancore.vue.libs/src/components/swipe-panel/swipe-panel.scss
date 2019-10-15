@@ -26,64 +26,70 @@
   z-index: 1000;
   top: 0;
 
-  width: cssVar('swipe-panel-size');
+  width: cssVar("swipe-panel-size");
   height: 100vh;
   padding: 2em;
 
-  background-color: cssVar('bg-inverted');
+  background-color: cssVar("bg-inverted");
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.15);
   position: relative;
+
+  & {
+    &,h1,h2,h3,h4,h5,span,p,li,b,label,small {
+      color: cssVar("text-color-inverted");
+    }
+  }
+
+  .light & {
+    &,h1,h2,h3,h4,h5,span,p,li,b,label,small {
+      background-color: cssVar("body-bg");
+      color: cssVar("text-color");
+    }
+  }
 
   &.fixed {
     position: fixed;
   }
 
   &.alignment-right {
-    left: calc(100% + var(--evan-swipe-panel-size));
-
     transition: 0.3s ease-out left;
-
-    &.show {
-      left: calc(100% - var(--evan-swipe-panel-size));
-    }
   }
 
   &.alignment-left {
-    right: calc(100% + var(--evan-swipe-panel-size));
-
     transition: 0.3s ease-out right;
+  }
 
+  @media (max-width: 767.98px) {
     &.show {
-      right: calc(100% - var(--evan-swipe-panel-size));
-    }
-  }
-
-  & {
-    &, h1,  h2,  h3,  h4,  h5,  span,  p,  li,  b,  label,  small {
-      color: cssVar('text-color-inverted');
-    }
-  }
-
-  .light & {
-    &, h1,  h2,  h3,  h4,  h5,  span,  p,  li,  b,  label,  small {
-      background-color: cssVar('body-bg');
-      color: cssVar('text-color');
-    }
-  }
-
-  @media (max-width: 768px) {
-    & {
       right: 100%;
-
       width: 100%;
+      left: 0;
+      top: 0;
+      right: 0;
+      position: fixed;
+      z-index: 1030;
+    }
+  }
+
+  @media (min-width: 767.98px) {
+    &.alignment-right {
+      left: calc(100% + var(--evan-swipe-panel-size));
 
       &.show {
-        right: 0;
+        left: calc(100% - var(--evan-swipe-panel-size));
+      }
+    }
+
+    &.alignment-left {
+      right: calc(100% + var(--evan-swipe-panel-size));
+
+      &.show {
+        right: calc(100% - var(--evan-swipe-panel-size));
       }
     }
   }
 }
 
 .fullscreen {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
