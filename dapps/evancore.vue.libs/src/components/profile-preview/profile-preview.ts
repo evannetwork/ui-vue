@@ -28,9 +28,9 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { watch } from 'fs';
 
 interface UserInfoInterface {
-  accountName: string,
-  profileType: string,
-  isVerified: boolean,
+  accountName: string;
+  profileType: string;
+  isVerified: boolean;
   picture: any;
 }
 
