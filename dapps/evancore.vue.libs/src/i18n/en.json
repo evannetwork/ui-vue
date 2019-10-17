@@ -68,6 +68,15 @@
     "logout-desc": "Are you sure you want to logout?",
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",
+    "permission": {
+      "type": {
+        "fullAccess": "Full Access",
+        "fullRead": "Full Read Permissions",
+        "readWrite": "Individual Write and Read Permissions",
+        "read": "Individual Read Permissions",
+        "none": "No Permissions"
+      }
+    },
     "please-login": "Please unlock your profile to continue.",
     "profile": {
       "account-name": "Account Name",
