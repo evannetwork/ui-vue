@@ -22,6 +22,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
 import AddressComponent from './address/address.vue';
+import BaseList from './lists/base-list/base-list.vue';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ButtonComponent from './button/button.vue';
 import CardComponent from './card/card.vue';
@@ -59,6 +60,7 @@ import vSelect from 'vue-select';
 // export them all, so other applications can access them
 export {
   AddressComponent,
+  BaseList,
   BreadcrumbsComponent,
   ButtonComponent,
   CardComponent,
@@ -96,6 +98,7 @@ export {
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-address', component: AddressComponent },
+  { name: 'evan-base-list', component: BaseList },
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-card', component: CardComponent },
