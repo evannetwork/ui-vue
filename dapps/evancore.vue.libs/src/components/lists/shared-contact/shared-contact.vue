@@ -20,7 +20,7 @@ the following URL: https://evan.network/license/
 <template>
   <div class="shared-contact">
     <evan-profile-preview :address="item.accountId" :accountName="item.alias" size="sm" />
-    <div class="permissions">{{item.permissionType}}</div>
+    <div class="permissions">{{ `_profile.sharings.permission.type.${item.permissionType}` | translate }}</div>
     <div class="actions">
       <div class="remove">
         <i class="mdi mdi-close-circle" />
