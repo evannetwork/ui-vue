@@ -176,7 +176,7 @@ export function registerComponents(Vue: any, components: Array<ComponentRegistra
 export function registerEvanI18N(Vue: any, translations: any) {
   // add all i18n definitions
   Object.keys(translations).forEach(key => Vue.i18n.add(key, translations[key]));
-};
+}
 
 /**
  * Vue does not trigger correct destroy events when a vue application is removed from the dom or

@@ -108,9 +108,9 @@ export default class EvanModal extends mixins(EvanComponent) {
    */
   hide() {
     if (this.preventHide) {
-      this.preventHide = false
+      this.preventHide = false;
 
-      return
+      return;
     }
 
     this.isShown = false;

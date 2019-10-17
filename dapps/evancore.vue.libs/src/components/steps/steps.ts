@@ -42,7 +42,7 @@ export default class StepsComponent extends mixins(EvanComponent) {
   @Prop({
     type: Number,
     default: 0
-  }) activeStep: number
+  }) activeStep: number;
 
   /**
    * The steps array, with the shape of Step interface:

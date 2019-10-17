@@ -91,7 +91,7 @@ export {
   SwipePanelComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
-}
+};
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [

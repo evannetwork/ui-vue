@@ -82,7 +82,7 @@ export default class Button extends mixins(EvanComponent) {
     type: String,
     default: 'right',
     validator: (value: string) => {
-      return ['left', 'right'].indexOf(value) !== -1 // TODO: validator seems not to be called
+      return ['left', 'right'].indexOf(value) !== -1; // TODO: validator seems not to be called
     }
   }) iconPosition;
 
