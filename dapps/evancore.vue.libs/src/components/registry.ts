@@ -50,6 +50,7 @@ import PermissionsComponent from './permissions/permissions.vue';
 import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
 import ProfilePicture from './profile-picture/profile-picture.vue';
+import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
@@ -88,6 +89,7 @@ export {
   PermissionsEditorComponent,
   ProfilePreview,
   ProfilePicture,
+  SharedContact,
   StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
@@ -126,6 +128,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
+  { name: 'evan-shared-contact', component: SharedContact },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
