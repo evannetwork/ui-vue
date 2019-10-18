@@ -33,10 +33,10 @@ import EvanComponent from '../../../component';
  */
 @Component({})
 class EvanSharedContact extends mixins(EvanComponent) {
-    @Prop({
-        type: Object,
-        required: true,
-    }) item: any;
+  @Prop({
+    type: Object,
+    required: true,
+  }) item: any;
 }
 
 export default EvanSharedContact;

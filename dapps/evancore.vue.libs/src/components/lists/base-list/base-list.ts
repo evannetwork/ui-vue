@@ -33,14 +33,13 @@ import EvanComponent from '../../../component';
  */
 @Component({})
 class EvanBaseList extends mixins(EvanComponent) {
-    /**
-    * data for list rendering
-    */
-    @Prop({
-        type: Array,
-        required: true,
-    }) data: Array<any>;
-
+  /**
+  * data for list rendering
+  */
+  @Prop({
+    type: Array,
+    required: true,
+  }) data: Array<any>;
 }
 
 export default EvanBaseList;
