@@ -1,0 +1,54 @@
+/*
+Copyright (C) 2018-present evan GmbH.
+
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License, version 3,
+as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see http://www.gnu.org/licenses/ or
+write to the Free Software Foundation, Inc., 51 Franklin Street,
+Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+the following URL: https://evan.network/license/
+*/
+
+@import '~@evan.network/ui/src/style/utils';
+
+.evan-base-list {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    background-color: white;
+    border: 1px solid white;
+    display: block;
+    width: 100%;
+    height: 64px;
+    padding: 12px 24px;
+    margin: 2px 0;
+    cursor: pointer;
+
+    &:hover {
+      background-color: cssVar('gray-100');
+      border: 1px solid cssVar('gray-200');
+
+      .actions {
+        color: cssVar('gray-600');
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .actions {
+      opacity: 0;
+    }
+  }
+}

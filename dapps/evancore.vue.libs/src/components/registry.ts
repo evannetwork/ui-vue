@@ -22,6 +22,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
 import AddressComponent from './address/address.vue';
+import BaseList from './lists/base-list/base-list.vue';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ButtonComponent from './button/button.vue';
 import CardComponent from './card/card.vue';
@@ -49,6 +50,7 @@ import PermissionsComponent from './permissions/permissions.vue';
 import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
 import ProfilePicture from './profile-picture/profile-picture.vue';
+import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
@@ -59,6 +61,7 @@ import vSelect from 'vue-select';
 // export them all, so other applications can access them
 export {
   AddressComponent,
+  BaseList,
   BreadcrumbsComponent,
   ButtonComponent,
   CardComponent,
@@ -86,6 +89,7 @@ export {
   PermissionsEditorComponent,
   ProfilePreview,
   ProfilePicture,
+  SharedContact,
   StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
@@ -96,6 +100,7 @@ export {
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-address', component: AddressComponent },
+  { name: 'evan-base-list', component: BaseList },
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-card', component: CardComponent },
@@ -123,6 +128,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
+  { name: 'evan-shared-contact', component: SharedContact },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
