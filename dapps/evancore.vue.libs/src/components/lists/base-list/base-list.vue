@@ -19,17 +19,17 @@ the following URL: https://evan.network/license/
 
 <template>
   <ul class="evan-base-list">
-    <li v-for="(item, index) in data" :key="index">
+  <li v-for="(item, index) in data" :key="index">
       <slot name="item" :item="item"></slot>
-    </li>
+  </li>
   </ul>
 </template>
 
 <style lang="scss">
-    @import "./base-list.scss";
+  @import "./base-list.scss";
 </style>
 
 <script lang="ts">
-    import Component from "./base-list";
-    export default Component;
+  import Component from "./base-list";
+  export default Component;
 </script>

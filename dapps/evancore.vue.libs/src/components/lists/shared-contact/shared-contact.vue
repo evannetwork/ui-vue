@@ -30,10 +30,10 @@ the following URL: https://evan.network/license/
 </template>
 
 <style lang="scss" scoped>
-    @import "./shared-contact.scss";
+  @import "./shared-contact.scss";
 </style>
 
 <script lang="ts">
-    import Component from "./shared-contact";
-    export default Component;
+  import Component from "./shared-contact";
+  export default Component;
 </script>
