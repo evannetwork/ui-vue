@@ -95,6 +95,10 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       const sideBar = document.getElementById(this.mountId);
       sideBar.appendChild(this.$el);
     }
+
+    if (this.isOpen) {
+      this.show();
+    }
   }
 
   beforeDestroy() {
