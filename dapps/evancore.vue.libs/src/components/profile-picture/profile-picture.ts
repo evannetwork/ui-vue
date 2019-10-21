@@ -146,7 +146,7 @@ class ProfilePicture extends mixins(EvanComponent) {
     }
 
     return accountName.split(/\s/).splice(0, 2).map(word => word.charAt(0)).join('');
-  };
+  }
 }
 
-export default ProfilePicture
+export default ProfilePicture;

@@ -20,21 +20,23 @@ the following URL: https://evan.network/license/
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
-import EvanControlComponent from '../control/control';
+// evan imports
+import EvanComponent from '../../../component';
 
 /**
- * Wrapper component for vue select
- * @see https://vue-select.org
+ * Shared contact with permissions, normally used as list item
  *
- * @class         SelectComponent
- * @selector      evan-form-control-v-select
+ * @class         EvanSharedContact
+ * @selector      evan-shared-contact
  */
 @Component({})
-export default class VSelectComponent extends mixins(EvanControlComponent) {
+class EvanSharedContact extends mixins(EvanComponent) {
   @Prop({
-    type: String,
-    default: 'label'
-  }) optionLabel: string;
+    type: Object,
+    required: true,
+  }) item: any;
 }
+
+export default EvanSharedContact;

@@ -17,24 +17,19 @@ Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
 the following URL: https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+<template>
+  <ul class="evan-base-list">
+  <li v-for="(item, index) in data" :key="index">
+      <slot name="item" :item="item"></slot>
+  </li>
+  </ul>
+</template>
 
-import EvanControlComponent from '../control/control';
+<style lang="scss">
+  @import "./base-list.scss";
+</style>
 
-/**
- * Wrapper component for vue select
- * @see https://vue-select.org
- *
- * @class         SelectComponent
- * @selector      evan-form-control-v-select
- */
-@Component({})
-export default class VSelectComponent extends mixins(EvanControlComponent) {
-  @Prop({
-    type: String,
-    default: 'label'
-  }) optionLabel: string;
-}
+<script lang="ts">
+  import Component from "./base-list";
+  export default Component;
+</script>

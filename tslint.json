@@ -10,7 +10,8 @@
     "forin": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      2
     ],
     "label-position": true,
     "max-line-length": [
@@ -20,8 +21,10 @@
     "member-access": false,
     "member-ordering": [
       true,
-      "static-before-instance",
-      "variables-before-functions"
+      [
+        "static-before-instance",
+        "variables-before-functions"
+      ]
     ],
     "no-arg": true,
     "no-bitwise": true,
@@ -60,6 +63,7 @@
     ],
     "radix": true,
     "semicolon": [
+      true,
       "always"
     ],
     "triple-equals": [

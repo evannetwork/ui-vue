@@ -17,24 +17,23 @@ Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
 the following URL: https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+<template>
+  <div class="shared-contact">
+    <evan-profile-preview :address="item.accountId" size="sm" />
+    <div class="permissions">{{ `_evan.permission.type.${item.permissionType}` | translate }}</div>
+    <div class="actions">
+      <div class="remove">
+        <i class="mdi mdi-close-circle" />
+      </div>
+    </div>
+  </div>
+</template>
 
-import EvanControlComponent from '../control/control';
+<style lang="scss" scoped>
+  @import "./shared-contact.scss";
+</style>
 
-/**
- * Wrapper component for vue select
- * @see https://vue-select.org
- *
- * @class         SelectComponent
- * @selector      evan-form-control-v-select
- */
-@Component({})
-export default class VSelectComponent extends mixins(EvanControlComponent) {
-  @Prop({
-    type: String,
-    default: 'label'
-  }) optionLabel: string;
-}
+<script lang="ts">
+  import Component from "./shared-contact";
+  export default Component;
+</script>

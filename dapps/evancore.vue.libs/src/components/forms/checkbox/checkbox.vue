@@ -18,31 +18,28 @@
 */
 
 <template>
-  <div class="form-group"
-    :class="{ 'inline': !stacked, }"
-    :style="{
-      'min-width': size === 12 ? '100%' : `${ 100 * (size / 12) }%`,
-    }">
-    <label class="col-form-label"
-      :for="id"
-      v-if="label">
-      {{ label }}
-    </label>
-    <div class="input-wrapper">
-      <slot></slot>
-      <div class="invalid-feedback" v-if="error">
-        {{ error | translate }}
-      </div>
-    </div>
-  </div>
+  <evan-form-control v-bind="$props" class="checkbox" >
+    <input
+      class="form-control"
+      v-bind="$props"
+      type="checkbox"
+      :class="{ 'is-invalid' : error}"
+      :id="id"
+      :checked="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.checked)"
+    />
+    <label :for="id" />
+  </evan-form-control>
 </template>
 
 <script lang="ts">
-  import FormDataInput from './control'
-  export default FormDataInput
+  import CheckBoxComponent from './checkbox'
+  export default CheckBoxComponent
 </script>
 
 <style lang="scss" scoped>
-  @import './control.scss'
+  @import './checkbox.scss'
 </style>
 

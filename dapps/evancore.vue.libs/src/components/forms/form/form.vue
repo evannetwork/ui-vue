@@ -30,8 +30,14 @@
         <i class="mdi mr-2" :class="[ {'mdi-lock': !isPublic}, {'mdi-web': isPublic} ]" />
         {{ title }}
       </h5>
-      <!-- TODO: add share action to button: -->
-      <evan-button v-if="!editMode" type="secondary" size="sm">{{ '_evan.share' | translate }}</evan-button>
+      <evan-button
+        v-if="!editMode"
+        type="secondary"
+        size="sm"
+        @click="share()"
+      >
+        {{ '_evan.share' | translate }}
+      </evan-button>
     </div>
     <div class="px-0 pt-4" :class="{ 'container': stacked }">
       <form class="d-flex flex-wrap flex-row justify-content-between" @submit="save">

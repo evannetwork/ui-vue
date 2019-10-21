@@ -20,21 +20,26 @@ the following URL: https://evan.network/license/
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
-import EvanControlComponent from '../control/control';
+// evan imports
+import EvanComponent from '../../../component';
 
 /**
- * Wrapper component for vue select
- * @see https://vue-select.org
+ * This is the basis of a list that is used for detail views or for navigation within an section.
  *
- * @class         SelectComponent
- * @selector      evan-form-control-v-select
+ * @class         EvanBaseList
+ * @selector      evan-base-list
  */
 @Component({})
-export default class VSelectComponent extends mixins(EvanControlComponent) {
+class EvanBaseList extends mixins(EvanComponent) {
+  /**
+  * data for list rendering
+  */
   @Prop({
-    type: String,
-    default: 'label'
-  }) optionLabel: string;
+    type: Array,
+    required: true,
+  }) data: Array<any>;
 }
+
+export default EvanBaseList;
