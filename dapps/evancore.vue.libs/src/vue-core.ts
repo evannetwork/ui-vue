@@ -81,8 +81,19 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       options,
       uiLibBaseUrl,
       dapp: dappToLoad,
+      uiState: {
+        swipePanel: {
+          left: false,
+          right: false
+        }
+      },
       ...options.state,
     },
+    mutations: {
+      toggleSidePanel (state, position = 'left') {
+        state.uiState.swipePanel[position] = !state.uiState.swipePanel[position];
+      }
+    }
   });
 
   // use defined or browser language

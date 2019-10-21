@@ -20,7 +20,7 @@
 // vue imports
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
@@ -56,25 +56,48 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: null }) mountId: string;
 
   /**
+   * Use property to control open or closed state.
+   */
+  @Prop({ default: false }) isOpen: boolean;
+
+  /**
+   * Animation stuff
+   */
+  isShown = false;
+
+  /**
    * shows the dom elements of the modal
    */
   isRendered = false;
-
-  /**
-   * animate them
-   */
-  isShown = false;
 
   /**
    * Wait until the swipe panel is rendered, so it can be shown using animation.
    */
   waitForRendered;
 
+  @Watch('isOpen')
+    onStateChange(isOpen: boolean, wasOpen: boolean) {
+      if (isOpen === wasOpen) {
+        return;
+      }
+
+      if (isOpen && !wasOpen) {
+        this.show();
+      } else {
+        this.hide();
+      }
+    }
+
+
   mounted() {
     if (this.mountId) {
       this.$el.parentNode.removeChild(this.$el);
       const sideBar = document.getElementById(this.mountId);
       sideBar.appendChild(this.$el);
+    }
+
+    if (this.isOpen) {
+      this.show();
     }
   }
 
@@ -102,7 +125,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   /**
    * Remove the modal element and hide it animated.
    */
-  hide($event) {
+  hide($event = null) {
     this.isShown = false;
     // it the panel was faster closed than opened, remove the wait for rendered watcher
     clearInterval(this.waitForRendered);

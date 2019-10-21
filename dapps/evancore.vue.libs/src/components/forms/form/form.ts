@@ -97,6 +97,13 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   @Prop() onlyForm: boolean;
 
   /**
+   * Function called, when share button is clicked.
+   */
+  @Prop({
+    required: true
+  }) handleShare: Function;
+
+  /**
    * Is the formular currently enabled?
    */
   editMode = false;
@@ -137,6 +144,17 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
     }
 
     this.editMode = active;
+  }
+
+  /**
+   * Set global UI property to open/close the right swipe panel or execute share handler.
+   */
+  share() {
+    if (typeof this.handleShare === 'function') {
+      this.handleShare();
+    } else {
+      console.warn('handleShare property is not a function.');
+    }
   }
 
   /**
