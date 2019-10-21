@@ -28,9 +28,9 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { watch } from 'fs';
 
 interface UserInfoInterface {
-  accountName: string,
-  profileType: string,
-  isVerified: boolean,
+  accountName: string;
+  profileType: string;
+  isVerified: boolean;
   picture: any;
 }
 
@@ -110,10 +110,16 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     const runtime = (<any>this).getRuntime();
     let accountDetails: any = { profileType: 'unspecified' };
     try {
-      accountDetails = (await runtime.profile.getProfileProperties([ 'accountDetails' ]))
-        .accountDetails || accountDetails;
-    } catch (ex) { }
+      accountDetails = (await runtime.profile.getProfileProperty('accountDetails')) || accountDetails;
+    } catch (ex) {
+      console.dir(ex);
+    }
     this.userInfo = accountDetails;
+
+    if (!this.userInfo.profileType) {
+      this.userInfo.profileType = 'unspecified';
+    }
+
     // use old alias logic
     if (!this.userInfo.accountName) {
       // load addressbook info

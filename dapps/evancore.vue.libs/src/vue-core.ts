@@ -81,8 +81,19 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       options,
       uiLibBaseUrl,
       dapp: dappToLoad,
+      uiState: {
+        swipePanel: {
+          left: false,
+          right: false
+        }
+      },
       ...options.state,
     },
+    mutations: {
+      toggleSidePanel (state, position = 'left') {
+        state.uiState.swipePanel[position] = !state.uiState.swipePanel[position];
+      }
+    }
   });
 
   // use defined or browser language
@@ -176,7 +187,7 @@ export function registerComponents(Vue: any, components: Array<ComponentRegistra
 export function registerEvanI18N(Vue: any, translations: any) {
   // add all i18n definitions
   Object.keys(translations).forEach(key => Vue.i18n.add(key, translations[key]));
-};
+}
 
 /**
  * Vue does not trigger correct destroy events when a vue application is removed from the dom or

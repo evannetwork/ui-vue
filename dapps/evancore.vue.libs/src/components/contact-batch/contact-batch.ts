@@ -113,7 +113,7 @@ export default class ContactBatchComponent extends mixins(EvanComponent) {
 
     if (text.length === 0) {
       return rgb;
-    };
+    }
 
     // disable tslint for bitwise operations
     /* tslint:disable */

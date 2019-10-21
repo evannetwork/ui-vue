@@ -25,8 +25,8 @@ import { Prop, Watch } from 'vue-property-decorator';
 import EvanControlComponent from '../control/control';
 
 interface Option {
-  label: string,
-  value: any
+  label: string;
+  value: any;
 }
 
 /**

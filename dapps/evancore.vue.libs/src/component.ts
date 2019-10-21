@@ -20,7 +20,7 @@
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter, { Route } from 'vue-router';
 import Vuex from 'vuex';
 import any from 'vuex-i18n';
 import { Prop } from 'vue-property-decorator';
@@ -53,7 +53,7 @@ export default class EvanComponent extends Vue {
    */
   $i18n: any;
   $router: VueRouter;
-  $route: any;
+  $route: Route;
   $store: any;
   $t: any;
 

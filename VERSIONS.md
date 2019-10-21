@@ -5,6 +5,10 @@
 - `evancore.vue.libs` (v1.8.0)
   - add `enableCancel` parameter to forms
 
+- add `evan-form-control-checkbox` component with custom checkbox styles
+- add `evan-permissions` component to handle permissions UI for single data set
+- add `evan-permissions-editor` component to handle permissions UI for a set of data sets
+
 ### Fixes
 - `evancore.vue.libs` (v1.8.0)
   - fix profile preview default design
@@ -16,7 +20,7 @@
 ### Features
 - `evancore.vue.libs` (v1.7.0)
   - add automatic vue dispatcher handling that fills `vuex` store
-  - add v-select form control for inputs and options selection as well
+  - add `v-select` form control for inputs and options selection as well
 - `select.vue.libs` (v3.2.0)
   - added [v-select](https://vue-select.org/) as dapp library
 
@@ -49,7 +53,7 @@
       - `evan-form`
       - `evan-control-input`
       - `evan-control-select`
-      - `evan-control-files` 
+      - `evan-control-files`
   - add `vue-toasted` and show toast messaged for address copy and running dispatchers
 
 
@@ -67,7 +71,7 @@
 - update versions of `lodash`, `typescript`
 - `evancore.vue.libs`
   - add `evan-test-mode` local storage configuration and extend `EvanComponent` with `testtestMode` flag
-  
+
 ### Fixes
 - `evancore.vue.libs`
   - remove organizations as default dapp
@@ -106,14 +110,14 @@
 ## Version 1.2.1
 ### Features
 - `evancore.vue.libs`
-  - add `modalClasses` param to `EvanModal` so each modal part class can be disabled 
+  - add `modalClasses` param to `EvanModal` so each modal part class can be disabled
   - add `$emit('init')` to `evan-nav-tabs`
   - add `$emit('init')` to `evan-modal`
 
 ### Fixes
 - `evancore.vue.libs`
   - fix endless mail loading in `DAppWrapper`
-  - fix `evan-files` remove file reloads page 
+  - fix `evan-files` remove file reloads page
   - send `change` event when removing a file from `evan-files` component
 
 

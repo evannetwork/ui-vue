@@ -1,0 +1,65 @@
+@import '~@evan.network/ui/src/style/utils';
+
+.permissions {
+  width: 100%;
+
+  .form-group.checkbox {
+    padding: 0;
+    margin: 0 auto;
+    min-width: 24px!important; // Uuuuugly
+  }
+
+  th {
+    small {
+      font-style: italic;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    vertical-align: bottom;
+  }
+
+  td, th {
+    padding: 8px 16px;
+    text-align: center;
+    width: 65px;
+
+    & > * {
+      margin: auto;
+    }
+  }
+
+  th:first-of-type, td:first-of-type {
+    text-align: left;
+    width: 100%;
+    padding-left: 0;
+
+    /* display three dots, when content bigger than column */
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: cssVar('gray-500');
+  }
+
+  th:last-of-type, td:last-of-type {
+    padding-right: 0;
+  }
+
+  .caption {
+    height: 32px;
+
+    span:first-child {
+      font-size: cssVar('small-font-size');
+      font-weight: 600;
+      color: cssVar('gray-600');
+      display: block;
+    }
+
+    span:nth-child(2) {
+      color: cssVar('gray-500');
+      font-size: 10px;
+      line-height: 1em;
+    }
+  }
+}
