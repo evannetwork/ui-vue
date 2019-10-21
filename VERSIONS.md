@@ -2,12 +2,16 @@
 
 ## Next Version
 ### Features
+- `evancore.vue.libs` (v1.8.0)
+  - add `enableCancel` parameter to forms
 
 - add `evan-form-control-checkbox` component with custom checkbox styles
 - add `evan-permissions` component to handle permissions UI for single data set
 - add `evan-permissions-editor` component to handle permissions UI for a set of data sets
 
 ### Fixes
+- `evancore.vue.libs` (v1.8.0)
+  - fix profile preview default design
 
 ### Deprecations
 

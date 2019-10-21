@@ -25,7 +25,7 @@
     </evan-logout>
     <slot name="header">
       <evan-profile-preview
-        class="p-4"
+        class="p-4" size="sm"
         :address="$store.state.runtime.activeAccount">
       </evan-profile-preview>
     </slot>
