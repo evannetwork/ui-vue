@@ -97,6 +97,11 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   @Prop() onlyForm: boolean;
 
   /**
+   * Hides / shows the cancel button
+   */
+  @Prop({ default: true }) enableCancel: boolean;
+
+  /**
    * Function called, when share button is clicked.
    */
   @Prop({

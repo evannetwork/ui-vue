@@ -79,7 +79,7 @@
             <evan-button
               class="mr-3"
               type="secondary"
-              v-if="!isLoading"
+              v-if="!isLoading && enableCancel"
               @click="cancel"
               :label="'_evan.cancel' | translate"
             />
