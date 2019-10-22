@@ -33,7 +33,7 @@
       <div class="d-flex flex-column justify-content-center ml-3"
         v-if="size === 'default' || size === 'sm'">
         <a class="force-oneline account-name"
-          :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`">
+          :href="`${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/${ address }/detail`">
           <b class="text-dark">
             {{ userInfo.accountName }}
           </b>
@@ -45,7 +45,7 @@
       <div v-else-if="size === 'lg'" class="d-flex flex-column justify-content-between p-3 w-100">
         <template v-if="!isEditMode">
           <a class="force-oneline account-name"
-            :href="canEdit() ? null : `${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/detail/${ address }`"
+            :href="canEdit() ? null : `${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/${ address }/detail`"
             @click="startEditing();">
             <h2 class="font-weight-semibold mb-0">
               {{ userInfo.accountName }}
