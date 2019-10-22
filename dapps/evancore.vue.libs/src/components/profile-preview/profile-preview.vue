@@ -46,7 +46,7 @@
         <template v-if="!isEditMode">
           <a class="force-oneline account-name"
             :href="canEdit() ? null : `${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/${ address }/detail`"
-            @click="startEditing();">
+            @click="userInfo.profileType !== 'company' && startEditing();">
             <h2 class="font-weight-semibold mb-0">
               {{ userInfo.accountName }}
             </h2>
@@ -57,7 +57,16 @@
         </template>
 
         <template v-else>
+          <a
+            class="force-oneline account-name"
+            v-if="userInfo.profileType === 'company'"
+            :href="canEdit() ? null : `${ dapp.baseUrl }/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/${ address }/detail`">
+            <h2 class="font-weight-semibold mb-0">
+              {{ userInfo.accountName }}
+            </h2>
+          </a>
           <evan-form-control-input
+            v-else
             id="accountName"
             ref="accountName"
             type="text"

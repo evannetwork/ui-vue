@@ -36,6 +36,11 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 @Component({ })
 export default class SidePanelComponent extends mixins(EvanComponent) {
   /**
+   * Which identifier should be used within the vuex store, to handle open states.
+   */
+  @Prop({ }) id: string;
+
+  /**
    * Where should the popup should been attached? (left / right)
    */
   @Prop({ default: '400px' }) width: string;
@@ -56,11 +61,6 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: null }) mountId: string;
 
   /**
-   * Use property to control open or closed state.
-   */
-  @Prop({ default: false }) isOpen: boolean;
-
-  /**
    * Animation stuff
    */
   isShown = false;
@@ -75,20 +75,6 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    */
   waitForRendered;
 
-  @Watch('isOpen')
-    onStateChange(isOpen: boolean, wasOpen: boolean) {
-      if (isOpen === wasOpen) {
-        return;
-      }
-
-      if (isOpen && !wasOpen) {
-        this.show();
-      } else {
-        this.hide();
-      }
-    }
-
-
   mounted() {
     if (this.mountId) {
       this.$el.parentNode.removeChild(this.$el);
@@ -96,14 +82,29 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       sideBar.appendChild(this.$el);
     }
 
-    if (this.isOpen) {
+    if (this.$store.state.uiState.swipePanel === this.id) {
       this.show();
     }
+
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'toggleSidePanel') {
+        if (state.uiState.swipePanel === this.id) {
+          this.show();
+        } else {
+          this.hide();
+        }
+      }
+    });
   }
 
   beforeDestroy() {
     if (this.mountId) {
       const sideBar = document.getElementById(this.mountId).innerHTML = '';
+
+      // close it on destroy
+      if (this.isRendered) {
+        this.$store.commit('toggleSidePanel', this.id);
+      }
     }
   }
 
@@ -111,33 +112,39 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Renders the modal element and shows it animated.
    */
   show() {
-    this.isRendered = true;
+    if (!this.isShown) {
+      this.isRendered = true;
+      this.$store.state.uiState.swipePanel = this.id;
 
-    // wait until swipe panel is rendered and show it
-    this.waitForRendered = setInterval(() => {
-      if (this.$el.querySelectorAll('.evan-swipe-panel').length > 0) {
-        clearInterval(this.waitForRendered);
-        setTimeout(() => this.isShown = true);
-      }
-    }, 10);
+      // wait until swipe panel is rendered and show it
+      this.waitForRendered = setInterval(() => {
+        if (this.$el.querySelectorAll('.evan-swipe-panel').length > 0) {
+          clearInterval(this.waitForRendered);
+          setTimeout(() => this.isShown = true);
+        }
+      }, 10);
+    }
   }
 
   /**
    * Remove the modal element and hide it animated.
    */
   hide($event = null) {
-    this.isShown = false;
-    // it the panel was faster closed than opened, remove the wait for rendered watcher
-    clearInterval(this.waitForRendered);
+    if (this.isShown) {
+      this.isShown = false;
+      this.$store.state.uiState.swipePanel = '';
+      // it the panel was faster closed than opened, remove the wait for rendered watcher
+      clearInterval(this.waitForRendered);
 
-    // remove the swipe panel content
-    setTimeout(() => this.isRendered = false, 400);
+      // remove the swipe panel content
+      setTimeout(() => this.isRendered = false, 400);
 
-    // tell parent component, that the swipe-panel is closing
-    this.$emit('close');
+      // tell parent component, that the swipe-panel is closing
+      this.$emit('close');
 
-    if ($event) {
-      $event.stopPropagation();
+      if ($event) {
+        $event.stopPropagation();
+      }
     }
   }
 }

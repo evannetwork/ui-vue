@@ -89,7 +89,8 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
     mutations: {
       toggleSidePanel (state, type = 'left') {
         // open the desired one
-        state.uiState.swipePanel = state.uiState.swipePanel === type ? '' : type;
+        state.uiState.swipePanel = state.uiState.swipePanel && state.uiState.swipePanel === type ?
+          '' : type;
       }
     }
   });
