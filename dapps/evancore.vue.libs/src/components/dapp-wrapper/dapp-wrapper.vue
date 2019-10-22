@@ -27,7 +27,7 @@
 
     <div class="dapp-wrapper-body"
       :class="{
-        'remove-header': onboarding || login,
+        'pt-0': onboarding || login,
       }"
       v-if="!loading">
       <div class="container w-100"
