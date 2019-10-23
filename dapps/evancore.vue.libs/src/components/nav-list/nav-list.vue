@@ -19,38 +19,33 @@
 
 <template>
   <div class="evan-nav-list">
-    <evan-logout ref="logoutComp"
-      disableButton="true"
-      v-if="showLogout">
-    </evan-logout>
+    <evan-logout ref="logoutComp" disableButton="true" v-if="showLogout"></evan-logout>
     <slot name="header">
-      <evan-profile-preview
-        class="p-4" size="sm"
-        :address="$store.state.runtime.activeAccount">
-      </evan-profile-preview>
+      <evan-profile-preview class="p-4" size="sm" :address="$store.state.runtime.activeAccount"></evan-profile-preview>
     </slot>
     <div class="nav-entries">
-      <template
-        v-for="(entry, index) in entries">
-        <span v-if="!entry" class="my-auto"></span>
-        <a
-          v-else
-          :id="entry.id"
-          :class="[
+      <template v-for="(entry, index) in entries">
+        <div :key="index">
+          <span v-if="!entry" class="my-auto"></span>
+          <a
+            v-else
+            :id="entry.id"
+            :class="[
             { 'active': activeEntry === index },
             `entry-${ index + 1 }`
           ]"
-          :href="entry.href"
-          @click="entry.action && entry.action();">
-          <i class="mr-3" :class="entry.icon"></i>
-          {{ entry.text | translate }}
-        </a>
+            :href="entry.href"
+            @click="entry.action && entry.action();"
+          >
+            <i class="mr-3" :class="entry.icon"></i>
+            {{ entry.text | translate }}
+          </a>
+        </div>
       </template>
     </div>
 
     <div class="nav-entries" style="flex: 0">
-      <a id="evan-logout"
-        @click="$refs.logoutComp.logout();">
+      <a id="evan-logout" @click="$refs.logoutComp.logout();">
         <i class="mr-3 mdi mdi-logout"></i>
         {{ '_evan.logout' | translate }}
       </a>

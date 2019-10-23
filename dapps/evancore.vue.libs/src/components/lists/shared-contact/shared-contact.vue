@@ -22,7 +22,7 @@ the following URL: https://evan.network/license/
     <evan-profile-preview :address="item.accountId" size="sm" />
     <div class="permissions">{{ `_evan.permission.type.${item.permissionType}` | translate }}</div>
     <div class="actions">
-      <div class="remove">
+      <div class="remove" @click="handleRemove()">
         <i class="mdi mdi-close-circle" />
       </div>
     </div>
