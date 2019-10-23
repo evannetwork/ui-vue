@@ -26,6 +26,9 @@
     <evan-logout ref="evanLogout" :disableButton="true"></evan-logout>
 
     <div class="dapp-wrapper-body"
+      :class="{
+        'pt-0': onboarding || login,
+      }"
       v-if="!loading">
       <div class="container w-100"
         v-if="!supportedBrowser">

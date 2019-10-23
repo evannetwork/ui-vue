@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Update Permissions</h3>
+    <h3>{{ '_evan.sharing.permissionsTitle' | translate }}</h3>
     <p>
       {{ description }}
     </p>
@@ -32,22 +32,22 @@
               :updatePermissions="updateDataSetPermissions"
             />
           </div>
-
-          <div class="panel-footer" v-if="selectedContact">
-            <evan-button type="secondary" :label="$t('_evan.cancel')" @click="reset" />
-            <evan-button
-              type="primary"
-              :label="$t('_evan.sharing.update')"
-              :disabled="!permissionsChanged"
-              @click="writePermissions"
-            />
-          </div>
       </template>
     </template>
     <div v-else>
       <p class="text-warning">
         {{ '_evan.sharing.noContacts' | translate}}
       </p>
+    </div>
+
+    <div class="panel-footer">
+      <evan-button type="secondary" :label="$t('_evan.cancel')" @click="reset" />
+      <evan-button
+        type="primary"
+        :label="$t('_evan.sharing.update')"
+        :disabled="!permissionsChanged"
+        @click="writePermissions"
+      />
     </div>
 
   </div>
