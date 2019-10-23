@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: flex-end;
   border-top: 1px solid cssVar('border-color-2');
+  bottom: 0;
+  position: absolute;
 
   button.btn-primary {
     width: 100%;

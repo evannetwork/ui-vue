@@ -25,7 +25,7 @@ import { deepEqual } from '@evan.network/ui';
 import { ContactInterface, DataSetPermissionsInterface } from '../../interfaces';
 import EvanComponent from '../../component';
 
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
@@ -66,7 +66,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
    */
   @Prop({
     default: null
-  }) selectedContact: ContactInterface;
+  }) selectedContact: string;
 
   /**
    * Initially pre-selected contact object.
@@ -74,6 +74,15 @@ class PermissionsEditor extends mixins(EvanComponent) {
   @Prop({
     default: 'To share your profile information with another contact, fill out the form below and click on “Share Profile Data”'
   }) description: string;
+
+
+  @Watch('selectedContact')
+    onSelectedContactChanged(val: string) {
+      if (typeof val === 'string') {
+        val = this.contacts.filter( contact => contact.value = val);
+      }
+    }
+
 
   async created() {
     this.contacts = await this.loadAddressBook();
@@ -94,10 +103,12 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   /**
-   * Set initial statet again.
+   * Set initial statet again and close the panel.
    */
   reset() {
     this.dataSets = clone(this.initialPermissions);
+
+    this.$store.commit('toggleSidePanel', 'right'); // TODO: replace "right" by new panel id
   }
 
   /**
@@ -153,7 +164,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
         'label': addressBook[key].alias,
         'value': key
       };
-    });
+    }).filter(entry => entry.value !== runtime.activeAccount);
   }
 }
 
