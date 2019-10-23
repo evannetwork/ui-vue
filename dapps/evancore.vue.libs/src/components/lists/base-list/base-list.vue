@@ -19,7 +19,7 @@ the following URL: https://evan.network/license/
 
 <template>
   <ul class="evan-base-list">
-  <li v-for="(item, index) in data" :key="index">
+  <li v-for="(item, index) in data" :key="index" :class="{'isSelected': item === selectedItem}">
       <slot name="item" :item="item"></slot>
   </li>
   </ul>
