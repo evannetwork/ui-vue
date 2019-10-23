@@ -40,6 +40,11 @@ class EvanBaseList extends mixins(EvanComponent) {
     type: Array,
     required: true,
   }) data: Array<any>;
+
+  /**
+   * selected list item
+   */
+  @Prop({}) selectedItem: Object;
 }
 
 export default EvanBaseList;

@@ -37,6 +37,11 @@ class EvanSharedContact extends mixins(EvanComponent) {
     type: Object,
     required: true,
   }) item: any;
+
+  @Prop({
+    type: Function,
+    required: true
+  }) handleRemove: Function;
 }
 
 export default EvanSharedContact;
