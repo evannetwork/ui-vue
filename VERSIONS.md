@@ -12,6 +12,7 @@
 - `evancore.vue.libs` (v1.8.0)
   - fix profile preview default design
   - add vuex store for handling uiStates
+  - add correct swipe panel event handling and persistent mountId management
 
 
 ### Deprecations
