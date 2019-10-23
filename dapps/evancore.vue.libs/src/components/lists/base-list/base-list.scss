@@ -33,10 +33,6 @@ the following URL: https://evan.network/license/
     margin: 2px 0;
     cursor: pointer;
 
-    &.isSelected, &:hover.isSelected {
-      border: 1px solid cssVar('primary')
-    }
-
     &:hover {
       background-color: cssVar('gray-100');
       border: 1px solid cssVar('gray-200');
@@ -49,6 +45,10 @@ the following URL: https://evan.network/license/
           opacity: 1;
         }
       }
+    }
+
+    &.isSelected {
+      border: 1px solid cssVar('primary')
     }
 
     .actions {
