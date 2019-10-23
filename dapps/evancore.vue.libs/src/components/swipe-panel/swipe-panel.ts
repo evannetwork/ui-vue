@@ -75,36 +75,39 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    */
   waitForRendered;
 
-  mounted() {
-    if (this.mountId) {
-      this.$el.parentNode.removeChild(this.$el);
-      const sideBar = document.getElementById(this.mountId);
-      sideBar.appendChild(this.$el);
-    }
+  /**
+   * Original element that contains this element
+   */
+  originParentElement: any;
 
-    if (this.$store.state.uiState.swipePanel === this.id) {
-      this.show();
-    }
+  @Watch('mountId')
+  onChildChanged(val: string) {
+    this.mountIdChanged(val);
+  }
+
+  mounted() {
+    this.originParentElement = this.$el.parentElement;
+
+    // check for mount id and render it directly if wanted
+    this.mountIdChanged();
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'toggleSidePanel') {
-        if (state.uiState.swipePanel === this.id) {
-          this.show();
-        } else {
-          this.hide();
-        }
+        state.uiState.swipePanel === this.id ? this.show() : this.hide();
       }
     });
   }
 
   beforeDestroy() {
-    if (this.mountId) {
-      const sideBar = document.getElementById(this.mountId).innerHTML = '';
+    // clear parent element references to be sure, that gc is working
+    this.originParentElement = null;
 
-      // close it on destroy
-      if (this.isRendered) {
-        this.$store.commit('toggleSidePanel', this.id);
-      }
+    // close it on destroy
+    this.isRendered && this.hide();
+
+    // remove it from current mount id
+    if (this.mountId) {
+      this.$el.parentNode.removeChild(this.$el);
     }
   }
 
@@ -112,7 +115,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Renders the modal element and shows it animated.
    */
   show() {
-    if (!this.isShown) {
+    if (!this.mountId && !this.isShown) {
       this.isRendered = true;
       this.$store.state.uiState.swipePanel = this.id;
 
@@ -130,9 +133,10 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Remove the modal element and hide it animated.
    */
   hide($event = null) {
-    if (this.isShown) {
+    if (!this.mountId && this.isShown) {
       this.isShown = false;
       this.$store.state.uiState.swipePanel = '';
+
       // it the panel was faster closed than opened, remove the wait for rendered watcher
       clearInterval(this.waitForRendered);
 
@@ -144,6 +148,29 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
 
       if ($event) {
         $event.stopPropagation();
+      }
+    }
+  }
+
+  /**
+   * Check if a mount id is specified and render it directly. Else apply swipe logic
+   */
+  mountIdChanged(mountId = this.mountId) {
+    if (mountId) {
+      document.getElementById(mountId).appendChild(this.$el);
+      this.isRendered = true;
+      this.isShown = true;
+    } else {
+      // move the element to it's original position
+      if (this.originParentElement !== this.$el.parentElement) {
+        this.originParentElement.appendChild(this.$el);
+      }
+
+      if (this.id && this.$store.state.uiState.swipePanel === this.id) {
+        this.show();
+      } else {
+        this.isRendered = false;
+        this.isShown = false;
       }
     }
   }
