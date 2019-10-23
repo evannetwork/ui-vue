@@ -43,8 +43,7 @@
     left: 0;
 
     // circle mask
-    &.user,
-    &.unspecified {
+    &.user {
       img,
       .image-placeholder {
         width: var(--size);
@@ -55,16 +54,6 @@
       +.verification-icon {
         bottom: 0;
         right: 0;
-      }
-    }
-    &.unspecified {
-      border: 1px solid cssVar('border-color');
-      background: white;
-      border-radius: 50%;
-
-      .image-placeholder {
-        background-color: cssVar('bg-level-3');
-        color: cssVar('border-color');
       }
     }
 
