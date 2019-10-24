@@ -27,7 +27,6 @@ import EvanComponent from '../../component';
 
 import { Prop, Watch } from 'vue-property-decorator';
 
-
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
 
 @Component({ })
@@ -135,10 +134,10 @@ class PermissionsEditor extends mixins(EvanComponent) {
   async writePermissions() {
     this.isLoading = true;
 
-    const accountId = this.selectedContact;
+    // const accountId = typeof this.selectedContact === 'string' ? this.selectedContact : this.selectedContact.value;
     const runtime = (<any>this).getRuntime();
 
-    await this.updatePermissions(runtime, accountId, this.dataSets, this.initialPermissions)
+    await this.updatePermissions(runtime, this.selectedContact, this.dataSets, this.initialPermissions)
       .catch((e: Error) => {
         console.log('Error writing permissions', e.message);
       });
