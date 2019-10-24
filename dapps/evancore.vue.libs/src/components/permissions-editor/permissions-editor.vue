@@ -21,7 +21,7 @@
       </template>
       <template v-else>
          <p v-if="selectedContact" class="mt-6 mb-0">
-            {{ $t('_evan.sharing.defineFor', { contactName: selectedContact.label }) }}
+            {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
           </p>
 
           <div v-for="(val, dataSetId) in dataSets" :key="dataSetId">

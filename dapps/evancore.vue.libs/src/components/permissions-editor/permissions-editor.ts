@@ -163,6 +163,12 @@ class PermissionsEditor extends mixins(EvanComponent) {
       };
     }).filter(entry => entry.value !== runtime.activeAccount);
   }
+
+  getContactLabel(contactId: string): string {
+    const { label } = this.contacts.find(item => item.value === contactId);
+
+    return label;
+  }
 }
 
 export default PermissionsEditor;
