@@ -44,8 +44,7 @@ export default class VSelectComponent extends mixins(EvanControlComponent) {
   @Prop({
     type: Function,
     default: (option) => {
-      if (option && typeof option === 'object' && option !== null &&
-          option.hasOwnProperty('value')) {
+      if (option && typeof option === 'object' && option.hasOwnProperty('value')) {
         return option.value;
       } else {
         return option;
