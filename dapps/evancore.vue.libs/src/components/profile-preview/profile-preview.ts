@@ -111,6 +111,12 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     let accountDetails: any = { profileType: 'unspecified' };
     try {
       accountDetails = (await runtime.profile.getProfileProperty('accountDetails')) || accountDetails;
+
+      // for companies load directly the company name and disable edit mode
+      if (accountDetails.profileType === 'company') {
+        const registrationData = (await runtime.profile.getProfileProperty('registration'));
+        accountDetails.accountName = registrationData.company;
+      }
     } catch (ex) {
       console.dir(ex);
     }
