@@ -38,7 +38,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   /**
    * Which identifier should be used within the vuex store, to handle open states.
    */
-  @Prop({ }) id: string;
+  @Prop({ }) panelId: string;
 
   /**
    * Where should the popup should been attached? (left / right)
@@ -93,7 +93,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'toggleSidePanel') {
-        state.uiState.swipePanel === this.id ? this.show() : this.hide();
+        state.uiState.swipePanel === this.panelId ? this.show() : this.hide();
       }
     });
   }
@@ -117,7 +117,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   show() {
     if (!this.mountId && !this.isShown) {
       this.isRendered = true;
-      this.$store.state.uiState.swipePanel = this.id;
+      this.$store.state.uiState.swipePanel = this.panelId;
 
       // wait until swipe panel is rendered and show it
       this.waitForRendered = setInterval(() => {
@@ -166,7 +166,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
         this.originParentElement.appendChild(this.$el);
       }
 
-      if (this.id && this.$store.state.uiState.swipePanel === this.id) {
+      if (this.panelId && this.$store.state.uiState.swipePanel === this.panelId) {
         this.show();
       } else {
         this.isRendered = false;
