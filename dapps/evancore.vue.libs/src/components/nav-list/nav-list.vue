@@ -56,4 +56,3 @@
   import Component from './nav-list.ts';
   export default Component;
 </script>
-
