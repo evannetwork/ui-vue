@@ -37,10 +37,10 @@ import EvanComponent from '../../component';
 @Component({})
 class ProfilePicture extends mixins(EvanComponent) {
   /**
-   * Profile type that should be used (unspecified, user, company, device)
+   * Profile type that should be used (user, company, device)
    */
   @Prop({
-    default: 'unspecified'
+    default: 'user'
   }) type: string;
 
   /**

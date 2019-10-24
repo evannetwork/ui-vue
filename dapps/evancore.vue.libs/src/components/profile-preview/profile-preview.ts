@@ -108,7 +108,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    */
   async loadUserInfo() {
     const runtime = (<any>this).getRuntime();
-    let accountDetails: any = { profileType: 'unspecified' };
+    let accountDetails: any = { profileType: 'user' };
     try {
       accountDetails = (await runtime.profile.getProfileProperty('accountDetails')) || accountDetails;
 
@@ -123,7 +123,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     this.userInfo = accountDetails;
 
     if (!this.userInfo.profileType) {
-      this.userInfo.profileType = 'unspecified';
+      this.userInfo.profileType = 'user';
     }
 
     // use old alias logic
