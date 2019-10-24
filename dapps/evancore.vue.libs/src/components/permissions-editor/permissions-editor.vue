@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>{{ `${i18nScope}.sharing.permissionsTitle` | translate }}</h3>
+    <h3>{{ `${i18nScope}.permissionsTitle` | translate }}</h3>
     <p>
-      {{ `${i18nScope}.sharing.description` | translate }}
+      {{ `${i18nScope}.description` | translate }}
     </p>
 
     <template v-if="contacts && contacts.length">
@@ -30,6 +30,7 @@
               :permissions="val.permissions"
               :dataSetId="dataSetId"
               :updatePermissions="updateDataSetPermissions"
+              :i18nScope="i18nScope"
             />
           </div>
       </template>

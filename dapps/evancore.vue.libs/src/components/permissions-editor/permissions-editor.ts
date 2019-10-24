@@ -71,7 +71,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
    * General translation scope.
    */
   @Prop({
-    default: '_evan'
+    default: '_evan.sharing'
   }) i18nScope: string;
 
   @Watch('selectedContact')

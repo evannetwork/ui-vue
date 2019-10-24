@@ -55,6 +55,13 @@ class Permissions extends mixins(EvanComponent) {
     required: true
   }) permissions: PermissionsInterface;
 
+  /**
+   * The dataset id.
+   */
+  @Prop({
+    default: '_evan'
+  }) i18nScope: string;
+
   @Prop({}) updatePermissions: Function;
 
   created() {
@@ -120,6 +127,12 @@ class Permissions extends mixins(EvanComponent) {
    */
   allPermissions(mode: 'read'|'readWrite', access = this.permissions): boolean {
     return Object.keys(access).every(key => access[key][mode] === true);
+  }
+
+  getTranslation(key: string): string {
+    const translated = this.$t(`${this.i18nScope}.${key}`);
+
+    return translated !== `${this.i18nScope}.${key}` ? translated : key;
   }
 }
 
