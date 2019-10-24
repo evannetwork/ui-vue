@@ -20,30 +20,31 @@
   https://evan.network/license/
 */
 
-@import "~@evan.network/ui/src/style/utils";
+@import '~@evan.network/ui/src/style/utils';
 
 .evan-swipe-panel {
+  position: relative;
   z-index: 1000;
   top: 0;
 
-  width: cssVar("swipe-panel-size");
+  width: cssVar('swipe-panel-size');
   height: 100vh;
   padding: 2em;
 
-  background-color: cssVar("bg-inverted");
+  background-color: cssVar('bg-inverted');
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.15);
-  position: relative;
 
   & {
-    &,h1,h2,h3,h4,h5,span,p,li,b,label,small {
-      color: cssVar("text-color-inverted");
+    &, h1, h2, h3, h4, h5, span, p, li, b, label, small {
+      color: cssVar('text-color-inverted');
     }
   }
 
   .light & {
-    &,h1,h2,h3,h4,h5,span,p,li,b,label,small {
-      background-color: cssVar("body-bg");
-      color: cssVar("text-color");
+    background-color: cssVar('body-bg');
+
+    &, h1, h2, h3, h4, h5, span, p, li, b, label, small {
+      color: cssVar('text-color');
     }
   }
 
@@ -61,13 +62,14 @@
 
   @media (max-width: 767.98px) {
     &.show {
-      right: 100%;
-      width: 100%;
-      left: 0;
-      top: 0;
-      right: 0;
       position: fixed;
       z-index: 1030;
+      top: 0;
+      right: 100%;
+      right: 0;
+      left: 0;
+
+      width: 100%;
     }
   }
 

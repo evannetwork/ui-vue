@@ -21,8 +21,9 @@ the following URL: https://evan.network/license/
   <evan-form-control v-bind="$props">
     <evan-v-select
       :id="id"
-      :value="value"
       :label="optionLabel"
+      :reduce="reduce"
+      :value="value"
       @search:blur="$emit('blur')"
       @search:focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event)"
