@@ -82,11 +82,17 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       uiLibBaseUrl,
       dapp: dappToLoad,
       uiState: {
+        profile: {
+          selectedSharedContacts: [],
+        },
         swipePanel: ''
       },
       ...options.state,
     },
     mutations: {
+      setSelectedSharedContacts (state, contacts = []) {
+        state.uiState.profile.selectedSharedContacts = contacts;
+      },
       toggleSidePanel (state, type = 'left') {
         // open the desired one
         state.uiState.swipePanel = state.uiState.swipePanel && state.uiState.swipePanel === type ?

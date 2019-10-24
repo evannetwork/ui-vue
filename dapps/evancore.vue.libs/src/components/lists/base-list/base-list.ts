@@ -41,10 +41,13 @@ class EvanBaseList extends mixins(EvanComponent) {
     required: true,
   }) data: Array<any>;
 
-  /**
-   * selected list item
-   */
-  @Prop({}) selectedItem: Object;
+  @Prop({
+    type: Function
+  }) isSelectedCallback: Function;
+
+  @Prop({
+    type: Function
+  }) itemClickedCallback: Function;
 }
 
 export default EvanBaseList;
