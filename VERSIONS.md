@@ -13,7 +13,7 @@
   - fix profile preview default design
   - add vuex store for handling uiStates
   - add correct swipe panel event handling and persistent mountId management
-
+- update gulp build scripts to be compatible node 12
 
 ### Deprecations
 
