@@ -31,9 +31,9 @@
           :id="entry.id"
           :key="index"
           :class="[
-          { 'active': activeEntry === index },
-          `entry-${ index + 1 }`
-        ]"
+            { 'active': activeEntry === index },
+            `entry-${ index + 1 }`
+          ]"
           :href="entry.href"
           @click="hideSidebar2() && (entry.action && entry.action());"
         >
