@@ -69,20 +69,18 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }) selectedContact: string;
 
   /**
-   * Initially pre-selected contact object.
+   * General translation scope.
    */
   @Prop({
-    default: 'To share your profile information with another contact, fill out the form below and click on “Share Profile Data”'
-  }) description: string;
-
+    default: '_evan'
+  }) i18nScope: string;
 
   @Watch('selectedContact')
-    onSelectedContactChanged(val: string) {
-      if (typeof val === 'string') {
-        val = this.contacts.filter( contact => contact.value = val);
+    onSelectedContactChanged(val: string, oldVal: string) {
+      if (val !== oldVal) {
+        this.getPermissionsForContact();
       }
     }
-
 
   async created() {
     this.contacts = await this.loadAddressBook();
@@ -115,13 +113,13 @@ class PermissionsEditor extends mixins(EvanComponent) {
    * Calls the `loadPermissions` function from properties with current contact id.
    */
   async getPermissionsForContact() {
-    if (!this.selectedContact || !this.selectedContact.value) {
+    if (!this.selectedContact || typeof this.selectedContact !== 'string') {
       return;
     }
 
     this.isLoading = true;
     this.dataSets = null;
-    this.dataSets = await this.loadPermissions(this.selectedContact.value)
+    this.dataSets = await this.loadPermissions(this.selectedContact)
       .catch((e: Error) => {
         console.log('Error loading permissions', e.message);
         this.isLoading = false;
@@ -137,7 +135,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
   async writePermissions() {
     this.isLoading = true;
 
-    const accountId = this.selectedContact.value;
+    const accountId = this.selectedContact;
     const runtime = (<any>this).getRuntime();
 
     await this.updatePermissions(runtime, accountId, this.dataSets, this.initialPermissions)

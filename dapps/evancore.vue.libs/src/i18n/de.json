@@ -104,6 +104,7 @@
       "selectContact": "Kontakt für die Freigabe auswählen",
       "defineFor": "Setzen Sie die Zugriffsrechte für ${contactName}.",
       "permissionsTitle": "Zugriffsrechte",
+      "description": "Um Ihre Daten mit anderen Kontakten zu teilen, wählen Sie die Optionen unten und klicken Sie auf “Freigaben aktualisieren”",
       "noContacts": "Sie haben keine Kontakte in Ihrem Adressbuch, bitte fügen Sie zuerst einen Kontakt hinzu.",
       "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden."
     },

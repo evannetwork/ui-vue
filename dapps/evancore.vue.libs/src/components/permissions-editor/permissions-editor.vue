@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>{{ '_evan.sharing.permissionsTitle' | translate }}</h3>
+    <h3>{{ `${i18nScope}.sharing.permissionsTitle` | translate }}</h3>
     <p>
-      {{ description }}
+      {{ `${i18nScope}.sharing.description` | translate }}
     </p>
 
     <template v-if="contacts && contacts.length">
