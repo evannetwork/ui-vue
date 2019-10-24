@@ -82,22 +82,21 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       uiLibBaseUrl,
       dapp: dappToLoad,
       uiState: {
-        swipePanel: {
-          left: false,
-          right: false
-        },
         profile: {
           selectedSharedContacts: [],
         },
+        swipePanel: ''
       },
       ...options.state,
     },
     mutations: {
-      toggleSidePanel (state, position = 'left') {
-        state.uiState.swipePanel[position] = !state.uiState.swipePanel[position];
-      },
       setSelectedSharedContacts (state, contacts = []) {
         state.uiState.profile.selectedSharedContacts = contacts;
+      },
+      toggleSidePanel (state, type = 'left') {
+        // open the desired one
+        state.uiState.swipePanel = state.uiState.swipePanel && state.uiState.swipePanel === type ?
+          '' : type;
       }
     }
   });
