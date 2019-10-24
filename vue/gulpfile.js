@@ -88,4 +88,4 @@ gulp.task('build', async function () {
   });
 });
 
-gulp.task('default', [ 'build' ]);
+gulp.task('default', gulp.series([ 'build' ]));
