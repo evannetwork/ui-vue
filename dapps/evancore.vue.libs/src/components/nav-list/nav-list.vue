@@ -35,7 +35,7 @@
             `entry-${ index + 1 }`
           ]"
             :href="entry.href"
-            @click="entry.action && entry.action();"
+            @click="hideSidebar2() && (entry.action && entry.action());"
           >
             <i class="mr-3" :class="entry.icon"></i>
             {{ entry.text | translate }}
