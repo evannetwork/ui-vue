@@ -25,22 +25,21 @@
     </slot>
     <div class="nav-entries">
       <template v-for="(entry, index) in entries">
-        <div :key="index">
-          <span v-if="!entry" class="my-auto"></span>
-          <a
-            v-else
-            :id="entry.id"
-            :class="[
+        <span v-if="!entry" class="my-auto" :key="index"></span>
+        <a
+          v-else
+          :id="entry.id"
+          :key="index"
+          :class="[
             { 'active': activeEntry === index },
             `entry-${ index + 1 }`
           ]"
-            :href="entry.href"
-            @click="hideSidebar2() && (entry.action && entry.action());"
-          >
-            <i class="mr-3" :class="entry.icon"></i>
-            {{ entry.text | translate }}
-          </a>
-        </div>
+          :href="entry.href"
+          @click="hideSidebar2() && (entry.action && entry.action());"
+        >
+          <i class="mr-3" :class="entry.icon"></i>
+          {{ entry.text | translate }}
+        </a>
       </template>
     </div>
 
@@ -57,4 +56,3 @@
   import Component from './nav-list.ts';
   export default Component;
 </script>
-
