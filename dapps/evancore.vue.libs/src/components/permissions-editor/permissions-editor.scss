@@ -2,11 +2,12 @@
 
 .panel-footer {
   display: flex;
-  padding: 24px 0;
+  padding: 24px;
   align-items: center;
   justify-content: flex-end;
   border-top: 1px solid cssVar('border-color-2');
   bottom: 0;
+  left: 0;
   position: absolute;
 
   button.btn-primary {
