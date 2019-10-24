@@ -12,6 +12,7 @@
 ### Fixes
 - `evancore.vue.libs` (v1.8.0)
   - fix profile preview default design
+- update gulp build scripts to be compatible node 12
 
 ### Deprecations
 
