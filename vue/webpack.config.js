@@ -47,8 +47,10 @@ module.exports = function(
   prodMode = false,
   externals = getExternals(),
 ) {
-  const packageJson = require(path.resolve(`${ dist }/../package.json`));
+  // enable prodMode, when node_env was set
+  prodMode = prodMode || process.env.NODE_ENV === 'production';
 
+  const packageJson = require(path.resolve(`${ dist }/../package.json`));
   const webpackConfig = {
     entry: './src/index.ts',
     externals: externals,
@@ -135,7 +137,7 @@ module.exports = function(
     }
   }
 
-  if (process.env.NODE_ENV === 'production' || prodMode) {
+  if (prodMode) {
     webpackConfig.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
     webpackConfig.plugins = (webpackConfig.plugins || []).concat([
@@ -157,13 +159,7 @@ module.exports = function(
   }
 
   // only rebuild d.ts files when we are running in production mode or they does not exists
-  if (!transpileOnly && 
-      (
-        process.env.NODE_ENV === 'production' ||
-        prodMode ||
-        !fs.existsSync(`${ dist }/${ name }.d.ts`)
-      )
-    ) {
+  if (!transpileOnly && (prodMode || !fs.existsSync(`${ dist }/${ name }.d.ts`))) {
     webpackConfig.plugins.push(new DeclarationBundlerPlugin({
       moduleName: `'${ packageJson.name }'`,
       out: `${ name }.d.ts`,
