@@ -7,6 +7,7 @@
   - add `evan-form-control-checkbox` component with custom checkbox styles
   - add `evan-permissions` component to handle permissions UI for single data set
   - add `evan-permissions-editor` component to handle permissions UI for a set of data sets
+  - allow functions in `evan-steps` disabled steps
 
 ### Fixes
 - `evancore.vue.libs` (v1.8.0)
