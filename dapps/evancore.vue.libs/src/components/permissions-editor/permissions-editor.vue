@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <h3>{{ `${i18nScope}.permissionsTitle` | translate }}</h3>
     <p>
       {{ `${i18nScope}.description` | translate }}
@@ -31,6 +31,7 @@
               :dataSetId="dataSetId"
               :updatePermissions="updateDataSetPermissions"
               :i18nScope="i18nScope"
+              :sortFilter="getSortFilter(dataSetId)"
             />
           </div>
       </template>

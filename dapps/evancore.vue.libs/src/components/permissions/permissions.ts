@@ -56,11 +56,18 @@ class Permissions extends mixins(EvanComponent) {
   }) permissions: PermissionsInterface;
 
   /**
-   * The dataset id.
+   * The i18n scope used for translations.
    */
   @Prop({
     default: '_evan'
   }) i18nScope: string;
+
+  /**
+   * The dataset id.
+   */
+  @Prop({
+    default: null
+  }) sortFilter: string[];
 
   @Prop({}) updatePermissions: Function;
 
@@ -69,9 +76,13 @@ class Permissions extends mixins(EvanComponent) {
     this.readWriteAll = this.allPermissions('readWrite');
   }
 
+  /**
+   * Check if readAll or writeAll needs to be (un)checked and execute callback function to update permissions.
+   */
   updated() {
     this.readAll = this.allPermissions('read');
     this.readWriteAll = this.allPermissions('readWrite');
+    this.sortFilter = this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
     this.updatePermissions({ dataSetId: this.dataSetId, permissions: this.permissions });
   }
 
@@ -129,6 +140,11 @@ class Permissions extends mixins(EvanComponent) {
     return Object.keys(access).every(key => access[key][mode] === true);
   }
 
+  /**
+   * Return translation for a certain key and scope if set, otherwise only the key.
+   *
+   * @param key
+   */
   getTranslation(key: string): string {
     const translated = this.$t(`${this.i18nScope}.${key}`);
 

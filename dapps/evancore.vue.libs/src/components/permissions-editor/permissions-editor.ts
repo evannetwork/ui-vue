@@ -29,6 +29,10 @@ import { Prop, Watch } from 'vue-property-decorator';
 
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
 
+interface SortFiltersInterface {
+  [key: string]: string[];
+}
+
 @Component({ })
 class PermissionsEditor extends mixins(EvanComponent) {
   contacts = null;
@@ -73,6 +77,19 @@ class PermissionsEditor extends mixins(EvanComponent) {
   @Prop({
     default: '_evan.sharing'
   }) i18nScope: string;
+
+  /**
+   * An object with arrays of sorted keys for each contract id,
+   * which may be used to sort and filter the visible permissions.
+   *
+   * `{ '0xd65D17035bE5964E9842004458B2F90e0B7B6604': ['accountDetails', 'registration', 'contact'], ... };`
+   *
+   * Or a simple array of keys for convenience if only one datacontract is used.
+   *  `['accountDetails', 'registration', 'contact']`
+   */
+  @Prop({
+    default: null
+  }) sortFilters: SortFiltersInterface | string[];
 
   @Watch('selectedContact')
     onSelectedContactChanged(val: string, oldVal: string) {
@@ -167,6 +184,28 @@ class PermissionsEditor extends mixins(EvanComponent) {
     const { label } = this.contacts.find(item => item.value === contactId);
 
     return label;
+  }
+
+  /**
+   * Return the sort & filter array for the correct contract id.
+   * @param dataSetId
+   */
+  getSortFilter(contractId: string) {
+    if (!this.sortFilters) {
+      return null;
+    }
+
+    if (Array.isArray(this.sortFilters)) {
+      return this.sortFilters;
+    }
+
+    if (this.sortFilters[contractId] || this.sortFilters[contractId] === null) {
+      return this.sortFilters[contractId];
+    }
+
+    console.warn(`getSortFilter function can not determine the desired filter array for ${contractId}`);
+
+    return null;
   }
 }
 
