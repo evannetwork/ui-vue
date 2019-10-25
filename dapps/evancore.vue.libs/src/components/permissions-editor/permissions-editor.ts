@@ -17,7 +17,6 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
@@ -35,7 +34,7 @@ interface SortFiltersInterface {
 
 @Component({ })
 class PermissionsEditor extends mixins(EvanComponent) {
-  contacts = null;
+  contacts: ContactInterface[] = null;
   permissionsChanged = false;
   initialPermissions: DataSetPermissionsInterface[] = null;
   isLoading = false;
@@ -65,7 +64,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }) loadPermissions: Function;
 
   /**
-   * Initially pre-selected contact object.
+   * Initially pre-selected contact id.
    */
   @Prop({
     default: null

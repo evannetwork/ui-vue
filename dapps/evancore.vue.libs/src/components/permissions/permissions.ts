@@ -17,7 +17,6 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
