@@ -139,7 +139,7 @@ const buildDApp = async (dappDir) => {
       // navigate to the dapp dir and run the build command
       process.chdir(dappDir);
 
-      await runExec('npm run build', dappDir, 'stderr');
+      await runExec(require(`${ dappDir }/package.json`).scripts.build, dappDir, 'stderr');
 
       // clear timer and calculate time
       serves[dappName].lastDuration = Math.round((Date.now() - startTime) / 1000);
