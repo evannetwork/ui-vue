@@ -25,8 +25,8 @@
       <tbody>
         <tr v-for="(val, property) in permissions" :key="property">
           <td class="caption">
-            <span>{{ property }}</span>
-            <span>{{ val.fields ? val.fields.join(', ') : property }}</span>
+            <span>{{ getTranslation(property) }}</span>
+            <span>{{ val.fields ? val.fields.map(field =>  getTranslation(field)).join(', ') : property }}</span>
           </td>
           <td>
             <evan-form-control-checkbox
