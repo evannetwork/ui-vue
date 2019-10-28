@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>{{ '_evan.sharing.permissionsTitle' | translate }}</h3>
+    <h3>{{ `${i18nScope}.permissionsTitle` | translate }}</h3>
     <p>
-      {{ description }}
+      {{ `${i18nScope}.description` | translate }}
     </p>
 
     <template v-if="contacts && contacts.length">
@@ -21,7 +21,7 @@
       </template>
       <template v-else>
          <p v-if="selectedContact" class="mt-6 mb-0">
-            {{ $t('_evan.sharing.defineFor', { contactName: selectedContact.label }) }}
+            {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
           </p>
 
           <div v-for="(val, dataSetId) in dataSets" :key="dataSetId">
@@ -30,6 +30,7 @@
               :permissions="val.permissions"
               :dataSetId="dataSetId"
               :updatePermissions="updateDataSetPermissions"
+              :i18nScope="i18nScope"
             />
           </div>
       </template>
