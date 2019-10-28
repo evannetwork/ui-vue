@@ -17,7 +17,6 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
@@ -32,7 +31,7 @@ class Permissions extends mixins(EvanComponent) {
   readWriteAll = false;
 
   /**
-   * The dataset name to be displayed.
+   * The contract name to be displayed.
    */
   @Prop({
     default: '',
@@ -40,12 +39,12 @@ class Permissions extends mixins(EvanComponent) {
   }) label: string;
 
   /**
-   * The dataset id.
+   * The contract id.
    */
   @Prop({
     default: '',
     required: true
-  }) dataSetId: string;
+  }) contractId: string;
 
   /**
    * The permissions object.
@@ -56,11 +55,18 @@ class Permissions extends mixins(EvanComponent) {
   }) permissions: PermissionsInterface;
 
   /**
-   * The dataset id.
+   * The i18n scope used for translations.
    */
   @Prop({
     default: '_evan'
   }) i18nScope: string;
+
+  /**
+   * An array of strings which is used to sort and filter the dataSet keys.
+   */
+  @Prop({
+    default: null
+  }) sortFilter: string[];
 
   @Prop({}) updatePermissions: Function;
 
@@ -69,14 +75,18 @@ class Permissions extends mixins(EvanComponent) {
     this.readWriteAll = this.allPermissions('readWrite');
   }
 
+  /**
+   * Check if readAll or writeAll needs to be (un)checked and execute callback function to update permissions.
+   */
   updated() {
     this.readAll = this.allPermissions('read');
     this.readWriteAll = this.allPermissions('readWrite');
-    this.updatePermissions({ dataSetId: this.dataSetId, permissions: this.permissions });
+    this.sortFilter = this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
+    this.updatePermissions({ contractId: this.contractId, permissions: this.permissions });
   }
 
   /**
-   * Set all permissions in a dataset at once.
+   * Set all permissions in a contract at once.
    *
    * @param mode: 'read'|'readWrite'
    * @param flag: boolean
@@ -94,7 +104,7 @@ class Permissions extends mixins(EvanComponent) {
   /**
    * Set read property and remove write property if read permission is removed.
    *
-   * @param property: string - the name of the property within the dataset
+   * @param property: string - the name of the property within the contract
    * @param val: boolean - define wether the permission is given or not
    */
   setRead(property: string, val: boolean) {
@@ -108,7 +118,7 @@ class Permissions extends mixins(EvanComponent) {
   /**
    * Set write property and add read property if write permission is given.
    *
-   * @param property: string - the name of the property within the dataset
+   * @param property: string - the name of the property within the contract
    * @param val: boolean - define wether the permission is given or not
    */
   setReadWrite(property: string, val: boolean) {
@@ -120,7 +130,7 @@ class Permissions extends mixins(EvanComponent) {
   }
 
   /**
-   * Returns whether all permissions in a dataset where checked for a certain access mode.
+   * Returns whether all permissions in a contract where checked for a certain access mode.
    *
    * @param mode: 'read'|'readWrite' - for which access mode
    * @param access: PermissionsInterface - The permissions object to check, default `this.permissions`
@@ -129,6 +139,11 @@ class Permissions extends mixins(EvanComponent) {
     return Object.keys(access).every(key => access[key][mode] === true);
   }
 
+  /**
+   * Return translation for a certain key and scope if set, otherwise only the key.
+   *
+   * @param key
+   */
   getTranslation(key: string): string {
     const translated = this.$t(`${this.i18nScope}.${key}`);
 

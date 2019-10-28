@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <h3>{{ `${i18nScope}.permissionsTitle` | translate }}</h3>
     <p>
       {{ `${i18nScope}.description` | translate }}
@@ -24,13 +24,14 @@
             {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
           </p>
 
-          <div v-for="(val, dataSetId) in dataSets" :key="dataSetId">
+          <div v-for="(val, contractId) in containersPermissions" :key="contractId">
             <evan-permissions
               :label="val.label"
               :permissions="val.permissions"
-              :dataSetId="dataSetId"
-              :updatePermissions="updateDataSetPermissions"
+              :contractId="contractId"
+              :updatePermissions="updateContractPermissions"
               :i18nScope="i18nScope"
+              :sortFilter="getSortFilter(contractId)"
             />
           </div>
       </template>
