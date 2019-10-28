@@ -8,7 +8,7 @@
         <th>
           <small>{{ '_evan.read' | translate }}</small>
           <evan-form-control-checkbox
-            :id="`${dataSetId}-read-all`"
+            :id="`${contractId}-read-all`"
             v-model="readAll"
             @input="val => updateAll('read', val)"
           />
@@ -16,7 +16,7 @@
         <th>
           <small>{{ '_evan.write' | translate }}</small>
           <evan-form-control-checkbox
-            :id="`${dataSetId}-write-all`"
+            :id="`${contractId}-write-all`"
             v-model="readWriteAll"
             @input="val => updateAll('readWrite', val)"
           />
@@ -31,14 +31,14 @@
             </td>
             <td>
               <evan-form-control-checkbox
-                :id="`${dataSetId}-${property}-read`"
+                :id="`${contractId}-${property}-read`"
                 :value="permissions[property].read"
                 @input="val => setRead(property, val)"
               />
             </td>
             <td>
               <evan-form-control-checkbox
-                :id="`${dataSetId}-${property}-write`"
+                :id="`${contractId}-${property}-write`"
                 :value="permissions[property].readWrite"
                 @input="val => setReadWrite(property, val)"
               />

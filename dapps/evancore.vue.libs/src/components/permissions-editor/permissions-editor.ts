@@ -21,12 +21,12 @@ import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
 import { deepEqual } from '@evan.network/ui';
-import { ContactInterface, DataSetPermissionsInterface } from '../../interfaces';
+import { ContactInterface, ContainerPermissionsInterface } from '../../interfaces';
 import EvanComponent from '../../component';
 
 import { Prop, Watch } from 'vue-property-decorator';
 
-const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
+const clone = (obj: any) => JSON.parse(JSON.stringify(obj)); // TODO: import from common utils
 
 interface SortFiltersInterface {
   [key: string]: string[];
@@ -36,18 +36,18 @@ interface SortFiltersInterface {
 class PermissionsEditor extends mixins(EvanComponent) {
   contacts: ContactInterface[] = null;
   permissionsChanged = false;
-  initialPermissions: DataSetPermissionsInterface[] = null;
+  initialPermissions: ContainerPermissionsInterface[] = null;
   isLoading = false;
 
   @Prop({
     default: null
-  }) dataSets: DataSetPermissionsInterface[];
+  }) containersPermissions: ContainerPermissionsInterface[];
 
   /**
    * Function to write the updated permissions object.
    * Should return a promise resolving a `boolean`.
    *
-   * - updatePermissions(permissions: DataSetPermissionsInterface): Promise<boolean>
+   * - updatePermissions(permissions: ContainerPermissionsInterface): Promise<boolean>
    */
   @Prop({
     required: true
@@ -55,9 +55,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
   /**
    * Function to load the desired permissions object.
-   * Should return a promise resolving a `DataSetPermissionsInterface`.
+   * Should return a promise resolving a `ContainerPermissionsInterface`.
    *
-   * - loadPermissions(userId: string): Promise<DataSetPermissionsInterface>
+   * - loadPermissions(userId: string): Promise<ContainerPermissionsInterface>
    */
   @Prop({
     required: true
@@ -103,23 +103,23 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   /**
-   * Receives updated permissions from permissions component and passes it to current datasets.
+   * Receives updated permissions from permissions component and passes it to current contract.
    * Performs check whether it's different to the initial state.
    *
    * @param updates
-   *  - dataSetId: the id of the dataset which was changed
+   *  - contractId: the id of the contract which was changed
    *  - permissions: the updated permissions object
    */
-  updateDataSetPermissions({dataSetId, permissions}) {
-    this.dataSets[dataSetId].permissions = permissions;
-    this.permissionsChanged = !deepEqual(this.dataSets, this.initialPermissions);
+  updateContractPermissions({contractId, permissions}) {
+    this.containersPermissions[contractId].permissions = permissions;
+    this.permissionsChanged = !deepEqual(this.containersPermissions, this.initialPermissions);
   }
 
   /**
    * Set initial statet again and close the panel.
    */
   reset() {
-    this.dataSets = clone(this.initialPermissions);
+    this.containersPermissions = clone(this.initialPermissions);
 
     this.$store.commit('toggleSidePanel', 'right'); // TODO: replace "right" by new panel id
   }
@@ -133,31 +133,31 @@ class PermissionsEditor extends mixins(EvanComponent) {
     }
 
     this.isLoading = true;
-    this.dataSets = null;
-    this.dataSets = await this.loadPermissions(this.selectedContact)
+    this.containersPermissions = null;
+    this.containersPermissions = await this.loadPermissions(this.selectedContact)
       .catch((e: Error) => {
         console.log('Error loading permissions', e.message);
         this.isLoading = false;
       });
 
-    this.initialPermissions = this.dataSets ? clone(this.dataSets) : this.initialPermissions;
+    this.initialPermissions = this.containersPermissions ? clone(this.containersPermissions) : this.initialPermissions;
     this.isLoading = false;
   }
 
   /**
-   * Calls the `updatePermissions` function from properties with the updated dataSets object.
+   * Calls the `updatePermissions` function from properties with the updated containersPermissions object.
    */
   async writePermissions() {
     this.isLoading = true;
 
     const runtime = (<any>this).getRuntime();
 
-    await this.updatePermissions(runtime, this.selectedContact, this.dataSets, this.initialPermissions)
+    await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions)
       .catch((e: Error) => {
         console.log('Error writing permissions', e.message);
       });
 
-    this.initialPermissions = clone(this.dataSets);
+    this.initialPermissions = clone(this.containersPermissions);
     this.isLoading = false;
   }
 
@@ -187,7 +187,8 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
   /**
    * Return the sort & filter array for the correct contract id.
-   * @param dataSetId
+   *
+   * @param contractId
    */
   getSortFilter(contractId: string) {
     if (!this.sortFilters) {

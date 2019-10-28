@@ -99,7 +99,7 @@ export interface ContactInterface {
 }
 
 /**
- * Interface for multiple dataset permissions object.
+ * Interface for multiple contract permissions object.
  */
 export interface PermissionsInterface {
   [property: string]: {
@@ -110,9 +110,9 @@ export interface PermissionsInterface {
 }
 
 /**
- * Defines an object of permission interfaces representing all permission attributes of a data set.
+ * Defines an object of permission interfaces representing all permission attributes of a container.
  */
-export interface DataSetPermissionsInterface {
+export interface ContainerPermissionsInterface {
   label: string;
   key: string;
   permissions: PermissionsInterface;

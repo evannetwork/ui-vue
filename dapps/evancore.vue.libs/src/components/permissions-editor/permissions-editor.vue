@@ -24,14 +24,14 @@
             {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
           </p>
 
-          <div v-for="(val, dataSetId) in dataSets" :key="dataSetId">
+          <div v-for="(val, contractId) in containersPermissions" :key="contractId">
             <evan-permissions
               :label="val.label"
               :permissions="val.permissions"
-              :dataSetId="dataSetId"
-              :updatePermissions="updateDataSetPermissions"
+              :contractId="contractId"
+              :updatePermissions="updateContractPermissions"
               :i18nScope="i18nScope"
-              :sortFilter="getSortFilter(dataSetId)"
+              :sortFilter="getSortFilter(contractId)"
             />
           </div>
       </template>
