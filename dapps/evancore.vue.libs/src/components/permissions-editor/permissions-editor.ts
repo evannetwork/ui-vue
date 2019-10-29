@@ -17,34 +17,37 @@
   the following URL: https://evan.network/license/
 */
 
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
 import { deepEqual } from '@evan.network/ui';
-import { ContactInterface, DataSetPermissionsInterface } from '../../interfaces';
+import { ContactInterface, ContainerPermissionsInterface } from '../../interfaces';
 import EvanComponent from '../../component';
 
 import { Prop, Watch } from 'vue-property-decorator';
 
-const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
+const clone = (obj: any) => JSON.parse(JSON.stringify(obj)); // TODO: import from common utils
+
+interface SortFiltersInterface {
+  [key: string]: string[];
+}
 
 @Component({ })
 class PermissionsEditor extends mixins(EvanComponent) {
-  contacts = null;
+  contacts: ContactInterface[] = null;
   permissionsChanged = false;
-  initialPermissions: DataSetPermissionsInterface[] = null;
+  initialPermissions: ContainerPermissionsInterface[] = null;
   isLoading = false;
 
   @Prop({
     default: null
-  }) dataSets: DataSetPermissionsInterface[];
+  }) containersPermissions: ContainerPermissionsInterface[];
 
   /**
    * Function to write the updated permissions object.
    * Should return a promise resolving a `boolean`.
    *
-   * - updatePermissions(permissions: DataSetPermissionsInterface): Promise<boolean>
+   * - updatePermissions(permissions: ContainerPermissionsInterface): Promise<boolean>
    */
   @Prop({
     required: true
@@ -52,16 +55,16 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
   /**
    * Function to load the desired permissions object.
-   * Should return a promise resolving a `DataSetPermissionsInterface`.
+   * Should return a promise resolving a `ContainerPermissionsInterface`.
    *
-   * - loadPermissions(userId: string): Promise<DataSetPermissionsInterface>
+   * - loadPermissions(userId: string): Promise<ContainerPermissionsInterface>
    */
   @Prop({
     required: true
   }) loadPermissions: Function;
 
   /**
-   * Initially pre-selected contact object.
+   * Initially pre-selected contact id.
    */
   @Prop({
     default: null
@@ -73,6 +76,19 @@ class PermissionsEditor extends mixins(EvanComponent) {
   @Prop({
     default: '_evan.sharing'
   }) i18nScope: string;
+
+  /**
+   * An object with arrays of sorted keys for each contract id,
+   * which may be used to sort and filter the visible permissions.
+   *
+   * `{ '0xd65D17035bE5964E9842004458B2F90e0B7B6604': ['accountDetails', 'registration', 'contact'], ... };`
+   *
+   * Or a simple array of keys for convenience if only one datacontract is used.
+   *  `['accountDetails', 'registration', 'contact']`
+   */
+  @Prop({
+    default: null
+  }) sortFilters: SortFiltersInterface | string[];
 
   @Watch('selectedContact')
     onSelectedContactChanged(val: string, oldVal: string) {
@@ -87,23 +103,23 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   /**
-   * Receives updated permissions from permissions component and passes it to current datasets.
+   * Receives updated permissions from permissions component and passes it to current contract.
    * Performs check whether it's different to the initial state.
    *
    * @param updates
-   *  - dataSetId: the id of the dataset which was changed
+   *  - contractId: the id of the contract which was changed
    *  - permissions: the updated permissions object
    */
-  updateDataSetPermissions({dataSetId, permissions}) {
-    this.dataSets[dataSetId].permissions = permissions;
-    this.permissionsChanged = !deepEqual(this.dataSets, this.initialPermissions);
+  updateContractPermissions({contractId, permissions}) {
+    this.containersPermissions[contractId].permissions = permissions;
+    this.permissionsChanged = !deepEqual(this.containersPermissions, this.initialPermissions);
   }
 
   /**
    * Set initial statet again and close the panel.
    */
   reset() {
-    this.dataSets = clone(this.initialPermissions);
+    this.containersPermissions = clone(this.initialPermissions);
 
     this.$store.commit('toggleSidePanel', 'right'); // TODO: replace "right" by new panel id
   }
@@ -117,31 +133,31 @@ class PermissionsEditor extends mixins(EvanComponent) {
     }
 
     this.isLoading = true;
-    this.dataSets = null;
-    this.dataSets = await this.loadPermissions(this.selectedContact)
+    this.containersPermissions = null;
+    this.containersPermissions = await this.loadPermissions(this.selectedContact)
       .catch((e: Error) => {
         console.log('Error loading permissions', e.message);
         this.isLoading = false;
       });
 
-    this.initialPermissions = this.dataSets ? clone(this.dataSets) : this.initialPermissions;
+    this.initialPermissions = this.containersPermissions ? clone(this.containersPermissions) : this.initialPermissions;
     this.isLoading = false;
   }
 
   /**
-   * Calls the `updatePermissions` function from properties with the updated dataSets object.
+   * Calls the `updatePermissions` function from properties with the updated containersPermissions object.
    */
   async writePermissions() {
     this.isLoading = true;
 
     const runtime = (<any>this).getRuntime();
 
-    await this.updatePermissions(runtime, this.selectedContact, this.dataSets, this.initialPermissions)
+    await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions)
       .catch((e: Error) => {
         console.log('Error writing permissions', e.message);
       });
 
-    this.initialPermissions = clone(this.dataSets);
+    this.initialPermissions = clone(this.containersPermissions);
     this.isLoading = false;
   }
 
@@ -167,6 +183,29 @@ class PermissionsEditor extends mixins(EvanComponent) {
     const { label } = this.contacts.find(item => item.value === contactId);
 
     return label;
+  }
+
+  /**
+   * Return the sort & filter array for the correct contract id.
+   *
+   * @param contractId
+   */
+  getSortFilter(contractId: string) {
+    if (!this.sortFilters) {
+      return null;
+    }
+
+    if (Array.isArray(this.sortFilters)) {
+      return this.sortFilters;
+    }
+
+    if (this.sortFilters[contractId] || this.sortFilters[contractId] === null) {
+      return this.sortFilters[contractId];
+    }
+
+    console.warn(`getSortFilter function can not determine the desired filter array for ${contractId}`);
+
+    return null;
   }
 }
 

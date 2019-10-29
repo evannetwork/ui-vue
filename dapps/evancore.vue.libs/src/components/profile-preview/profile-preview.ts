@@ -23,9 +23,7 @@ import * as bcc from '@evan.network/api-blockchain-core';
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
-import Vue from 'vue';
 import { Prop, Watch } from 'vue-property-decorator';
-import { watch } from 'fs';
 
 interface UserInfoInterface {
   accountName: string;

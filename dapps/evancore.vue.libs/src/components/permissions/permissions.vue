@@ -8,7 +8,7 @@
         <th>
           <small>{{ '_evan.read' | translate }}</small>
           <evan-form-control-checkbox
-            :id="`${dataSetId}-read-all`"
+            :id="`${contractId}-read-all`"
             v-model="readAll"
             @input="val => updateAll('read', val)"
           />
@@ -16,32 +16,34 @@
         <th>
           <small>{{ '_evan.write' | translate }}</small>
           <evan-form-control-checkbox
-            :id="`${dataSetId}-write-all`"
+            :id="`${contractId}-write-all`"
             v-model="readWriteAll"
             @input="val => updateAll('readWrite', val)"
           />
         </th>
       </thead>
       <tbody>
-        <tr v-for="(val, property) in permissions" :key="property">
-          <td class="caption">
-            <span>{{ getTranslation(property) }}</span>
-            <span>{{ val.fields ? val.fields.map(field =>  getTranslation(field)).join(', ') : property }}</span>
-          </td>
-          <td>
-            <evan-form-control-checkbox
-              :id="`${dataSetId}-${property}-read`"
-              :value="permissions[property].read"
-              @input="val => setRead(property, val)"
-            />
-          </td>
-          <td>
-            <evan-form-control-checkbox
-              :id="`${dataSetId}-${property}-write`"
-              :value="permissions[property].readWrite"
-              @input="val => setReadWrite(property, val)"
-            />
-          </td>
+        <tr v-for="property in sortFilter" :key="property">
+          <template v-if="permissions[property]">
+            <td class="caption">
+              <span>{{ getTranslation(property) }}</span>
+              <span>{{ permissions[property].fields ? permissions[property].fields.map(field =>  getTranslation(field)).join(', ') : property }}</span>
+            </td>
+            <td>
+              <evan-form-control-checkbox
+                :id="`${contractId}-${property}-read`"
+                :value="permissions[property].read"
+                @input="val => setRead(property, val)"
+              />
+            </td>
+            <td>
+              <evan-form-control-checkbox
+                :id="`${contractId}-${property}-write`"
+                :value="permissions[property].readWrite"
+                @input="val => setReadWrite(property, val)"
+              />
+            </td>
+          </template>
         </tr>
       </tbody>
     </table>

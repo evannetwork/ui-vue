@@ -1,5 +1,12 @@
 @import '~@evan.network/ui/src/style/utils';
 
+.wrapper {
+  height: 100%;
+  overflow: auto;
+  margin: -32px;
+  padding: 32px;
+}
+
 .panel-footer {
   display: flex;
   padding: 24px;
@@ -9,6 +16,7 @@
   bottom: 0;
   left: 0;
   position: absolute;
+  background: cssVar("bg-level-1");
 
   button.btn-primary {
     width: 100%;

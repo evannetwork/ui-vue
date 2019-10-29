@@ -28,7 +28,7 @@ import EvanComponent from '../../component';
  */
 interface Step {
   title: string;
-  disabled: boolean;
+  disabled: boolean|Function;
 }
 
 /**
@@ -70,9 +70,20 @@ export default class StepsComponent extends mixins(EvanComponent) {
    * @param      {number}  index     steps index
    */
   gotoStep(index: number) {
-    if (!this.steps[index].disabled) {
+    if (!this.isDisabled(index)) {
       this.activeStep = index;
       this.$emit('stepChange', index);
     }
+  }
+
+  /**
+   * Gets the disabled state for a step. Only boolean value or result of disabled function check.
+   *
+   * @param      {number}  index   step index to check for
+   */
+  isDisabled(index: number) {
+    const step = this.steps[index];
+    return (typeof step.disabled === 'function' ? step.disabled() : step.disabled) ||
+      (index !== 0 && this.isDisabled(index - 1));
   }
 }

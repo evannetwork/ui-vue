@@ -18,17 +18,12 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
-import { EvanFormControl } from '@evan.network/ui-vue-core';
 import { UIContainerFile, FileHandler, } from '@evan.network/ui';
 
-import { getDomainName } from '../../utils';
 import EvanComponent from '../../component';
 
 /**

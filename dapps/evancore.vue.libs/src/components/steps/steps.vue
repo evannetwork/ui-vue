@@ -26,7 +26,7 @@
           `evan-step-${ index }`,
           { 'active': activeStep === index, }
         ]"
-        :disabled="step.disabled"
+        :disabled="isDisabled(index)"
         @click="gotoStep(index)">
         <span class="stepper-circle">
           <template v-if="!minimal">{{ index + 1 }}</template>
