@@ -36,9 +36,10 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 @Component({ })
 export default class SidePanelComponent extends mixins(EvanComponent) {
   /**
-   * Which identifier should be used within the vuex store, to handle open states.
+   * Passes the current open state into the side panel, so it will be openable / closable with one
+   * param.
    */
-  @Prop({ }) panelId: string;
+  @Prop({ }) isOpen: string;
 
   /**
    * Where should the popup should been attached? (left / right)
@@ -81,8 +82,13 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   originParentElement: any;
 
   @Watch('mountId')
-  onChildChanged(val: string) {
+  onMountIdChange(val: string) {
     this.mountIdChanged(val);
+  }
+
+  @Watch('isOpen')
+  onIsOpenChange(val: boolean) {
+    val ? this.show() : this.hide();
   }
 
   mounted() {
@@ -90,12 +96,6 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
 
     // check for mount id and render it directly if wanted
     this.mountIdChanged();
-
-    this.$store.subscribe((mutation, state) => {
-      if (mutation.type === 'toggleSidePanel') {
-        state.uiState.swipePanel === this.panelId ? this.show() : this.hide();
-      }
-    });
   }
 
   beforeDestroy() {
@@ -117,13 +117,15 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   show() {
     if (!this.mountId && !this.isShown) {
       this.isRendered = true;
-      this.$store.state.uiState.swipePanel = this.panelId;
 
       // wait until swipe panel is rendered and show it
       this.waitForRendered = setInterval(() => {
         if (this.$el.querySelectorAll('.evan-swipe-panel').length > 0) {
           clearInterval(this.waitForRendered);
-          setTimeout(() => this.isShown = true);
+          setTimeout(() => {
+            this.isShown = true;
+            this.$emit('show');
+          });
         }
       }, 10);
     }
@@ -135,7 +137,6 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   hide($event = null) {
     if (!this.mountId && this.isShown) {
       this.isShown = false;
-      this.$store.state.uiState.swipePanel = '';
 
       // it the panel was faster closed than opened, remove the wait for rendered watcher
       clearInterval(this.waitForRendered);
@@ -144,7 +145,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       setTimeout(() => this.isRendered = false, 400);
 
       // tell parent component, that the swipe-panel is closing
-      this.$emit('close');
+      this.$emit('hide');
 
       if ($event) {
         $event.stopPropagation();
@@ -166,7 +167,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
         this.originParentElement.appendChild(this.$el);
       }
 
-      if (this.panelId && this.$store.state.uiState.swipePanel === this.panelId) {
+      if (this.isOpen) {
         this.show();
       } else {
         this.isRendered = false;
