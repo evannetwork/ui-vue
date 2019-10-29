@@ -22,7 +22,7 @@
     <div v-if="loading" class="spinner-border spinner-border-sm" />
     <template v-else-if="userInfo !== null">
       <evan-profile-picture
-        :src="userInfo.picture.files[0]"
+        :src="userInfo.picture ? userInfo.picture.files[0] : null"
         :accountName="userInfo.accountName"
         :type="userInfo.profileType"
         :isVerified="userInfo.isVerified"
