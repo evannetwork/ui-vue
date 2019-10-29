@@ -115,6 +115,9 @@
     "use-password": "Unlock",
     "view-profile": "View Profile",
     "welcome-to-evan": "Welcome to the evan.network",
-    "write": "write"
+    "write": "write",
+    "mnemonic-export": {
+      "print-recovery": "Drucken Sie Ihren Wiederherstellungsschlüssel"
+    }
   }
 }

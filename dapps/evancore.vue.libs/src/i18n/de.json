@@ -115,6 +115,9 @@
     "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
-    "write": "schreiben"
+    "write": "schreiben",
+    "mnemonic-export": {
+      "print-recovery": "Print your recovery key"
+    }
   }
 }

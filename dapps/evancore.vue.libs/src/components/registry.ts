@@ -34,8 +34,8 @@ import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapp
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import FormComponent from './forms/form/form.vue';
-import FormControlComponent from './forms/control/control.vue';
 import FormControlCheckboxComponent from './forms/checkbox/checkbox.vue';
+import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
@@ -43,13 +43,14 @@ import FormControlVSelectComponent from './forms/v-select/v-select.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
+import MnemonicExport from './dapp-wrapper/mnemonic-export/mnemonic-export.vue';
 import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
 import PermissionsComponent from './permissions/permissions.vue';
 import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
-import ProfilePreview from './profile-preview/profile-preview.vue';
 import ProfilePicture from './profile-picture/profile-picture.vue';
+import ProfilePreview from './profile-preview/profile-preview.vue';
 import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
@@ -121,13 +122,14 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },
   { name: 'evan-logout', component: LogoutComponent },
+  { name: 'evan-mnemonic-export', component: MnemonicExport },
   { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
   { name: 'evan-permissions', component: PermissionsComponent },
   { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
-  { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
+  { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-shared-contact', component: SharedContact },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
