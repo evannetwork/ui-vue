@@ -23,7 +23,7 @@
         </th>
       </thead>
       <tbody>
-        <tr v-for="property in sortFilter" :key="property">
+        <tr v-for="property in computedSortFilter" :key="property">
           <template v-if="permissions[property]">
             <td class="caption">
               <span>{{ getTranslation(property) }}</span>

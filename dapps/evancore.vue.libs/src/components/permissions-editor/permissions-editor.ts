@@ -25,6 +25,7 @@ import { ContactInterface, ContainerPermissionsInterface } from '../../interface
 import EvanComponent from '../../component';
 
 import { Prop, Watch } from 'vue-property-decorator';
+import { emit } from 'cluster';
 
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj)); // TODO: import from common utils
 
@@ -78,6 +79,20 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }) i18nScope: string;
 
   /**
+   * Callback function when contact was selected.
+   */
+  @Prop({
+    type: Function
+  }) onSelect: Function;
+
+  /**
+   * Use component in relative context.
+   */
+  @Prop({
+    default: false
+  }) relative: boolean;
+
+  /**
    * An object with arrays of sorted keys for each contract id,
    * which may be used to sort and filter the visible permissions.
    *
@@ -90,12 +105,22 @@ class PermissionsEditor extends mixins(EvanComponent) {
     default: null
   }) sortFilters: SortFiltersInterface | string[];
 
+  /**
+   *  Update shown permissions according to selected contact.
+   *
+   * @param val
+   * @param oldVal
+   */
   @Watch('selectedContact')
-    onSelectedContactChanged(val: string, oldVal: string) {
-      if (val !== oldVal) {
-        this.getPermissionsForContact();
+  onSelectedContactChanged(val: string, oldVal: string) {
+    if (val !== oldVal) {
+      this.getPermissionsForContact();
+
+      if (typeof this.onSelect === 'function') {
+        this.onSelect(val);
       }
     }
+  }
 
   async created() {
     this.contacts = await this.loadAddressBook();
@@ -176,7 +201,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
         'label': addressBook[key].alias,
         'value': key
       };
-    }).filter(entry => entry.value !== runtime.activeAccount);
+    }).filter(entry => entry.value !== runtime.activeAccount && !/\@/.test(entry.value));
   }
 
   getContactLabel(contactId: string): string {
