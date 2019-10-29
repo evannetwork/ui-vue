@@ -25,7 +25,6 @@ import { ContactInterface, ContainerPermissionsInterface } from '../../interface
 import EvanComponent from '../../component';
 
 import { Prop, Watch } from 'vue-property-decorator';
-import { emit } from 'cluster';
 
 const clone = (obj: any) => JSON.parse(JSON.stringify(obj)); // TODO: import from common utils
 
