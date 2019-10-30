@@ -32,6 +32,11 @@ interface SortFiltersInterface {
   [key: string]: string[];
 }
 
+interface Address {
+  label: string;
+  value: string;
+}
+
 @Component({ })
 class PermissionsEditor extends mixins(EvanComponent) {
   contacts: ContactInterface[] = null;
@@ -78,6 +83,20 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }) i18nScope: string;
 
   /**
+   * Callback function when contact was selected.
+   */
+  @Prop({
+    type: Function
+  }) onSelect: Function;
+
+  /**
+   * Use component in relative context.
+   */
+  @Prop({
+    default: false
+  }) relative: boolean;
+
+  /**
    * An object with arrays of sorted keys for each contract id,
    * which may be used to sort and filter the visible permissions.
    *
@@ -90,12 +109,22 @@ class PermissionsEditor extends mixins(EvanComponent) {
     default: null
   }) sortFilters: SortFiltersInterface | string[];
 
+  /**
+   *  Update shown permissions according to selected contact.
+   *
+   * @param val
+   * @param oldVal
+   */
   @Watch('selectedContact')
-    onSelectedContactChanged(val: string, oldVal: string) {
-      if (val !== oldVal) {
-        this.getPermissionsForContact();
+  onSelectedContactChanged(val: string, oldVal: string) {
+    if (val !== oldVal) {
+      this.getPermissionsForContact();
+
+      if (typeof this.onSelect === 'function') {
+        this.onSelect(val);
       }
     }
+  }
 
   async created() {
     this.contacts = await this.loadAddressBook();
@@ -129,6 +158,8 @@ class PermissionsEditor extends mixins(EvanComponent) {
    */
   async getPermissionsForContact() {
     if (!this.selectedContact || typeof this.selectedContact !== 'string') {
+      this.containersPermissions = null;
+
       return;
     }
 
@@ -163,8 +194,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
   /**
    * Load the addressbook for the current user.
+   * Excludes the current user and invited users which are not registered yet.
    */
-  async loadAddressBook() {
+  async loadAddressBook(): Promise<Address[]> {
     const runtime = (<any>this).getRuntime();
 
     // load the contacts for the current user, so we can display correct contact alias
@@ -176,7 +208,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
         'label': addressBook[key].alias,
         'value': key
       };
-    }).filter(entry => entry.value !== runtime.activeAccount);
+    }).filter(entry => entry.value !== runtime.activeAccount && !/\@/.test(entry.value));
   }
 
   getContactLabel(contactId: string): string {
