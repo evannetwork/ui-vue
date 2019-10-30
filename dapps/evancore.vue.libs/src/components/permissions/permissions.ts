@@ -96,7 +96,7 @@ class Permissions extends mixins(EvanComponent) {
    * @param flag: boolean
    */
   updateAll(mode: 'read'|'readWrite', flag: boolean) {
-    Object.keys(this.permissions).forEach( property =>  {
+    this.sortFilter.forEach( property =>  {
       this.permissions[property][mode] = flag;
 
       if (mode === 'readWrite' && flag) {
