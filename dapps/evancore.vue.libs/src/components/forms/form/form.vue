@@ -31,7 +31,7 @@
         {{ title }}
       </h5>
       <evan-button
-        v-if="!editMode"
+        v-if="shareable && !editMode"
         type="secondary"
         size="sm"
         @click="share()"
