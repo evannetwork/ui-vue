@@ -32,6 +32,11 @@ interface SortFiltersInterface {
   [key: string]: string[];
 }
 
+interface Address {
+  label: string;
+  value: string;
+}
+
 @Component({ })
 class PermissionsEditor extends mixins(EvanComponent) {
   contacts: ContactInterface[] = null;
@@ -153,6 +158,8 @@ class PermissionsEditor extends mixins(EvanComponent) {
    */
   async getPermissionsForContact() {
     if (!this.selectedContact || typeof this.selectedContact !== 'string') {
+      this.containersPermissions = null;
+
       return;
     }
 
@@ -187,8 +194,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
   /**
    * Load the addressbook for the current user.
+   * Excludes the current user and invited users which are not registered yet.
    */
-  async loadAddressBook() {
+  async loadAddressBook(): Promise<Address[]> {
     const runtime = (<any>this).getRuntime();
 
     // load the contacts for the current user, so we can display correct contact alias
