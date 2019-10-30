@@ -42,7 +42,7 @@
       </p>
     </div>
 
-    <div class="panel-footer">
+    <div class="panel-footer" :class="{'relative': this.relative}">
       <evan-button type="secondary" :label="$t('_evan.cancel')" @click="reset" />
       <evan-button
         type="primary"

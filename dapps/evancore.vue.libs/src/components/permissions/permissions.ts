@@ -85,6 +85,10 @@ class Permissions extends mixins(EvanComponent) {
     this.updatePermissions({ contractId: this.contractId, permissions: this.permissions });
   }
 
+  get computedSortFilter() {
+    return this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
+  }
+
   /**
    * Set all permissions in a contract at once.
    *
@@ -92,7 +96,7 @@ class Permissions extends mixins(EvanComponent) {
    * @param flag: boolean
    */
   updateAll(mode: 'read'|'readWrite', flag: boolean) {
-    Object.keys(this.permissions).forEach( property =>  {
+    this.sortFilter.forEach( property =>  {
       this.permissions[property][mode] = flag;
 
       if (mode === 'readWrite' && flag) {
