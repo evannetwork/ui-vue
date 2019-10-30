@@ -24,6 +24,13 @@ the following URL: https://evan.network/license/
   align-items: center;
   width: 100%;
   padding: 12px 24px;
+  position: relative;
+
+  .spinner {
+    right: 24px;
+    color: cssVar('gray-400');
+    position: absolute;
+  }
 
   .permissions {
     flex-grow: 1;

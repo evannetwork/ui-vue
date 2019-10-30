@@ -66,9 +66,11 @@
     "login": "Profil entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
+    "no": "Nein",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "permission": {
+      "hint": "Alle Berechtigungen entziehen?",
       "type": {
         "fullAccess": "Vollzugriff",
         "fullRead": "komplette Leserechte",
@@ -115,6 +117,7 @@
     "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
-    "write": "schreiben"
+    "write": "schreiben",
+    "yes": "Ja"
   }
 }

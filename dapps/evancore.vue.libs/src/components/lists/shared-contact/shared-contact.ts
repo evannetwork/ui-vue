@@ -42,6 +42,12 @@ class EvanSharedContact extends mixins(EvanComponent) {
     required: true
   }) removeCallback: Function;
 
+  @Prop({
+    type: Boolean,
+    default: false,
+    required: true,
+  }) isLoading: boolean;
+
   /**
    * flag for ui if user will remove shared contact
    */

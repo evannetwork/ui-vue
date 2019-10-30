@@ -20,20 +20,23 @@ the following URL: https://evan.network/license/
 <template>
   <div class="shared-contact" @mouseleave="($event) => handleCancelRemove($event)">
     <evan-profile-preview :address="item.accountId" size="sm" />
-    <div v-if="!willRemove" class="permissions">{{ `_evan.permission.type.${item.permissionType}` | translate }}</div>
-    <div v-else class="permissions hint">Alle Berechtigungen entziehen?</div>
-    <div v-if="!willRemove" class="remove" @click="$event => handleWillRemove($event)">
-      <i class="mdi mdi-close-circle" />
-    </div>
-    <div v-if="willRemove" class="d-flex align-items-center">
+    <div  v-if="isLoading" class="spinner-border spinner-border-sm spinner" />
+    <template v-else>
+      <div v-if="!willRemove" class="permissions">{{ `_evan.permission.type.${item.permissionType}` | translate }}</div>
+      <div v-else class="permissions hint">{{ `_evan.permission.hint`| translate }}</div>
+      <div v-if="!willRemove" class="remove" @click="$event => handleWillRemove($event)">
+        <i class="mdi mdi-close-circle" />
+      </div>
+      <div v-if="willRemove" class="d-flex align-items-center">
         <evan-button size="sm" type="secondary" class="mr-1" @click="$event => handleCancelRemove($event)">
-          nein
+          {{'_evan.no' | translate }}
         </evan-button>
         <evan-button size="sm" type="primary" class="mr-1" @click="$event => handleRemove($event)">
-          ja
+          {{'_evan.yes' | translate }}
         </evan-button>
       </div>
-    </div>
+    </template>
+  </div>  
 </template>
 
 <style lang="scss" scoped>
