@@ -17,9 +17,8 @@
   the following URL: https://evan.network/license/
 */
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
@@ -29,7 +28,6 @@ import EvanVueDispatcherHandler from '../../dispatcher';
 import { DAppWrapperRouteInterface } from '../../interfaces';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { getDomainName } from '../../utils';
-import { registerEvanI18N, } from '../../vue-core';
 
 // load domain name for quick usage
 const domainName = getDomainName();

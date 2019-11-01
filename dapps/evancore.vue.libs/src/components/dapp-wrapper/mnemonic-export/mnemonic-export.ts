@@ -22,9 +22,6 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import * as bcc from '@evan.network/api-blockchain-core';
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../../component';
-import Vue from 'vue';
-import { Prop } from 'vue-property-decorator';
-import { getDomainName } from '../../../utils';
 
 /**
  * Shows a notification at the bottom of the screen, that the user needs to export it's mnemonic. On
@@ -47,12 +44,15 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   async created() {
     // try to decrypt
     if (window.localStorage['evan-mnemonic']) {
-      const runtime = (<any>this).getRuntime();
+      const runtime = this.getRuntime();
       const encrypted = window.localStorage['evan-mnemonic'];
       const vault = await dappBrowser.lightwallet.loadUnlockedVault();
       const cryptor = runtime.sharing.options.cryptoProvider
         .getCryptorByCryptoAlgo(runtime.sharing.options.defaultCryptoAlgo);
-      this.mnemonic = await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), { key: vault.encryptionKey, });
+
+      this.mnemonic = await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), { key: vault.encryptionKey });
+
+      console.log('this.mnemonic', this.mnemonic);
     }
   }
 }

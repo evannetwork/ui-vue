@@ -19,12 +19,17 @@
 
 <template>
   <div class="" v-if="mnemonic">
-    
+    {{ mnemonic }}
+    <div class="hint-banner bg-primary bg-text-primary col-md-8 offset-md-2 p-3 text-center">
+      <i class="mdi mdi-shield-alert-outline" />
+      {{ '_evan.mnemonic-export.print-recovery' | translate }}
+      <evan-button  type="icon" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './mnemonic-export.ts';
+  import Component from './mnemonic-export';
   export default Component;
 </script>
 
