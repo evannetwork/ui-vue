@@ -31,7 +31,7 @@
         {{ title }}
       </h5>
       <evan-button
-        v-if="!editMode"
+        v-if="shareable && !editMode"
         type="secondary"
         size="sm"
         @click="share()"
@@ -46,7 +46,7 @@
           <template v-for="(controlName) in form.controls">
             <slot :name="`form-control-${ controlName }`">
               <component
-                :disabled="isLoading"
+                :disabled="!editable || isLoading"
                 :error="(onlyForm || editMode && !onlyForm) ? getTranslation(form[controlName], 'error') : false"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"

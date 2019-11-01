@@ -8,6 +8,7 @@
   - add `evan-permissions` component to handle permissions UI for single data set
   - add `evan-permissions-editor` component to handle permissions UI for a set of data sets
   - allow functions in `evan-steps` disabled steps
+  - add `editable` and `shareable` flag to formulars
 
 ### Fixes
 - `evancore.vue.libs` (v1.8.0)
