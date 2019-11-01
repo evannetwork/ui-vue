@@ -117,7 +117,7 @@
     "welcome-to-evan": "Willkommen im evan.network",
     "write": "schreiben",
     "mnemonic-export": {
-      "print-recovery": "Print your recovery key"
+      "print-recovery": "Drucken Sie Ihren Wiederherstellungsschlüssel"
     }
   }
 }

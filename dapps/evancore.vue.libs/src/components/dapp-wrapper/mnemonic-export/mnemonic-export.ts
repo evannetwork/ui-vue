@@ -24,13 +24,13 @@ import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../../component';
 
 /**
- * Shows a notification at the bottom of the screen, that the user needs to export it's mnemonic. On
- * click, a modal is opened is shown, where the user can read about mnemonics and where he can
+ * Shows a notification at the bottom of the screen, that the user needs to export its mnemonic. On
+ * click a modal is shown, where the user can read about mnemonics and where he can
  * export the mnemonic as pdf.
  *
  * @class      MnemonicExport @selector      evan-mnemonic-export
  */
-@Component({ })
+@Component({})
 export default class MnemonicExport extends mixins(EvanComponent) {
   /**
    * Checks for the evan-mnemonic parameter within the localStorage. If the parameter is available
@@ -47,10 +47,13 @@ export default class MnemonicExport extends mixins(EvanComponent) {
       const runtime = this.getRuntime();
       const encrypted = window.localStorage['evan-mnemonic'];
       const vault = await dappBrowser.lightwallet.loadUnlockedVault();
-      const cryptor = runtime.sharing.options.cryptoProvider
-        .getCryptorByCryptoAlgo(runtime.sharing.options.defaultCryptoAlgo);
+      const cryptor = runtime.sharing.options.cryptoProvider.getCryptorByCryptoAlgo(
+        runtime.sharing.options.defaultCryptoAlgo
+      );
 
-      this.mnemonic = await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), { key: vault.encryptionKey });
+      this.mnemonic = await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), {
+        key: vault.encryptionKey
+      });
 
       console.log('this.mnemonic', this.mnemonic);
     }
