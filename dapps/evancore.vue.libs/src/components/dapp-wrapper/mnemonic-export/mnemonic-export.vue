@@ -21,6 +21,7 @@
   <div class="notification-bar">
     <div class="mnemonic" v-if="isShown">
       <p>{{ mnemonic }}</p>
+      <button @click="copyToClipboard(mnemonic)">Copy</button>
       <button @click="downloadTextfile('Mnemonics', mnemonic)">Download</button>
     </div>
     <a

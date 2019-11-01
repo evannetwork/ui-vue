@@ -48,7 +48,7 @@ export default class MnemonicExport extends mixins(EvanComponent) {
    * Checks for the evan-mnemonic parameter within the localStorage. If the parameter is available
    * and the user is able to decrypt the value, the notification will be shown.
    */
-  private async getMnemonic() {
+  private async getMnemonic(): Promise<string> {
     if (window.localStorage['evan-mnemonic']) {
       const runtime = this.getRuntime();
       const encrypted = localStorage['evan-mnemonic'];
@@ -65,13 +65,40 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     }
   }
 
+  /**
+   * Trigger download of text file
+   * @param filename Name for the file with .txt suffix
+   * @param text Content of the text tile
+   */
   private downloadTextfile(filename: string, text: string) {
     let element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute(
+      'href',
+      'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
+    );
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+  }
+
+  /**
+   * @param text Text to copy
+   */
+  private copyToClipboard(text) {
+    let textArea = document.createElement('textarea');
+    textArea.value = text;
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+    document.body.removeChild(textArea);
   }
 }
