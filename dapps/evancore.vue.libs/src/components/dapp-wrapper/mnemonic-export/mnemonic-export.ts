@@ -32,30 +32,46 @@ import EvanComponent from '../../../component';
  */
 @Component({})
 export default class MnemonicExport extends mixins(EvanComponent) {
+  mnemonic: string;
+  isShown = false;
+
+  async created() {
+    this.mnemonic = await this.getMnemonic();
+    console.log('this.mnemonic', this.mnemonic);
+  }
+
+  private toggleVisibility() {
+    this.isShown = !this.isShown;
+  }
+
   /**
    * Checks for the evan-mnemonic parameter within the localStorage. If the parameter is available
    * and the user is able to decrypt the value, the notification will be shown.
    */
-  mnemonic = '';
-
-  /**
-   * Checkup localStorage for set mnemonic.
-   */
-  async created() {
-    // try to decrypt
+  private async getMnemonic() {
     if (window.localStorage['evan-mnemonic']) {
       const runtime = this.getRuntime();
-      const encrypted = window.localStorage['evan-mnemonic'];
+      const encrypted = localStorage['evan-mnemonic'];
       const vault = await dappBrowser.lightwallet.loadUnlockedVault();
       const cryptor = runtime.sharing.options.cryptoProvider.getCryptorByCryptoAlgo(
         runtime.sharing.options.defaultCryptoAlgo
       );
 
-      this.mnemonic = await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), {
+      return await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), {
         key: vault.encryptionKey
       });
-
-      console.log('this.mnemonic', this.mnemonic);
+    } else {
+      return '';
     }
+  }
+
+  private downloadTextfile(filename: string, text: string) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
 }

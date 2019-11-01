@@ -18,21 +18,23 @@
 */
 
 <template>
-  <div class="" v-if="mnemonic">
-    {{ mnemonic }}
-    <div class="hint-banner bg-primary bg-text-primary col-md-8 offset-md-2 p-3 text-center">
-      <i class="mdi mdi-shield-alert-outline" />
-      {{ '_evan.mnemonic-export.print-recovery' | translate }}
-      <evan-button type="icon" />
+  <div class="notification-bar">
+    <div class="mnemonic" v-if="isShown">
+      <p>{{ mnemonic }}</p>
+      <button @click="downloadTextfile('Mnemonics', mnemonic)">Download</button>
     </div>
+    <a
+      class="hint-banner bg-primary bg-text-primary text-center"
+      @click="toggleVisibility"
+    >{{ '_evan.mnemonic-export.print-recovery' | translate }}</a>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './mnemonic-export';
-  export default Component;
+import Component from "./mnemonic-export";
+export default Component;
 </script>
 
 <style lang="scss" scoped>
-  @import './mnemonic-export.scss';
+@import "./mnemonic-export.scss";
 </style>
