@@ -58,6 +58,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   @Prop() editable: string;
 
   /**
+   * Directly pass already loaded account details to the component
+   */
+  @Prop() accountDetails: any;
+
+  /**
    * Show loading symbol
    */
   loading = true;
@@ -83,6 +88,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    */
   isEditMode = false;
 
+  /**
+   * Blockchain-core profile instance for the provided address
+   */
+  profile: bcc.Profile = null;
+
   @Watch('$attrs')
     onChildChanged(val: UserInfoInterface, oldVal: UserInfoInterface) {
       Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src });
@@ -91,7 +101,14 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Load user specific information
    */
   async created() {
-    await this.loadUserInfo();
+    // skip initial data loading if parent data was passed into the component
+    if (this.accountDetails) {
+      this.userInfo = this.accountDetails;
+      // transform to correct format
+      await this.fillEmptyProfileData();
+    } else {
+      await this.loadUserInfo();
+    }
 
     // watch for save updates
     this.listeners.push(Dispatcher.watch(($event: any) => {
@@ -99,6 +116,8 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
         this.loadUserInfo();
       }
     }, `profile.vue.${ this.domainName }`, 'updateProfileDispatcher'));
+
+    this.loading = false;
   }
 
   /**
@@ -106,41 +125,29 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    */
   async loadUserInfo() {
     const runtime = (<any>this).getRuntime();
+    const profile = new bcc.Profile({
+      accountId: runtime.activeAccount,
+      profileOwner: this.address,
+      ...runtime,
+    });
+
     let accountDetails: any = { profileType: 'user' };
     try {
-      accountDetails = (await runtime.profile.getProfileProperty('accountDetails')) || accountDetails;
+      accountDetails = (await profile.getProfileProperty('accountDetails')) || accountDetails;
 
       // for companies load directly the company name and disable edit mode
       if (accountDetails.profileType === 'company') {
-        const registrationData = (await runtime.profile.getProfileProperty('registration'));
+        const registrationData = (await profile.getProfileProperty('registration'));
         accountDetails.accountName = registrationData.company;
       }
     } catch (ex) {
-      console.dir(ex);
+      runtime.logger.log(`Could not load profile data for ${ this.address }: ${ ex.message }`, 'error');
     }
+
     this.userInfo = accountDetails;
 
-    if (!this.userInfo.profileType) {
-      this.userInfo.profileType = 'user';
-    }
-
-    // use old alias logic
-    if (!this.userInfo.accountName) {
-      // load addressbook info
-      const addressBook = await runtime.profile.getAddressBook();
-      const contact = addressBook.profile[this.address];
-
-      this.userInfo.accountName = contact ? contact.alias : this.address;
-    }
-    // fill empty picture
-    if (!this.userInfo.picture) {
-      this.userInfo.picture = { files: [ ] };
-    }
-
-    // transform to correct format
-    this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
-      FileHandler.fileToContainerFile(file)
-    ));
+    // ensure profile picture is set and transformed to ui file
+    await this.fillEmptyProfileData();
 
     // backup user info, so we can revert last changes
     this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
@@ -192,5 +199,35 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     if (this.canEdit()) {
       this.isEditMode = true;
     }
+  }
+
+  /**
+   * Ensure picture is set on profile
+   */
+  async fillEmptyProfileData() {
+    const runtime = (<any>this).getRuntime();
+
+    if (!this.userInfo.profileType) {
+      this.userInfo.profileType = 'user';
+    }
+
+    // use old alias logic
+    if (!this.userInfo.accountName) {
+      // load addressbook info
+      const addressBook = await runtime.profile.getAddressBook();
+      const contact = addressBook.profile[this.address];
+
+      this.userInfo.accountName = contact ? contact.alias : this.address;
+    }
+
+    // fill empty picture
+    if (!this.userInfo.picture) {
+      this.userInfo.picture = { files: [ ] };
+    }
+
+    // transform to correct format
+    this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
+      FileHandler.fileToContainerFile(file)
+    ));
   }
 }

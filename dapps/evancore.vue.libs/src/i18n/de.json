@@ -66,9 +66,14 @@
     "login": "Profil entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
+	"mnemonic-export": {
+      "print-recovery": "Drucken Sie Ihren Wiederherstellungsschlüssel"
+    }
+    "no": "Nein",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "permission": {
+      "hint": "Alle Berechtigungen entziehen?",
       "type": {
         "fullAccess": "Vollzugriff",
         "fullRead": "komplette Leserechte",
@@ -116,8 +121,6 @@
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
     "write": "schreiben",
-    "mnemonic-export": {
-      "print-recovery": "Drucken Sie Ihren Wiederherstellungsschlüssel"
-    }
+    "yes": "Ja"
   }
 }

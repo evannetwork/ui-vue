@@ -650,7 +650,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
           `_evan.dapp-wrapper.dispatcher-status.${ instance.status }`,
           {
             title: this.$t(instance.dispatcher.title),
-            percentage: (100 / instance.dispatcher.steps.length) * instance.stepIndex,
+            percentage: Math.round((100 / instance.dispatcher.steps.length) * instance.stepIndex),
           }
         ), {
           type: instance.status === 'finished' ? 'success' :

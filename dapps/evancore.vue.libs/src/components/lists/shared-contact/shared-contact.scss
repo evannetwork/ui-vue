@@ -23,15 +23,37 @@ the following URL: https://evan.network/license/
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 12px 24px;
+  position: relative;
+
+  .spinner {
+    right: 24px;
+    color: cssVar('gray-400');
+    position: absolute;
+  }
 
   .permissions {
     flex-grow: 1;
     margin: 0 24px;
     text-align: right;
     font-size: cssVar('small-font-size');
+
+    &.hint {
+      color: cssVar('primary');
+    }
+  }
+
+  &:hover .remove {
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+      color: cssVar('red');
+    }
   }
 
   .remove {
-      padding: 0 12px;
+    color: cssVar('gray-600');
+    opacity: 0;
   }
 }

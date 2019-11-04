@@ -18,22 +18,32 @@ the following URL: https://evan.network/license/
 */
 
 <template>
-  <div class="shared-contact">
+  <div class="shared-contact" @mouseleave="($event) => handleCancelRemove($event)">
     <evan-profile-preview :address="item.accountId" size="sm" />
-    <div class="permissions">{{ `_evan.permission.type.${item.permissionType}` | translate }}</div>
-    <div class="actions">
-      <div class="remove" @click="($event) => handleRemove($event)">
+    <div  v-if="isLoading" class="spinner-border spinner-border-sm spinner" />
+    <template v-else>
+      <div v-if="!willRemove" class="permissions">{{ `_evan.permission.type.${item.permissionType}` | translate }}</div>
+      <div v-else class="permissions hint">{{ `_evan.permission.hint`| translate }}</div>
+      <div v-if="!willRemove" class="remove" @click="$event => handleWillRemove($event)">
         <i class="mdi mdi-close-circle" />
       </div>
-    </div>
-  </div>
+      <div v-if="willRemove" class="d-flex align-items-center">
+        <evan-button size="sm" type="secondary" class="mr-1" @click="$event => handleCancelRemove($event)">
+          {{'_evan.no' | translate }}
+        </evan-button>
+        <evan-button size="sm" type="primary" class="mr-1" @click="$event => handleRemove($event)">
+          {{'_evan.yes' | translate }}
+        </evan-button>
+      </div>
+    </template>
+  </div>  
 </template>
 
 <style lang="scss" scoped>
-  @import "./shared-contact.scss";
+@import "./shared-contact.scss";
 </style>
 
 <script lang="ts">
-  import Component from "./shared-contact";
-  export default Component;
+import Component from "./shared-contact";
+export default Component;
 </script>

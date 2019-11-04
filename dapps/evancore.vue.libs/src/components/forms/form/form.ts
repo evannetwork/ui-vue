@@ -109,6 +109,17 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   }) handleShare: Function;
 
   /**
+   * Makes the formular editable.
+   */
+  @Prop({ default: true }) editable: boolean;
+
+
+  /**
+   * Show / hide the share button.
+   */
+  @Prop({ default: true }) shareable: boolean;
+
+  /**
    * Is the formular currently enabled?
    */
   editMode = false;
@@ -142,13 +153,15 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
    * @param      {boolean}  active  enable / disable editMode
    */
   setEditMode(active: boolean): void {
-    // save latest data, so we can restore it on cancelation
-    if (!this.editMode && active && this.form) {
-      // use clone deep to break array references (e.g. in file upload)
-      this.formDataBackup = cloneDeep(bcc.lodash, this.form.getFormData());
-    }
+    if (this.editable) {
+      // save latest data, so we can restore it on cancelation
+      if (!this.editMode && active && this.form) {
+        // use clone deep to break array references (e.g. in file upload)
+        this.formDataBackup = cloneDeep(bcc.lodash, this.form.getFormData());
+      }
 
-    this.editMode = active;
+      this.editMode = active;
+    }
   }
 
   /**

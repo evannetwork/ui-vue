@@ -18,6 +18,11 @@
   position: absolute;
   background: cssVar("bg-level-1");
 
+  &.relative {
+    position: relative;
+    padding: 24px 0;
+  }
+
   button.btn-primary {
     width: 100%;
     margin-left: 20px;

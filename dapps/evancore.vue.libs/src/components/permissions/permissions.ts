@@ -71,6 +71,7 @@ class Permissions extends mixins(EvanComponent) {
   @Prop({}) updatePermissions: Function;
 
   created() {
+    this.sortFilter = this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
     this.readAll = this.allPermissions('read');
     this.readWriteAll = this.allPermissions('readWrite');
   }
@@ -79,10 +80,14 @@ class Permissions extends mixins(EvanComponent) {
    * Check if readAll or writeAll needs to be (un)checked and execute callback function to update permissions.
    */
   updated() {
+    this.sortFilter = this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
     this.readAll = this.allPermissions('read');
     this.readWriteAll = this.allPermissions('readWrite');
-    this.sortFilter = this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
     this.updatePermissions({ contractId: this.contractId, permissions: this.permissions });
+  }
+
+  get computedSortFilter() {
+    return this.sortFilter === null ? Object.keys(this.permissions) : this.sortFilter;
   }
 
   /**
@@ -92,7 +97,7 @@ class Permissions extends mixins(EvanComponent) {
    * @param flag: boolean
    */
   updateAll(mode: 'read'|'readWrite', flag: boolean) {
-    Object.keys(this.permissions).forEach( property =>  {
+    this.sortFilter.forEach( property =>  {
       this.permissions[property][mode] = flag;
 
       if (mode === 'readWrite' && flag) {
@@ -136,7 +141,7 @@ class Permissions extends mixins(EvanComponent) {
    * @param access: PermissionsInterface - The permissions object to check, default `this.permissions`
    */
   allPermissions(mode: 'read'|'readWrite', access = this.permissions): boolean {
-    return Object.keys(access).every(key => access[key][mode] === true);
+    return this.sortFilter.every(key => access[key][mode] === true);
   }
 
   /**

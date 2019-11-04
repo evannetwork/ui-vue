@@ -3,7 +3,7 @@
     <table class="permissions" v-if="permissions">
       <thead>
         <th>
-          <h4> {{ label }} </h4>
+          <h4> {{ getTranslation(label) }} </h4>
         </th>
         <th>
           <small>{{ '_evan.read' | translate }}</small>
@@ -23,7 +23,7 @@
         </th>
       </thead>
       <tbody>
-        <tr v-for="property in sortFilter" :key="property">
+        <tr v-for="property in computedSortFilter" :key="property">
           <template v-if="permissions[property]">
             <td class="caption">
               <span>{{ getTranslation(property) }}</span>

@@ -40,7 +40,35 @@ class EvanSharedContact extends mixins(EvanComponent) {
   @Prop({
     type: Function,
     required: true
-  }) handleRemove: Function;
+  }) removeCallback: Function;
+
+  @Prop({
+    type: Boolean,
+    default: false,
+    required: true,
+  }) isLoading: boolean;
+
+  /**
+   * flag for ui if user will remove shared contact
+   */
+  willRemove = false;
+
+  handleWillRemove(event: MouseEvent) {
+    event.stopPropagation();
+    this.willRemove = true;
+  }
+
+  handleCancelRemove(event: MouseEvent) {
+    event.stopPropagation();
+    this.willRemove = false;
+  }
+
+  handleRemove(event: MouseEvent) {
+    event.stopPropagation();
+    this.willRemove = false;
+
+    this.removeCallback();
+  }
 }
 
 export default EvanSharedContact;
