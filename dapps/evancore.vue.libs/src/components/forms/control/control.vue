@@ -41,3 +41,8 @@
   import FormDataInput from './control'
   export default FormDataInput
 </script>
+
+<style lang="scss" scoped>
+  @import './control.scss'
+</style>
+

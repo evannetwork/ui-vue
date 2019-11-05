@@ -1,24 +1,4 @@
-/*
-  Copyright (C) 2018-present evan GmbH.
-
-  This program is free software: you can redistribute it and/or modify it
-  under the terms of the GNU Affero General Public License, version 3,
-  as published by the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the GNU Affero General Public License for more details.
-
-  You should have received a copy of the GNU Affero General Public License
-  along with this program. If not, see http://www.gnu.org/licenses/ or
-  write to the Free Software Foundation, Inc., 51 Franklin Street,
-  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
-  the following URL: https://evan.network/license/
-*/
-
-/* tslint:disable */
-export default {
+{
   "_evan": {
     "_routes": {
       "actions": "Aktionen",
@@ -86,8 +66,19 @@ export default {
     "login": "Profil entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
+    "no": "Nein",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
+    "permission": {
+      "hint": "Alle Berechtigungen entziehen?",
+      "type": {
+        "fullAccess": "Vollzugriff",
+        "fullRead": "komplette Leserechte",
+        "readWrite": "individuelle Schreib- und Leserechte",
+        "read": "individuelle Leserechte",
+        "none": "keine Berechtigungen"
+      }
+    },
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
       "account-name": "Account Name",
@@ -97,8 +88,7 @@ export default {
         "company-desc": "Verwalten Sie Unternehmensinformationen (Handelsregisternummer, Firmensitz, ...) und lassen Sie Ihr Unternehmen notariell auf dem evan.network bestätigen.",
         "device": "Gerät",
         "device-desc": "Speichern Sie Geräteninformationen und Verbindungseinstellungen.",
-        "undefined": "unspezifizierter Account",
-        "unspecified": "unspezifizierter Account",
+        "undefined": "User",
         "user": "User"
       }
     },
@@ -107,8 +97,18 @@ export default {
       "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
       "use-picture": "Fertig"
     },
+    "read": "lesen",
     "save": "Speichern",
     "share": "Freigeben",
+    "sharing": {
+      "update": "Freigaben aktualisieren",
+      "selectContact": "Kontakt für die Freigabe auswählen",
+      "defineFor": "Setzen Sie die Zugriffsrechte für {contactName}.",
+      "permissionsTitle": "Zugriffsrechte",
+      "description": "Um Ihre Daten mit anderen Kontakten zu teilen, wählen Sie die Optionen unten und klicken Sie auf “Freigaben aktualisieren”",
+      "noContacts": "Sie haben keine Kontakte in Ihrem Adressbuch, bitte fügen Sie zuerst einen Kontakt hinzu.",
+      "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden."
+    },
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
@@ -116,7 +116,8 @@ export default {
     },
     "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
-    "welcome-to-evan": "Willkommen im evan.network"
+    "welcome-to-evan": "Willkommen im evan.network",
+    "write": "schreiben",
+    "yes": "Ja"
   }
 }
-/* tslint:enable */

@@ -22,6 +22,7 @@ import { ComponentRegistrationInterface } from '../interfaces';
 
 // import all components
 import AddressComponent from './address/address.vue';
+import BaseList from './lists/base-list/base-list.vue';
 import BreadcrumbsComponent from './breadcrumbs/breadcrumbs.vue';
 import ButtonComponent from './button/button.vue';
 import CardComponent from './card/card.vue';
@@ -34,6 +35,7 @@ import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import FormComponent from './forms/form/form.vue';
 import FormControlComponent from './forms/control/control.vue';
+import FormControlCheckboxComponent from './forms/checkbox/checkbox.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
@@ -44,8 +46,11 @@ import LogoutComponent from './logout/logout.vue';
 import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
+import PermissionsComponent from './permissions/permissions.vue';
+import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
 import ProfilePreview from './profile-preview/profile-preview.vue';
 import ProfilePicture from './profile-picture/profile-picture.vue';
+import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
@@ -56,6 +61,7 @@ import vSelect from 'vue-select';
 // export them all, so other applications can access them
 export {
   AddressComponent,
+  BaseList,
   BreadcrumbsComponent,
   ButtonComponent,
   CardComponent,
@@ -68,6 +74,7 @@ export {
   EvanComponent,
   FormComponent,
   FormControlComponent,
+  FormControlCheckboxComponent,
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
@@ -78,18 +85,22 @@ export {
   ModalComponent,
   NavListComponent,
   NavTabsComponent,
+  PermissionsComponent,
+  PermissionsEditorComponent,
   ProfilePreview,
   ProfilePicture,
+  SharedContact,
   StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
-}
+};
 
 // map them to element names, so they can be used within templates
 const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-address', component: AddressComponent },
+  { name: 'evan-base-list', component: BaseList },
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-card', component: CardComponent },
@@ -101,6 +112,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-file-input', component: FormControlFilesComponent },
   { name: 'evan-form', component: FormComponent },
   { name: 'evan-form-control', component: FormControlComponent },
+  { name: 'evan-form-control-checkbox', component: FormControlCheckboxComponent },
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
@@ -112,8 +124,11 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
+  { name: 'evan-permissions', component: PermissionsComponent },
+  { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
   { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
+  { name: 'evan-shared-contact', component: SharedContact },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },

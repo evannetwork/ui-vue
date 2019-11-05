@@ -18,25 +18,22 @@ the following URL: https://evan.network/license/
 */
 
 <template>
-  <evan-form-control v-bind="$props">
-    <evan-v-select
-      :id="id"
-      :label="optionLabel"
-      :reduce="reduce"
-      :value="value"
-      @search:blur="$emit('blur')"
-      @search:focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event)"
-      v-bind="$attrs"
-    />
-  </evan-form-control>
+  <ul class="evan-base-list">
+    <li v-for="(item, index) in data"
+      :key="index"
+      :class="{'isSelected': isSelectedCallback(item)}"
+      @click="($event) => itemClickedCallback(item, $event)"
+    >
+      <slot name="item" :item="item"></slot>
+    </li>
+  </ul>
 </template>
 
 <style lang="scss">
-  @import './v-select.scss'
+  @import "./base-list.scss";
 </style>
 
 <script lang="ts">
-  import FormDataVSelect from './v-select'
-  export default FormDataVSelect
+  import Component from "./base-list";
+  export default Component;
 </script>

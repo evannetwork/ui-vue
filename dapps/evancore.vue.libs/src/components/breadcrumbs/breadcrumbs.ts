@@ -134,7 +134,7 @@ export default class BreadcrumbsComponent extends mixins(EvanComponent) {
           path: index === 0 ? this._baseHash :
             `${ this._baseHash }/${ breadcrumbHashes.slice(1, index + 1).join('/') }`,
           id: breadcrumb,
-        }
+        };
       });
 
       // show the go back button, when the navigation is deeper than 0

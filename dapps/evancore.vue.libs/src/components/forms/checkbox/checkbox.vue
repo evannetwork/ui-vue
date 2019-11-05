@@ -18,31 +18,28 @@
 */
 
 <template>
-  <div class="evan-steps" v-if="steps && steps.length !== 0">
-    <div :class="`evan-step-header${ minimal ? '-sm' : '' }`">
-      <button class="btn"
-        v-for="(step, index) of steps"
-        :class="[
-          `evan-step-${ index }`,
-          { 'active': activeStep === index, }
-        ]"
-        :disabled="isDisabled(index)"
-        @click="gotoStep(index)">
-        <span class="stepper-circle">
-          <template v-if="!minimal">{{ index + 1 }}</template>
-        </span>
-        <component
-          :is="minimal ? 'evan-tooltip' : 'span'">
-          {{ step.title | translate }}
-        </component>
-      </button>
-    </div>
-  </div>
+  <evan-form-control v-bind="$props" class="checkbox" >
+    <input
+      class="form-control"
+      v-bind="$props"
+      type="checkbox"
+      :class="{ 'is-invalid' : error}"
+      :id="id"
+      :checked="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.checked)"
+    />
+    <label :for="id" />
+  </evan-form-control>
 </template>
 
 <script lang="ts">
-  import Component from './steps';
-  export default Component;
+  import CheckBoxComponent from './checkbox'
+  export default CheckBoxComponent
 </script>
 
+<style lang="scss" scoped>
+  @import './checkbox.scss'
+</style>
 

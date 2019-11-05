@@ -21,8 +21,11 @@
   <div :style="`--evan-swipe-panel-size: ${ width }`">
     <template v-if="isRendered">
       <div class="evan-swipe-panel"
-        v-on:click.prevent=""
-        :class="{ 'show' : isShown, [`alignment-${alignment}`]: true, 'fixed': !mountId }"
+        :class="{
+          'fixed': !mountId,
+          'show': isShown,
+          [`alignment-${alignment}`]: !mountId,
+        }"
         :style="customStyle">
         <slot></slot>
       </div>

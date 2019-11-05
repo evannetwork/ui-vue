@@ -17,26 +17,28 @@ Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
 the following URL: https://evan.network/license/
 */
 
-<template>
-  <evan-form-control v-bind="$props">
-    <evan-v-select
-      :id="id"
-      :label="optionLabel"
-      :reduce="reduce"
-      :value="value"
-      @search:blur="$emit('blur')"
-      @search:focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event)"
-      v-bind="$attrs"
-    />
-  </evan-form-control>
-</template>
+@import '~@evan.network/ui/src/style/utils';
 
-<style lang="scss">
-  @import './v-select.scss'
-</style>
+.evan-base-list {
+  list-style-type: none;
+  padding: 0;
 
-<script lang="ts">
-  import FormDataVSelect from './v-select'
-  export default FormDataVSelect
-</script>
+  li {
+    background-color: white;
+    border: 1px solid white;
+    display: block;
+    width: 100%;
+    height: 64px;
+    margin: 2px 0;
+    cursor: pointer;
+
+    &:hover {
+      background-color: cssVar('gray-100');
+      border: 1px solid cssVar('gray-200');
+    }
+
+    &.isSelected {
+      border: 1px solid cssVar('primary')
+    }
+  }
+}

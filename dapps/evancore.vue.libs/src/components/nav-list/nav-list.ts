@@ -122,4 +122,11 @@ export default class NavListComponent extends mixins(EvanComponent) {
       }
     }
   }
+
+  /**
+   * Sends the hide sidebar event.
+   */
+  hideSidebar2() {
+    window.dispatchEvent(new CustomEvent('dapp-wrapper-sidebar-close'));
+  }
 }

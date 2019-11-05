@@ -17,32 +17,15 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <div class="evan-steps" v-if="steps && steps.length !== 0">
-    <div :class="`evan-step-header${ minimal ? '-sm' : '' }`">
-      <button class="btn"
-        v-for="(step, index) of steps"
-        :class="[
-          `evan-step-${ index }`,
-          { 'active': activeStep === index, }
-        ]"
-        :disabled="isDisabled(index)"
-        @click="gotoStep(index)">
-        <span class="stepper-circle">
-          <template v-if="!minimal">{{ index + 1 }}</template>
-        </span>
-        <component
-          :is="minimal ? 'evan-tooltip' : 'span'">
-          {{ step.title | translate }}
-        </component>
-      </button>
-    </div>
-  </div>
-</template>
+import Component, { mixins } from 'vue-class-component';
 
-<script lang="ts">
-  import Component from './steps';
-  export default Component;
-</script>
+import EvanControlComponent from '../control/control';
 
-
+/**
+ * Base component for input element.
+ *
+ * @class         CheckboxComponent
+ * @selector      evan-form-control-checkbox
+ */
+@Component({})
+export default class CheckboxComponent extends mixins(EvanControlComponent) {}

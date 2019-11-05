@@ -20,7 +20,7 @@
 // vue imports
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
@@ -35,6 +35,12 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
  */
 @Component({ })
 export default class SidePanelComponent extends mixins(EvanComponent) {
+  /**
+   * Passes the current open state into the side panel, so it will be openable / closable with one
+   * param.
+   */
+  @Prop({ }) isOpen: string;
+
   /**
    * Where should the popup should been attached? (left / right)
    */
@@ -56,31 +62,52 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: null }) mountId: string;
 
   /**
+   * Animation stuff
+   */
+  isShown = false;
+
+  /**
    * shows the dom elements of the modal
    */
   isRendered = false;
-
-  /**
-   * animate them
-   */
-  isShown = false;
 
   /**
    * Wait until the swipe panel is rendered, so it can be shown using animation.
    */
   waitForRendered;
 
+  /**
+   * Original element that contains this element
+   */
+  originParentElement: any;
+
+  @Watch('mountId')
+  onMountIdChange(val: string) {
+    this.mountIdChanged(val);
+  }
+
+  @Watch('isOpen')
+  onIsOpenChange(val: boolean) {
+    val ? this.show() : this.hide();
+  }
+
   mounted() {
-    if (this.mountId) {
-      this.$el.parentNode.removeChild(this.$el);
-      const sideBar = document.getElementById(this.mountId);
-      sideBar.appendChild(this.$el);
-    }
+    this.originParentElement = this.$el.parentElement;
+
+    // check for mount id and render it directly if wanted
+    this.mountIdChanged();
   }
 
   beforeDestroy() {
+    // clear parent element references to be sure, that gc is working
+    this.originParentElement = null;
+
+    // close it on destroy
+    this.isRendered && this.hide();
+
+    // remove it from current mount id
     if (this.mountId) {
-      const sideBar = document.getElementById(this.mountId).innerHTML = '';
+      this.$el.parentNode.removeChild(this.$el);
     }
   }
 
@@ -88,33 +115,64 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Renders the modal element and shows it animated.
    */
   show() {
-    this.isRendered = true;
+    if (!this.mountId && !this.isShown) {
+      this.isRendered = true;
 
-    // wait until swipe panel is rendered and show it
-    this.waitForRendered = setInterval(() => {
-      if (this.$el.querySelectorAll('.evan-swipe-panel').length > 0) {
-        clearInterval(this.waitForRendered);
-        setTimeout(() => this.isShown = true);
-      }
-    }, 10);
+      // wait until swipe panel is rendered and show it
+      this.waitForRendered = setInterval(() => {
+        if (this.$el.querySelectorAll('.evan-swipe-panel').length > 0) {
+          clearInterval(this.waitForRendered);
+          setTimeout(() => {
+            this.isShown = true;
+            this.$emit('show');
+          });
+        }
+      }, 10);
+    }
   }
 
   /**
    * Remove the modal element and hide it animated.
    */
-  hide($event) {
-    this.isShown = false;
-    // it the panel was faster closed than opened, remove the wait for rendered watcher
-    clearInterval(this.waitForRendered);
+  hide($event = null) {
+    if (!this.mountId && this.isShown) {
+      this.isShown = false;
 
-    // remove the swipe panel content
-    setTimeout(() => this.isRendered = false, 400);
+      // it the panel was faster closed than opened, remove the wait for rendered watcher
+      clearInterval(this.waitForRendered);
 
-    // tell parent component, that the swipe-panel is closing
-    this.$emit('close');
+      // remove the swipe panel content
+      setTimeout(() => this.isRendered = false, 400);
 
-    if ($event) {
-      $event.stopPropagation();
+      // tell parent component, that the swipe-panel is closing
+      this.$emit('hide');
+
+      if ($event) {
+        $event.stopPropagation();
+      }
+    }
+  }
+
+  /**
+   * Check if a mount id is specified and render it directly. Else apply swipe logic
+   */
+  mountIdChanged(mountId = this.mountId) {
+    if (mountId) {
+      document.getElementById(mountId).appendChild(this.$el);
+      this.isRendered = true;
+      this.isShown = true;
+    } else {
+      // move the element to it's original position
+      if (this.originParentElement !== this.$el.parentElement) {
+        this.originParentElement.appendChild(this.$el);
+      }
+
+      if (this.isOpen) {
+        this.show();
+      } else {
+        this.isRendered = false;
+        this.isShown = false;
+      }
     }
   }
 }

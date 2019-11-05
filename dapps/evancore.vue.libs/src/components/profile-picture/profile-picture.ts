@@ -18,17 +18,12 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
-import { EvanFormControl } from '@evan.network/ui-vue-core';
 import { UIContainerFile, FileHandler, } from '@evan.network/ui';
 
-import { getDomainName } from '../../utils';
 import EvanComponent from '../../component';
 
 /**
@@ -37,10 +32,10 @@ import EvanComponent from '../../component';
 @Component({})
 class ProfilePicture extends mixins(EvanComponent) {
   /**
-   * Profile type that should be used (unspecified, user, company, device)
+   * Profile type that should be used (user, company, device)
    */
   @Prop({
-    default: 'unspecified'
+    default: 'user'
   }) type: string;
 
   /**
@@ -146,7 +141,7 @@ class ProfilePicture extends mixins(EvanComponent) {
     }
 
     return accountName.split(/\s/).splice(0, 2).map(word => word.charAt(0)).join('');
-  };
+  }
 }
 
-export default ProfilePicture
+export default ProfilePicture;

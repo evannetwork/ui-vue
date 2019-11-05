@@ -36,5 +36,19 @@ export default class VSelectComponent extends mixins(EvanControlComponent) {
   @Prop({
     type: String,
     default: 'label'
-  })optionLabel: string;
+  }) optionLabel: string;
+
+  /**
+   * Apply default reduce function, so by passing an object, the value will be returned.
+   */
+  @Prop({
+    type: Function,
+    default: (option) => {
+      if (option && typeof option === 'object' && option.hasOwnProperty('value')) {
+        return option.value;
+      } else {
+        return option;
+      }
+    }
+  }) reduce: Function;
 }

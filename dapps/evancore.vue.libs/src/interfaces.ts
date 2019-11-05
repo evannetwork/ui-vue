@@ -76,7 +76,7 @@ export interface EvanFormControlUISpecs {
     label?: string;
     options?: Array<{ label: string, value: any }>;
     size?: number;
-  }
+  };
   type: string;
 }
 
@@ -90,3 +90,30 @@ export interface EvanFormControlOptions {
   value?: any;
 }
 
+/**
+ * used for contacts in vue select component.
+ */
+export interface ContactInterface {
+  label: string;
+  value: string;
+}
+
+/**
+ * Interface for multiple contract permissions object.
+ */
+export interface PermissionsInterface {
+  [property: string]: {
+    read: boolean,
+    readWrite: boolean,
+    fields?: string[]
+  };
+}
+
+/**
+ * Defines an object of permission interfaces representing all permission attributes of a container.
+ */
+export interface ContainerPermissionsInterface {
+  label: string;
+  key: string;
+  permissions: PermissionsInterface;
+}

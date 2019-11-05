@@ -192,7 +192,7 @@ export default class EvanVueDispatcherHandler {
   ) {
     const [ dappEns, dispatcherName ] = dispatcher.id.split('|||');
     const isCurr = dappEns === this.dappName;
-    const id = scope === this ? dispatcher.id : dispatcherName
+    const id = scope === this ? dispatcher.id : dispatcherName;
 
     // fill empty instances
     scope.instances[id] = scope.instances[id] || [ ];

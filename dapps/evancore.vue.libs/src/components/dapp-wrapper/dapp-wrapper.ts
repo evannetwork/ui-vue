@@ -127,7 +127,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   /**
    * selector for the side bar 2
    */
-  sideBar2Selector = `#${ this.id } .dapp-wrapper-content-wrapper > .dapp-wrapper-sidebar-2 > *`
+  sideBar2Selector = `#${ this.id } .dapp-wrapper-content-wrapper > .dapp-wrapper-sidebar-2 > *`;
 
   /**
    * is the current dapp-wrapper gets initialized? => use loading to don't render dapp-loader or
@@ -562,7 +562,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     if (this.userInfo.readMails.indexOf(mail.address) === -1) {
       this.userInfo.readMails.push(mail.address);
 
-      window.localStorage['evan-mail-read'] = JSON.stringify(this.userInfo.readMails)
+      window.localStorage['evan-mail-read'] = JSON.stringify(this.userInfo.readMails);
     }
 
     (<any>this.$refs).mailDropdown.hide($event);
@@ -652,7 +652,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
           `_evan.dapp-wrapper.dispatcher-status.${ instance.status }`,
           {
             title: this.$t(instance.dispatcher.title),
-            percentage: (100 / instance.dispatcher.steps.length) * instance.stepIndex,
+            percentage: Math.round((100 / instance.dispatcher.steps.length) * instance.stepIndex),
           }
         ), {
           type: instance.status === 'finished' ? 'success' :

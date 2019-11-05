@@ -17,32 +17,28 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <div class="evan-steps" v-if="steps && steps.length !== 0">
-    <div :class="`evan-step-header${ minimal ? '-sm' : '' }`">
-      <button class="btn"
-        v-for="(step, index) of steps"
-        :class="[
-          `evan-step-${ index }`,
-          { 'active': activeStep === index, }
-        ]"
-        :disabled="isDisabled(index)"
-        @click="gotoStep(index)">
-        <span class="stepper-circle">
-          <template v-if="!minimal">{{ index + 1 }}</template>
-        </span>
-        <component
-          :is="minimal ? 'evan-tooltip' : 'span'">
-          {{ step.title | translate }}
-        </component>
-      </button>
-    </div>
-  </div>
-</template>
+@import '~@evan.network/ui/src/style/utils';
 
-<script lang="ts">
-  import Component from './steps';
-  export default Component;
-</script>
+.profile-preview {
+  &.default {
+    .account-name {
+      font-size: 24px;
+    }
 
+    .profile-type {
+      font-size: 14px;
+    }
+  }
 
+  &.sm {
+    .account-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .profile-type {
+      font-size: 10px;
+      font-weight: 300;
+    }
+  }
+}

@@ -81,8 +81,24 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       options,
       uiLibBaseUrl,
       dapp: dappToLoad,
+      uiState: {
+        profile: {
+          selectedSharedContacts: [],
+        },
+        swipePanel: ''
+      },
       ...options.state,
     },
+    mutations: {
+      setSelectedSharedContacts (state, contacts = []) {
+        state.uiState.profile.selectedSharedContacts = contacts;
+      },
+      toggleSidePanel (state, type = 'left') {
+        // open the desired one
+        state.uiState.swipePanel = state.uiState.swipePanel && state.uiState.swipePanel === type ?
+          '' : type;
+      }
+    }
   });
 
   // use defined or browser language
@@ -176,7 +192,7 @@ export function registerComponents(Vue: any, components: Array<ComponentRegistra
 export function registerEvanI18N(Vue: any, translations: any) {
   // add all i18n definitions
   Object.keys(translations).forEach(key => Vue.i18n.add(key, translations[key]));
-};
+}
 
 /**
  * Vue does not trigger correct destroy events when a vue application is removed from the dom or

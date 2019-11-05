@@ -17,26 +17,36 @@ Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
 the following URL: https://evan.network/license/
 */
 
-<template>
-  <evan-form-control v-bind="$props">
-    <evan-v-select
-      :id="id"
-      :label="optionLabel"
-      :reduce="reduce"
-      :value="value"
-      @search:blur="$emit('blur')"
-      @search:focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event)"
-      v-bind="$attrs"
-    />
-  </evan-form-control>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 
-<style lang="scss">
-  @import './v-select.scss'
-</style>
+// evan imports
+import EvanComponent from '../../../component';
 
-<script lang="ts">
-  import FormDataVSelect from './v-select'
-  export default FormDataVSelect
-</script>
+/**
+ * This is the basis of a list that is used for detail views or for navigation within an section.
+ *
+ * @class         EvanBaseList
+ * @selector      evan-base-list
+ */
+@Component({})
+class EvanBaseList extends mixins(EvanComponent) {
+  /**
+  * data for list rendering
+  */
+  @Prop({
+    type: Array,
+    required: true,
+  }) data: Array<any>;
+
+  @Prop({
+    type: Function
+  }) isSelectedCallback: Function;
+
+  @Prop({
+    type: Function
+  }) itemClickedCallback: Function;
+}
+
+export default EvanBaseList;

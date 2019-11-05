@@ -97,6 +97,29 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   @Prop() onlyForm: boolean;
 
   /**
+   * Hides / shows the cancel button
+   */
+  @Prop({ default: true }) enableCancel: boolean;
+
+  /**
+   * Function called, when share button is clicked.
+   */
+  @Prop({
+    required: true
+  }) handleShare: Function;
+
+  /**
+   * Makes the formular editable.
+   */
+  @Prop({ default: true }) editable: boolean;
+
+
+  /**
+   * Show / hide the share button.
+   */
+  @Prop({ default: true }) shareable: boolean;
+
+  /**
    * Is the formular currently enabled?
    */
   editMode = false;
@@ -130,13 +153,26 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
    * @param      {boolean}  active  enable / disable editMode
    */
   setEditMode(active: boolean): void {
-    // save latest data, so we can restore it on cancelation
-    if (!this.editMode && active && this.form) {
-      // use clone deep to break array references (e.g. in file upload)
-      this.formDataBackup = cloneDeep(bcc.lodash, this.form.getFormData());
-    }
+    if (this.editable) {
+      // save latest data, so we can restore it on cancelation
+      if (!this.editMode && active && this.form) {
+        // use clone deep to break array references (e.g. in file upload)
+        this.formDataBackup = cloneDeep(bcc.lodash, this.form.getFormData());
+      }
 
-    this.editMode = active;
+      this.editMode = active;
+    }
+  }
+
+  /**
+   * Set global UI property to open/close the right swipe panel or execute share handler.
+   */
+  share() {
+    if (typeof this.handleShare === 'function') {
+      this.handleShare();
+    } else {
+      console.warn('handleShare property is not a function.');
+    }
   }
 
   /**
