@@ -2,6 +2,8 @@
 
 ## Next Version
 ### Features
+- `evancore.vue.libs` (v1.9.0)
+  - add required flag to `evan-control`
 
 ### Fixes
 

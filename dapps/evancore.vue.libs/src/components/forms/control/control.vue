@@ -27,6 +27,9 @@
       :for="id"
       v-if="label">
       {{ label }}
+      <small class="text-muted" v-if="!isRequired()">
+        ({{ '_evan.optional' | translate }})
+      </small>
     </label>
     <div class="input-wrapper">
       <slot></slot>

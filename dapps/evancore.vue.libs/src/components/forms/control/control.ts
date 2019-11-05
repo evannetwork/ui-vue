@@ -86,4 +86,20 @@ export default class ControlComponent extends mixins(EvanComponent) {
   @Prop({
     default: 12,
   }) size: boolean;
+
+  /**
+   * Is the current field is required? If not, a optional hint will be displayed
+   */
+  @Prop() required: boolean|Function;
+
+  /**
+   * Determines if the current field is required. If not, show a optional hint.
+   */
+  isRequired() {
+    if (this.required && typeof this.required === 'function') {
+      return this.required();
+    } else {
+      return this.required;
+    }
+  }
 }
