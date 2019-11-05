@@ -43,8 +43,8 @@
   "devDependencies": {
     "@evan.network/api-blockchain-core": "^2.3.0",
     "@evan.network/smart-contracts-core": "^2.1.1",
-    "@evan.network/ui": "^1.7.2",
-    "@evan.network/ui-dapp-browser": "^2.5.1"
+    "@evan.network/ui": "^1.7.3",
+    "@evan.network/ui-dapp-browser": "^2.6.1"
   },
   "husky": {
     "hooks": {
@@ -68,5 +68,5 @@
     "deploy": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/deployment.js deploy --config /Users/tschuck/projects/evan.network/ui/ui-vue-core/scripts/config/deployment.js",
     "serve": "gulp --gulpfile node_modules/@evan.network/ui-dapp-browser/gulp/serve.js serve"
   },
-  "version": "1.7.0"
+  "version": "1.8.0"
 }

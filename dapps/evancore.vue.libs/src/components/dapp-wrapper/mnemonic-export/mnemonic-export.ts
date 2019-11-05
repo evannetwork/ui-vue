@@ -32,7 +32,7 @@ import EvanComponent from '../../../component';
  */
 @Component({})
 export default class MnemonicExport extends mixins(EvanComponent) {
-  mnemonic = '';
+  mnemonic = [];
 
   async created() {
     this.mnemonic = await this.getMnemonic();
@@ -47,7 +47,7 @@ export default class MnemonicExport extends mixins(EvanComponent) {
    * Checks for the evan-mnemonic parameter within the localStorage. If the parameter is available
    * and the user is able to decrypt the value, the notification will be shown.
    */
-  private async getMnemonic(): Promise<string> {
+  private async getMnemonic(): Promise<string[]> {
     if (window.localStorage['evan-mnemonic']) {
       const runtime = this.getRuntime();
       const encrypted = localStorage['evan-mnemonic'];
@@ -56,9 +56,9 @@ export default class MnemonicExport extends mixins(EvanComponent) {
         runtime.sharing.options.defaultCryptoAlgo
       );
 
-      return await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), {
+      return (await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), {
         key: vault.encryptionKey
-      });
+      })).split(' ');
     }
   }
 

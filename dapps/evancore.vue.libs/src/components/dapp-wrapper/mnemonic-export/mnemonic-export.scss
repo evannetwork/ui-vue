@@ -16,7 +16,8 @@
 
 @import '~@evan.network/ui/src/style/utils';
 
-.hint-banner {
+@media screen {
+  .hint-banner {
   background: cssVar("primary-color");
   color: cssVar("");
   position: fixed;
@@ -25,27 +26,90 @@
   bottom: 0;
   height: 60px;
   line-height: 60px; // vertical center (for one-liner)
-  & > a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    color: white;
+    & > a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      color: white;
+    }
+  }
+
+  .button-wrapper {
+    position: relative;
+
+    .hidden {
+      opacity: 0;
+    }
+
+    .spinner {
+      position: absolute;
+    }
+
+    span {
+      color: inherit;
+    }
+  }
+
+  .mnemonics span {
+    font-size: 2em;
   }
 }
 
-.button-wrapper {
-  position: relative;
-
-  .hidden {
-    opacity: 0;
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
   }
 
-  .spinner {
-    position: absolute;
+  .print-view {
+    visibility: visible;
+    z-index: 9999999;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 210mm;
+    height: 297mm;
+    padding: 20mm;
+
+    position: fixed;
+    background-color: #ffffff;
+    display: block;
+
+    .mnemonics {
+
+      font-size: 16pt;
+      line-height: 21pt;
+
+      ol { counter-reset: item; }
+      ol li {
+        width: 50%;
+        float: left;
+        border-bottom: 1px solid #EEE;
+        display: block;
+      }
+      ol li:before {
+          content: counter(item) ". ";
+          counter-increment: item;
+          color: #AAA;
+          width: 2em;
+          display: inline-block;
+      }
+    }
+
+    * {
+      visibility: visible;
+    }
+
+    button, button.btn, .evan.theme-evan .btn {
+      display: none;
+    }
   }
 
-  span {
-    color: inherit;
+  .print-view:after {
+    content: "";
+    width: 100mm;
+    background: #FFF;
   }
 }
