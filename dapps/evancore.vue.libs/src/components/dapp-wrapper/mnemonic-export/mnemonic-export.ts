@@ -32,16 +32,15 @@ import EvanComponent from '../../../component';
  */
 @Component({})
 export default class MnemonicExport extends mixins(EvanComponent) {
-  mnemonic: string;
-  isShown = false;
+  mnemonic = '';
 
   async created() {
     this.mnemonic = await this.getMnemonic();
-    console.log('this.mnemonic', this.mnemonic);
+    console.log('mnemonic', this.mnemonic);
   }
 
-  private toggleVisibility() {
-    this.isShown = !this.isShown;
+  private showModal() {
+    (<any>this.$refs.modal).show();
   }
 
   /**
@@ -60,8 +59,6 @@ export default class MnemonicExport extends mixins(EvanComponent) {
       return await cryptor.decrypt(bcc.buffer.from(encrypted, 'hex'), {
         key: vault.encryptionKey
       });
-    } else {
-      return '';
     }
   }
 
@@ -86,7 +83,7 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   /**
    * @param text Text to copy
    */
-  private copyToClipboard(text) {
+  private copyToClipboard(text: string) {
     let textArea = document.createElement('textarea');
     textArea.value = text;
     document.body.appendChild(textArea);

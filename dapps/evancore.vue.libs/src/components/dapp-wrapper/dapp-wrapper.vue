@@ -233,7 +233,7 @@
               </evan-modal>
               <slot name="content"></slot>
               <!-- if the user gone through the sign-up, but never exported his mnemonic -->
-              <evan-mnemonic-export v-if="createRuntime && topLevel"></evan-mnemonic-export>
+              <evan-mnemonic-export v-if="createRuntime && topLevel && isLoggedin"></evan-mnemonic-export>
             </div>
             <div v-if="topLevel" id="dapp-wrapper-sidebar-right" />
           </div>

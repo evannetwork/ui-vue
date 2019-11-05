@@ -117,6 +117,15 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    */
   @Prop({ default: true }) createRuntime: boolean;
 
+  get isLoggedin() {
+    console.log('Logged In!');
+    return this.$store.state.isLoggedin;
+  }
+  set isLoggedin(state) {
+    this.$store.commit('setLoginState', state);
+    console.log('Log State:', state);
+  }
+
   /**
    * id of this element, so child elements can be queried easier
    */
@@ -455,6 +464,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
       this.$emit('loggedin', this.$store.state.runtime);
       this.loading = false;
       this.login = false;
+      this.isLoggedin = true;
 
       // load the user infos like alias, mails, dispatchers ...
       if (this.topLevel) {

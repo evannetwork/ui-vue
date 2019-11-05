@@ -18,16 +18,27 @@
 */
 
 <template>
-  <div class="notification-bar">
-    <div class="mnemonic" v-if="isShown">
-      <p>{{ mnemonic }}</p>
-      <button @click="copyToClipboard(mnemonic)">Copy</button>
-      <button @click="downloadTextfile('Mnemonics', mnemonic)">Download</button>
+  <div class="notification-bar" v-if="mnemonic">
+    <div class="hint-banner bg-primary bg-text-primary text-center">
+      <a @click="showModal">{{ '_evan.mnemonic-export.print-recovery' | translate }}</a>
     </div>
-    <a
-      class="hint-banner bg-primary bg-text-primary text-center"
-      @click="toggleVisibility"
-    >{{ '_evan.mnemonic-export.print-recovery' | translate }}</a>
+
+    <evan-modal ref="modal" :hideFooterButton="true" :maxWidth="'800px'" disableBackdrop="true">
+      <template v-slot:header>
+        <h5 class="modal-title">{{ '_onboarding.sign-up.get-mnemonic' | translate }}</h5>
+      </template>
+      <template v-slot:body>
+        <div>
+          <p v-html="$t('_onboarding.sign-up.get-mnemonic-desc-long')"></p>
+          <h3 class="text-danger text-center">{{ mnemonic }}</h3>
+          <button @click="copyToClipboard(mnemonic)">Copy</button>
+          <button @click="downloadTextfile('Mnemonics', mnemonic)">Download</button>
+        </div>
+      </template>
+      <template v-slot:footer>
+        <evan-button type="primary" id="modal-cancel">{{ '_evan.view-profile' | translate }}</evan-button>
+      </template>
+    </evan-modal>
   </div>
 </template>
 

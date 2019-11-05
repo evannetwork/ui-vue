@@ -18,7 +18,20 @@
 
 .hint-banner {
   background: cssVar("primary-color");
-  color: cssVar("")
+  color: cssVar("");
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  line-height: 60px; // vertical center (for one-liner)
+  & > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    color: white;
+  }
 }
 
 .button-wrapper {
