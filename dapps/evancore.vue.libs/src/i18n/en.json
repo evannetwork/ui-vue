@@ -102,9 +102,9 @@
     "save": "Save",
     "share": "Share",
     "sharing": {
+      "add-contact": "Add contact",
       "defineFor": "Define the permissions for {contactName}.",
       "description": "To share your information with another contact, fill out the form below and click on “Update Sharing Options”",
-      "noContacts": "You have no contacts in your address book. Please add a contact first to share with.",
       "noPermissions": "No permissions available to edit.",
       "permissionsTitle": "Update Permissions",
       "selectContact": "Select contact to share with",
