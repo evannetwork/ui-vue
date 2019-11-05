@@ -68,7 +68,7 @@
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
 	"mnemonic-export": {
       "print-recovery": "Drucken Sie Ihren Wiederherstellungsschlüssel"
-    }
+    },
     "no": "Nein",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",

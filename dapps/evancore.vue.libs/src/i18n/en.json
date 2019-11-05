@@ -68,7 +68,7 @@
     "logout-desc": "Are you sure you want to logout?",
     "mnemonic-export": {
       "print-recovery": "Print your recovery key"
-    }
+    },
     "no": "No",
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",

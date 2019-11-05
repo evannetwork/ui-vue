@@ -89,16 +89,10 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   private copyToClipboard(text) {
     let textArea = document.createElement('textarea');
     textArea.value = text;
-
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-
-    try {
-      document.execCommand('copy');
-    } catch (err) {
-      console.log('Oops, unable to copy');
-    }
+    document.execCommand('copy');
     document.body.removeChild(textArea);
   }
 }
