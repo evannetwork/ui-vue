@@ -2,6 +2,14 @@
 
 ## Next Version
 ### Features
+
+### Fixes
+
+### Deprecations
+
+
+## Version 1.8.0
+### Features
 - `evancore.vue.libs` (v1.8.0)
   - add `enableCancel` parameter to forms
   - add `evan-form-control-checkbox` component with custom checkbox styles
@@ -9,15 +17,13 @@
   - add `evan-permissions-editor` component to handle permissions UI for a set of data sets
   - allow functions in `evan-steps` disabled steps
   - add `editable` and `shareable` flag to formulars
+  - add swipe panel event handling and persistent `mountId` management
 
 ### Fixes
 - `evancore.vue.libs` (v1.8.0)
   - fix profile preview default design
   - add vuex store for handling uiStates
-  - add correct swipe panel event handling and persistent mountId management
 - update gulp build scripts to be compatible node 12
-
-### Deprecations
 
 
 ## Version 1.7.0
