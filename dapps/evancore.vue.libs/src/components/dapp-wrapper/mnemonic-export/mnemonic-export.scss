@@ -18,20 +18,17 @@
 
 @media screen {
   .hint-banner {
-  background: cssVar("primary-color");
-  color: cssVar("");
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 60px;
-  line-height: 60px; // vertical center (for one-liner)
+    background: cssVar('primary-color');
+    color: cssVar('');
     & > a {
       display: block;
       width: 100%;
       height: 100%;
       cursor: pointer;
       color: white;
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 
@@ -78,23 +75,24 @@
     display: block;
 
     .mnemonics {
-
       font-size: 16pt;
       line-height: 21pt;
 
-      ol { counter-reset: item; }
+      ol {
+        counter-reset: item;
+      }
       ol li {
         width: 50%;
         float: left;
-        border-bottom: 1px solid #EEE;
+        border-bottom: 1px solid #eee;
         display: block;
       }
       ol li:before {
-          content: counter(item) ". ";
-          counter-increment: item;
-          color: #AAA;
-          width: 2em;
-          display: inline-block;
+        content: counter(item) '. ';
+        counter-increment: item;
+        color: #aaa;
+        width: 2em;
+        display: inline-block;
       }
     }
 
@@ -102,14 +100,16 @@
       visibility: visible;
     }
 
-    button, button.btn, .evan.theme-evan .btn {
+    button,
+    button.btn,
+    .evan.theme-evan .btn {
       display: none;
     }
   }
 
   .print-view:after {
-    content: "";
+    content: '';
     width: 100mm;
-    background: #FFF;
+    background: #fff;
   }
 }

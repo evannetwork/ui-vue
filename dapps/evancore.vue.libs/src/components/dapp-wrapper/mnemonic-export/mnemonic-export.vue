@@ -19,7 +19,7 @@
 
 <template>
   <div class="notification-bar" v-if="mnemonic">
-    <div class="hint-banner bg-primary bg-text-primary text-center">
+    <div class="hint-banner bg-primary bg-text-primary col-md-8 offset-md-2 p-3 text-center">
       <a @click="showModal">{{ '_evan.mnemonic-export.print-recovery' | translate }}</a>
     </div>
     <evan-modal ref="modal" :hideFooterButton="true" :maxWidth="'800px'" disableBackdrop="true" class="mnemonic-modal">
