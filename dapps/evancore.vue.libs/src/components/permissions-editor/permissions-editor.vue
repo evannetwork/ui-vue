@@ -8,10 +8,11 @@
       <evan-form-control-v-select
         class="loading"
         id="shareContactSelect"
-        :label="$t('_evan.sharing.selectContact')"
         v-model="selectedContact"
-        :options="contacts"
         :disabled="contacts.length === 0"
+        :label="$t('_evan.sharing.selectContact')"
+        :options="contacts"
+        required="true"
         @input="getPermissionsForContact"
       />
 
