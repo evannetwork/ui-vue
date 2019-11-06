@@ -18,9 +18,7 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
@@ -32,10 +30,12 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
  * encrypted with that password. Used by the dapp-wrapper to login the current user if needed. Will
  * send an `logged-in` event including the users provided password.
  *
+ * TODO: Rethink the naming. We have sign-in, sign-up, signed-in and login (this)
+ *
  * @class         LoginComponent
  * @selector      evan-login
  */
-@Component({ })
+@Component({})
 export default class LoginComponent extends mixins(EvanComponent) {
   /**
    * preload accountId
@@ -59,7 +59,7 @@ export default class LoginComponent extends mixins(EvanComponent) {
       valid: false,
       dirty: false,
       ref: null as any
-    },
+    }
   };
 
   /**
@@ -86,8 +86,11 @@ export default class LoginComponent extends mixins(EvanComponent) {
 
       // get the current account id
       try {
-        this.form.password.valid = await dappBrowser.bccHelper.isAccountPasswordValid(bcc,
-          this.accountId, this.form.password.value);
+        this.form.password.valid = await dappBrowser.bccHelper.isAccountPasswordValid(
+          bcc,
+          this.accountId,
+          this.form.password.value
+        );
       } catch (ex) {
         this.form.password.value = false;
       }
