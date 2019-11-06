@@ -83,6 +83,7 @@
     "please-login": "Please unlock your profile to continue.",
     "profile": {
       "account-name": "Account Name",
+      "no-alias": "No alias",
       "types": {
         "choose": "Specify Account Type",
         "company": "Company",
@@ -91,6 +92,9 @@
         "device-desc": "Save device information and connection settings.",
         "undefined": "User",
         "user": "User"
+      },
+      "wallet": {
+        "current-balance": "Balance"
       }
     },
     "profile-picture": {

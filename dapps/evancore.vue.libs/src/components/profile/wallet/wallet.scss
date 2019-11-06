@@ -17,26 +17,58 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <evan-form-control v-bind="$props">
-    <select class="form-control custom-select"
-      :id="id"
-      :value="value"
-      :disabled="disabled"
-      @blur="$emit('blur')"
-      @focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event.target.value)"
-      v-bind="$attrs">
-      <option v-for="option in options"
-        :value="option.value || option"
-        :key="option.value || option">
-        {{ (option.label || option) | translate }}
-      </option>
-    </select>
-  </evan-form-control>
-</template>
+@import '~@evan.network/ui/src/style/utils';
+$yellow: #fbe19e;
 
-<script lang="ts">
-  import FormDataSelect from './select'
-  export default FormDataSelect
-</script>
+.evan-wallet {
+  position: relative;
+
+  display: block;
+
+  height: 200px;
+  padding: 1.5em;
+
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &, * {
+    text-decoration: none !important;
+  }
+
+  & > h1 {
+    font-size: 36px;
+    font-weight: 600;
+
+    margin-bottom: 0;
+  }
+
+  .account-info {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    padding: 0.8em 1.5em;
+
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: rgba(3, 49, 60, 0.6);
+
+    * {
+      color: cssVar('light');
+    }
+
+    small:first-child {
+      font-weight: bold;
+
+      margin: 0;
+
+      color: $yellow;
+    }
+
+    small:nth-child(2) {
+      opacity: 0.5;
+    }
+  }
+}

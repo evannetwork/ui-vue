@@ -83,6 +83,7 @@
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
       "account-name": "Account Name",
+      "no-alias": "Kein Alias",
       "types": {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
@@ -91,6 +92,9 @@
         "device-desc": "Speichern Sie Geräteninformationen und Verbindungseinstellungen.",
         "undefined": "User",
         "user": "User"
+      },
+      "wallet": {
+        "current-balance": "Kontostand"
       }
     },
     "profile-picture": {

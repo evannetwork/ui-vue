@@ -5,6 +5,7 @@
 - `evancore.vue.libs` (v1.9.0)
   - add required flag to `evan-control`
   - add configurable `no-contacts` text to the `evan-permission-editor`
+  - add `evan-wallet` component
 
 ### Fixes
 
