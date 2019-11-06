@@ -190,7 +190,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
         console.log('Error writing permissions', e.message);
       });
 
-    this.initialPermissions = clone(this.containersPermissions);
+    this.cancel();
     this.isLoading = false;
   }
 
