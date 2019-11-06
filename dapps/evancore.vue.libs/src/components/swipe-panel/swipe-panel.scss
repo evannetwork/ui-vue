@@ -29,10 +29,16 @@
 
   width: cssVar('swipe-panel-size');
   height: 100vh;
-  padding: 2em;
+  padding: 2rem;
 
   background-color: cssVar('bg-inverted');
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.15);
+
+  .btn-close {
+    position: absolute;
+    right: 20px;
+    top: 24px;
+  }
 
   & {
     &, h1, h2, h3, h4, h5, span, p, li, b, label, small {
