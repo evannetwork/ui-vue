@@ -67,7 +67,15 @@
     "logout": "Logout",
     "logout-desc": "Are you sure you want to logout?",
     "mnemonic-export": {
-      "print-recovery": "Print your recovery key"
+      "account-id": "Account ID",
+      "alias": "Alias",
+      "description": "Your account is protected by your password and recovery key. You will need your recovery key to log in from new devices.\n\nPlease note: The recovery key is not stored in your profile information and could not be set back. In case of lost, you will loose access to your business partners, contacts and profile information.",
+      "download": "Download as Text File",
+      "notification": "Print your recovery key",
+      "print-or-store": "Print your recovery key and store it at a secure place offline.",
+      "print": "Print",
+      "recovery-key": "Recovery Key",
+      "title": "Print your Recovery Key"
     },
     "no": "No",
     "password": "Password",

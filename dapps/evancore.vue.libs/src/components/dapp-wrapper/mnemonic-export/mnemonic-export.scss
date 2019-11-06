@@ -15,20 +15,41 @@
 */
 
 @import '~@evan.network/ui/src/style/utils';
+  .pre-wrap {
+    white-space: pre-wrap;
+  }
 
-@media screen {
-  .hint-banner {
-    background: cssVar('primary-color');
-    color: cssVar('');
-    & > a {
-      display: block;
-      width: 100%;
-      height: 100%;
+  .notification-bar {
+    margin-top: -52px;
+    height: 52px;
+
+    .hint-banner {
+      background: cssVar('primary-color');
       cursor: pointer;
-      color: white;
-      &:hover {
-        text-decoration: none;
-      }
+    }
+  }
+
+  .info-box {
+    background-color: cssVar("primary-color")
+  }
+
+  .mnemonics {
+    .word {
+      padding: 4px 8px;
+      margin: 8px -8px;
+      border-radius: 4px;
+      border: 1px solid cssVar("border-color");
+    }
+
+    & span {
+      font-size: inherit;
+    }
+
+    & span.order {
+      color: cssVar("border-color");
+      width: 1.5em;
+      display: inline-block;
+      user-select: none;
     }
   }
 
@@ -48,10 +69,12 @@
     }
   }
 
-  .mnemonics span {
-    font-size: 2em;
+  i.mdi.header-icon {
+    font-size: 7em;
+    line-height: 1em;
+    float: left;
+    margin-right: 20px;
   }
-}
 
 @media print {
   @page {
@@ -60,7 +83,6 @@
   }
 
   .print-view {
-    visibility: visible;
     z-index: 9999999;
     left: 0;
     top: 0;
@@ -78,26 +100,15 @@
       font-size: 16pt;
       line-height: 21pt;
 
-      ol {
-        counter-reset: item;
-      }
-      ol li {
-        width: 50%;
+      .col-lg-4 {
+        width: 33%;
         float: left;
-        border-bottom: 1px solid #eee;
-        display: block;
       }
-      ol li:before {
-        content: counter(item) '. ';
-        counter-increment: item;
-        color: #aaa;
-        width: 2em;
-        display: inline-block;
-      }
-    }
 
-    * {
-      visibility: visible;
+      .word {
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
     }
 
     button,

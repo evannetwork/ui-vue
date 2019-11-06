@@ -33,10 +33,15 @@ import EvanComponent from '../../../component';
 @Component({})
 export default class MnemonicExport extends mixins(EvanComponent) {
   mnemonic = [];
+  address = '';
+  alias = '';
 
   async created() {
     this.mnemonic = await this.getMnemonic();
-    console.log('mnemonic', this.mnemonic);
+    const runtime = this.getRuntime();
+
+    this.address = runtime.activeAccount;
+    this.alias = 'TODO alias';
   }
 
   private showModal() {
@@ -91,5 +96,9 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     textArea.select();
     document.execCommand('copy');
     document.body.removeChild(textArea);
+  }
+
+  private print() {
+    window.print();
   }
 }
