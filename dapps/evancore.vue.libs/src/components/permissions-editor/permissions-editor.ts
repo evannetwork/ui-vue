@@ -145,12 +145,14 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   /**
-   * Set initial statet again and close the panel.
+   * set editor to null and close the panel if neccessary
    */
-  reset() {
-    this.containersPermissions = clone(this.initialPermissions);
-
-    this.$store.commit('toggleSidePanel', 'right'); // TODO: replace "right" by new panel id
+  cancel() {
+    this.selectedContact = null;
+    this.containersPermissions = null;
+    this.initialPermissions = null;
+    this.onSelect();
+    this.$store.commit('toggleSidePanel', ''); // TODO: replace "right" by new panel id
   }
 
   /**
