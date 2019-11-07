@@ -33,6 +33,7 @@
         "stopping": "Stopping {title} ({percentage}%)"
       },
       "empty-queue": "Everything is synchronized...",
+      "from": "from",
       "instance-accept": {
         "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
         "ok": "continue",

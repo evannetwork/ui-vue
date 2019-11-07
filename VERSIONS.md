@@ -7,6 +7,7 @@
   - add configurable `no-contacts` text to the `evan-permission-editor`
   - add `evan-wallet` component
   - added `evan-qr-code` component
+  - add `mail` toast message
 
 ### Fixes
 

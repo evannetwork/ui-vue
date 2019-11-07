@@ -33,6 +33,7 @@
         "stopping": "Gestoppt {title} ({percentage}%)"
       },
       "empty-queue": "Alles ist synchronisiert...",
+      "from": "von",
       "instance-accept": {
         "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
         "ok": "fortfahren",
@@ -40,7 +41,7 @@
       },
       "instance-delete": {
         "desc": "Wollen Sie diesen Eintrag unwiderruflich löschen?",
-        "ok": "löschen",
+        "ok": "Löschen",
         "title": "Eintrag löschen"
       },
       "my-contacts": "Meine Kontakte",
