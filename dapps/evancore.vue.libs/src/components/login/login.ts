@@ -19,11 +19,14 @@
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { getDomainName } from '../../utils';
+
 
 /**
  * Handles the password input of a user and checks, if it's correct and it's profile can be
@@ -35,20 +38,19 @@ import * as dappBrowser from '@evan.network/ui-dapp-browser';
  * @class         LoginComponent
  * @selector      evan-login
  */
-@Component({})
+@Component
 export default class LoginComponent extends mixins(EvanComponent) {
   /**
    * preload accountId
    */
-  accountId = dappBrowser.core.activeAccount();
+  // accountId = dappBrowser.core.activeAccount();
+  @Prop() accountId: string;
+  @Prop() mnemonic: string;
 
-  /**
-   * is the current mnemonic / password is currently checking?
-   */
   checkingPassword = false;
 
   /**
-   * formular specific variables
+   * form specific variables
    */
   form = {
     /**
@@ -58,14 +60,12 @@ export default class LoginComponent extends mixins(EvanComponent) {
       value: window.localStorage['evan-test-password'] || '',
       valid: false,
       dirty: false,
-      ref: null as any
+      ref: null
     }
   };
 
-  /**
-   * Focus the password element.
-   */
   mounted() {
+    // Focus the password input.
     this.form.password.ref = this.$refs['password'];
     this.form.password.ref.focus();
 
@@ -77,8 +77,6 @@ export default class LoginComponent extends mixins(EvanComponent) {
 
   /**
    * Check the current password input and send the logged in event to the parent component.
-   *
-   * @param      {any}  event   form submit event
    */
   async login() {
     if (this.form.password.value.length > 7) {
@@ -92,6 +90,7 @@ export default class LoginComponent extends mixins(EvanComponent) {
           this.form.password.value
         );
       } catch (ex) {
+        console.error(ex);
         this.form.password.value = false;
       }
 
@@ -99,6 +98,12 @@ export default class LoginComponent extends mixins(EvanComponent) {
       // applications can access it
       if (this.form.password.valid) {
         this.$emit('logged-in', this.form.password.value);
+        if (this.mnemonic) {
+          await dappBrowser.lightwallet.createVaultAndSetActive(this.mnemonic, this.form.password.value);
+        }
+        dappBrowser.core.setCurrentProvider('internal');
+
+        window.location.hash = `/${ this.$route.query.origin || `dashboard.vue.${ getDomainName() }` }`;
       } else {
         // only enable button when password is invalid
         this.checkingPassword = false;
