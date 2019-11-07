@@ -50,6 +50,7 @@ import PermissionsComponent from './permissions/permissions.vue';
 import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
 import ProfilePicture from './profile/profile-picture/profile-picture.vue';
 import ProfilePreview from './profile/profile-preview/profile-preview.vue';
+import QRCodeComponent from './qr-code/qr-code.vue';
 import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
@@ -90,6 +91,7 @@ export {
   PermissionsEditorComponent,
   ProfilePicture,
   ProfilePreview,
+  QRCodeComponent,
   SharedContact,
   StepsComponent,
   SuccessComponent,
@@ -130,6 +132,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
   { name: 'evan-profile-picture', component: ProfilePicture },
   { name: 'evan-profile-preview', component: ProfilePreview },
+  { name: 'evan-qr-code', component: QRCodeComponent },
   { name: 'evan-shared-contact', component: SharedContact },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },

@@ -75,9 +75,22 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   vueCoreBaseUrl = '';
 
   /**
+   * Link to the openend profile wallet for the passed address
+   */
+  walletLink = '';
+
+  /**
    * Load user specific information
    */
   async created() {
+    const dapp = this.$store.state.dapp;
+    this.walletLink = [
+      dapp.baseUrl,
+      dapp.rootEns,
+      `profile.vue.${ dapp.domainName }`,
+      `${ this.address }/wallet`,
+    ].join('/');
+
     await Promise.all([
       (async () => {
         const profile = new bcc.Profile({
@@ -105,5 +118,17 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     ]);
 
     this.loading = false;
+  }
+
+  /**
+   * Open the qr code modal.
+   *
+   * @param      {Event}  $event  click event
+   */
+  showQRCode($event) {
+    (this.$refs.qrCodeModal as any).show();
+    $event.stopPropagation();
+
+    return false;
   }
 }

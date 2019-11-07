@@ -18,7 +18,7 @@
 */
 
 @import '~@evan.network/ui/src/style/utils';
-$yellow: #fbe19e;
+$walletYellow: #fbe19e;
 
 .evan-wallet {
   position: relative;
@@ -64,11 +64,42 @@ $yellow: #fbe19e;
 
       margin: 0;
 
-      color: $yellow;
+      color: $walletYellow;
     }
 
     small:nth-child(2) {
-      opacity: 0.5;
+      opacity: 0.9;
     }
+  }
+}
+
+.qr-code-open {
+  position: absolute;
+  top: calc(50% - 16px);
+  right: 15%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 32px;
+
+  border: 1px solid cssVar('dark');
+  border-radius: 5px;
+  background: $walletYellow;
+
+  i {
+    color: cssVar('dark');
+  }
+}
+
+.qrcode-modal {
+   /deep/ .modal-header,  /deep/ .modal-footer {
+    display: none !important;
+  }
+
+  /deep/ img {
+    margin: auto;
   }
 }

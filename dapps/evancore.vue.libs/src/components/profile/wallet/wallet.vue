@@ -18,26 +18,45 @@
 */
 
 <template>
-  <component class="evan-wallet"
-    :class="{ 'evan-highlight': href }"
-    :href="href ? href : null"
-    :is="href ? 'a' : 'div'"
-    :style="{
-      'background-image': `url(${ $store.state.uiLibBaseUrl }/assets/wallet-background.png)`
-    }">
-    <evan-loading v-if="loading"></evan-loading>
-    <template v-else>
-      <h1 class="text-primary">{{ balance.amount }} EVE</h1>
-      <small class="text-light font-weight-semibold">
-        {{ '_evan.profile.wallet.current-balance' | translate }}
-        {{ balance.timestamp | moment('LLL') }}
-      </small>
-      <div class="account-info">
-        <small>{{ alias === address ? $t('_evan.profile.no-alias') : alias }}</small>
-        <small class="text-muted">{{ address }}</small>
-      </div>
-    </template>
-  </component>
+  <div class="position-relative">
+    <a class="evan-wallet evan-highlight"
+      :href="walletLink"
+      :style="{
+        'background-image': `url(${ $store.state.uiLibBaseUrl }/assets/wallet-background.png)`
+      }">
+      <evan-loading v-if="loading"></evan-loading>
+      <template v-else>
+        <h1 class="text-primary">{{ balance.amount }} EVE</h1>
+        <small class="text-light font-weight-semibold">
+          {{ '_evan.profile.wallet.current-balance' | translate }}
+          {{ balance.timestamp | moment('LLL') }}
+        </small>
+        <div class="account-info">
+          <small>{{ alias === address ? $t('_evan.profile.no-alias') : alias }}</small>
+          <small>{{ address }}</small>
+        </div>
+      </template>
+    </a>
+    <div class="qr-code-open evan-highlight"
+      @click="showQRCode($event)">
+      <i class="mdi mdi-qrcode-scan"></i>
+    </div>
+    <evan-modal
+      class="qrcode-modal"
+      ref="qrCodeModal"
+      :maxWidth="'600px'">
+      <template v-slot:header>
+        <div></div>
+      </template>
+      <template v-slot:body>
+        <evan-qr-code
+          :text="walletLink"
+          height="400"
+          width="400"
+        />
+      </template>
+    </evan-modal>
+  </div>
 </template>
 
 <script lang="ts">
