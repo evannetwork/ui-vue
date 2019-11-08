@@ -17,26 +17,15 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <div class="checkbox">
-    <input
-      class="form-control"
-      type="checkbox"
-      v-bind="$attrs"
-      :id="id"
-      :checked="value"
-      @input="$emit('input', $event.target.checked)"
-    >
-    <label :for="id" />
-  </div>
-</template>
+import Component, { mixins } from 'vue-class-component';
 
-<script lang="ts">
-  import Checkbox from './checkbox';
-  export default Checkbox;
-</script>
+import EvanControlComponent from '../control/control';
 
-<style lang="scss" scoped>
-  @import './checkbox.scss'
-</style>
-
+/**
+ * Base component for input element.
+ *
+ * @class         CheckboxComponent
+ * @selector      evan-form-control-checkbox
+ */
+@Component({})
+export default class CheckboxComponent extends mixins(EvanControlComponent) {}

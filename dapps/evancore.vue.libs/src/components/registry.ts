@@ -33,8 +33,9 @@ import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
+import EvanCheckboxComponent from './forms/checkbox/checkbox.vue';
 import FormComponent from './forms/form/form.vue';
-import FormControlCheckboxComponent from './forms/checkbox/checkbox.vue';
+import FormControlCheckboxComponent from './forms/checkbox/checkbox-control.vue';
 import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
@@ -73,6 +74,7 @@ export {
   DAppWrapperSidebarLevel2Component,
   DropdownComponent,
   EvanComponent,
+  EvanCheckboxComponent,
   FormComponent,
   FormControlComponent,
   FormControlCheckboxComponent,
@@ -106,6 +108,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-card', component: CardComponent },
   { name: 'evan-contact-batch', component: ContactBatchComponent },
+  { name: 'evan-checkbox', component: EvanCheckboxComponent },
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },

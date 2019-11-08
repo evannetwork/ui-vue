@@ -18,22 +18,25 @@
 */
 
 <template>
-  <div class="checkbox">
+  <evan-form-control v-bind="$props" class="checkbox" >
     <input
       class="form-control"
+      v-bind="$props"
       type="checkbox"
-      v-bind="$attrs"
+      :class="{ 'is-invalid' : error}"
       :id="id"
       :checked="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event.target.checked)"
-    >
+    />
     <label :for="id" />
-  </div>
+  </evan-form-control>
 </template>
 
 <script lang="ts">
-  import Checkbox from './checkbox';
-  export default Checkbox;
+  import CheckboxControl from './checkbox-control';
+  export default CheckboxControl;
 </script>
 
 <style lang="scss" scoped>

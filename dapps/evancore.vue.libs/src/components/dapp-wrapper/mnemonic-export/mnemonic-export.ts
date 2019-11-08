@@ -35,13 +35,17 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   mnemonic = [];
   address = '';
   alias = '';
+  backupLevel = 0;
+  understood = false;
+  now = null;
 
   async created() {
-    this.mnemonic = await this.getMnemonic();
     const runtime = this.getRuntime();
 
     this.address = runtime.activeAccount;
-    this.alias = 'TODO alias';
+    this.mnemonic = await this.getMnemonic();
+    this.now = new Date();
+    this.alias = window.localStorage.getItem('evan-alias');
   }
 
   private showModal() {
@@ -83,6 +87,8 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+
+    this.backupLevel += 1;
   }
 
   /**
@@ -96,9 +102,11 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     textArea.select();
     document.execCommand('copy');
     document.body.removeChild(textArea);
+    this.backupLevel += 1;
   }
 
   private print() {
     window.print();
+    this.backupLevel += 1;
   }
 }

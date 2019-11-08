@@ -16,16 +16,24 @@
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
 */
-
 import Component, { mixins } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 
-import EvanControlComponent from '../control/control';
+import EvanComponent from '../../../component';
 
 /**
  * Base component for input element.
  *
  * @class         CheckboxComponent
- * @selector      evan-form-control-checkbox
+ * @selector      evan-checkbox
  */
 @Component({})
-export default class CheckboxComponent extends mixins(EvanControlComponent) {}
+export default class CheckboxComponent extends mixins(EvanComponent) {
+  @Prop({
+    type: Boolean
+  }) value: boolean;
+
+  @Prop({
+    type: String
+  }) id: string;
+}
