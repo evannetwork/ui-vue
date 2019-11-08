@@ -211,20 +211,40 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   getTranslation(control: EvanFormControl, type: string) {
     // if manual error text was specified, translate it and return it directly
     if (type === 'error') {
-      if (typeof control.error !== 'boolean') {
-        return this.$t(control.error);
-      } else if (!control.error) {
-        return control.error;
+      if (typeof control[type] !== 'boolean') {
+        return this.$t(control[type]);
+      } else if (!control[type]) {
+        return control[type];
       }
     }
 
     // return directly specified translation
-    if (control.uiSpecs && control.uiSpecs.attr && control.uiSpecs.attr[type]) {
-      return this.$t(control.uiSpecs.attr[type]);
+    let returnTranslation = type !== 'hint';
+    if (control.uiSpecs && control.uiSpecs.attr &&
+        control.uiSpecs.attr.hasOwnProperty(type)) {
+      // if it's a hint, check if it's set to true or string
+      if (type === 'hint') {
+        if (control.uiSpecs.attr.hint) {
+          // if true, enable hint translation
+          if (typeof control.uiSpecs.attr.hint === 'boolean') {
+            returnTranslation = true;
+          } else {
+            // for a string directly return it
+            return this.$t(control.uiSpecs.attr.hint);
+          }
+        }
+        // else, disable the hint
+      } else {
+        return this.$t(control.uiSpecs.attr[type]);
+      }
     }
 
-    // return default translation
-    return this.$t(`${ this.i18nScope }.${ control.name }.${ type }`);
+    if (returnTranslation) {
+      // return default translation
+      return this.$t(`${ this.i18nScope }.${ control.name }.${ type }`);
+    } else {
+      return '';
+    }
   }
 
   /**

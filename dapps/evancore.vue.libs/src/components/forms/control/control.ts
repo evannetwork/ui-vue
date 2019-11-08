@@ -54,6 +54,13 @@ export default class ControlComponent extends mixins(EvanComponent) {
   }) placeholder: string;
 
   /**
+   * Hint text that should be displayed after the control
+   */
+  @Prop({
+    type: String
+  }) hint: string;
+
+  /**
    * The id for the input field.
    */
   @Prop({

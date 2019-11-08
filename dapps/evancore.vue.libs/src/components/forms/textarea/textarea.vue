@@ -17,25 +17,21 @@
   the following URL: https://evan.network/license/
 */
 
-// vue imports
-import Component, { mixins } from 'vue-class-component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+<template>
+  <evan-form-control v-bind="$props">
+    <textarea class="form-control"
+      v-bind="$props"
+      :class="{ 'is-invalid' : error }"
+      :id="id"
+      :value="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.value)"
+    />
+  </evan-form-control>
+</template>
 
-import EvanControlComponent from '../control/control';
-
-/**
- * Base component for input element.
- *
- * @class         FormDataInput
- * @selector      evan-form-control-input
- */
-@Component({})
-export default class InputComponent extends mixins(EvanControlComponent) {
-  /**
-   * Input type attribute
-   */
-  @Prop({
-    default: 'text',
-  }) type: boolean;
-}
+<script lang="ts">
+  import Component from './textarea'
+  export default Component
+</script>

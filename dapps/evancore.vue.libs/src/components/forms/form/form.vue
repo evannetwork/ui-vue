@@ -48,6 +48,7 @@
               <component
                 :disabled="!editable || isLoading"
                 :error="(onlyForm || editMode && !onlyForm) ? getTranslation(form[controlName], 'error') : false"
+                :hint="getTranslation(form[controlName], 'hint')"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"
