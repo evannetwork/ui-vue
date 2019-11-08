@@ -22,9 +22,12 @@
 .notification-bar {
   .hint-banner {
     line-height: 25px;
+
     position: absolute;
     bottom: 0;
+
     cursor: pointer;
+
     background: cssVar('primary-color');
 
     & i:first-of-type {
@@ -41,10 +44,12 @@
   .word {
     margin: 8px -8px;
     padding: 4px 8px;
-    border: 1px solid cssVar('border-color');
-    background: cssVar('bg-level-1');
-    border-radius: 4px;
+
     letter-spacing: 1px;
+
+    border: 1px solid cssVar('border-color');
+    border-radius: 4px;
+    background: cssVar('bg-level-1');
   }
 
   & span {
@@ -53,8 +58,11 @@
 
   & span.order {
     display: inline-block;
+
     width: 1.5em;
+
     user-select: none;
+
     color: cssVar('border-color');
   }
 }
@@ -75,17 +83,21 @@
   i.mdi.header-icon {
     font-size: 7em;
     line-height: 1em;
+
     float: left;
+
     margin-right: 20px;
   }
 
   .understood-checkbox {
     float: left;
+
     margin-right: 1em;
   }
 
   .account-id {
     overflow: hidden;
+
     text-overflow: ellipsis;
   }
 
@@ -114,11 +126,9 @@
 
 @media screen and (min-width: 768px) {
   .mnemonic-modal {
-    /deep/ .modal-body,
-    /deep/ .modal-footer,
-    /deep/ .modal-header {
-      background-image: linear-gradient(90deg, cssVar('bg-inverted') 50%, cssVar('bg-level-3') 50%);
+    /deep/ .modal-body, /deep/ .modal-footer, /deep/ .modal-header {
       border: none!important;
+      background-image: linear-gradient(90deg, cssVar('bg-inverted') 50%, cssVar('bg-level-3') 50%);
     }
   }
 
@@ -175,8 +185,8 @@
 
       .word {
         border: none;
-        border-radius: 0;
         border-bottom: 2px solid #cccccc;
+        border-radius: 0;
 
         & span.order {
           color: #cccccc;
@@ -185,17 +195,20 @@
     }
 
     i.mdi.header-icon {
-      float: none;
       font-size: 20mm;
+
+      float: none;
     }
 
     .evan-logo {
-      float: right;
-      height: 20mm;
-      width: auto;
       position: absolute;
       top: 0;
       right: 0;
+
+      float: right;
+
+      width: auto;
+      height: 20mm;
     }
 
     button, button.btn, .evan.theme-evan .btn {
