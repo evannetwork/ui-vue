@@ -32,7 +32,7 @@ import EvanComponent from '../../../component';
  */
 @Component({})
 export default class MnemonicExport extends mixins(EvanComponent) {
-  mnemonic = [];
+  mnemonic = null;
   address = '';
   alias = '';
   backupLevel = 0;
@@ -50,6 +50,12 @@ export default class MnemonicExport extends mixins(EvanComponent) {
 
   private showModal() {
     (<any>this.$refs.modal).show();
+  }
+
+  private goSecure () {
+    this.mnemonic = null;
+    window.localStorage.removeItem('evan-mnemonic');
+    (<any>this.$refs.modal).hide();
   }
 
   /**

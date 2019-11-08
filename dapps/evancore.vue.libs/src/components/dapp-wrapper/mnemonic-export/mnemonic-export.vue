@@ -100,7 +100,7 @@
             @click="print">
             {{ '_evan.mnemonic-export.print' | translate }}
           </evan-button>
-          <evan-button v-if="understood" type="primary" >
+          <evan-button v-if="understood" type="primary" @click="goSecure" >
             <i class="mdi mdi-account-key mr-3" /> {{ '_evan.mnemonic-export.go-secure' | translate }}
           </evan-button>
       </template>
