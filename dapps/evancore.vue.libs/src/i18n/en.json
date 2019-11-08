@@ -64,6 +64,7 @@
     },
     "invalid-password": "The provided password is invalid.",
     "login": "Unlock profile",
+    "log-in": "Log in",
     "logout": "Logout",
     "logout-desc": "Are you sure you want to logout?",
     "no": "No",
@@ -114,7 +115,6 @@
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"
     },
-    "use-password": "Unlock",
     "view-profile": "View Profile",
     "welcome-to-evan": "Welcome to the evan.network",
     "write": "write",

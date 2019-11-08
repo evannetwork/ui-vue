@@ -64,6 +64,7 @@
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "login": "Profil entsperren",
+    "log-in": "Einloggen",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
     "no": "Nein",
@@ -114,7 +115,6 @@
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"
     },
-    "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
     "write": "schreiben",

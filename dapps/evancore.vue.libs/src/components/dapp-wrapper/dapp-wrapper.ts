@@ -29,6 +29,7 @@ import EvanVueDispatcherHandler from '../../dispatcher';
 import { DAppWrapperRouteInterface } from '../../interfaces';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { getDomainName } from '../../utils';
+import { bccUtils } from '@evan.network/ui';
 import { registerEvanI18N, } from '../../vue-core';
 
 // load domain name for quick usage
@@ -46,7 +47,7 @@ const i18nPref = '_evan._routes';
  * navigation, that can be applied by every component. Have a look at the breadcrumbs /
  * dapp-wrapper-level-2 component.
  *
- * TODO: Refactor login logic
+ * TODO: Rework login function
  *
  * @class         DAppWrapperComponent
  * @selector      evan-dapp-wrapper
@@ -450,6 +451,10 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
         null,
         { executor },
       );
+
+      // Save alias to localstorage
+      this.userInfo.alias = await bccUtils.getUserAlias(this.$store.state.runtime.profile);
+      window.localStorage.setItem('evan-alias', this.userInfo.alias);
 
       // create and register a vue dispatcher handler, so applications can easily access dispatcher data
       // from vuex store

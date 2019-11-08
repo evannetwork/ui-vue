@@ -27,7 +27,6 @@ import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { getDomainName } from '../../utils';
 
-
 /**
  * Handles the password input of a user and checks, if it's correct and it's profile can be
  * encrypted with that password. Used by the dapp-wrapper to login the current user if needed. Will
@@ -45,7 +44,9 @@ export default class LoginComponent extends mixins(EvanComponent) {
    */
   // accountId = dappBrowser.core.activeAccount();
   @Prop() accountId: string;
-  @Prop() mnemonic: string;
+  @Prop({ required: false }) mnemonic: string;
+
+  alias: string | null;
 
   checkingPassword = false;
 
@@ -63,6 +64,10 @@ export default class LoginComponent extends mixins(EvanComponent) {
       ref: null
     }
   };
+
+  created() {
+    this.alias = window.localStorage.getItem('evan-alias');
+  }
 
   mounted() {
     // Focus the password input.
@@ -98,12 +103,17 @@ export default class LoginComponent extends mixins(EvanComponent) {
       // applications can access it
       if (this.form.password.valid) {
         this.$emit('logged-in', this.form.password.value);
+        // mnemonic available during onboarding
         if (this.mnemonic) {
-          await dappBrowser.lightwallet.createVaultAndSetActive(this.mnemonic, this.form.password.value);
+          await dappBrowser.lightwallet.createVaultAndSetActive(
+            this.mnemonic,
+            this.form.password.value
+          );
         }
         dappBrowser.core.setCurrentProvider('internal');
 
-        window.location.hash = `/${ this.$route.query.origin || `dashboard.vue.${ getDomainName() }` }`;
+        window.location.hash = `/${this.$route.query.origin ||
+          `dashboard.vue.${getDomainName()}`}`;
       } else {
         // only enable button when password is invalid
         this.checkingPassword = false;

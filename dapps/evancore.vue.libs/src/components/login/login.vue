@@ -18,7 +18,7 @@
 */
 
 <template>
-  <div class="bg-level-3 w-100 h-100 d-flex align-items-center flex-column">
+  <div class="bg-level-3 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
     <div class="mt-3 mb-3 text-center">
       <h1>Log In</h1>
       <div class="bg-primary d-inline-block" style="width: 70px; height: 5px;"></div>
@@ -26,24 +26,34 @@
     <div class="bg-level-1 mx-auto border password-dialog mt-3 mt-md-5">
       <form class="p-4" v-on:submit.prevent="login">
         <div class="form-group">
+          <p>Alias: {{alias}}</p>
           <label for="password">{{ '_evan.password' | translate }}</label>
-          <input class="form-control" type="password" required
-            id="password" ref="password"
+          <input
+            class="form-control"
+            type="password"
+            required
+            id="password"
+            ref="password"
             :placeholder="'_evan.password-placeholder' | translate"
             v-model="form.password.value"
-            v-bind:class="{ 'is-invalid' : form.password.dirty && !form.password.valid }">
-          <div class="invalid-feedback">
-            {{ '_evan.invalid-password' | translate }}
-          </div>
+            v-bind:class="{ 'is-invalid' : form.password.dirty && !form.password.valid }"
+          />
+          <div class="invalid-feedback">{{ '_evan.invalid-password' | translate }}</div>
         </div>
 
         <div class="text-center">
-          <button type="submit" class="btn btn-rounded btn-primary font-weight-normal"
-            :disabled="form.password.value.length < 8 || checkingPassword">
-            <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"
-              v-if="checkingPassword">
-            </span>
-            <span>{{ '_evan.use-password' | translate }}</span>
+          <button
+            type="submit"
+            class="btn btn-rounded btn-primary font-weight-normal"
+            :disabled="form.password.value.length < 8 || checkingPassword"
+          >
+            <span
+              class="spinner-border spinner-border-sm mr-3"
+              role="status"
+              aria-hidden="true"
+              v-if="checkingPassword"
+            ></span>
+            <span>{{ '_evan.log-in' | translate }}</span>
           </button>
         </div>
       </form>
@@ -52,10 +62,10 @@
 </template>
 
 <script lang="ts">
-  import Component from './login';
-  export default Component;
+import Component from "./login";
+export default Component;
 </script>
 
 <style lang="scss" scoped>
-  @import './login';
+@import "./login";
 </style>
