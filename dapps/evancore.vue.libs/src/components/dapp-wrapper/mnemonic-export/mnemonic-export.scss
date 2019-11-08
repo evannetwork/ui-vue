@@ -146,11 +146,18 @@
   @page {
     margin: 0;
 
-    size: A4;
+    size: A4 portrait;
   }
 
   .no-print {
     display: none;
+  }
+
+  .evan.theme-evan .col-md-6 {
+    flex: 100%;
+
+    width: 100%;
+    max-width: 100%;
   }
 
   .print-view {
@@ -165,6 +172,7 @@
 
     width: 210mm;
     height: 297mm;
+    height: 317mm;
     padding: 20mm;
 
     background-color: #ffffff;
@@ -181,6 +189,7 @@
         float: left;
 
         width: 33%;
+        max-width: 33%;
       }
 
       .word {
@@ -214,13 +223,5 @@
     button, button.btn, .evan.theme-evan .btn {
       display: none;
     }
-  }
-
-  .print-view:after {
-    width: 100mm;
-
-    content: '';
-
-    background: #ffffff;
   }
 }

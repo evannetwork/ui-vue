@@ -80,7 +80,7 @@
                   v-for="(word, index) of mnemonic"
                   :key="word" >
                   <div class="word">
-                    <span class="order">{{index}}:</span>
+                    <span class="order">{{index + 1}}:</span>
                     <span>{{understood ?  '*'.repeat(word.length) : word }}</span>
                   </div>
                 </div>
