@@ -15,6 +15,7 @@
       "copy": "Kopieren",
       "open-in-explorer": "Im Explorer anzeigen"
     },
+    "alias": "Alias",
     "browser-not-supported": {
       "desc": "Bitte gehen Sie sicher, dass Sie einen der folgenden Browsern verwenden:<ul><li>Chrome</li><li>Edge</li><li>Firefox (kein privater Modus!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Ihr Browser wird nicht unterstützt"
@@ -68,6 +69,7 @@
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
     "no": "Nein",
+    "not-your-account": "Nicht Ihr Account?",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "permission": {

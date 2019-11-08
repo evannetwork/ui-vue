@@ -26,7 +26,19 @@
     <div class="bg-level-1 mx-auto border password-dialog mt-3 mt-md-5">
       <form class="p-4" v-on:submit.prevent="login">
         <div class="form-group">
-          <p>Alias: {{alias}}</p>
+          <template v-if="alias">
+            <label for="alias">{{ '_evan.alias' | translate }}</label>
+            <input class="form-control" id="alias" type="text" :value="alias" disabled />
+
+            <evan-logout ref="evanLogout">
+              <template v-slot:button>
+                <div style="display:flex">
+                  <div class="spacer"></div>
+                  <a class="not-your-account" @click="$refs.evanLogout.logout()">{{ '_evan.not-your-account' | translate }}</a>
+                </div>
+              </template>
+            </evan-logout>
+          </template>
           <label for="password">{{ '_evan.password' | translate }}</label>
           <input
             class="form-control"
