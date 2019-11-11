@@ -92,7 +92,7 @@
        <template v-slot:footer>
           <evan-button v-if="!understood"
             type="text"
-            @click="downloadTextfile('Mnemonics', mnemonic.join(' '))">
+            @click="downloadMnemonics()">
             {{ '_evan.mnemonic-export.download' | translate}}
           </evan-button>
           <evan-button v-if="!understood"

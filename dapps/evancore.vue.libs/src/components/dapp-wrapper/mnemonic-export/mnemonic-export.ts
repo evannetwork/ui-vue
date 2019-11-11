@@ -35,7 +35,6 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   mnemonic = null;
   address = '';
   alias = '';
-  backupLevel = 0;
   understood = false;
   now = null;
 
@@ -77,13 +76,27 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     }
   }
 
+  private downloadMnemonics() {
+    const fileName = `recovery-key-${this.alias}`;
+    const text = [];
+
+    text.push(this.$t('_evan.mnemonic-export.description'));
+    text.push(`\n${this.$t('_evan.mnemonic-export.account-id')}: ${this.address}`);
+    text.push(`${this.$t('_evan.mnemonic-export.alias')}: ${this.alias}\n`);
+    text.push(`${this.$t('_evan.mnemonic-export.recovery-key')}:\n\n${this.mnemonic.join(' ')}`);
+
+    this.downloadTextfile(fileName, text.join('\n'));
+  }
+
   /**
-   * Trigger download of text file
+   * Trigger download of text file.
+   *
    * @param filename Name for the file with .txt suffix
    * @param text Content of the text tile
    */
   private downloadTextfile(filename: string, text: string) {
-    let element = document.createElement('a');
+    const element = document.createElement('a');
+
     element.setAttribute(
       'href',
       'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
@@ -93,26 +106,28 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
-
-    this.backupLevel += 1;
   }
 
   /**
+   * Adds text to clipboard.
+   *
    * @param text Text to copy
    */
   private copyToClipboard(text: string) {
-    let textArea = document.createElement('textarea');
+    const textArea = document.createElement('textarea');
+
     textArea.value = text;
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
     document.execCommand('copy');
     document.body.removeChild(textArea);
-    this.backupLevel += 1;
   }
 
+  /**
+   * Open browser print dialogue.
+   */
   private print() {
     window.print();
-    this.backupLevel += 1;
   }
 }
