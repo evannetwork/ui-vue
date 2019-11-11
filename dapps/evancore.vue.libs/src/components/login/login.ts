@@ -45,6 +45,7 @@ export default class LoginComponent extends mixins(EvanComponent) {
   // accountId = dappBrowser.core.activeAccount();
   @Prop() accountId: string;
   @Prop({ required: false }) mnemonic: string;
+  @Prop({ default: false }) showSignup: boolean;
 
   alias: string | null;
 

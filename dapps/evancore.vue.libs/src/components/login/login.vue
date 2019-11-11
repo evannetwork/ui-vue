@@ -19,11 +19,10 @@
 
 <template>
   <div class="bg-level-3 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
-    <div class="mt-3 mb-3 text-center">
-      <h1>{{ '_evan.log-in' | translate }}</h1>
-      <div class="bg-primary d-inline-block" style="width: 70px; height: 5px;"></div>
-    </div>
-    <div class="bg-level-1 mx-auto border password-dialog mt-3 mt-md-5">
+    <h4
+      class="text-center mt-4 mb-3 text-uppercase font-weight-bold"
+    >{{ '_evan.log-in' | translate }}</h4>
+    <div class="form-container">
       <form class="p-4" v-on:submit.prevent="login">
         <div class="form-group">
           <template v-if="alias">
@@ -34,7 +33,10 @@
               <template v-slot:button>
                 <div style="display:flex">
                   <div class="flex-grow-1"></div>
-                  <a class="not-your-account" @click="$refs.evanLogout.logout()">{{ '_evan.not-your-account' | translate }}</a>
+                  <a
+                    class="not-your-account mt-2"
+                    @click="$refs.evanLogout.logout()"
+                  >{{ '_evan.not-your-account' | translate }}</a>
                 </div>
               </template>
             </evan-logout>
@@ -53,10 +55,10 @@
           <div class="invalid-feedback">{{ '_evan.invalid-password' | translate }}</div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center mt-6">
           <button
             type="submit"
-            class="btn btn-rounded btn-primary font-weight-normal"
+            class="btn btn-block btn-primary"
             :disabled="form.password.value.length < 8 || checkingPassword"
           >
             <span
@@ -67,6 +69,9 @@
             ></span>
             <span>{{ '_evan.log-in' | translate }}</span>
           </button>
+        </div>
+        <div class="text-center mt-3" v-if="showSignup">
+          <p v-html="$t('_evan.need-an-account')"></p>
         </div>
       </form>
     </div>

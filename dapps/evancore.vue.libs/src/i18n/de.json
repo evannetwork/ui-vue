@@ -68,6 +68,7 @@
     "log-in": "Einloggen",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
+    "need-an-account": "Noch kein Account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Account erstellen</a>",
     "no": "Nein",
     "not-your-account": "Nicht Ihr Account?",
     "password": "Passwort",
