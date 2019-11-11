@@ -118,7 +118,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   @Prop({ default: true }) createRuntime: boolean;
 
   get isLoggedin() {
-    console.log('Logged In?', this.$store.state.isLoggedin);
     return this.$store.state.isLoggedin;
   }
   set isLoggedin(state) {
