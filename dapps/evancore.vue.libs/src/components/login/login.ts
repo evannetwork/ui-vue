@@ -96,7 +96,6 @@ export default class LoginComponent extends mixins(EvanComponent) {
           this.form.password.value
         );
       } catch (ex) {
-        console.error(ex);
         this.form.password.value = false;
       }
 
