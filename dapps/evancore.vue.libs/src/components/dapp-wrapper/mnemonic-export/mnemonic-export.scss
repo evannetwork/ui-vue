@@ -129,6 +129,10 @@
     /deep/ .modal-body, /deep/ .modal-footer, /deep/ .modal-header {
       border: none!important;
       background-image: linear-gradient(90deg, cssVar('bg-inverted') 50%, cssVar('bg-level-3') 50%);
+
+      h5 {
+        color: cssVar('primary');
+      }
     }
   }
 
