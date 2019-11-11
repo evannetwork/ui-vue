@@ -122,7 +122,6 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   }
   set isLoggedin(state) {
     this.$store.commit('setLoginState', state);
-    console.log('Log State:', state);
   }
 
   /**
