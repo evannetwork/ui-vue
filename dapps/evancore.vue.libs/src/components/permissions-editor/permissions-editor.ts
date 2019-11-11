@@ -145,12 +145,14 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   /**
-   * Set initial statet again and close the panel.
+   * set editor to null and close the panel if neccessary
    */
-  reset() {
-    this.containersPermissions = clone(this.initialPermissions);
-
-    this.$store.commit('toggleSidePanel', 'right'); // TODO: replace "right" by new panel id
+  cancel() {
+    this.selectedContact = null;
+    this.containersPermissions = null;
+    this.initialPermissions = null;
+    this.onSelect();
+    this.$store.commit('toggleSidePanel', ''); // TODO: replace "right" by new panel id
   }
 
   /**
@@ -181,14 +183,15 @@ class PermissionsEditor extends mixins(EvanComponent) {
   async writePermissions() {
     this.isLoading = true;
 
-    const runtime = (<any>this).getRuntime();
+    try {
+      const runtime = (<any>this).getRuntime();
+      await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions);
+      this.initialPermissions = clone(this.containersPermissions);
+    } catch (ex) {
+      return console.error('Error writing permissions', ex.message);
+    }
 
-    await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions)
-      .catch((e: Error) => {
-        console.log('Error writing permissions', e.message);
-      });
-
-    this.initialPermissions = clone(this.containersPermissions);
+    this.cancel();
     this.isLoading = false;
   }
 

@@ -33,6 +33,7 @@
         "stopping": "Gestoppt {title} ({percentage}%)"
       },
       "empty-queue": "Alles ist synchronisiert...",
+      "from": "von",
       "instance-accept": {
         "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
         "ok": "fortfahren",
@@ -40,7 +41,7 @@
       },
       "instance-delete": {
         "desc": "Wollen Sie diesen Eintrag unwiderruflich löschen?",
-        "ok": "löschen",
+        "ok": "Löschen",
         "title": "Eintrag löschen"
       },
       "my-contacts": "Meine Kontakte",
@@ -81,6 +82,7 @@
       "understood": "Ich habe meinen Wiederherstellungsschlüssel gesichert und verstehe das Risiko, ihn zu verlieren."
     },
     "no": "Nein",
+    "optional": "optional",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
     "permission": {
@@ -88,14 +90,15 @@
       "type": {
         "fullAccess": "Vollzugriff",
         "fullRead": "komplette Leserechte",
-        "readWrite": "individuelle Schreib- und Leserechte",
+        "none": "keine Berechtigungen",
         "read": "individuelle Leserechte",
-        "none": "keine Berechtigungen"
+        "readWrite": "individuelle Schreib- und Leserechte"
       }
     },
     "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
     "profile": {
       "account-name": "Account Name",
+      "no-alias": "Kein Alias",
       "types": {
         "choose": "Profiltyp spezifieren",
         "company": "Unternehmen",
@@ -104,6 +107,9 @@
         "device-desc": "Speichern Sie Geräteninformationen und Verbindungseinstellungen.",
         "undefined": "User",
         "user": "User"
+      },
+      "wallet": {
+        "current-balance": "Kontostand"
       }
     },
     "profile-picture": {
@@ -115,13 +121,13 @@
     "save": "Speichern",
     "share": "Freigeben",
     "sharing": {
-      "update": "Freigaben aktualisieren",
-      "selectContact": "Kontakt für die Freigabe auswählen",
+      "add-contact": "Kontakt hinzufügen",
       "defineFor": "Setzen Sie die Zugriffsrechte für {contactName}.",
-      "permissionsTitle": "Zugriffsrechte",
       "description": "Um Ihre Daten mit anderen Kontakten zu teilen, wählen Sie die Optionen unten und klicken Sie auf “Freigaben aktualisieren”",
-      "noContacts": "Sie haben keine Kontakte in Ihrem Adressbuch, bitte fügen Sie zuerst einen Kontakt hinzu.",
-      "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden."
+      "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden.",
+      "permissionsTitle": "Zugriffsrechte",
+      "selectContact": "Kontakt für die Freigabe auswählen",
+      "update": "Freigaben aktualisieren"
     },
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {

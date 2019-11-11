@@ -57,6 +57,11 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: false }) showBackdrop: boolean;
 
   /**
+   * Should the close button be shown?
+   */
+  @Prop({ default: false }) hideCloseButton: boolean;
+
+  /**
    * Should the sidebar be fixed, or mounted as child of #mountId in in DOM flow?
    */
   @Prop({ default: null }) mountId: string;
