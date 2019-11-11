@@ -23,7 +23,7 @@
       class="text-center mt-4 mb-3 text-uppercase font-weight-bold"
     >{{ '_evan.log-in' | translate }}</h4>
     <div class="form-container">
-      <form class="p-4" v-on:submit.prevent="login">
+      <form class="p-4" @submit.prevent="login">
         <div class="form-group">
           <template v-if="alias">
             <label for="alias">{{ '_evan.alias' | translate }}</label>
@@ -33,11 +33,10 @@
               <template v-slot:button>
                 <div class="d-flex">
                   <div class="flex-grow-1"></div>
-                  <evan-button
-                    :type="'text'"
-                    class="mt-2"
+                  <a
+                    class="not-your-account mt-2"
                     @click="$refs.evanLogout.logout()"
-                  >{{ '_evan.not-your-account' | translate }}</evan-button>
+                  >{{ '_evan.not-your-account' | translate }}</a>
                 </div>
               </template>
             </evan-logout>
