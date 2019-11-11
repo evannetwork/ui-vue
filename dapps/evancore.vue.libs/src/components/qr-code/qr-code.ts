@@ -17,9 +17,6 @@
   the following URL: https://evan.network/license/
 */
 
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
-
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
