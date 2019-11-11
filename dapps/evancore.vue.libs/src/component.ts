@@ -38,7 +38,7 @@ export default class EvanComponent extends Vue {
    */
   dapp: any;
 
-  dispatcher: any;
+  dispatcher;
 
   /**
    * Active dapp browser domain name
