@@ -33,7 +33,7 @@
             <evan-logout ref="evanLogout">
               <template v-slot:button>
                 <div style="display:flex">
-                  <div class="spacer"></div>
+                  <div class="flex-grow-1"></div>
                   <a class="not-your-account" @click="$refs.evanLogout.logout()">{{ '_evan.not-your-account' | translate }}</a>
                 </div>
               </template>
