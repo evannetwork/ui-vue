@@ -67,7 +67,7 @@
     "login": "Profil entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
-	  "mnemonic-export": {
+    "mnemonic-export": {
       "account-id": "Account-ID",
       "alias": "Alias",
       "created-at": "Erstellt am:",
