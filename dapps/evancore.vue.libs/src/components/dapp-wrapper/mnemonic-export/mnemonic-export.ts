@@ -82,8 +82,9 @@ export default class MnemonicExport extends mixins(EvanComponent) {
 
     text.push(this.$t('_evan.mnemonic-export.description'));
     text.push(`\n${this.$t('_evan.mnemonic-export.account-id')}: ${this.address}`);
-    text.push(`${this.$t('_evan.mnemonic-export.alias')}: ${this.alias}\n`);
-    text.push(`${this.$t('_evan.mnemonic-export.recovery-key')}:\n\n${this.mnemonic.join(' ')}`);
+    text.push(`${this.$t('_evan.mnemonic-export.alias')}: ${this.alias}`);
+    text.push(`\n${this.$t('_evan.mnemonic-export.recovery-key')}:`);
+    text.push(`\n${this.mnemonic.join(' ')}`);
 
     this.downloadTextfile(fileName, text.join('\n'));
   }
