@@ -31,12 +31,13 @@
 
             <evan-logout ref="evanLogout">
               <template v-slot:button>
-                <div style="display:flex">
+                <div class="d-flex">
                   <div class="flex-grow-1"></div>
-                  <a
-                    class="not-your-account mt-2"
+                  <evan-button
+                    :type="'text'"
+                    class="mt-2"
                     @click="$refs.evanLogout.logout()"
-                  >{{ '_evan.not-your-account' | translate }}</a>
+                  >{{ '_evan.not-your-account' | translate }}</evan-button>
                 </div>
               </template>
             </evan-logout>
