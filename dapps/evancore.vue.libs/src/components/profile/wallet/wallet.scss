@@ -1,0 +1,105 @@
+/*
+  Copyright (C) 2018-present evan GmbH.
+
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+*/
+
+@import '~@evan.network/ui/src/style/utils';
+$walletYellow: #fbe19e;
+
+.evan-wallet {
+  position: relative;
+
+  display: block;
+
+  height: 200px;
+  padding: 1.5em;
+
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &, * {
+    text-decoration: none !important;
+  }
+
+  & > h1 {
+    font-size: 36px;
+    font-weight: 600;
+
+    margin-bottom: 0;
+  }
+
+  .account-info {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    padding: 0.8em 1.5em;
+
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: rgba(3, 49, 60, 0.6);
+
+    * {
+      color: cssVar('light');
+    }
+
+    small:first-child {
+      font-weight: bold;
+
+      margin: 0;
+
+      color: $walletYellow;
+    }
+
+    small:nth-child(2) {
+      opacity: 0.9;
+    }
+  }
+}
+
+.qr-code-open {
+  position: absolute;
+  top: calc(50% - 16px);
+  right: 15%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 32px;
+
+  border: 1px solid cssVar('dark');
+  border-radius: 5px;
+  background: $walletYellow;
+
+  i {
+    color: cssVar('dark');
+  }
+}
+
+.qrcode-modal {
+   /deep/ .modal-header,  /deep/ .modal-footer {
+    display: none !important;
+  }
+
+  /deep/ img {
+    margin: auto;
+  }
+}

@@ -126,7 +126,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   // add vue toaster
   Vue.use(VueToasted, {
     duration: 3000,
-    position: 'bottom-right',
+    position: 'bottom-left',
   });
 
   const vue = new Vue({

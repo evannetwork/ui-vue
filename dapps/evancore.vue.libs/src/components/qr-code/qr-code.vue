@@ -18,34 +18,10 @@
 */
 
 <template>
-  <div class="form-group"
-    :class="{ 'inline': !stacked, }"
-    :style="{
-      'min-width': size === 12 ? '100%' : `${ 100 * (size / 12) }%`,
-    }">
-    <label class="col-form-label"
-      :for="id"
-      v-if="label">
-      {{ label }}
-      <small class="text-muted" v-if="!isRequired()">
-        ({{ '_evan.optional' | translate }})
-      </small>
-    </label>
-    <div class="input-wrapper">
-      <slot></slot>
-      <div class="invalid-feedback" v-if="error">
-        {{ error | translate }}
-      </div>
-    </div>
-  </div>
+  <div></div>
 </template>
 
 <script lang="ts">
-  import FormDataInput from './control'
-  export default FormDataInput
+  import Component from './qr-code';
+  export default Component;
 </script>
-
-<style lang="scss" scoped>
-  @import './control.scss'
-</style>
-

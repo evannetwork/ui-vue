@@ -24,7 +24,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 // evan.network imports
 import { UIContainerFile, FileHandler, } from '@evan.network/ui';
 
-import EvanComponent from '../../component';
+import EvanComponent from '../../../component';
 
 /**
  * Wrapper for profile verifications.

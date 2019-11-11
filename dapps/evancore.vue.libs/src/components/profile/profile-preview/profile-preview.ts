@@ -17,12 +17,12 @@
   the following URL: https://evan.network/license/
 */
 
-import { Dispatcher, cloneDeep, FileHandler, } from '@evan.network/ui';
+import { Dispatcher, cloneDeep, FileHandler, bccUtils, } from '@evan.network/ui';
 import * as bcc from '@evan.network/api-blockchain-core';
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import EvanComponent from '../../component';
+import EvanComponent from '../../../component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 interface UserInfoInterface {
@@ -134,12 +134,6 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     let accountDetails: any = { profileType: 'user' };
     try {
       accountDetails = (await profile.getProfileProperty('accountDetails')) || accountDetails;
-
-      // for companies load directly the company name and disable edit mode
-      if (accountDetails.profileType === 'company') {
-        const registrationData = (await profile.getProfileProperty('registration'));
-        accountDetails.accountName = registrationData.company;
-      }
     } catch (ex) {
       runtime.logger.log(`Could not load profile data for ${ this.address }: ${ ex.message }`, 'error');
     }
@@ -212,13 +206,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     }
 
     // use old alias logic
-    if (!this.userInfo.accountName) {
-      // load addressbook info
-      const addressBook = await runtime.profile.getAddressBook();
-      const contact = addressBook.profile[this.address];
-
-      this.userInfo.accountName = contact ? contact.alias : this.address;
-    }
+    this.userInfo.accountName = await bccUtils.getUserAlias(runtime.profile, this.userInfo);
 
     // fill empty picture
     if (!this.userInfo.picture) {

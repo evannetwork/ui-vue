@@ -34,8 +34,8 @@ import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapp
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanComponent from '../component';
 import FormComponent from './forms/form/form.vue';
-import FormControlComponent from './forms/control/control.vue';
 import FormControlCheckboxComponent from './forms/checkbox/checkbox.vue';
+import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
@@ -48,8 +48,9 @@ import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
 import PermissionsComponent from './permissions/permissions.vue';
 import PermissionsEditorComponent from './permissions-editor/permissions-editor.vue';
-import ProfilePreview from './profile-preview/profile-preview.vue';
-import ProfilePicture from './profile-picture/profile-picture.vue';
+import ProfilePicture from './profile/profile-picture/profile-picture.vue';
+import ProfilePreview from './profile/profile-preview/profile-preview.vue';
+import QRCodeComponent from './qr-code/qr-code.vue';
 import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
@@ -57,6 +58,7 @@ import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
 import vSelect from 'vue-select';
+import WalletComponent from './profile/wallet/wallet.vue';
 
 // export them all, so other applications can access them
 export {
@@ -73,8 +75,8 @@ export {
   DropdownComponent,
   EvanComponent,
   FormComponent,
-  FormControlComponent,
   FormControlCheckboxComponent,
+  FormControlComponent,
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
@@ -87,14 +89,16 @@ export {
   NavTabsComponent,
   PermissionsComponent,
   PermissionsEditorComponent,
-  ProfilePreview,
   ProfilePicture,
+  ProfilePreview,
+  QRCodeComponent,
   SharedContact,
   StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
+  WalletComponent,
 };
 
 // map them to element names, so they can be used within templates
@@ -126,8 +130,9 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-nav-tabs', component: NavTabsComponent },
   { name: 'evan-permissions', component: PermissionsComponent },
   { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
-  { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-profile-picture', component: ProfilePicture },
+  { name: 'evan-profile-preview', component: ProfilePreview },
+  { name: 'evan-qr-code', component: QRCodeComponent },
   { name: 'evan-shared-contact', component: SharedContact },
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
@@ -135,6 +140,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
   { name: 'evan-v-select', component: vSelect },
+  { name: 'evan-wallet', component: WalletComponent },
 ];
 
 export default componentRegistration;

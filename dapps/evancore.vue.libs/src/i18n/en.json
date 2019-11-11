@@ -33,6 +33,7 @@
         "stopping": "Stopping {title} ({percentage}%)"
       },
       "empty-queue": "Everything is synchronized...",
+      "from": "from",
       "instance-accept": {
         "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
         "ok": "continue",
@@ -67,6 +68,7 @@
     "logout": "Logout",
     "logout-desc": "Are you sure you want to logout?",
     "no": "No",
+    "optional": "optional",
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",
     "permission": {
@@ -74,14 +76,15 @@
       "type": {
         "fullAccess": "Full Access",
         "fullRead": "Full Read Permissions",
-        "readWrite": "Individual Write and Read Permissions",
+        "none": "No Permissions",
         "read": "Individual Read Permissions",
-        "none": "No Permissions"
+        "readWrite": "Individual Write and Read Permissions"
       }
     },
     "please-login": "Please unlock your profile to continue.",
     "profile": {
       "account-name": "Account Name",
+      "no-alias": "No alias",
       "types": {
         "choose": "Specify Account Type",
         "company": "Company",
@@ -90,6 +93,9 @@
         "device-desc": "Save device information and connection settings.",
         "undefined": "User",
         "user": "User"
+      },
+      "wallet": {
+        "current-balance": "Balance"
       }
     },
     "profile-picture": {
@@ -101,13 +107,13 @@
     "save": "Save",
     "share": "Share",
     "sharing": {
-      "update": "Update Sharing Options",
-      "selectContact": "Select contact to share with",
+      "add-contact": "Add contact",
       "defineFor": "Define the permissions for {contactName}.",
-      "permissionsTitle": "Update Permissions",
       "description": "To share your information with another contact, fill out the form below and click on “Update Sharing Options”",
-      "noContacts": "You have no contacts in your address book. Please add a contact first to share with.",
-      "noPermissions": "No permissions available to edit."
+      "noPermissions": "No permissions available to edit.",
+      "permissionsTitle": "Update Permissions",
+      "selectContact": "Select contact to share with",
+      "update": "Update Sharing Options"
     },
     "transaction_costs_hint": "This will cause transaction fees.",
     "under-development": {

@@ -1,21 +1,20 @@
 <template>
   <div class="wrapper">
     <h3>{{ `${i18nScope}.permissionsTitle` | translate }}</h3>
-    <p>
-      {{ `${i18nScope}.description` | translate }}
-    </p>
 
     <template v-if="contacts && contacts.length">
+      <p>{{ `${i18nScope}.description` | translate }}</p>
+
       <evan-form-control-v-select
         class="loading"
         id="shareContactSelect"
-        :label="$t('_evan.sharing.selectContact')"
         v-model="selectedContact"
-        :options="contacts"
         :disabled="contacts.length === 0"
+        :label="$t('_evan.sharing.selectContact')"
+        :options="contacts"
+        required="true"
         @input="getPermissionsForContact"
       />
-
 
       <template v-if="selectedContact">
         <evan-loading v-if="isLoading"/>
@@ -38,9 +37,14 @@
       </template>
     </template>
     <div v-else>
-      <p class="text-warning">
-        {{ '_evan.sharing.noContacts' | translate}}
-      </p>
+      <p>{{ `${i18nScope}.description-no-contacts` | translate }}</p>
+      <div class="text-center my-5">
+        <evan-button
+          type="primary"
+          :href="`#/${ dapp.rootEns }/profile.vue.${ dapp.domainName }/${ $store.state.runtime.activeAccount }/addressbook.vue.${ dapp.domainName }`">
+          {{ '_evan.sharing.add-contact' | translate }}
+        </evan-button>
+      </div>
     </div>
 
     <div class="panel-footer" :class="{'relative': this.relative}">

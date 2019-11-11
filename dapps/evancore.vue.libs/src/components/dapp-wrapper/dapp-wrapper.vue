@@ -82,7 +82,7 @@
                   @click="routeActivated(route)">
                   <i class="position-relative" :class="route.icon">
                     <span class="notification-dot"
-                      v-if="route.path.startsWith('mailbox.vue') && userInfo.newMailCount !== 0">
+                      v-if="route.path.startsWith('mailbox.vue') && userInfo.newMailCount > 0">
                     </span>
                   </i>
                   <evan-tooltip :placement="'right'">

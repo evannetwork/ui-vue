@@ -24,6 +24,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { bccUtils } from '@evan.network/ui';
 import EvanComponent from '../../component';
 import EvanVueDispatcherHandler from '../../dispatcher';
 import { DAppWrapperRouteInterface } from '../../interfaces';
@@ -493,6 +494,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     if (!this.userInfo.mailsLoading) {
       this.userInfo.mailsLoading = true;
 
+      const runtime = this.$store.state.runtime;
       try {
         // load mail inbox informations, load 10 for checking for +9 new mails
         this.userInfo.readMails = JSON.parse(window.localStorage['evan-mail-read'] || '[ ]');
@@ -504,7 +506,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
 
         // load until 5 mails could be decrypted or the maximum amount of mails is reached
         while (mails.length < 5 && (initial || offset < this.userInfo.totalMails)) {
-          const mailResult = await this.$store.state.runtime.mailbox.getReceivedMails(5, offset);
+          const mailResult = await runtime.mailbox.getReceivedMails(5, offset);
 
           // increase offset with amount of loaded mails
           initial = false;
@@ -532,8 +534,59 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
 
         // check the last read mail count against the current one, to check for new mails
         const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
+        this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
+
         if (previousRead < this.userInfo.totalMails) {
-          this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
+          // show a toast message for the last unread mails
+          await Promise.all(this.userInfo.mails.slice(0, this.userInfo.newMailCount).map(async (mail) => {
+            const fromProfile = new bcc.Profile({
+              accountId: runtime.activeAccount,
+              profileOwner: mail.from,
+              ...runtime
+            });
+            const alias = mail.fromAlias || await bccUtils.getUserAlias(fromProfile);
+            const mailClass = mail.address.replace('0x', 'mail-');
+            const mailLink = [
+              this.dapp.baseUrl,
+              this.dapp.rootEns,
+              `mailbox.vue.${ this.dapp.domainName }/received/detail`,
+              `${ mail.address }`,
+            ].join('/');
+            const modalClick = (e, toastObject) => {
+              this.markMailAsRead(mail);
+              toastObject.goAway(0);
+              this.loadMails();
+            };
+
+            if (!document.querySelector(`.${ mailClass }`) &&
+                this.userInfo.readMails.indexOf(mail.address) === -1) {
+              this.$toasted.show(
+                `${ mail.title }` + (alias ? ` ${ this.$t('_evan.dapp-wrapper.from') } ${ alias }` : ''),
+                {
+                  className: mailClass,
+                  duration: null,
+                  type: 'info',
+                  action : [
+                    {
+                      class: 'mdi mdi-email-open-outline',
+                      href: mailLink,
+                      icon : '',
+                      onClick: (e, toastObject) => {
+                        modalClick(e, toastObject);
+                        // then redirect to original location
+                        window.location = mailLink;
+                      },
+                    },
+                    {
+                      icon : '',
+                      class: 'mdi mdi-close',
+                      onClick: modalClick,
+                    }
+                  ]
+                }
+              );
+            }
+          }));
         }
       } catch (ex) {
         this.$store.state.runtime.logger.log(ex.message, 'error');
@@ -544,28 +597,25 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   }
 
   /**
-   * Opens the mail preview dropdown and sets the evan-mail-read-count.
+   * Add a mail address to the readMails array.
+   *
+   * @param      {any}  mail    mail object
    */
-  openMailDropdown() {
-    (<any>this.$refs.mailDropdown).show();
-
-    // set last mail read count to the current counter
-    this.userInfo.newMailCount = 0;
-    window.localStorage['evan-mail-read-count'] = this.userInfo.totalMails;
-  }
-
-  /**
-   * Opens a mail within the mailbox
-   */
-  openMail(mail: any, $event: any) {
+  markMailAsRead(mail: any) {
     // set the mail read and save it into the local store
     if (this.userInfo.readMails.indexOf(mail.address) === -1) {
       this.userInfo.readMails.push(mail.address);
 
       window.localStorage['evan-mail-read'] = JSON.stringify(this.userInfo.readMails);
-    }
 
-    (<any>this.$refs).mailDropdown.hide($event);
+      // calculate new read mail count
+      const currReadCount = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
+      const mailIndex = this.userInfo.mails.indexOf(mail);
+      const newReadCount = this.userInfo.totalMails - mailIndex;
+      if (mailIndex !== -1 && currReadCount < newReadCount) {
+        window.localStorage['evan-mail-read-count'] = newReadCount;
+      }
+    }
   }
 
   /**
@@ -655,6 +705,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
             percentage: Math.round((100 / instance.dispatcher.steps.length) * instance.stepIndex),
           }
         ), {
+          duration: instance.status === 'finished' ? 7000 : 3000,
           type: instance.status === 'finished' ? 'success' :
                 instance.status === 'error' ? 'error' :
                 'info'

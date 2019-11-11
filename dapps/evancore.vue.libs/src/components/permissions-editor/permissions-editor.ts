@@ -183,12 +183,13 @@ class PermissionsEditor extends mixins(EvanComponent) {
   async writePermissions() {
     this.isLoading = true;
 
-    const runtime = (<any>this).getRuntime();
-
-    await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions)
-      .catch((e: Error) => {
-        console.log('Error writing permissions', e.message);
-      });
+    try {
+      const runtime = (<any>this).getRuntime();
+      await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions);
+      this.initialPermissions = clone(this.containersPermissions);
+    } catch (ex) {
+      return console.error('Error writing permissions', ex.message);
+    }
 
     this.cancel();
     this.isLoading = false;
