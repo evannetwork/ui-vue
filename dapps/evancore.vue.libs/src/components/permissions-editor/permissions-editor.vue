@@ -16,24 +16,24 @@
         @input="getPermissionsForContact"
       />
 
-      <template v-if="isLoading">
-        <evan-loading />
-      </template>
-      <template v-else>
-        <p v-if="selectedContact" class="mt-6 mb-0">
-          {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
-        </p>
+      <template v-if="selectedContact">
+        <evan-loading v-if="isLoading"/>
+        <template v-else>
+          <p v-if="selectedContact" class="mt-6 mb-0">
+            {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
+          </p>
 
-        <div v-for="(val, contractId) in containersPermissions" :key="contractId">
-          <evan-permissions
-            :label="val.label"
-            :permissions="val.permissions"
-            :contractId="contractId"
-            :updatePermissions="updateContractPermissions"
-            :i18nScope="i18nScope"
-            :sortFilter="getSortFilter(contractId)"
-          />
-        </div>
+          <div v-for="(val, contractId) in containersPermissions" :key="contractId">
+            <evan-permissions
+              :label="val.label"
+              :permissions="val.permissions"
+              :contractId="contractId"
+              :updatePermissions="updateContractPermissions"
+              :i18nScope="i18nScope"
+              :sortFilter="getSortFilter(contractId)"
+            />
+          </div>
+        </template>
       </template>
     </template>
     <div v-else>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="panel-footer" :class="{'relative': this.relative}">
-      <evan-button type="secondary" :label="$t('_evan.cancel')" @click="reset" />
+      <evan-button type="secondary" :label="$t('_evan.cancel')" @click="cancel" :disabled="!selectedContact" />
       <evan-button
         type="primary"
         :label="$t('_evan.sharing.update')"

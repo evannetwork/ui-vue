@@ -19,10 +19,12 @@
 
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { bccUtils, } from '@evan.network/ui';
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../../component';
+import { Prop, } from 'vue-property-decorator';
 
 /**
  * Shows a animated "check" icon.
