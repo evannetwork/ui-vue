@@ -33,7 +33,7 @@
         <div class="print-view">
           <div class="row">
             <!-- dark left info box -->
-            <div class="col-md-6 info-box inverted">
+            <div class="col-md-6 info-box inverted pr-7">
               <i class="mdi mdi-shield-alert-outline header-icon" />
               <img class="evan-logo print-only" :src="`${ $store.state.uiBaseUrl }/assets/evan-logo-dark-half.svg`">
               <h3 class="print-only mt-5">{{ '_evan.mnemonic-export.recovery-key' | translate }}</h3>
