@@ -35,6 +35,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './tooltip.ts';
+  import Component from './tooltip';
   export default Component;
 </script>

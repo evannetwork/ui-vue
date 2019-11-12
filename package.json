@@ -45,7 +45,8 @@
     "@evan.network/api-blockchain-core": "^2.3.0",
     "@evan.network/smart-contracts-core": "^2.1.1",
     "@evan.network/ui": "^1.7.3",
-    "@evan.network/ui-dapp-browser": "^2.6.1"
+    "@evan.network/ui-dapp-browser": "^2.6.1",
+    "fork-ts-checker-webpack-plugin": "^3.1.0"
   },
   "husky": {
     "hooks": {

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './address.ts';
+  import Component from './address';
   export default Component;
 </script>
 

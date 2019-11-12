@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './dapp-wrapper-level-2.ts';
+  import Component from './dapp-wrapper-level-2';
   export default Component;
 </script>
 
