@@ -60,7 +60,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   /**
    * Directly pass already loaded account details to the component
    */
-  @Prop() accountDetails: any;
+  @Prop() accountDetails: any; // TODO: needs proper type/interface
 
   /**
    * Show loading symbol

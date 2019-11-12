@@ -18,7 +18,6 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
@@ -26,29 +25,34 @@ import { Prop } from 'vue-property-decorator';
 import EvanComponent from '../../component';
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
+import { getDomainName } from '../../utils';
 
 /**
  * Handles the password input of a user and checks, if it's correct and it's profile can be
  * encrypted with that password. Used by the dapp-wrapper to login the current user if needed. Will
  * send an `logged-in` event including the users provided password.
  *
+ * TODO: Rethink the naming. We have sign-in, sign-up, signed-in and login (this)
+ *
  * @class         LoginComponent
  * @selector      evan-login
  */
-@Component({ })
+@Component
 export default class LoginComponent extends mixins(EvanComponent) {
   /**
    * preload accountId
    */
-  accountId = dappBrowser.core.activeAccount();
+  // accountId = dappBrowser.core.activeAccount();
+  @Prop() accountId: string;
+  @Prop({ required: false }) mnemonic: string;
+  @Prop({ default: false }) showSignup: boolean;
 
-  /**
-   * is the current mnemonic / password is currently checking?
-   */
+  alias: string | null;
+
   checkingPassword = false;
 
   /**
-   * formular specific variables
+   * form specific variables
    */
   form = {
     /**
@@ -58,14 +62,16 @@ export default class LoginComponent extends mixins(EvanComponent) {
       value: window.localStorage['evan-test-password'] || '',
       valid: false,
       dirty: false,
-      ref: null as any
-    },
+      ref: null
+    }
   };
 
-  /**
-   * Focus the password element.
-   */
+  created() {
+    this.alias = window.localStorage.getItem('evan-alias');
+  }
+
   mounted() {
+    // Focus the password input.
     this.form.password.ref = this.$refs['password'];
     this.form.password.ref.focus();
 
@@ -77,8 +83,6 @@ export default class LoginComponent extends mixins(EvanComponent) {
 
   /**
    * Check the current password input and send the logged in event to the parent component.
-   *
-   * @param      {any}  event   form submit event
    */
   async login() {
     if (this.form.password.value.length > 7) {
@@ -86,8 +90,11 @@ export default class LoginComponent extends mixins(EvanComponent) {
 
       // get the current account id
       try {
-        this.form.password.valid = await dappBrowser.bccHelper.isAccountPasswordValid(bcc,
-          this.accountId, this.form.password.value);
+        this.form.password.valid = await dappBrowser.bccHelper.isAccountPasswordValid(
+          bcc,
+          this.accountId,
+          this.form.password.value
+        );
       } catch (ex) {
         this.form.password.value = false;
       }
@@ -96,6 +103,17 @@ export default class LoginComponent extends mixins(EvanComponent) {
       // applications can access it
       if (this.form.password.valid) {
         this.$emit('logged-in', this.form.password.value);
+        // mnemonic available during onboarding
+        if (this.mnemonic) {
+          await dappBrowser.lightwallet.createVaultAndSetActive(
+            this.mnemonic,
+            this.form.password.value
+          );
+        }
+        dappBrowser.core.setCurrentProvider('internal');
+
+        window.location.hash = `/${this.$route.query.origin ||
+          `dashboard.vue.${getDomainName()}`}`;
       } else {
         // only enable button when password is invalid
         this.checkingPassword = false;

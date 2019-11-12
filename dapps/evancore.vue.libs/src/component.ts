@@ -59,6 +59,8 @@ export default class EvanComponent extends Vue {
    */
   testMode = false;
 
+  dispatcher;
+
   constructor() {
     super();
 

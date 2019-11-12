@@ -15,6 +15,7 @@
       "copy": "Copy",
       "open-in-explorer": "Open in Explorer"
     },
+    "alias": "Alias",
     "browser-not-supported": {
       "desc": "Please be sure to use one of the following browsers:<ul><li>Chrome</li><li>Edge</li><li>Firefox (no private mode!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Your browser is not supported"
@@ -64,6 +65,7 @@
       }
     },
     "invalid-password": "The provided password is invalid.",
+    "log-in": "Log in",
     "login": "Unlock profile",
     "logout": "Logout",
     "logout-desc": "Are you sure you want to logout?",
@@ -76,13 +78,15 @@
       "download": "Download as Text File",
       "go-secure": "Go Secure",
       "notification": "Print your recovery key",
-      "print-or-store": "Print your recovery key and store it at a secure place offline.",
       "print": "Print",
+      "print-or-store": "Print your recovery key and store it at a secure place offline.",
       "recovery-key": "Recovery Key",
       "title": "Print your Recovery Key",
       "understood": "I backed up my recovery key and understand the risk of losing it."
     },
+    "need-an-account": "Need an account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Sign Up</a>",
     "no": "No",
+    "not-your-account": "Not your account?",
     "optional": "optional",
     "password": "Password",
     "password-placeholder": "Password from the original profile creation",
@@ -135,7 +139,6 @@
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"
     },
-    "use-password": "Unlock",
     "view-profile": "View Profile",
     "welcome-to-evan": "Welcome to the evan.network",
     "write": "write",

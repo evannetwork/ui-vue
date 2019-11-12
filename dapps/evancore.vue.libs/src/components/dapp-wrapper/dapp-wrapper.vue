@@ -241,7 +241,9 @@
       </template>
 
       <evan-login v-else
-        v-on:logged-in="login">
+        v-on:logged-in="login"
+        :accountId="userInfo.address"
+      >
       </evan-login>
     </div>
     <div class="dapp-wrapper-body" v-else>
