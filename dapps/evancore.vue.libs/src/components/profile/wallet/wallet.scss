@@ -28,9 +28,10 @@ $walletYellow: #fbe19e;
   height: 200px;
   padding: 1.5em;
 
-  border-radius: 5px;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 15px;
+  overflow: hidden;
 
   &, * {
     text-decoration: none !important;
@@ -64,6 +65,7 @@ $walletYellow: #fbe19e;
 
       margin: 0;
 
+      display: block;
       color: $walletYellow;
     }
 
