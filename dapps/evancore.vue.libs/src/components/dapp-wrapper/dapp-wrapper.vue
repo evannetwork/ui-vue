@@ -239,7 +239,9 @@
       </template>
 
       <evan-login v-else
-        v-on:logged-in="login">
+        v-on:logged-in="login"
+        :accountId="userInfo.address"
+      >
       </evan-login>
     </div>
     <div class="dapp-wrapper-body" v-else>
@@ -251,6 +253,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './dapp-wrapper.ts';
+  import Component from './dapp-wrapper';
   export default Component;
 </script>

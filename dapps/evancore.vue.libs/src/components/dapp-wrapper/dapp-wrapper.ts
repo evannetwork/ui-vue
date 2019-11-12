@@ -29,6 +29,7 @@ import EvanVueDispatcherHandler from '../../dispatcher';
 import { DAppWrapperRouteInterface } from '../../interfaces';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { getDomainName } from '../../utils';
+import { bccUtils } from '@evan.network/ui';
 import { registerEvanI18N, } from '../../vue-core';
 
 // load domain name for quick usage
@@ -45,6 +46,8 @@ const i18nPref = '_evan._routes';
  * It also provides content containers for a second left panel tree and a persistent breadcrumb
  * navigation, that can be applied by every component. Have a look at the breadcrumbs /
  * dapp-wrapper-level-2 component.
+ *
+ * TODO: Rework login function
  *
  * @class         DAppWrapperComponent
  * @selector      evan-dapp-wrapper
@@ -174,13 +177,14 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   hashChangeWatcher: any;
 
   /**
-   * current user informations
+   * current user information
    */
-  userInfo: any = {
-    addressBook: { },
+  userInfo = {
+    address: dappBrowser.core.activeAccount(), // TODO: wording "address" vs "accountId" in different components
+    addressBook: {} as any, // TODO: resolve any
     alias: '',
     loading: false,
-    mails: '',
+    mails: [],
     mailsLoading: false,
     newMailCount: 0,
     readMails: [ ],
@@ -188,7 +192,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   };
 
   /**
-   * Queue loading informations
+   * Queue loading information
    */
   queueInstances = { };
   queueCount = 0;
@@ -448,6 +452,10 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
         { executor },
       );
 
+      // Save alias to localstorage
+      this.userInfo.alias = await bccUtils.getUserAlias(this.$store.state.runtime.profile);
+      window.localStorage.setItem('evan-alias', this.userInfo.alias);
+
       // create and register a vue dispatcher handler, so applications can easily access dispatcher data
       // from vuex store
       this.dispatcherHandler = new EvanVueDispatcherHandler(this);
@@ -487,7 +495,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   }
 
   /**
-   * Load the mail informations for the current user
+   * Load the mail information for the current user
    */
   async loadMails(mailsToReach = 5) {
     if (!this.userInfo.mailsLoading) {

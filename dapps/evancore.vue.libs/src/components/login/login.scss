@@ -28,3 +28,16 @@
     width: 90%;
   }
 }
+
+.not-your-account {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input#password, input#alias {
+  height: 40px;
+}
+
+.form-container {
+  width: 400px;
+}
