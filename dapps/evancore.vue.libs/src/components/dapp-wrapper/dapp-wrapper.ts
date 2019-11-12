@@ -580,18 +580,20 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
                   className: mailClass,
                   duration: null,
                   type: 'info',
-                  action : [
+                  action: [
                     {
+                      text: '',
                       class: 'mdi mdi-email-open-outline',
                       href: mailLink,
-                      icon : '',
+                      icon: '',
                       onClick: (e, toastObject) => {
                         modalClick(e, toastObject);
                         // then redirect to original location
-                        window.location = mailLink;
-                      },
+                        window.location.assign(mailLink);
+                      }
                     },
                     {
+                      text: '',
                       icon : '',
                       class: 'mdi mdi-close',
                       onClick: modalClick,
