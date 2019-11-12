@@ -17,21 +17,19 @@
   the following URL: https://evan.network/license/
 */
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { bccUtils } from '@evan.network/ui';
+
 import EvanComponent from '../../component';
 import EvanVueDispatcherHandler from '../../dispatcher';
 import { DAppWrapperRouteInterface } from '../../interfaces';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
 import { getDomainName } from '../../utils';
-import { bccUtils } from '@evan.network/ui';
-import { registerEvanI18N, } from '../../vue-core';
 
 // load domain name for quick usage
 const domainName = getDomainName();
@@ -122,6 +120,13 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    * should be the runtime created? Includes onboarding & login checks.
    */
   @Prop({ default: true }) createRuntime: boolean;
+
+  get isLoggedin() {
+    return this.$store.state.isLoggedin;
+  }
+  set isLoggedin(state) {
+    this.$store.commit('setLoginState', state);
+  }
 
   /**
    * id of this element, so child elements can be queried easier
@@ -466,6 +471,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
       this.$emit('loggedin', this.$store.state.runtime);
       this.loading = false;
       this.login = false;
+      this.isLoggedin = true;
 
       // load the user infos like alias, mails, dispatchers ...
       if (this.topLevel) {

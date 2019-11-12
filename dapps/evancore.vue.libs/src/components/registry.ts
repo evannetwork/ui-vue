@@ -32,9 +32,10 @@ import DAppLoadingComponent from './loading/loading.vue';
 import DAppWrapperComponent from './dapp-wrapper/dapp-wrapper.vue';
 import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapper-level-2.vue';
 import DropdownComponent from './dropdown/dropdown.vue';
+import EvanCheckboxComponent from './forms/checkbox/checkbox.vue';
 import EvanComponent from '../component';
 import FormComponent from './forms/form/form.vue';
-import FormControlCheckboxComponent from './forms/checkbox/checkbox.vue';
+import FormControlCheckboxComponent from './forms/checkbox/checkbox-control.vue';
 import FormControlComponent from './forms/control/control.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
@@ -43,6 +44,7 @@ import FormControlVSelectComponent from './forms/v-select/v-select.vue';
 import IframeComponent from './iframe/iframe.vue';
 import LoginComponent from './login/login.vue';
 import LogoutComponent from './logout/logout.vue';
+import MnemonicExport from './dapp-wrapper/mnemonic-export/mnemonic-export.vue';
 import ModalComponent from './modal/modal.vue';
 import NavListComponent from './nav-list/nav-list.vue';
 import NavTabsComponent from './nav-tabs/nav-tabs.vue';
@@ -73,6 +75,7 @@ export {
   DAppWrapperComponent,
   DAppWrapperSidebarLevel2Component,
   DropdownComponent,
+  EvanCheckboxComponent,
   EvanComponent,
   FormComponent,
   FormControlCheckboxComponent,
@@ -108,28 +111,30 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-breadcrumbs', component: BreadcrumbsComponent },
   { name: 'evan-button', component: ButtonComponent },
   { name: 'evan-card', component: CardComponent },
+  { name: 'evan-checkbox', component: EvanCheckboxComponent },
   { name: 'evan-contact-batch', component: ContactBatchComponent },
   { name: 'evan-dapp-loader', component: DAppLoaderComponent },
-  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
+  { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dropdown', component: DropdownComponent },
   { name: 'evan-file-input', component: FormControlFilesComponent },
-  { name: 'evan-form', component: FormComponent },
-  { name: 'evan-form-control', component: FormControlComponent },
   { name: 'evan-form-control-checkbox', component: FormControlCheckboxComponent },
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
   { name: 'evan-form-control-v-select', component: FormControlVSelectComponent },
+  { name: 'evan-form-control', component: FormControlComponent },
+  { name: 'evan-form', component: FormComponent },
   { name: 'evan-iframe', component: IframeComponent },
   { name: 'evan-loading', component: DAppLoadingComponent },
   { name: 'evan-login', component: LoginComponent },
   { name: 'evan-logout', component: LogoutComponent },
+  { name: 'evan-mnemonic-export', component: MnemonicExport },
   { name: 'evan-modal', component: ModalComponent },
   { name: 'evan-nav-list', component: NavListComponent },
   { name: 'evan-nav-tabs', component: NavTabsComponent },
-  { name: 'evan-permissions', component: PermissionsComponent },
   { name: 'evan-permissions-editor', component: PermissionsEditorComponent },
+  { name: 'evan-permissions', component: PermissionsComponent },
   { name: 'evan-profile-picture', component: ProfilePicture },
   { name: 'evan-profile-preview', component: ProfilePreview },
   { name: 'evan-qr-code', component: QRCodeComponent },
