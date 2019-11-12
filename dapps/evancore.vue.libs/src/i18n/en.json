@@ -71,7 +71,7 @@
       "account-id": "Account ID",
       "alias": "Alias",
       "created-at": "Created at:",
-      "description": "Your account is protected by your password and recovery key. You will need your recovery key to log in from new devices.\n\nPlease note: The recovery key is not stored in your profile information and could not be set back. In case of lost, you will loose access to your business partners, contacts and profile information.",
+      "description": "Your account is protected by your password and recovery key. You will need your recovery key to log in from new devices.\n\nPlease note: The recovery key is not stored in your profile information and could not be set back. In case of lost, you will lose access to your business partners, contacts and profile information.",
       "download": "Download as Text File",
       "go-secure": "Go Secure",
       "notification": "Print your recovery key",
