@@ -15,6 +15,7 @@
       "copy": "Kopieren",
       "open-in-explorer": "Im Explorer anzeigen"
     },
+    "alias": "Alias",
     "browser-not-supported": {
       "desc": "Bitte gehen Sie sicher, dass Sie einen der folgenden Browsern verwenden:<ul><li>Chrome</li><li>Edge</li><li>Firefox (kein privater Modus!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Ihr Browser wird nicht unterstützt"
@@ -64,10 +65,13 @@
       }
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
+    "log-in": "Einloggen",
     "login": "Profil entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
+    "need-an-account": "Noch kein Account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Account erstellen</a>",
     "no": "Nein",
+    "not-your-account": "Nicht Ihr Account?",
     "optional": "optional",
     "password": "Passwort",
     "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
@@ -120,7 +124,6 @@
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"
     },
-    "use-password": "Entsperren",
     "view-profile": "Profil anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
     "write": "schreiben",
