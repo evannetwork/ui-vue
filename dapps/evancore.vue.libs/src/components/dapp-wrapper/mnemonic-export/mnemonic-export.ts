@@ -123,6 +123,14 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     textArea.select();
     document.execCommand('copy');
     document.body.removeChild(textArea);
+
+    this.$toasted.show(
+      this.$t(`_evan.mnemonic-export.copied`),
+      {
+        duration: 3000,
+        type: 'success'
+      }
+    );
   }
 
   /**
