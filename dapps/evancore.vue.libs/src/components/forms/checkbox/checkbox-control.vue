@@ -17,27 +17,29 @@
   the following URL: https://evan.network/license/
 */
 
-.password-dialog {
-  max-width: 100%;
+<template>
+  <evan-form-control v-bind="$props" class="checkbox" >
+    <input
+      class="form-control"
+      v-bind="$props"
+      type="checkbox"
+      :class="{ 'is-invalid' : error}"
+      :id="id"
+      :checked="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.checked)"
+    />
+    <label :for="id" />
+  </evan-form-control>
+</template>
 
-  @media(min-width: 768px) {
-    min-width: 500px;
-  }
+<script lang="ts">
+  import CheckboxControl from './checkbox-control';
+  export default CheckboxControl;
+</script>
 
-  @media(max-width: 767px) {
-    width: 90%;
-  }
-}
+<style lang="scss" scoped>
+  @import './checkbox.scss'
+</style>
 
-.not-your-account {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-input#password, input#alias {
-  height: 40px;
-}
-
-.form-container {
-  width: 400px;
-}

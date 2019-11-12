@@ -87,6 +87,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
         },
         swipePanel: ''
       },
+      isLoggedin: false,
       ...options.state,
     },
     mutations: {
@@ -97,6 +98,9 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
         // open the desired one
         state.uiState.swipePanel = state.uiState.swipePanel && state.uiState.swipePanel === type ?
           '' : type;
+      },
+      setLoginState(state, isLoggedin: boolean) {
+        state.isLoggedin = isLoggedin;
       }
     }
   });

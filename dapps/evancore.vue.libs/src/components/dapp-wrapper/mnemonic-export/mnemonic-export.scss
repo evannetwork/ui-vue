@@ -1,0 +1,231 @@
+/*
+  Copyright (C) 2018-present evan GmbH.
+  This program is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Affero General Public License, version 3,
+  as published by the Free Software Foundation.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/ or
+  write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
+  the following URL: https://evan.network/license/
+*/
+
+@import '~@evan.network/ui/src/style/utils';
+.pre-wrap {
+  white-space: pre-wrap;
+}
+
+.notification-bar {
+  .hint-banner {
+    line-height: 25px;
+
+    position: absolute;
+    bottom: 0;
+
+    cursor: pointer;
+
+    background: cssVar('primary-color');
+
+    & i:first-of-type {
+      float: left;
+    }
+
+    & i:last-of-type {
+      float: right;
+    }
+  }
+}
+
+.mnemonics {
+  .word {
+    margin: 8px -8px;
+    padding: 4px 8px;
+
+    letter-spacing: 1px;
+
+    border: 1px solid cssVar('border-color');
+    border-radius: 4px;
+    background: cssVar('bg-level-1');
+  }
+
+  & span {
+    font-size: inherit;
+  }
+
+  & span.order {
+    display: inline-block;
+
+    width: 1.5em;
+
+    user-select: none;
+
+    color: cssVar('border-color');
+  }
+}
+
+.mnemonic-modal {
+  .copy-btn {
+    color: cssVar('border-color');
+
+    /deep/ i.mdi {
+      font-size: 1.3em;
+    }
+  }
+
+  .copy-btn:hover {
+    color: #000000;
+  }
+
+  i.mdi.header-icon {
+    font-size: 7em;
+    line-height: 1em;
+
+    float: left;
+
+    margin-right: 20px;
+  }
+
+  .understood-checkbox {
+    float: left;
+
+    margin-right: 1em;
+  }
+
+  .account-id {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+  .button-wrapper {
+    position: relative;
+
+    .hidden {
+      opacity: 0;
+    }
+
+    .spinner {
+      position: absolute;
+    }
+
+    span {
+      color: inherit;
+    }
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mnemonic-modal {
+    /deep/ .modal-body, /deep/ .modal-footer, /deep/ .modal-header {
+      border: none!important;
+      background-image: linear-gradient(90deg, cssVar('bg-inverted') 50%, cssVar('bg-level-3') 50%);
+
+      h5 {
+        color: cssVar('primary');
+      }
+    }
+  }
+
+  .inverted, .inverted * {
+    color: cssVar('text-color-inverted');
+    background: cssVar('bg-inverted');
+
+    h4, h5 {
+      color: cssVar('primary-color');
+    }
+  }
+}
+
+@media print {
+  @page {
+    margin: 0;
+
+    size: A4 portrait;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  .evan.theme-evan .col-md-6 {
+    flex: 100%;
+
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .print-view {
+    position: fixed;
+    z-index: 9999999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+
+    width: 210mm;
+    height: 297mm;
+    height: 317mm;
+    padding: 20mm;
+
+    background-color: #ffffff;
+
+    p {
+      text-align: justify;
+      text-align-last: left;
+    }
+    .mnemonics {
+      font-size: 16pt;
+      line-height: 21pt;
+
+      .col-lg-4 {
+        float: left;
+
+        width: 33%;
+        max-width: 33%;
+      }
+
+      .word {
+        border: none;
+        border-bottom: 2px solid #cccccc;
+        border-radius: 0;
+
+        & span.order {
+          color: #cccccc;
+        }
+      }
+    }
+
+    i.mdi.header-icon {
+      font-size: 20mm;
+
+      float: none;
+    }
+
+    .evan-logo {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      float: right;
+
+      width: auto;
+      height: 20mm;
+    }
+
+    button, button.btn, .evan.theme-evan .btn {
+      display: none;
+    }
+  }
+}

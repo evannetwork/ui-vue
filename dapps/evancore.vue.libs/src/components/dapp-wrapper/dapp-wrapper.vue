@@ -232,6 +232,8 @@
                 </template>
               </evan-modal>
               <slot name="content"></slot>
+              <!-- if the user gone through the sign-up, but never exported his mnemonic -->
+              <evan-mnemonic-export v-if="createRuntime && topLevel && isLoggedin"></evan-mnemonic-export>
             </div>
             <div v-if="topLevel" id="dapp-wrapper-sidebar-right" />
           </div>
@@ -239,7 +241,9 @@
       </template>
 
       <evan-login v-else
-        v-on:logged-in="login">
+        v-on:logged-in="login"
+        :accountId="userInfo.address"
+      >
       </evan-login>
     </div>
     <div class="dapp-wrapper-body" v-else>
@@ -251,6 +255,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './dapp-wrapper.ts';
+  import Component from './dapp-wrapper';
   export default Component;
 </script>
