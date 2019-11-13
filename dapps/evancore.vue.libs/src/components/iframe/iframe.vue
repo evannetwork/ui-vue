@@ -29,6 +29,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './iframe.ts';
+  import Component from './iframe';
   export default Component;
 </script>

@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './success.ts';
+  import Component from './success';
   export default Component;
 </script>
 

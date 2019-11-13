@@ -30,6 +30,9 @@
       <i class="mdi mdi-arrow-left"></i>
     </button>
     
+    <!-- TODO: The 'breadcrumbs' variable inside 'v-for' directive should be replaced with
+      a computed property that returns filtered array instead.
+      You should not mix 'v-for' with 'v-if'. -->
     <template 
       v-for="(breadcrumb, index) in breadcrumbs"
       v-if="ignored.indexOf(breadcrumb.id) === -1">
@@ -52,7 +55,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './breadcrumbs.ts';
+  import Component from './breadcrumbs';
   export default Component;
 </script>
 
