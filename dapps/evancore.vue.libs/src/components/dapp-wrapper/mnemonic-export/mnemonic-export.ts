@@ -77,7 +77,7 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   }
 
   private downloadMnemonics() {
-    const fileName = `recovery-key-${this.alias}`;
+    const fileName = `recovery-key-${this.alias}.txt`;
     const text = [];
 
     text.push(this.$t('_evan.mnemonic-export.description'));
