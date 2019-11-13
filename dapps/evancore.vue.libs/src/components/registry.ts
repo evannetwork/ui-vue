@@ -60,7 +60,7 @@ import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
 import vSelect from 'vue-select';
-import WalletComponent from './profile/wallet/wallet.vue';
+import WalletCardComponent from './profile/wallet-card/wallet-card.vue';
 
 // export them all, so other applications can access them
 export {
@@ -101,7 +101,7 @@ export {
   SwipePanelComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
-  WalletComponent,
+  WalletCardComponent,
 };
 
 // map them to element names, so they can be used within templates
@@ -145,7 +145,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
   { name: 'evan-v-select', component: vSelect },
-  { name: 'evan-wallet', component: WalletComponent },
+  { name: 'evan-wallet-card', component: WalletCardComponent },
 ];
 
 export default componentRegistration;

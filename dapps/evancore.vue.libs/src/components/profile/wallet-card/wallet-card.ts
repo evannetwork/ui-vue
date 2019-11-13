@@ -24,16 +24,10 @@ import { bccUtils, } from '@evan.network/ui';
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../../component';
-import { Prop, } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
-/**
- * Shows a animated "check" icon.
- *
- * @class         SuccessComponent
- * @selector      evan-success
- */
 @Component({ })
-export default class ProfilePreviewComponent extends mixins(EvanComponent) {
+export default class WalletCardComponent extends mixins(EvanComponent) {
   /**
    * Address of the specific account.
    */
