@@ -26,7 +26,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require('webpack');
 
 /**
@@ -72,7 +71,7 @@ module.exports = function(
           loader: 'ts-loader',
           exclude: /node_modules/,
           options: {
-            transpileOnly: true,
+            transpileOnly,
             appendTsSuffixTo: [/\.vue$/],
           }
         },
@@ -126,11 +125,6 @@ module.exports = function(
         filename: `${ name }.css`,
         chunkFilename: `${ name }.css`,
       }),
-      new ForkTsCheckerWebpackPlugin({
-        tslint: false,
-        eslint: false, // TODO: add linting
-        vue: true
-      })
     ],
     resolve: {
       extensions: ['.ts', '.js', '.vue', '.json'],
