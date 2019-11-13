@@ -70,7 +70,7 @@ export default class EvanComponent extends Vue {
 
   /**
    * Custom navigation method for evan vue projects. Always navigates using window.location.hash to
-   * force hash chaining on nested DApps.
+   * force hash changing on nested DApps.
    *
    * @param      {string}  path      path that should be navigated to
    * @param      {string}  baseHash  navigation base hash (e.g. dashboard.vue.evan, default = this.dapp.baseHash)
