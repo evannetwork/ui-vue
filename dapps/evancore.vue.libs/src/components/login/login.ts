@@ -68,11 +68,6 @@ export default class LoginComponent extends mixins(EvanComponent) {
 
   created() {
     this.alias = window.localStorage.getItem('evan-alias');
-
-    // fill alias, when it wasn't cached before and we are not within the onboarding
-    if (!this.alias && this.$route.hash.indexOf(`onboarding.vue.${ getDomainName() }`) === -1) {
-      this.alias = this.$t('_evan.login-missing-alias');
-    }
   }
 
   mounted() {
