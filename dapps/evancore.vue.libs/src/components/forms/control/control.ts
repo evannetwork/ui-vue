@@ -35,9 +35,7 @@ export default class ControlComponent extends mixins(EvanComponent) {
   /**
    * The value for the input field.
    */
-  @Prop({
-    type: String
-  }) value: string;
+  @Prop() value: Array<any> | string;
 
   /**
    *  The label for the input field.

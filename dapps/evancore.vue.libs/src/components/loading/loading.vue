@@ -24,6 +24,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './loading.ts';
+  import Component from './loading';
   export default Component;
 </script>

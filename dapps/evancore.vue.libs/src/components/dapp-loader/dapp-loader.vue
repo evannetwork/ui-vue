@@ -24,6 +24,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './dapp-loader.ts';
+  import Component from './dapp-loader';
   export default Component;
 </script>
