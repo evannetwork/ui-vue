@@ -56,6 +56,7 @@
                 v-model="form[controlName].value"
                 v-bind="form[controlName].uiSpecs && form[controlName].uiSpecs.attr ? form[controlName].uiSpecs.attr : { }"
                 @blur="form[controlName].setDirty()"
+                @input="form[controlName].uiSpecs && form[controlName].uiSpecs.input ? form[controlName].uiSpecs.input($event) : null"
               />
             </slot>
           </template>
