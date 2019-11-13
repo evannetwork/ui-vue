@@ -25,22 +25,20 @@
     <div class="form-container">
       <form class="p-4" @submit.prevent="login">
         <div class="form-group">
-          <template v-if="alias">
-            <label for="alias">{{ '_evan.alias' | translate }}</label>
-            <input class="form-control" id="alias" type="text" :value="alias" disabled />
+          <label for="alias">{{ '_evan.alias' | translate }}</label>
+          <input class="form-control" id="alias" type="text" :value="alias" disabled />
 
-            <evan-logout ref="evanLogout">
-              <template v-slot:button>
-                <div class="d-flex">
-                  <div class="flex-grow-1"></div>
-                  <a
-                    class="not-your-account mt-2"
-                    @click="$refs.evanLogout.logout()"
-                  >{{ '_evan.not-your-account' | translate }}</a>
-                </div>
-              </template>
-            </evan-logout>
-          </template>
+          <evan-logout ref="evanLogout">
+            <template v-slot:button>
+              <div class="d-flex">
+                <div class="flex-grow-1"></div>
+                <a
+                  class="not-your-account mt-2"
+                  @click="$refs.evanLogout.logout()"
+                >{{ '_evan.not-your-account' | translate }}</a>
+              </div>
+            </template>
+          </evan-logout>
           <label for="password">{{ '_evan.password' | translate }}</label>
           <input
             class="form-control"

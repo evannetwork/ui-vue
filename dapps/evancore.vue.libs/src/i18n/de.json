@@ -67,6 +67,7 @@
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "log-in": "Einloggen",
     "login": "Profil entsperren",
+    "login-missing-alias": "Bitte einloggen, um Alias zu laden.",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
     "mnemonic-export": {

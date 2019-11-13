@@ -67,6 +67,7 @@
     "invalid-password": "The provided password is invalid.",
     "log-in": "Log in",
     "login": "Unlock profile",
+    "login-missing-alias": "Please login, to load the alias.",
     "logout": "Logout",
     "logout-desc": "Are you sure you want to logout?",
     "mnemonic-export": {
