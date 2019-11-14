@@ -151,7 +151,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
     this.selectedContact = null;
     this.containersPermissions = null;
     this.initialPermissions = null;
-    this.onSelect();
+    if (typeof this.onSelect === 'function') {
+      this.onSelect();
+    }
     this.$store.commit('toggleSidePanel', ''); // TODO: replace "right" by new panel id
   }
 
