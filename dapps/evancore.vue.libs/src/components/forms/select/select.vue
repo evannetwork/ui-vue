@@ -19,24 +19,27 @@
 
 <template>
   <evan-form-control v-bind="$props">
-    <select class="form-control custom-select"
+    <select
+      class="form-control custom-select"
       :id="id"
       :value="value"
       :disabled="disabled"
       @blur="$emit('blur')"
       @focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event.target.value)"
-      v-bind="$attrs">
-      <option v-for="option in options"
+      v-bind="$attrs"
+    >
+      <option v-if="placeholder" value="" selected disabled hidden>{{ placeholder }}</option>
+      <option
+        v-for="option in options"
         :value="option.value || option"
-        :key="option.value || option">
-        {{ (option.label || option) | translate }}
-      </option>
+        :key="option.value || option"
+      >{{ (option.label || option) | translate }}</option>
     </select>
   </evan-form-control>
 </template>
 
 <script lang="ts">
-  import FormDataSelect from './select'
-  export default FormDataSelect
+import FormDataSelect from './select';
+export default FormDataSelect;
 </script>

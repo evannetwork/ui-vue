@@ -34,7 +34,7 @@ the following URL: https://evan.network/license/
 </template>
 
 <style lang="scss">
-  @import './v-select.scss'
+  @import './v-select.scss';
 </style>
 
 <script lang="ts">

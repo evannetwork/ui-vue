@@ -43,4 +43,8 @@ export default class SelectComponent extends mixins(EvanControlComponent) {
   @Prop({
     type: Object
   }) options: Option[] | string[];
+
+  @Prop({
+    required: false
+  }) placeholder: string;
 }
