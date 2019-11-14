@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './logout.ts';
+  import Component from './logout';
   export default Component;
 </script>
 

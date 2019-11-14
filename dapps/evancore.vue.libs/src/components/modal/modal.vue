@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './modal.ts';
+  import Component from './modal';
   export default Component;
 </script>
 

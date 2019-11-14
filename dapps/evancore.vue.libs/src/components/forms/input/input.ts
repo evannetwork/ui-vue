@@ -37,5 +37,5 @@ export default class InputComponent extends mixins(EvanControlComponent) {
    */
   @Prop({
     default: 'text',
-  }) type: boolean;
+  }) type: string;
 }

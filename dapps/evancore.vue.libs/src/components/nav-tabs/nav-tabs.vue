@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './nav-tabs.ts';
+  import Component from './nav-tabs';
   export default Component;
 </script>
 

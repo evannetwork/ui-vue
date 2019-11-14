@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './breadcrumbs.ts';
+  import Component from './breadcrumbs';
   export default Component;
 </script>
 

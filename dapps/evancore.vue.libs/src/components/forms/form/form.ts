@@ -211,10 +211,10 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   getTranslation(control: EvanFormControl, type: string) {
     // if manual error text was specified, translate it and return it directly
     if (type === 'error') {
-      if (typeof control[type] !== 'boolean') {
-        return this.$t(control[type]);
-      } else if (!control[type]) {
-        return control[type];
+      if (typeof control.error !== 'boolean') {
+        return this.$t(control.error);
+      } else if (!control.error) {
+        return control.error;
       }
     }
 

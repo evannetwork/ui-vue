@@ -37,6 +37,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './under-development.ts';
+  import Component from './under-development';
   export default Component;
 </script>
