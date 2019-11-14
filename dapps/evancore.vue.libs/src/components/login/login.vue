@@ -27,16 +27,18 @@
     <div class="form-container">
       <form class="p-4" @submit.prevent="login">
         <div class="form-group">
-          <div>
-            <label for="alias">{{ '_evan.alias' | translate }}</label>
-            <input
-              class="form-control"
-              id="alias"
-              type="text"
-              :value="alias"
-              disabled
-            />
-          </div>
+          <template v-if="alias">
+            <div>            
+              <label for="alias">{{ '_evan.alias' | translate }}</label>
+              <input
+                class="form-control"
+                id="alias"
+                type="text"
+                :value="alias"
+                disabled
+              />
+            </div>
+          </template>
 
           <div class="mt-3">
             <label for="password">{{ '_evan.password' | translate }}</label>
