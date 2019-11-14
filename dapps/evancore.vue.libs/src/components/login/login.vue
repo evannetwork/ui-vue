@@ -18,41 +18,44 @@
 */
 
 <template>
-  <div class="bg-level-3 w-100 h-100 d-flex align-items-center justify-content-center flex-column">
-    <h4
-      class="text-center mt-4 mb-3 text-uppercase font-weight-bold"
-    >{{ '_evan.log-in' | translate }}</h4>
+  <div
+    class="bg-level-3 w-100 h-100 d-flex align-items-center justify-content-center flex-column"
+  >
+    <h4 class="text-center mt-4 mb-3 text-uppercase font-weight-bold">
+      {{ '_evan.log-in' | translate }}
+    </h4>
     <div class="form-container">
       <form class="p-4" @submit.prevent="login">
         <div class="form-group">
-          <template v-if="alias">
+          <div>
             <label for="alias">{{ '_evan.alias' | translate }}</label>
-            <input class="form-control" id="alias" type="text" :value="alias" disabled />
+            <input
+              class="form-control"
+              id="alias"
+              type="text"
+              :value="alias"
+              disabled
+            />
+          </div>
 
-            <evan-logout ref="evanLogout">
-              <template v-slot:button>
-                <div class="d-flex">
-                  <div class="flex-grow-1"></div>
-                  <a
-                    class="not-your-account mt-2"
-                    @click="$refs.evanLogout.logout()"
-                  >{{ '_evan.not-your-account' | translate }}</a>
-                </div>
-              </template>
-            </evan-logout>
-          </template>
-          <label for="password">{{ '_evan.password' | translate }}</label>
-          <input
-            class="form-control"
-            type="password"
-            required
-            id="password"
-            ref="password"
-            :placeholder="'_evan.password-placeholder' | translate"
-            v-model="form.password.value"
-            v-bind:class="{ 'is-invalid' : form.password.dirty && !form.password.valid }"
-          />
-          <div class="invalid-feedback">{{ '_evan.invalid-password' | translate }}</div>
+          <div class="mt-3">
+            <label for="password">{{ '_evan.password' | translate }}</label>
+            <input
+              class="form-control"
+              type="password"
+              required
+              id="password"
+              ref="password"
+              :placeholder="'_evan.password-placeholder' | translate"
+              v-model="form.password.value"
+              v-bind:class="{
+                'is-invalid': form.password.dirty && !form.password.valid
+              }"
+            />
+            <div class="invalid-feedback">
+              {{ '_evan.invalid-password' | translate }}
+            </div>
+          </div>
         </div>
 
         <div class="text-center mt-6">
@@ -70,19 +73,29 @@
             <span>{{ '_evan.log-in' | translate }}</span>
           </button>
         </div>
-        <div class="text-center mt-3" v-if="showSignup">
-          <p v-html="$t('_evan.need-an-account')"></p>
+        <div class="text-center mt-2">
+          <evan-logout ref="evanLogout">
+            <template v-slot:button>
+              <a class="not-your-account" @click="$refs.evanLogout.logout()">
+                {{ '_evan.not-your-account' | translate }}
+              </a>
+            </template>
+          </evan-logout>
         </div>
+
+        <!-- <div class="text-center mt-3" v-if="showSignup">
+          <p v-html="$t('_evan.need-an-account')"></p>
+        </div>-->
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Component from "./login";
+  import Component from './login';
 export default Component;
 </script>
 
 <style lang="scss" scoped>
-@import "./login";
+  @import './login';
 </style>
