@@ -14,6 +14,7 @@
 ### Fixes
 - `evancore.vue.libs` (v1.9.0)
   - fix `evan-control` without label width
+  - fix `evan-dapp-loader` loading symbol is removed
 
 ### Deprecations
 
