@@ -48,6 +48,7 @@
               <component
                 :disabled="!editable || isLoading"
                 :error="(onlyForm || editMode && !onlyForm) ? getTranslation(form[controlName], 'error') : false"
+                :hint="getTranslation(form[controlName], 'hint')"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"
@@ -55,6 +56,7 @@
                 v-model="form[controlName].value"
                 v-bind="form[controlName].uiSpecs && form[controlName].uiSpecs.attr ? form[controlName].uiSpecs.attr : { }"
                 @blur="form[controlName].setDirty()"
+                @input="form[controlName].uiSpecs && form[controlName].uiSpecs.input ? form[controlName].uiSpecs.input($event) : null"
               />
             </slot>
           </template>

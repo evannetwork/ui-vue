@@ -231,6 +231,9 @@ export function registerEventHandlers(vueInstance: any) {
         vueInstance.$destroy();
         elementObserver.disconnect();
         setTimeout(() => window.removeEventListener('beforeunload', beforeUnload));
+
+        // recover toastet container element and move it to the next existing vue dapp container
+        document.querySelector('.evan-vue-dapp').appendChild(vueInstance.$toasted.container);
       }
     } while (parent && parent !== document.body);
   });

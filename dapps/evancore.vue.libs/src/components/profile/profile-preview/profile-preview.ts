@@ -206,7 +206,8 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     }
 
     // use old alias logic
-    this.userInfo.accountName = await bccUtils.getUserAlias(runtime.profile, this.userInfo);
+    this.userInfo.accountName = this.userInfo.accountName ||
+      await bccUtils.getUserAlias(runtime.profile, this.userInfo);
 
     // fill empty picture
     if (!this.userInfo.picture) {
