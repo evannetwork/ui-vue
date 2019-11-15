@@ -101,6 +101,13 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Load user specific information
    */
   async created() {
+    const runtime = (<any>this).getRuntime();
+    this.profile = new bcc.Profile({
+      accountId: runtime.activeAccount,
+      profileOwner: this.address,
+      ...runtime,
+    });
+
     // skip initial data loading if parent data was passed into the component
     if (this.accountDetails) {
       this.userInfo = this.accountDetails;
@@ -124,18 +131,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Load the latest user information.
    */
   async loadUserInfo() {
-    const runtime = (<any>this).getRuntime();
-    const profile = new bcc.Profile({
-      accountId: runtime.activeAccount,
-      profileOwner: this.address,
-      ...runtime,
-    });
-
     let accountDetails: any = { profileType: 'user' };
     try {
-      accountDetails = (await profile.getProfileProperty('accountDetails')) || accountDetails;
+      accountDetails = (await this.profile.getProfileProperty('accountDetails')) || accountDetails;
     } catch (ex) {
-      runtime.logger.log(`Could not load profile data for ${ this.address }: ${ ex.message }`, 'error');
+      this.profile.log(`Could not load profile data for ${ this.address }: ${ ex.message }`, 'error');
     }
 
     this.userInfo = accountDetails;
@@ -199,15 +199,13 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Ensure picture is set on profile
    */
   async fillEmptyProfileData() {
-    const runtime = (<any>this).getRuntime();
-
     if (!this.userInfo.profileType) {
       this.userInfo.profileType = 'user';
     }
 
     // use old alias logic
     this.userInfo.accountName = this.userInfo.accountName ||
-      await bccUtils.getUserAlias(runtime.profile, this.userInfo);
+      await bccUtils.getUserAlias(this.profile, this.userInfo);
 
     // fill empty picture
     if (!this.userInfo.picture) {

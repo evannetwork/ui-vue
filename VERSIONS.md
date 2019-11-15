@@ -16,6 +16,7 @@
   - fix `evan-control` without label width
   - fix `evan-dapp-loader` loading symbol is removed
   - disable number input select option
+  - fix `profile-preview` for foreign profiles
 
 ### Deprecations
 
