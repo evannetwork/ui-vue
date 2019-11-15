@@ -19,7 +19,6 @@
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 
