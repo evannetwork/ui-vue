@@ -14,6 +14,7 @@
 ### Fixes
 - `evancore.vue.libs` (v1.9.0)
   - fix `evan-control` without label width
+  - add correct `evan-button` href handling
 
 ### Deprecations
 

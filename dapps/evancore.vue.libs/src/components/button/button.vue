@@ -26,7 +26,8 @@
       { [ `btn-${ size }` ]: size !== 'normal'  },
     ]"
     :disabled="disabled"
-    :href="href"
+    :href="href ? href : null"
+    :rel="href ? 'noopener noreferrer': ''"
     @click="$emit('click', $event)">
     <template v-if="!$slots.default">
       <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
