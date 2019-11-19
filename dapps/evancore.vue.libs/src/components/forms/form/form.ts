@@ -220,22 +220,32 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
 
     // return directly specified translation
     let returnTranslation = type !== 'hint';
-    if (control.uiSpecs && control.uiSpecs.attr &&
-        control.uiSpecs.attr.hasOwnProperty(type)) {
+    if (control.uiSpecs &&
+        (control.uiSpecs.hasOwnProperty(type) ||
+          (control.uiSpecs.attr && control.uiSpecs.attr.hasOwnProperty(type)))
+      ) {
+      // allow property definition within uiSpecis and within attr (specifing label within attr would be confusing)
+      const specOverwrite = control.uiSpecs.attr && control.uiSpecs.attr[type] ?
+        control.uiSpecs.attr[type] : control.uiSpecs[type];
+      // if the attribute is a dynamic function, execute and return the value
+      if (typeof specOverwrite === 'function') {
+        return specOverwrite();
+      }
+
       // if it's a hint, check if it's set to true or string
       if (type === 'hint') {
-        if (control.uiSpecs.attr.hint) {
+        if (specOverwrite) {
           // if true, enable hint translation
-          if (typeof control.uiSpecs.attr.hint === 'boolean') {
+          if (typeof specOverwrite === 'boolean') {
             returnTranslation = true;
           } else {
             // for a string directly return it
-            return this.$t(control.uiSpecs.attr.hint);
+            return this.$t(specOverwrite);
           }
         }
         // else, disable the hint
       } else {
-        return this.$t(control.uiSpecs.attr[type]);
+        return this.$t(specOverwrite);
       }
     }
 
