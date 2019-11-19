@@ -66,6 +66,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import './permissions-editor.scss'
+  @import './permissions-editor.scss';
 </style>
 

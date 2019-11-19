@@ -27,6 +27,7 @@
       @blur="$emit('blur')"
       @focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event.target.value)"
+      @change="$emit('change', $event)"
       v-bind="$attrs"
     >
       <option v-if="placeholder" value="" selected disabled hidden>{{ placeholder }}</option>
