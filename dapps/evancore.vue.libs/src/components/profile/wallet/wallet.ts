@@ -102,7 +102,9 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
       })(),
       (async () => {
         // load balance and parse it to 3 decimal places
-        const amount = parseFloat((await dappBrowser.core.getBalance(this.address)).toFixed(3));
+        const amount = Math
+          .floor(parseFloat(await dappBrowser.core.getBalance(this.address)))
+          .toFixed(2);
         this.balance = {
           amount: amount.toLocaleString(this.$i18n.locale()),
           timestamp: Date.now(),
