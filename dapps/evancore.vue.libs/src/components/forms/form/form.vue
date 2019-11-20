@@ -39,7 +39,11 @@
         {{ '_evan.share' | translate }}
       </evan-button>
     </div>
-    <div class="px-0 pt-4" :class="{ 'container': stacked }">
+    <div class="px-0"
+      :class="{
+        'container': stacked,
+        'pt-4': !onlyForm,
+      }">
       <form class="d-flex flex-wrap flex-row justify-content-between" @submit="save">
         <slot v-bind:setEditMode="setEditMode"></slot>
         <slot name="form" v-if="form">
