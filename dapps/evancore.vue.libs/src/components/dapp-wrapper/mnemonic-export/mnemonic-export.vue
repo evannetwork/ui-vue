@@ -78,6 +78,14 @@
               </div>
               <div class="row mb-2 pl-5">
                 <div class="col-md-3">
+                  <span class="bold">{{ '_evan.mnemonic-export.evan-id' | translate }}</span>
+                </div>
+                <div class="col-md-9">
+                  <span>{{ identityAddress }}</span>
+                </div>
+              </div>
+              <div class="row mb-2 pl-5">
+                <div class="col-md-3">
                   <span class="bold">{{ '_evan.mnemonic-export.alias' | translate }}</span>
                 </div>
                 <div class="col-md-9">

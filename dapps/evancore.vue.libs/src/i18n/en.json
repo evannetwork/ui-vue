@@ -6,7 +6,7 @@
       "explorer": "Explorer",
       "favorites": "DApps",
       "help": "Help",
-      "profile": "Profile",
+      "profile": "Identity",
       "synchronization": "Synchronization",
       "verifications": "Verification Center"
     },
@@ -47,7 +47,7 @@
       },
       "my-contacts": "My Contacts",
       "my-mailbox": "My Messages",
-      "my-profile": "My Profile",
+      "my-profile": "My Identity",
       "new-mails": "You have {newMailCount} new messages",
       "queue": "Data-Synchronization",
       "queue-continue": "continue",
@@ -66,20 +66,21 @@
     },
     "invalid-password": "The provided password is invalid.",
     "log-in": "Log in",
-    "login": "Unlock profile",
+    "login": "Unlock Identity",
     "logout": "Logout",
     "logout-desc": "Are you sure you want to logout?",
     "mnemonic-export": {
       "account-id": "Account ID",
       "alias": "Alias",
+      "cancel": {
+        "desc": "Backing up the recovery key is enormously important. Please export or print your recovery key and accept the dialog on the left to continue.",
+        "title": "Print recovery key"
+      },
       "copied": "Copied mnemonic to clipboard.",
       "created-at": "Created at",
-      "cancel": {
-        "title": "Print recovery key",
-        "desc": "Backing up the recovery key is enormously important. Please export or print your recovery key and accept the dialog on the left to continue."
-      },
       "description": "The 12-word recovery key shown here must be securely stored, so that you can access and manage your digital twins and your account at any time.\n\nTo log in to the evan.network, you need the recovery key and the password you have chosen beforehand. ",
       "download": "Download as Text File",
+      "evan-id": "evan.network ID",
       "go-secure": "Close",
       "notification": "Print your recovery key",
       "print": "Print",
@@ -104,7 +105,7 @@
         "readWrite": "Individual Write and Read Permissions"
       }
     },
-    "please-login": "Please unlock your profile to continue.",
+    "please-login": "Please unlock your Identity to continue.",
     "profile": {
       "account-name": "Account Name",
       "no-alias": "No alias",
@@ -122,8 +123,8 @@
       }
     },
     "profile-picture": {
-      "upload": "Upload your profile picture here",
-      "upload-dnd": "Click here or drag'n'drop your new profile picture here.",
+      "upload": "Upload your picture here",
+      "upload-dnd": "Click here or drag'n'drop your new picture here.",
       "use-picture": "Use Picture"
     },
     "read": "read",
@@ -143,7 +144,7 @@
       "desc": "The area shown is currently under construction and will be available soon.",
       "title": "Under construction"
     },
-    "view-profile": "View Profile",
+    "view-profile": "View Identity",
     "welcome-to-evan": "Welcome to the evan.network",
     "write": "write",
     "yes": "Yes"

@@ -38,6 +38,11 @@ export default class MnemonicExport extends mixins(EvanComponent) {
   understood = false;
   now = null;
 
+  /**
+   * Identity address of the current logged in user
+   */
+  identityAddress: string = null;
+
   async created() {
     const runtime = this.getRuntime();
 
@@ -45,6 +50,7 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     this.mnemonic = await this.getMnemonic();
     this.now = new Date();
     this.alias = window.localStorage.getItem('evan-alias');
+    this.identityAddress = await runtime.verifications.getIdentityForAccount(this.address, true);
 
     // Show directly the mnemonic export and do not allow closing.
     this.mnemonic && this.$nextTick(() => this.showModal());
