@@ -107,7 +107,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
       // transform to correct format
       await this.fillEmptyProfileData();
       // setup reset value for edit mode cancel
-      this.setOriginalUserInfo();
+      this.backupUserInfo();
     } else {
       await this.loadUserInfo();
     }
@@ -146,7 +146,7 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     await this.fillEmptyProfileData();
 
     // setup reset value for edit mode cancel
-    this.setOriginalUserInfo();
+    this.backupUserInfo();
 
     this.$emit('update', this.userInfo);
     this.loading = false;
@@ -223,10 +223,9 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   }
 
   /**
-   * Overwrites the reset value, when the user cancels the edit mode.
+   * Backups the current user info, so we can revert last changes.
    */
-  setOriginalUserInfo() {
-    // backup user info, so we can revert last changes
+  backupUserInfo() {
     this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
   }
 }

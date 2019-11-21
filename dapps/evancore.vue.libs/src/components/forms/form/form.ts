@@ -220,10 +220,7 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
 
     // return directly specified translation
     let returnTranslation = type !== 'hint';
-    if (control.uiSpecs &&
-        (control.uiSpecs.hasOwnProperty(type) ||
-          (control.uiSpecs.attr && control.uiSpecs.attr.hasOwnProperty(type)))
-      ) {
+    if (this.hasControlType(control, type)) {
       // allow property definition within uiSpecis and within attr (specifing label within attr would be confusing)
       const specOverwrite = control.uiSpecs.attr && control.uiSpecs.attr[type] ?
         control.uiSpecs.attr[type] : control.uiSpecs[type];
@@ -270,5 +267,25 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
     }
 
     return `evan-form-control-${ type }`;
+  }
+
+  /**
+   * Overwrites a control a specific attribute.
+   *
+   * @param      {EvanFormControl}  control  control that should be checked
+   * @param      {string}           type     type that is overwritten (placeholder, hint, ...)
+   */
+  hasControlType(control: EvanFormControl, type: string) {
+    let hasControl = false;
+
+    if (control.uiSpecs) {
+      if (control.uiSpecs.hasOwnProperty(type)) {
+        hasControl = true;
+      } else if (control.uiSpecs.attr && control.uiSpecs.attr.hasOwnProperty(type)) {
+        hasControl = true;
+      }
+    }
+
+    return hasControl;
   }
 }
