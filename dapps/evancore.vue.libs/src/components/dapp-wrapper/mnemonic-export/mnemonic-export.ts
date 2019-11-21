@@ -45,16 +45,19 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     this.mnemonic = await this.getMnemonic();
     this.now = new Date();
     this.alias = window.localStorage.getItem('evan-alias');
+
+    // Show directly the mnemonic export and do not allow closing.
+    this.mnemonic && this.$nextTick(() => this.showModal());
   }
 
   private showModal() {
-    (<any>this.$refs.modal).show();
+    (this.$refs.modal as any).show();
   }
 
   private goSecure () {
     this.mnemonic = null;
     window.localStorage.removeItem('evan-mnemonic');
-    (<any>this.$refs.modal).hide();
+    (this.$refs.modal as any).hide();
   }
 
   /**
@@ -138,5 +141,14 @@ export default class MnemonicExport extends mixins(EvanComponent) {
    */
   private print() {
     window.print();
+  }
+
+  /**
+   * Prevent dialog to be closed, when user did not has exported the mnemonic.
+   */
+  onModalClose($event) {
+    if (!this.understood) {
+      (this.$refs.understoodModal as any).show();
+    }
   }
 }

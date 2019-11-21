@@ -73,16 +73,20 @@
       "account-id": "Account ID",
       "alias": "Alias",
       "copied": "Copied mnemonic to clipboard.",
-      "created-at": "Created at:",
-      "description": "Your account is protected by your password and recovery key. You will need your recovery key to log in from new devices.\n\nPlease note: The recovery key is not stored in your profile information and could not be set back. In case of lost, you will lose access to your business partners, contacts and profile information.",
+      "created-at": "Created at",
+      "cancel": {
+        "title": "Print recovery key",
+        "desc": "Backing up the recovery key is enormously important. Please export or print your recovery key and accept the dialog on the left to continue."
+      },
+      "description": "The 12-word recovery key shown here must be securely stored, so that you can access and manage your digital twins and your account at any time.\n\nTo log in to the evan.network, you need the recovery key and the password you have chosen beforehand. ",
       "download": "Download as Text File",
-      "go-secure": "Go Secure",
+      "go-secure": "Close",
       "notification": "Print your recovery key",
       "print": "Print",
-      "print-or-store": "Print your recovery key and store it at a secure place offline.",
+      "print-or-store": "Print your recovery key and store it offline on a safe place! After you close the window, the recovery key no longer appears.",
       "recovery-key": "Recovery Key",
       "title": "Print your Recovery Key",
-      "understood": "I backed up my recovery key and understand the risk of losing it."
+      "understood": "I understood"
     },
     "need-an-account": "Need an account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Sign Up</a>",
     "no": "No",

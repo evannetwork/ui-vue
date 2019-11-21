@@ -10,6 +10,7 @@
   - add `mail` toast message
   - add hint to `evan-control`
   - add `evan-form-control-textarea`
+  - add `mnemonic-export` component ui after onboarding
 
 ### Fixes
 - `evancore.vue.libs` (v1.9.0)
