@@ -17,25 +17,14 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <evan-form-control v-bind="$props">
-    <input class="form-control"
-      v-bind="$props"
-      :class="{ 'is-invalid' : error }"
-      :id="id"
-      :value="value"
-      @blur="$emit('blur')"
-      @focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event.target.value)"
-    />
-  </evan-form-control>
-</template>
 
-<script lang="ts">
-  import FormDataInput from './input';
-  export default FormDataInput;
-</script>
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
 
-<style lang="scss" scoped>
-  @import './input.scss';
-</style>
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}

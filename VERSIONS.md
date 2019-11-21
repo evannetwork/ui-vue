@@ -16,6 +16,9 @@
 ### Fixes
 - `evancore.vue.libs` (v1.9.0)
   - fix `evan-control` without label width
+  - fix `evan-dapp-loader` loading symbol is removed
+  - disable number input select option
+  - fix `profile-preview` for foreign profiles
 
 ### Deprecations
 - `evancore.vue.libs` (v1.9.0)
