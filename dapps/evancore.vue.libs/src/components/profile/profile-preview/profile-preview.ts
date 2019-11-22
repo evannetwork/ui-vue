@@ -106,6 +106,8 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
       this.userInfo = this.accountDetails;
       // transform to correct format
       await this.fillEmptyProfileData();
+      // setup reset value for edit mode cancel
+      this.backupUserInfo();
     } else {
       await this.loadUserInfo();
     }
@@ -143,8 +145,8 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     // ensure profile picture is set and transformed to ui file
     await this.fillEmptyProfileData();
 
-    // backup user info, so we can revert last changes
-    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
+    // setup reset value for edit mode cancel
+    this.backupUserInfo();
 
     this.$emit('update', this.userInfo);
     this.loading = false;
@@ -218,5 +220,12 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
       FileHandler.fileToContainerFile(file)
     ));
+  }
+
+  /**
+   * Backups the current user info, so we can revert last changes.
+   */
+  backupUserInfo() {
+    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
   }
 }

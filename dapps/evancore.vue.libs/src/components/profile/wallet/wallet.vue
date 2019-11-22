@@ -19,7 +19,7 @@
 
 <template>
   <div>
-    <div class="position-relative evan-highlight">
+    <div class="wallet-container evan-highlight">
       <a class="evan-wallet"
         :href="walletLink"
         :style="{
@@ -38,7 +38,7 @@
           </div>
         </template>
       </a>
-      <div class="qr-code-open evan-highlight"
+      <div class="qr-code-open"
         @click="showQRCode($event)">
         <i class="mdi mdi-qrcode-scan"></i>
       </div>

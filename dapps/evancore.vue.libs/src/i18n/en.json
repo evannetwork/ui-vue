@@ -89,7 +89,7 @@
     "not-your-account": "Not your account?",
     "optional": "optional",
     "password": "Password",
-    "password-placeholder": "Password from the original profile creation",
+    "password-placeholder": "Password",
     "permission": {
       "hint": "Remove all permissions?",
       "type": {

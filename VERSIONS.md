@@ -16,6 +16,8 @@
   - fix `evan-control` without label width
 
 ### Deprecations
+- `evancore.vue.libs` (v1.9.0)
+  - remove company name from registration entry
 
 
 ## Version 1.8.0
