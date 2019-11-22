@@ -206,11 +206,12 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
    * Return the translation for a control specific text (label, placeholder, error)
    *
    * @param      {EvanFormControl}  control  control that should be translated
-   * @param      {string}           type     text that should be translated (label, placeholder, error)
+   * @param      {string}           attr     attribute that should be translated (label,
+   *                                         placeholder, error)
    */
-  getTranslation(control: EvanFormControl, type: string) {
+  getTranslation(control: EvanFormControl, attr: string) {
     // if manual error text was specified, translate it and return it directly
-    if (type === 'error') {
+    if (attr === 'error') {
       if (typeof control.error !== 'boolean') {
         return this.$t(control.error);
       } else if (!control.error) {
@@ -219,18 +220,18 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
     }
 
     // return directly specified translation
-    let returnTranslation = type !== 'hint';
-    if (this.hasControlType(control, type)) {
+    let returnTranslation = attr !== 'hint';
+    if (this.hasControlAttr(control, attr)) {
       // allow property definition within uiSpecis and within attr (specifing label within attr would be confusing)
-      const specOverwrite = control.uiSpecs.attr && control.uiSpecs.attr[type] ?
-        control.uiSpecs.attr[type] : control.uiSpecs[type];
+      const specOverwrite = control.uiSpecs.attr && control.uiSpecs.attr[attr] ?
+        control.uiSpecs.attr[attr] : control.uiSpecs[attr];
       // if the attribute is a dynamic function, execute and return the value
       if (typeof specOverwrite === 'function') {
         return specOverwrite();
       }
 
       // if it's a hint, check if it's set to true or string
-      if (type === 'hint') {
+      if (attr === 'hint') {
         if (specOverwrite) {
           // if true, enable hint translation
           if (typeof specOverwrite === 'boolean') {
@@ -248,7 +249,7 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
 
     if (returnTranslation) {
       // return default translation
-      return this.$t(`${ this.i18nScope }.${ control.name }.${ type }`);
+      return this.$t(`${ this.i18nScope }.${ control.name }.${ attr }`);
     } else {
       return '';
     }
@@ -270,18 +271,19 @@ export default class EvanFormComponent extends mixins(EvanComponent) {
   }
 
   /**
-   * Overwrites a control a specific attribute.
+   * Checks if a custom attribute value was applied to a control object.
    *
    * @param      {EvanFormControl}  control  control that should be checked
-   * @param      {string}           type     type that is overwritten (placeholder, hint, ...)
+   * @param      {string}           attr     attr that is overwritten (placeholder, hint, ...)
+   * @return     {boolean} has custom attribute or not
    */
-  hasControlType(control: EvanFormControl, type: string) {
+  hasControlAttr(control: EvanFormControl, attr: string) {
     let hasControl = false;
 
     if (control.uiSpecs) {
-      if (control.uiSpecs.hasOwnProperty(type)) {
+      if (control.uiSpecs.hasOwnProperty(attr)) {
         hasControl = true;
-      } else if (control.uiSpecs.attr && control.uiSpecs.attr.hasOwnProperty(type)) {
+      } else if (control.uiSpecs.attr && control.uiSpecs.attr.hasOwnProperty(attr)) {
         hasControl = true;
       }
     }
