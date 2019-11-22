@@ -24,6 +24,7 @@
       :id="id"
       :value="value"
       :disabled="disabled"
+      :required="required"
       @blur="$emit('blur')"
       @focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event.target.value)"

@@ -46,4 +46,6 @@ export default class SelectComponent extends mixins(EvanControlComponent) {
   @Prop({
     required: false
   }) placeholder: string;
+
+  @Prop() required: boolean;
 }
