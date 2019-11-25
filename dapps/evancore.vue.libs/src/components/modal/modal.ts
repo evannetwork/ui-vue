@@ -74,6 +74,11 @@ export default class EvanModal extends mixins(EvanComponent) {
   }) modalClasses;
 
   /**
+   * Overwrite the original close function.
+   */
+  @Prop() closeAction: Function;
+
+  /**
    * shows the dom elements of the modal
    */
   isRendered = false;

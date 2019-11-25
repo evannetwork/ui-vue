@@ -6,7 +6,7 @@
       "explorer": "Explorer",
       "favorites": "DApps",
       "help": "Hilfe",
-      "profile": "Profil",
+      "profile": "Identität",
       "synchronization": "Synchronisation",
       "verifications": "Verifikations-Center"
     },
@@ -47,7 +47,7 @@
       },
       "my-contacts": "Meine Kontakte",
       "my-mailbox": "Meine Nachrichten",
-      "my-profile": "Mein Profil",
+      "my-profile": "Meine Identität",
       "new-mails": "Sie haben {newMailCount} neue Nachrichten",
       "queue": "Daten-Synchronisation",
       "queue-continue": "fortfahren",
@@ -66,23 +66,28 @@
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
     "log-in": "Einloggen",
-    "login": "Profil entsperren",
+    "login": "Identität entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
     "mnemonic-export": {
       "account-id": "Account-ID",
       "alias": "Alias",
+      "cancel": {
+        "desc": "Das sichern des Wiederherstellungsschlüssels ist enorm wichtig. Bitte exportieren oder drucken Sie Ihren Wiederherstellungssschlüssel und akzeptieren Sie den Dialog auf der linken Seite, um fortzufahren",
+        "title": "Wiederherstellungssschlüssel drucken"
+      },
       "copied": "Mnemonic wurde in die Zwischenablage kopiert.",
-      "created-at": "Erstellt am:",
-      "description": "Ihr Konto ist durch Ihr Passwort und Ihren Wiederherstellungsschlüssel geschützt.\n\nSie benötigen Ihren Wiederherstellungsschlüssel, um sich von neuen Geräten aus anzumelden. Bitte beachten Sie: Der Wiederherstellungsschlüssel wird nicht in Ihren Profilinformationen gespeichert und kann nicht zurückgesetzt werden. Bei Verlust verlieren Sie den Zugriff auf Ihre Geschäftspartner, Kontakte und Profilinformationen.",
+      "created-at": "Erstellt am",
+      "description": "Um sich im evan.network anzumelden sind der Wiederherstellungsschlüssel sowie das zuvor selbst gewählte Passwort notwendig.\n\nDer hier angezeigte Wiederherstellungsschlüssel in Form von 12 Wörtern muss sicher gespeichert werden, damit Sie jederzeit Zugriff auf Ihre Digitalen Zwillinge und Ihren Account haben und diese verwalten können.",
       "download": "Download als Textdatei",
-      "go-secure": "Account schützen",
+      "evan-id": "evan.network ID",
+      "go-secure": "Schließen",
       "notification": "Drucken Sie Ihren Wiederherstellungsschlüssel",
       "print": "Drucken",
-      "print-or-store": "Drucken Sie Ihren Wiederherstellungsschlüssel aus und speichern Sie ihn offline an einem sicheren Ort.",
+      "print-or-store": "Drucken Sie Ihren Wiederherstellungsschlüssel aus und speichern Sie ihn offline an einem sicheren Ort! Nach dem Schließen des Fensters wird der Wiederherstellungsschlüssel nicht mehr angezeigt.",
       "recovery-key": "Wiederherstellungssschlüssel",
       "title": "Drucken Sie Ihren Wiederherstellungsschlüssel",
-      "understood": "Ich habe meinen Wiederherstellungsschlüssel gesichert und verstehe das Risiko, ihn zu verlieren."
+      "understood": "Ich habe verstanden"
     },
     "need-an-account": "Noch kein Account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Account erstellen</a>",
     "no": "Nein",
@@ -100,12 +105,12 @@
         "readWrite": "individuelle Schreib- und Leserechte"
       }
     },
-    "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
+    "please-login": "Bitte entsperren Sie Ihre Identität, um fortzufahren.",
     "profile": {
       "account-name": "Account Name",
       "no-alias": "Kein Alias",
       "types": {
-        "choose": "Profiltyp spezifieren",
+        "choose": "Identitätstyp spezifieren",
         "company": "Unternehmen",
         "company-desc": "Verwalten Sie Unternehmensinformationen (Handelsregisternummer, Firmensitz, ...) und lassen Sie Ihr Unternehmen notariell auf dem evan.network bestätigen.",
         "device": "Gerät",
@@ -118,7 +123,7 @@
       }
     },
     "profile-picture": {
-      "upload": "Laden Sie hier ihr Profilbild hoch",
+      "upload": "Laden Sie hier ihr Bild hoch",
       "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
       "use-picture": "Fertig"
     },
@@ -139,7 +144,7 @@
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"
     },
-    "view-profile": "Profil anzeigen",
+    "view-profile": "Identität anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
     "write": "schreiben",
     "yes": "Ja"
