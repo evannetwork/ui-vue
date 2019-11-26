@@ -20,20 +20,25 @@
 <template>
   <div class="form-group"
     :class="{ 'inline': !stacked, }"
-    :style="{
-      'min-width': size === 12 ? '100%' : `${ 100 * (size / 12) }%`,
-    }">
+    :style="{ 'width': size === 12 ? '100%' : `${ 100 * (size / 12) }%`, }">
     <label class="col-form-label"
       :for="id"
       v-if="label">
       {{ label }}
+      <small class="text-muted" v-if="!isRequired()">
+        ({{ '_evan.optional' | translate }})
+      </small>
     </label>
-    <div class="input-wrapper">
+    <div class="input-wrapper"
+      :style="{ 'min-width': label ? '300px' : '0px' }">
       <slot></slot>
       <div class="invalid-feedback" v-if="error">
         {{ error | translate }}
       </div>
     </div>
+    <small class="form-text text-muted" v-if="hint">
+      {{ hint | translate }}
+    </small>
   </div>
 </template>
 

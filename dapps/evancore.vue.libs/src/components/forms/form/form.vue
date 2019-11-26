@@ -31,7 +31,7 @@
         {{ title }}
       </h5>
       <evan-button
-        v-if="!editMode"
+        v-if="shareable && !editMode"
         type="secondary"
         size="sm"
         @click="share()"
@@ -39,15 +39,20 @@
         {{ '_evan.share' | translate }}
       </evan-button>
     </div>
-    <div class="px-0 pt-4" :class="{ 'container': stacked }">
+    <div class="px-0"
+      :class="{
+        'container': stacked,
+        'pt-4': !onlyForm,
+      }">
       <form class="d-flex flex-wrap flex-row justify-content-between" @submit="save">
         <slot v-bind:setEditMode="setEditMode"></slot>
         <slot name="form" v-if="form">
           <template v-for="(controlName) in form.controls">
             <slot :name="`form-control-${ controlName }`">
               <component
-                :disabled="isLoading"
+                :disabled="!editable || isLoading"
                 :error="(onlyForm || editMode && !onlyForm) ? getTranslation(form[controlName], 'error') : false"
+                :hint="getTranslation(form[controlName], 'hint')"
                 :is="getControlComponentName(form[controlName])"
                 :label="getTranslation(form[controlName], 'label')"
                 :placeholder="getTranslation(form[controlName], 'placeholder')"
@@ -55,6 +60,7 @@
                 v-model="form[controlName].value"
                 v-bind="form[controlName].uiSpecs && form[controlName].uiSpecs.attr ? form[controlName].uiSpecs.attr : { }"
                 @blur="form[controlName].setDirty()"
+                @input="form[controlName].uiSpecs && form[controlName].uiSpecs.input ? form[controlName].uiSpecs.input($event) : null"
               />
             </slot>
           </template>

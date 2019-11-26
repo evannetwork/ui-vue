@@ -6,7 +6,7 @@
       "explorer": "Explorer",
       "favorites": "DApps",
       "help": "Hilfe",
-      "profile": "Profil",
+      "profile": "Identität",
       "synchronization": "Synchronisation",
       "verifications": "Verifikations-Center"
     },
@@ -15,6 +15,7 @@
       "copy": "Kopieren",
       "open-in-explorer": "Im Explorer anzeigen"
     },
+    "alias": "Alias",
     "browser-not-supported": {
       "desc": "Bitte gehen Sie sicher, dass Sie einen der folgenden Browsern verwenden:<ul><li>Chrome</li><li>Edge</li><li>Firefox (kein privater Modus!)</li><li>Opera</li><li>Safari</li></ul>",
       "title": "Ihr Browser wird nicht unterstützt"
@@ -33,6 +34,7 @@
         "stopping": "Gestoppt {title} ({percentage}%)"
       },
       "empty-queue": "Alles ist synchronisiert...",
+      "from": "von",
       "instance-accept": {
         "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
         "ok": "fortfahren",
@@ -40,12 +42,12 @@
       },
       "instance-delete": {
         "desc": "Wollen Sie diesen Eintrag unwiderruflich löschen?",
-        "ok": "löschen",
+        "ok": "Löschen",
         "title": "Eintrag löschen"
       },
       "my-contacts": "Meine Kontakte",
       "my-mailbox": "Meine Nachrichten",
-      "my-profile": "Mein Profil",
+      "my-profile": "Meine Identität",
       "new-mails": "Sie haben {newMailCount} neue Nachrichten",
       "queue": "Daten-Synchronisation",
       "queue-continue": "fortfahren",
@@ -63,37 +65,65 @@
       }
     },
     "invalid-password": "Das eingegebene Passwort ist ungültig.",
-    "login": "Profil entsperren",
+    "log-in": "Einloggen",
+    "login": "Identität entsperren",
     "logout": "Ausloggen",
     "logout-desc": "Wollen Sie sich wirklich abmelden?",
+    "mnemonic-export": {
+      "account-id": "Account-ID",
+      "alias": "Alias",
+      "cancel": {
+        "desc": "Das sichern des Wiederherstellungsschlüssels ist enorm wichtig. Bitte exportieren oder drucken Sie Ihren Wiederherstellungssschlüssel und akzeptieren Sie den Dialog auf der linken Seite, um fortzufahren",
+        "title": "Wiederherstellungssschlüssel drucken"
+      },
+      "copied": "Mnemonic wurde in die Zwischenablage kopiert.",
+      "created-at": "Erstellt am",
+      "description": "Um sich im evan.network anzumelden sind der Wiederherstellungsschlüssel sowie das zuvor selbst gewählte Passwort notwendig.\n\nDer hier angezeigte Wiederherstellungsschlüssel in Form von 12 Wörtern muss sicher gespeichert werden, damit Sie jederzeit Zugriff auf Ihre Digitalen Zwillinge und Ihren Account haben und diese verwalten können.",
+      "download": "Download als Textdatei",
+      "evan-id": "evan.network ID",
+      "go-secure": "Schließen",
+      "notification": "Drucken Sie Ihren Wiederherstellungsschlüssel",
+      "print": "Drucken",
+      "print-or-store": "Drucken Sie Ihren Wiederherstellungsschlüssel aus und speichern Sie ihn offline an einem sicheren Ort! Nach dem Schließen des Fensters wird der Wiederherstellungsschlüssel nicht mehr angezeigt.",
+      "recovery-key": "Wiederherstellungssschlüssel",
+      "title": "Drucken Sie Ihren Wiederherstellungsschlüssel",
+      "understood": "Ich habe verstanden"
+    },
+    "need-an-account": "Noch kein Account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Account erstellen</a>",
     "no": "Nein",
+    "not-your-account": "Nicht Ihr Account?",
+    "optional": "optional",
     "password": "Passwort",
-    "password-placeholder": "Passwort von der ursprünglichen Profilerstellung",
+    "password-placeholder": "Passwort",
     "permission": {
       "hint": "Alle Berechtigungen entziehen?",
       "type": {
         "fullAccess": "Vollzugriff",
         "fullRead": "komplette Leserechte",
-        "readWrite": "individuelle Schreib- und Leserechte",
+        "none": "keine Berechtigungen",
         "read": "individuelle Leserechte",
-        "none": "keine Berechtigungen"
+        "readWrite": "individuelle Schreib- und Leserechte"
       }
     },
-    "please-login": "Bitte entsperren Sie Ihr Profil, um fortzufahren.",
+    "please-login": "Bitte entsperren Sie Ihre Identität, um fortzufahren.",
     "profile": {
       "account-name": "Account Name",
+      "no-alias": "Kein Alias",
       "types": {
-        "choose": "Profiltyp spezifieren",
+        "choose": "Identitätstyp spezifieren",
         "company": "Unternehmen",
         "company-desc": "Verwalten Sie Unternehmensinformationen (Handelsregisternummer, Firmensitz, ...) und lassen Sie Ihr Unternehmen notariell auf dem evan.network bestätigen.",
         "device": "Gerät",
         "device-desc": "Speichern Sie Geräteninformationen und Verbindungseinstellungen.",
         "undefined": "User",
         "user": "User"
+      },
+      "wallet": {
+        "current-balance": "Kontostand"
       }
     },
     "profile-picture": {
-      "upload": "Laden Sie hier ihr Profilbild hoch",
+      "upload": "Laden Sie hier ihr Bild hoch",
       "upload-dnd": "Hier klicken oder eine Bilddatei hereinziehen.",
       "use-picture": "Fertig"
     },
@@ -101,21 +131,20 @@
     "save": "Speichern",
     "share": "Freigeben",
     "sharing": {
-      "update": "Freigaben aktualisieren",
-      "selectContact": "Kontakt für die Freigabe auswählen",
+      "add-contact": "Kontakt hinzufügen",
       "defineFor": "Setzen Sie die Zugriffsrechte für {contactName}.",
-      "permissionsTitle": "Zugriffsrechte",
       "description": "Um Ihre Daten mit anderen Kontakten zu teilen, wählen Sie die Optionen unten und klicken Sie auf “Freigaben aktualisieren”",
-      "noContacts": "Sie haben keine Kontakte in Ihrem Adressbuch, bitte fügen Sie zuerst einen Kontakt hinzu.",
-      "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden."
+      "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden.",
+      "permissionsTitle": "Zugriffsrechte",
+      "selectContact": "Kontakt für die Freigabe auswählen",
+      "update": "Freigaben aktualisieren"
     },
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {
       "desc": "Der dargestellte Bereich befindet sich momentan in der Entwicklung und wird bald verfügbar sein.",
       "title": "In Entwicklung"
     },
-    "use-password": "Entsperren",
-    "view-profile": "Profil anzeigen",
+    "view-profile": "Identität anzeigen",
     "welcome-to-evan": "Willkommen im evan.network",
     "write": "schreiben",
     "yes": "Ja"

@@ -17,27 +17,16 @@
   the following URL: https://evan.network/license/
 */
 
-.password-dialog {
-  max-width: 100%;
+// vue imports
+import Component, { mixins } from 'vue-class-component';
 
-  @media(min-width: 768px) {
-    min-width: 500px;
-  }
+import EvanControlComponent from '../control/control';
 
-  @media(max-width: 767px) {
-    width: 90%;
-  }
-}
-
-.not-your-account {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-input#password, input#alias {
-  height: 40px;
-}
-
-.form-container {
-  width: 400px;
-}
+/**
+ * Base component for textarea element.
+ *
+ * @class         FormControlTextareaComponent
+ * @selector      evan-form-control-textarea
+ */
+@Component({})
+export default class FormControlTextareaComponent extends mixins(EvanControlComponent) { }

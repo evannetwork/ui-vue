@@ -18,36 +18,20 @@
 */
 
 <template>
-  <div :style="`--evan-swipe-panel-size: ${ width }`">
-    <template v-if="isRendered">
-      <div class="evan-swipe-panel"
-        :class="{
-          'fixed': !mountId,
-          'show': isShown,
-          [`alignment-${alignment}`]: !mountId,
-        }"
-        :style="customStyle">
-        <evan-button
-          v-if="!hideCloseButton"
-          class="mb-3 btn-close"
-          :size="size" type="icon-secondary" 
-          @click="hide($event)"
-          icon="mdi mdi-close" 
-        />
-        <slot></slot>
-      </div>
-      <div v-if="showBackdrop" class="fullscreen"
-        @click="hide($event)">
-      </div>
-    </template>
-  </div>
+  <evan-form-control v-bind="$props">
+    <textarea class="form-control"
+      v-bind="$props"
+      :class="{ 'is-invalid' : error }"
+      :id="id"
+      :value="value"
+      @blur="$emit('blur')"
+      @focus="$parent.$emit('setFocus')"
+      @input="$emit('input', $event.target.value)"
+    />
+  </evan-form-control>
 </template>
 
 <script lang="ts">
-  import Component from './swipe-panel';
-  export default Component;
+  import Component from './textarea'
+  export default Component
 </script>
-
-<style lang="scss" scoped>
-  @import './swipe-panel.scss'
-</style>

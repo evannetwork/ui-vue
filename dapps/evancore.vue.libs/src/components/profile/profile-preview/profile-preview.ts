@@ -17,12 +17,12 @@
   the following URL: https://evan.network/license/
 */
 
-import { Dispatcher, cloneDeep, FileHandler, } from '@evan.network/ui';
+import { Dispatcher, cloneDeep, FileHandler, bccUtils, } from '@evan.network/ui';
 import * as bcc from '@evan.network/api-blockchain-core';
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import EvanComponent from '../../component';
+import EvanComponent from '../../../component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 interface UserInfoInterface {
@@ -58,6 +58,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
   @Prop() editable: string;
 
   /**
+   * Directly pass already loaded account details to the component
+   */
+  @Prop() accountDetails: any; // TODO: needs proper type/interface
+
+  /**
    * Show loading symbol
    */
   loading = true;
@@ -83,6 +88,11 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    */
   isEditMode = false;
 
+  /**
+   * Blockchain-core profile instance for the provided address
+   */
+  profile: bcc.Profile = null;
+
   @Watch('$attrs')
     onChildChanged(val: UserInfoInterface, oldVal: UserInfoInterface) {
       Object.assign(this.userInfo, this.$attrs, { pictureSrc: this.$attrs.src });
@@ -91,7 +101,23 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
    * Load user specific information
    */
   async created() {
-    await this.loadUserInfo();
+    const runtime = (<any>this).getRuntime();
+    this.profile = new bcc.Profile({
+      accountId: runtime.activeAccount,
+      profileOwner: this.address,
+      ...runtime,
+    });
+
+    // skip initial data loading if parent data was passed into the component
+    if (this.accountDetails) {
+      this.userInfo = this.accountDetails;
+      // transform to correct format
+      await this.fillEmptyProfileData();
+      // setup reset value for edit mode cancel
+      this.backupUserInfo();
+    } else {
+      await this.loadUserInfo();
+    }
 
     // watch for save updates
     this.listeners.push(Dispatcher.watch(($event: any) => {
@@ -99,51 +125,28 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
         this.loadUserInfo();
       }
     }, `profile.vue.${ this.domainName }`, 'updateProfileDispatcher'));
+
+    this.loading = false;
   }
 
   /**
    * Load the latest user information.
    */
   async loadUserInfo() {
-    const runtime = (<any>this).getRuntime();
     let accountDetails: any = { profileType: 'user' };
     try {
-      accountDetails = (await runtime.profile.getProfileProperty('accountDetails')) || accountDetails;
-
-      // for companies load directly the company name and disable edit mode
-      if (accountDetails.profileType === 'company') {
-        const registrationData = (await runtime.profile.getProfileProperty('registration'));
-        accountDetails.accountName = registrationData.company;
-      }
+      accountDetails = (await this.profile.getProfileProperty('accountDetails')) || accountDetails;
     } catch (ex) {
-      console.dir(ex);
+      this.profile.log(`Could not load profile data for ${ this.address }: ${ ex.message }`, 'error');
     }
+
     this.userInfo = accountDetails;
 
-    if (!this.userInfo.profileType) {
-      this.userInfo.profileType = 'user';
-    }
+    // ensure profile picture is set and transformed to ui file
+    await this.fillEmptyProfileData();
 
-    // use old alias logic
-    if (!this.userInfo.accountName) {
-      // load addressbook info
-      const addressBook = await runtime.profile.getAddressBook();
-      const contact = addressBook.profile[this.address];
-
-      this.userInfo.accountName = contact ? contact.alias : this.address;
-    }
-    // fill empty picture
-    if (!this.userInfo.picture) {
-      this.userInfo.picture = { files: [ ] };
-    }
-
-    // transform to correct format
-    this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
-      FileHandler.fileToContainerFile(file)
-    ));
-
-    // backup user info, so we can revert last changes
-    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
+    // setup reset value for edit mode cancel
+    this.backupUserInfo();
 
     this.$emit('update', this.userInfo);
     this.loading = false;
@@ -192,5 +195,35 @@ export default class ProfilePreviewComponent extends mixins(EvanComponent) {
     if (this.canEdit()) {
       this.isEditMode = true;
     }
+  }
+
+  /**
+   * Ensure picture is set on profile
+   */
+  async fillEmptyProfileData() {
+    if (!this.userInfo.profileType) {
+      this.userInfo.profileType = 'user';
+    }
+
+    // use old alias logic
+    this.userInfo.accountName = this.userInfo.accountName ||
+      await bccUtils.getUserAlias(this.profile, this.userInfo);
+
+    // fill empty picture
+    if (!this.userInfo.picture) {
+      this.userInfo.picture = { files: [ ] };
+    }
+
+    // transform to correct format
+    this.userInfo.picture.files = await Promise.all(this.userInfo.picture.files.map(async file =>
+      FileHandler.fileToContainerFile(file)
+    ));
+  }
+
+  /**
+   * Backups the current user info, so we can revert last changes.
+   */
+  backupUserInfo() {
+    this.originUserInfo = cloneDeep(bcc.lodash, this.userInfo);
   }
 }

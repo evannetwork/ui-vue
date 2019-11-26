@@ -53,6 +53,6 @@
 </template>
 
 <script lang="ts">
-  import Component from './nav-list.ts';
+  import Component from './nav-list';
   export default Component;
 </script>

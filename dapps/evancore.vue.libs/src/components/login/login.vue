@@ -18,56 +18,84 @@
 */
 
 <template>
-  <div class="bg-level-3 w-100 h-100 d-flex align-items-center flex-column">
-    <div class="mt-3 mb-3 text-center">
-      <br>
-      <h1 class="mt-4 font-weight-semibold">{{ '_evan.welcome-to-evan' | translate }}</h1>
-      <h3 class="mt-4 font-weight-semibold text-muted">{{ '_evan.please-login' | translate }}</h3>
-      <div class="bg-primary d-inline-block" style="width: 70px; height: 5px;"></div>
-      <br>
-    </div>
-    <div class="bg-level-1 mx-auto border password-dialog mt-3 mt-md-5">
-      <div class="d-flex p-2 align-items-center justify-content-between border-bottom">
-        <h4 class="m-0 ml-3">{{ '_evan.login' | translate }}</h4>
-        <evan-logout ref="evanLogout">
-          <template v-slot:button>
-            <button type="button" class="btn"
-              @click="$refs.evanLogout.logout()">
-              <i class="mdi mdi-logout"></i>
-            </button>
-          </template>
-        </evan-logout>
-      </div>
-      <form class="p-4" v-on:submit.prevent="login">
+  <div
+    class="bg-level-3 w-100 h-100 d-flex align-items-center justify-content-center flex-column"
+  >
+    <h4 class="text-center mt-4 mb-3 text-uppercase font-weight-bold">
+      {{ '_evan.log-in' | translate }}
+    </h4>
+    <div class="form-container">
+      <form class="p-4" @submit.prevent="login">
         <div class="form-group">
-          <label for="password">{{ '_evan.password' | translate }}</label>
-          <input class="form-control" type="password" required
-            id="password" ref="password"
-            :placeholder="'_evan.password-placeholder' | translate"
-            v-model="form.password.value"
-            v-bind:class="{ 'is-invalid' : form.password.dirty && !form.password.valid }">
-          <div class="invalid-feedback">
-            {{ '_evan.invalid-password' | translate }}
+          <template v-if="alias">
+            <div>            
+              <label for="alias">{{ '_evan.alias' | translate }}</label>
+              <input
+                class="form-control"
+                id="alias"
+                type="text"
+                :value="alias"
+                disabled
+              />
+            </div>
+          </template>
+
+          <div class="mt-3">
+            <label for="password">{{ '_evan.password' | translate }}</label>
+            <input
+              class="form-control"
+              type="password"
+              required
+              id="password"
+              ref="password"
+              :placeholder="'_evan.password-placeholder' | translate"
+              v-model="form.password.value"
+              v-bind:class="{
+                'is-invalid': form.password.dirty && !form.password.valid
+              }"
+            />
+            <div class="invalid-feedback">
+              {{ '_evan.invalid-password' | translate }}
+            </div>
           </div>
         </div>
 
-        <div class="text-center">
-          <button type="submit" class="btn btn-rounded btn-primary font-weight-normal"
-            :disabled="form.password.value.length < 8 || checkingPassword">
-            <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"
-              v-if="checkingPassword">
-            </span>
-            <span>{{ '_evan.use-password' | translate }}</span>
+        <div class="text-center mt-6">
+          <button
+            type="submit"
+            class="btn btn-block btn-primary"
+            :disabled="form.password.value.length < 8 || checkingPassword"
+          >
+            <span
+              class="spinner-border spinner-border-sm mr-3"
+              role="status"
+              aria-hidden="true"
+              v-if="checkingPassword"
+            ></span>
+            <span>{{ '_evan.log-in' | translate }}</span>
           </button>
         </div>
+        <div class="text-center mt-2">
+          <evan-logout ref="evanLogout">
+            <template v-slot:button>
+              <a class="not-your-account" @click="$refs.evanLogout.logout()">
+                {{ '_evan.not-your-account' | translate }}
+              </a>
+            </template>
+          </evan-logout>
+        </div>
+
+        <!-- <div class="text-center mt-3" v-if="showSignup">
+          <p v-html="$t('_evan.need-an-account')"></p>
+        </div>-->
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Component from './login.ts';
-  export default Component;
+  import Component from './login';
+export default Component;
 </script>
 
 <style lang="scss" scoped>

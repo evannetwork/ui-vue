@@ -21,14 +21,9 @@
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
 import VueRouter, { Route } from 'vue-router';
-import Vuex from 'vuex';
-import any from 'vuex-i18n';
-import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
-import EvanVueDispatcherHandler from './dispatcher';
 import { getDomainName } from './utils';
 
 /**
@@ -42,6 +37,8 @@ export default class EvanComponent extends Vue {
    * active dapp that was detected by the routing lib (getNextDApp)
    */
   dapp: any;
+
+  dispatcher;
 
   /**
    * Active dapp browser domain name
@@ -73,7 +70,7 @@ export default class EvanComponent extends Vue {
 
   /**
    * Custom navigation method for evan vue projects. Always navigates using window.location.hash to
-   * force hash chaning on nested DApps.
+   * force hash changing on nested DApps.
    *
    * @param      {string}  path      path that should be navigated to
    * @param      {string}  baseHash  navigation base hash (e.g. dashboard.vue.evan, default = this.dapp.baseHash)

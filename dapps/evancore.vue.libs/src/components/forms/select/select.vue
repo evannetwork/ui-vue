@@ -22,6 +22,7 @@
     <select class="form-control custom-select"
       :id="id"
       :value="value"
+      :disabled="disabled"
       @blur="$emit('blur')"
       @focus="$parent.$emit('setFocus')"
       @input="$emit('input', $event.target.value)"
