@@ -20,18 +20,26 @@
 @import '~@evan.network/ui/src/style/utils';
 $walletYellow: #fbe19e;
 
+.wallet-container {
+  position: relative;
+
+  width: 85.60mm;
+  height: 53.98mm;
+}
+
 .evan-wallet {
   position: relative;
 
   display: block;
+  overflow: hidden;
 
-  height: 200px;
+  width: 100%;
+  height: 100%;
   padding: 1.5em;
 
+  border-radius: 15px;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 15px;
-  overflow: hidden;
 
   &, * {
     text-decoration: none !important;
@@ -63,9 +71,10 @@ $walletYellow: #fbe19e;
     small:first-child {
       font-weight: bold;
 
+      display: block;
+
       margin: 0;
 
-      display: block;
       color: $walletYellow;
     }
 
@@ -77,8 +86,8 @@ $walletYellow: #fbe19e;
 
 .qr-code-open {
   position: absolute;
-  top: calc(50% - 16px);
-  right: 15%;
+  top: calc(50% - 18px);
+  right: 5%;
 
   display: flex;
   align-items: center;
@@ -97,7 +106,7 @@ $walletYellow: #fbe19e;
 }
 
 .qrcode-modal {
-   /deep/ .modal-header,  /deep/ .modal-footer {
+  /deep/ .modal-header, /deep/ .modal-footer {
     display: none !important;
   }
 
