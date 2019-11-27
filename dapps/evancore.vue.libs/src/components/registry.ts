@@ -37,6 +37,7 @@ import EvanComponent from '../component';
 import FormComponent from './forms/form/form.vue';
 import FormControlCheckboxComponent from './forms/checkbox/checkbox-control.vue';
 import FormControlComponent from './forms/control/control.vue';
+import FormControlCountriesComponent from './forms/countries/countries.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
@@ -81,6 +82,7 @@ export {
   FormComponent,
   FormControlCheckboxComponent,
   FormControlComponent,
+  FormControlCountriesComponent,
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
@@ -125,6 +127,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
   { name: 'evan-form-control-textarea', component: FormControlTextareaComponent },
+  { name: 'evan-form-control-countries', component: FormControlCountriesComponent },
   { name: 'evan-form-control-v-select', component: FormControlVSelectComponent },
   { name: 'evan-form-control', component: FormControlComponent },
   { name: 'evan-form', component: FormComponent },
