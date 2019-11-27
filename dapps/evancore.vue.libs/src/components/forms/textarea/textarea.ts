@@ -19,23 +19,14 @@
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 
 /**
- * Base component for input element.
+ * Base component for textarea element.
  *
- * @class         FormDataInput
- * @selector      evan-form-control-input
+ * @class         FormControlTextareaComponent
+ * @selector      evan-form-control-textarea
  */
 @Component({})
-export default class InputComponent extends mixins(EvanControlComponent) {
-  /**
-   * Input type attribute
-   */
-  @Prop({
-    default: 'text',
-  }) type: string;
-}
+export default class FormControlTextareaComponent extends mixins(EvanControlComponent) { }

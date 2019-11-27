@@ -32,6 +32,10 @@
 </template>
 
 <script lang="ts">
-  import FormDataInput from './input'
-  export default FormDataInput
+  import FormDataInput from './input';
+  export default FormDataInput;
 </script>
+
+<style lang="scss" scoped>
+  @import './input.scss';
+</style>

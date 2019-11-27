@@ -15,6 +15,7 @@
 */
 
 @import '~@evan.network/ui/src/style/utils';
+
 .pre-wrap {
   white-space: pre-wrap;
 }
@@ -153,8 +154,12 @@
     size: A4 portrait;
   }
 
-  .no-print {
-    display: none;
+  .evan.theme-evan {
+    .no-print {
+      &, * {
+        display: none !important;
+      }
+    }
   }
 
   .evan.theme-evan .col-md-6 {
@@ -185,24 +190,25 @@
       text-align: justify;
       text-align-last: left;
     }
-    .mnemonics {
-      font-size: 16pt;
-      line-height: 21pt;
 
-      .col-lg-4 {
-        float: left;
+    .mnemonic-box {
+      margin-top: 2em;
 
-        width: 33%;
-        max-width: 33%;
+      & > .row {
+        padding: 0 !important;
       }
 
-      .word {
-        border: none;
-        border-bottom: 2px solid #cccccc;
-        border-radius: 0;
+      .mnemonics {
+        font-size: cssVar('font-size');
+        font-weight: 400;
 
-        & span.order {
-          color: #cccccc;
+        margin-top: 2em;
+
+        .col-lg-4 {
+          float: left;
+
+          width: 33%;
+          max-width: 33%;
         }
       }
     }
@@ -227,5 +233,14 @@
     button, button.btn, .evan.theme-evan .btn {
       display: none;
     }
+  }
+}
+
+/deep/ .understood-modal {
+  &, .modal {
+    z-index: 1060;
+  }
+  .modal-backdrop {
+    z-index: 1055;
   }
 }

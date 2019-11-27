@@ -8,10 +8,21 @@
   - add `evan-wallet` component
   - added `evan-qr-code` component
   - add `mail` toast message
+  - add hint to `evan-control`
+  - add `evan-form-control-textarea`
+  - add `mnemonic-export` component ui after onboarding
+  - add `closeAction` parameter to `evan-modal`
 
 ### Fixes
+- `evancore.vue.libs` (v1.9.0)
+  - fix `evan-control` without label width
+  - fix `evan-dapp-loader` loading symbol is removed
+  - disable number input select option
+  - fix `profile-preview` for foreign profiles
 
 ### Deprecations
+- `evancore.vue.libs` (v1.9.0)
+  - remove company name from registration entry
 
 
 ## Version 1.8.0

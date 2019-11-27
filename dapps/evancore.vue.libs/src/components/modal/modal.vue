@@ -22,7 +22,7 @@
     <template v-if="isRendered">
       <div class="modal fade" tabindex="-1"
         :class="{ 'show': isShown }"
-        @click="!disableBackdrop && hide();">
+        @click="!disableBackdrop && (closeAction ? closeAction() : hide())">
         <div
           class="modal-dialog"
           role="document"
@@ -34,7 +34,7 @@
             <template v-if="!customModal">
               <div :class="{ 'modal-header d-flex align-items-center': modalClasses.indexOf('modal-header') !== -1 }">
                 <slot name="header"></slot>
-                <evan-button type="icon" @click="hide()">
+                <evan-button type="icon" @click="closeAction ? closeAction() : hide()">
                   <i class="mdi mdi-close"></i>
                 </evan-button>
               </div>
@@ -45,7 +45,7 @@
                 <evan-button type="secondary"
                   id="modal-cancel"
                   v-if="!hideFooterButton"
-                  @click="hide();">
+                  @click="closeAction ? closeAction() : hide()">
                   {{ '_evan.cancel' | translate }}
                 </evan-button>
                 <slot name="footer"></slot>
