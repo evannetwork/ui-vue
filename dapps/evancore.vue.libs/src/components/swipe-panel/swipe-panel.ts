@@ -64,6 +64,11 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: null }) mountId: string;
 
   /**
+   * Show fixed title in the Swipe Panel
+   */
+  @Prop() title: string;
+
+  /**
    * Animation stuff
    */
   isShown = false;
