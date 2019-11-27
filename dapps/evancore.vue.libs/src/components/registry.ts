@@ -34,6 +34,7 @@ import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapp
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanCheckboxComponent from './forms/checkbox/checkbox.vue';
 import EvanComponent from '../component';
+import FailedComponent from './failed/failed.vue';
 import FormComponent from './forms/form/form.vue';
 import FormControlCheckboxComponent from './forms/checkbox/checkbox-control.vue';
 import FormControlComponent from './forms/control/control.vue';
@@ -78,6 +79,7 @@ export {
   DropdownComponent,
   EvanCheckboxComponent,
   EvanComponent,
+  FailedComponent,
   FormComponent,
   FormControlCheckboxComponent,
   FormControlComponent,
@@ -119,6 +121,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dropdown', component: DropdownComponent },
+  { name: 'evan-failed', component: FailedComponent },
   { name: 'evan-file-input', component: FormControlFilesComponent },
   { name: 'evan-form-control-checkbox', component: FormControlCheckboxComponent },
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
