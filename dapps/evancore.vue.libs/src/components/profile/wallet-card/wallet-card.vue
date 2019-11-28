@@ -62,10 +62,10 @@
 </template>
 
 <script lang="ts">
-  import Component from './wallet';
+  import Component from './wallet-card';
   export default Component;
 </script>
 
 <style lang="scss" scoped>
-  @import "./wallet.scss";
+  @import "./wallet-card.scss";
 </style>

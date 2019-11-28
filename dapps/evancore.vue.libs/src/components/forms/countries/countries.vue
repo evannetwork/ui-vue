@@ -18,30 +18,17 @@
 */
 
 <template>
-  <evan-form-control v-bind="$props">
-    <select
-      class="form-control custom-select"
-      :id="id"
-      :value="value"
-      :disabled="disabled"
-      :required="required"
-      @blur="$emit('blur')"
-      @focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event.target.value)"
-      @change="$emit('change', $event)"
-      v-bind="$attrs"
-    >
-      <option v-if="placeholder" value="" selected disabled hidden>{{ placeholder }}</option>
-      <option
-        v-for="option in options"
-        :value="option.value || option"
-        :key="option.value || option"
-      >{{ (option.label || option) | translate }}</option>
-    </select>
-  </evan-form-control>
+  <component
+    :options="countries"
+    :is="loading ? 'evan-loading': 'evan-form-control-v-select'"
+    v-bind="Object.assign({ }, $attr, $props)"
+    @input="$emit('input', $event)"
+    @blur="$emit('blur')"
+    @setFocus="$parent.$emit('setFocus')"
+  />
 </template>
 
 <script lang="ts">
-import FormDataSelect from './select';
-export default FormDataSelect;
+import Component from './countries';
+export default Component;
 </script>

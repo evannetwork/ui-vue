@@ -12,6 +12,7 @@
   - add `evan-form-control-textarea`
   - add `mnemonic-export` component ui after onboarding
   - add `closeAction` parameter to `evan-modal`
+  - add `evan-form-control-countries` component as predefined `v-select` component
 
 ### Fixes
 - `evancore.vue.libs` (v1.9.0)

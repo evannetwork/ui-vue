@@ -17,31 +17,17 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <evan-form-control v-bind="$props">
-    <select
-      class="form-control custom-select"
-      :id="id"
-      :value="value"
-      :disabled="disabled"
-      :required="required"
-      @blur="$emit('blur')"
-      @focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event.target.value)"
-      @change="$emit('change', $event)"
-      v-bind="$attrs"
-    >
-      <option v-if="placeholder" value="" selected disabled hidden>{{ placeholder }}</option>
-      <option
-        v-for="option in options"
-        :value="option.value || option"
-        :key="option.value || option"
-      >{{ (option.label || option) | translate }}</option>
-    </select>
-  </evan-form-control>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
+import EvanComponent from '../../component';
+import Vue from 'vue';
+import { Prop } from 'vue-property-decorator';
 
-<script lang="ts">
-import FormDataSelect from './select';
-export default FormDataSelect;
-</script>
+/**
+ * Shows a animated "cross" icon.
+ *
+ * @class         FailedComponent
+ * @selector      evan-failed
+ */
+@Component({ })
+export default class FailedComponent extends mixins(EvanComponent) { }

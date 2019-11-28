@@ -34,9 +34,11 @@ import DAppWrapperSidebarLevel2Component from './dapp-wrapper-level-2/dapp-wrapp
 import DropdownComponent from './dropdown/dropdown.vue';
 import EvanCheckboxComponent from './forms/checkbox/checkbox.vue';
 import EvanComponent from '../component';
+import FailedComponent from './failed/failed.vue';
 import FormComponent from './forms/form/form.vue';
 import FormControlCheckboxComponent from './forms/checkbox/checkbox-control.vue';
 import FormControlComponent from './forms/control/control.vue';
+import FormControlCountriesComponent from './forms/countries/countries.vue';
 import FormControlFilesComponent from './forms/files/files.vue';
 import FormControlInputComponent from './forms/input/input.vue';
 import FormControlSelectComponent from './forms/select/select.vue';
@@ -61,7 +63,7 @@ import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
 import vSelect from 'vue-select';
-import WalletComponent from './profile/wallet/wallet.vue';
+import WalletCardComponent from './profile/wallet-card/wallet-card.vue';
 
 // export them all, so other applications can access them
 export {
@@ -78,9 +80,11 @@ export {
   DropdownComponent,
   EvanCheckboxComponent,
   EvanComponent,
+  FailedComponent,
   FormComponent,
   FormControlCheckboxComponent,
   FormControlComponent,
+  FormControlCountriesComponent,
   FormControlFilesComponent,
   FormControlInputComponent,
   FormControlSelectComponent,
@@ -103,7 +107,7 @@ export {
   SwipePanelComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
-  WalletComponent,
+  WalletCardComponent,
 };
 
 // map them to element names, so they can be used within templates
@@ -119,12 +123,14 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-dapp-wrapper-level-2', component: DAppWrapperSidebarLevel2Component },
   { name: 'evan-dapp-wrapper', component: DAppWrapperComponent },
   { name: 'evan-dropdown', component: DropdownComponent },
+  { name: 'evan-failed', component: FailedComponent },
   { name: 'evan-file-input', component: FormControlFilesComponent },
   { name: 'evan-form-control-checkbox', component: FormControlCheckboxComponent },
   { name: 'evan-form-control-files', component: FormControlFilesComponent },
   { name: 'evan-form-control-input', component: FormControlInputComponent },
   { name: 'evan-form-control-select', component: FormControlSelectComponent },
   { name: 'evan-form-control-textarea', component: FormControlTextareaComponent },
+  { name: 'evan-form-control-countries', component: FormControlCountriesComponent },
   { name: 'evan-form-control-v-select', component: FormControlVSelectComponent },
   { name: 'evan-form-control', component: FormControlComponent },
   { name: 'evan-form', component: FormComponent },
@@ -148,7 +154,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
   { name: 'evan-v-select', component: vSelect },
-  { name: 'evan-wallet', component: WalletComponent },
+  { name: 'evan-wallet-card', component: WalletCardComponent },
 ];
 
 export default componentRegistration;

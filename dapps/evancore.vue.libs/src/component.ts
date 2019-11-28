@@ -68,6 +68,10 @@ export default class EvanComponent extends Vue {
     this.testMode = window.localStorage['evan-test-mode'] === 'true';
   }
 
+  created() {
+    this.$emit('init', this);
+  }
+
   /**
    * Custom navigation method for evan vue projects. Always navigates using window.location.hash to
    * force hash changing on nested DApps.

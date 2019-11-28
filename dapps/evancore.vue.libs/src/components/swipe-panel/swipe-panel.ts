@@ -18,14 +18,11 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 /**
  * Bootstrap dropdown menu wrapper in evan.network style.
@@ -39,7 +36,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Passes the current open state into the side panel, so it will be openable / closable with one
    * param.
    */
-  @Prop({ }) isOpen: string;
+  @Prop() isOpen: string;
 
   /**
    * Where should the popup should been attached? (left / right)
@@ -65,6 +62,11 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Should the sidebar be fixed, or mounted as child of #mountId in in DOM flow?
    */
   @Prop({ default: null }) mountId: string;
+
+  /**
+   * Show fixed title in the Swipe Panel
+   */
+  @Prop() title: string;
 
   /**
    * Animation stuff

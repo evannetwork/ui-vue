@@ -17,16 +17,20 @@
   the following URL: https://evan.network/license/
 */
 
+import * as dappBrowser from '@evan.network/ui-dapp-browser';
+
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 
-interface Option {
+interface OptionInterface {
   label: string;
   value: any;
 }
+
+let countries;
 
 /**
  * Wrapper component for button elements.
@@ -35,17 +39,41 @@ interface Option {
  * @selector      evan-form-control-select
  */
 @Component({})
-export default class SelectComponent extends mixins(EvanControlComponent) {
+export default class CountriesComponent extends mixins(EvanControlComponent) {
   /**
-   * The selectable options. Can be an array of label-value pairs or an array of strings.
+   * Show loading until the countries were fetched.
    */
-  @Prop({
-    type: Object
-  }) options: Option[] | string[];
+  loading = true;
 
-  @Prop({
-    required: false
-  }) placeholder: string;
+  /**
+   * Countries that are selectable by the v-select
+   */
+  countries: Array<OptionInterface> = null;
 
-  @Prop() required: boolean;
+  /**
+   * Load countries, sort and translate them.
+   */
+  async created() {
+    // ensure loaded countries
+    if (!countries) {
+      const countriesDApp = await dappBrowser.System
+        .import(`countries.libs.${ dappBrowser.getDomainName() }!dapp-content`);
+
+      // ensure translations
+      Object.keys(countriesDApp.translations).forEach(lang =>
+        this.$i18n.add(lang, countriesDApp.translations[lang])
+      );
+      // set available countries
+      countries = countriesDApp.countries;
+    }
+
+    // sort and translate countries
+    this.countries = countries
+      .map(isoCode => {
+        return { value: isoCode, label: (this as any).$t(`_countries.${isoCode}`), };
+      })
+      .sort((a, b) => (a.label > b.label ? 1 : (b.label > a.label ? -1 : 0)));
+
+    this.loading = false;
+  }
 }
