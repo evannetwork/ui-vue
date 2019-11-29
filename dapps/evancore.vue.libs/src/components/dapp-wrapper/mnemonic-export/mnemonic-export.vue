@@ -69,34 +69,38 @@
             <!--rigth box containing mnemonic -->
             <div class="col-md-6 mnemonic-box">
               <div class="row mb-2 pl-5">
-                <div class="col-md-3">
-                  <span class="bold">{{ '_evan.mnemonic-export.account-id' | translate }}</span>
+                <div class="col-md-4">
+                  <span class="bold" style="white-space: nowrap;">
+                    {{ '_evan.mnemonic-export.account-id' | translate }}
+                  </span>
                 </div>
-                <div class="col-md-9 account-id">
+                <div class="col-md-8 account-id">
                   <span>{{ address }}</span>
                 </div>
               </div>
               <div class="row mb-2 pl-5">
-                <div class="col-md-3">
-                  <span class="bold">{{ '_evan.mnemonic-export.evan-id' | translate }}</span>
+                <div class="col-md-4">
+                  <span class="bold" style="white-space: nowrap;">
+                    {{ '_evan.mnemonic-export.evan-id' | translate }}
+                  </span>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8 account-id">
                   <span>{{ identityAddress }}</span>
                 </div>
               </div>
               <div class="row mb-2 pl-5">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <span class="bold">{{ '_evan.mnemonic-export.alias' | translate }}</span>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                   <span>{{ alias }}</span>
                 </div>
               </div>
               <div class="print-only row mb-2 pl-5">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <span class="bold">{{ '_evan.mnemonic-export.created-at' | translate }}</span>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                   <span>{{ now | moment('LLL') }}</span>
                 </div>
               </div>
