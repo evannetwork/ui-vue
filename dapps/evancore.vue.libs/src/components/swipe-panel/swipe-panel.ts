@@ -168,6 +168,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       document.getElementById(mountId).appendChild(this.$el);
       this.isRendered = true;
       this.isShown = true;
+      this.$emit('show');
     } else {
       // move the element to it's original position
       if (this.originParentElement !== this.$el.parentElement) {
@@ -179,6 +180,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       } else {
         this.isRendered = false;
         this.isShown = false;
+        this.$emit('hide');
       }
     }
   }
