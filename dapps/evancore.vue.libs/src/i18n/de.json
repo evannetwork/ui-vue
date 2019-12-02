@@ -131,13 +131,13 @@
     "save": "Speichern",
     "share": "Freigeben",
     "sharing": {
-      "add-contact": "Kontakt hinzufügen",
+      "add-contact": "Zur Kontaktübersicht",
       "defineFor": "Setzen Sie die Zugriffsrechte für {contactName}.",
       "description": "Um Ihre Daten mit anderen Kontakten zu teilen, wählen Sie die Optionen unten und klicken Sie auf “Freigaben aktualisieren”",
       "noPermissions": "Keine Zugriffsrechte zum Bearbeiten vorhanden.",
       "permissionsTitle": "Zugriffsrechte",
       "selectContact": "Kontakt für die Freigabe auswählen",
-      "update": "Freigaben aktualisieren"
+      "update": "Daten freigeben"
     },
     "transaction_costs_hint": "Es entstehen Transaktionskosten.",
     "under-development": {

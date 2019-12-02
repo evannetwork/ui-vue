@@ -13,6 +13,7 @@
   - add `mnemonic-export` component ui after onboarding
   - add `closeAction` parameter to `evan-modal`
   - add `evan-form-control-countries` component as predefined `v-select` component
+  - make `evan-base-list` item `isSelectedCallback` and `itemClickedCallback` functions optional
 
 ### Fixes
 - `evancore.vue.libs` (v1.9.0)
