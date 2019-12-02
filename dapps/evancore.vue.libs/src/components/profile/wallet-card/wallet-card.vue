@@ -27,7 +27,11 @@
         }">
         <evan-loading v-if="loading"></evan-loading>
         <template v-else>
-          <h1 class="text-primary">{{ balance.amount }} EVE</h1>
+          <h1
+            class="text-primary"
+            id="evan-account-balance">
+            {{ balance.amount }} EVE
+          </h1>
           <small class="text-light font-weight-semibold">
             {{ '_evan.profile.wallet.current-balance' | translate }}
             {{ balance.timestamp | moment('LLL') }}
