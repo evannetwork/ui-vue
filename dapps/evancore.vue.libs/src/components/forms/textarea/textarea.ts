@@ -19,6 +19,7 @@
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
+import { Prop, } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 
@@ -29,4 +30,11 @@ import EvanControlComponent from '../control/control';
  * @selector      evan-form-control-textarea
  */
 @Component({})
-export default class FormControlTextareaComponent extends mixins(EvanControlComponent) { }
+export default class FormControlTextareaComponent extends mixins(EvanControlComponent) {
+  /**
+   * Input type attribute
+   */
+  @Prop({
+    default: 3,
+  }) rows: number;
+}
