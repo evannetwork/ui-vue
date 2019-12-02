@@ -58,7 +58,9 @@ export default class Button extends mixins(EvanComponent) {
   /**
    * Href property for link button
    */
-  @Prop() href: string;
+  @Prop({
+    default: null,
+  }) href: string;
 
   /**
    * Button Label.
