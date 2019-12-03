@@ -18,6 +18,8 @@
 */
 // import vue libs
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import vuexI18n from 'vuex-i18n';
 
 // import evan libs
 import * as dappBrowser from '@evan.network/ui-dapp-browser';

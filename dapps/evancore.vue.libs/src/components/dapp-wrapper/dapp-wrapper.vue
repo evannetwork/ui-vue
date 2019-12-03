@@ -48,7 +48,7 @@
         <div class="dapp-wrapper-sidebar" v-if="!onboarding && enableSidebar">
           <slot name="sidebar">
             <ul class="nav top-nav">
-              <li v-for="(route, index) in routes" v-bind:key="index">
+              <li v-for="(route, index) in routes">
                 <a
                   :id="`evan-dapp-${ (route.path || route.id).split('.')[0] }`"
                   :class="{ active: route.path && $route.path.startsWith(route.fullPath) }"
@@ -74,7 +74,6 @@
               </li>
               <li
                 v-for="(route, index) in bottomRoutes"
-                v-bind:key="index"
                 :style="{ order: (index + 1) * 10 }">
                 <a
                   :id="`evan-dapp-${ (route.path || route.id).split('.')[0] }`"
@@ -125,8 +124,8 @@
                   </span>
                   <div class="p-3"
                     v-for="(instance, index) in queueInstances"
-                    v-bind:key="index"
-                    :id="`evan-panel-queue-${ index }`">
+                    :id="`evan-panel-queue-${ index }`"
+                    @click="">
                     <template v-if="instance.dispatcher">
                       <div class="d-flex">
                         <strong class="d-flex align-items-center mb-2">
