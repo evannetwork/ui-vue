@@ -550,7 +550,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
         const previousRead = parseInt(window.localStorage['evan-mail-read-count'] || 0, 10);
         this.userInfo.newMailCount = this.userInfo.totalMails - previousRead;
 
-        if (previousRead < this.userInfo.totalMails) {
+        if (previousRead < this.userInfo.totalMails && !window.localStorage['evan-test-mode']) {
           // show a toast message for the last unread mails
           await Promise.all(this.userInfo.mails.slice(0, this.userInfo.newMailCount).map(async (mail) => {
             const fromProfile = new bcc.Profile({
