@@ -44,8 +44,8 @@
               <i class="mdi mdi-shield-alert-outline header-icon" />
               <img class="evan-logo print-only" :src="`${ $store.state.uiBaseUrl }/assets/evan-logo-dark-half.svg`">
               <h3 class="print-only mt-5">{{ '_evan.mnemonic-export.recovery-key' | translate }}</h3>
-              <p class="pre-wrap text-justify">{{ '_evan.mnemonic-export.description' | translate }}</p>
-              <p class="pre-wrap text-justify bold no-print">{{ '_evan.mnemonic-export.print-or-store' | translate }}</p>
+              <p class="hyphen-auto pre-wrap text-justify">{{ '_evan.mnemonic-export.description' | translate }}</p>
+              <p class="hyphen-auto pre-wrap text-justify bold no-print">{{ '_evan.mnemonic-export.print-or-store' | translate }}</p>
               <p
                 class="mt-5 d-flex no-print align-items-center justify-content-between"
                 style="min-height: 40px;">
