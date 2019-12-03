@@ -20,16 +20,11 @@
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-import any from 'vuex-i18n';
-import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
 import * as bcc from '@evan.network/api-blockchain-core';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { EvanQueue, Dispatcher, DispatcherInstance } from '@evan.network/ui';
-import { getDomainName } from './utils';
 
 /**
  * evan.network vue handler for dispatchers. Adds dispatcher status information to the vuex store.
