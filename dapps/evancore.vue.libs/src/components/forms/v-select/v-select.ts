@@ -19,8 +19,7 @@ the following URL: https://evan.network/license/
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 

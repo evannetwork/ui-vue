@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './contact-batch.ts';
+  import Component from './contact-batch';
   export default Component;
 </script>
 

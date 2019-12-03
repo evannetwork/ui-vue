@@ -18,12 +18,12 @@ the following URL: https://evan.network/license/
 */
 
 <template>
-  <ul class="evan-base-list">
-    <li v-for="(item, index) in data"
+  <ul class="evan-base-list" :class="{ 'is-selectable': !!itemClickedCallback }">
+    <li
+      :class="{ 'is-selected': !!isSelectedCallback && isSelectedCallback(item), }"
       :key="index"
-      :class="{'isSelected': isSelectedCallback(item)}"
-      @click="($event) => itemClickedCallback(item, $event)"
-    >
+      @click="($event) => itemClickedCallback && itemClickedCallback(item, $event)"
+      v-for="(item, index) in data">
       <slot name="item" :item="item"></slot>
     </li>
   </ul>

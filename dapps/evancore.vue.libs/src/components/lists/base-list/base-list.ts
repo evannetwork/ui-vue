@@ -36,16 +36,22 @@ class EvanBaseList extends mixins(EvanComponent) {
   * data for list rendering
   */
   @Prop({
-    type: Array,
     required: true,
+    type: Array,
   }) data: Array<any>;
 
+  /**
+   * Function to check, if a item is selected
+   */
   @Prop({
-    type: Function
+    type: Function,
   }) isSelectedCallback: Function;
 
+  /**
+   * Function to run, if a item is clicked.
+   */
   @Prop({
-    type: Function
+    type: Function,
   }) itemClickedCallback: Function;
 }
 

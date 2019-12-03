@@ -105,7 +105,13 @@ export default class DAppLoaderComponent extends mixins(EvanComponent) {
     // !IMPORTANT: clear the inner html before running getNextDApp
     //   => it will check for elements dapp names as id's, to check which dapp was already loaded
     //   => by forcing dapp loading under an other domain, will cause false domain loading
-    this.$el.innerHTML = '';
+    this.$el.innerHTML = `
+      <div class="evan-loading w-100 h-100 pt-5 pb-5 text-center">
+        <div class="spinner-border text-primary"></div>
+      </div>
+    `;
+    // save loading el, so it can be removed after the dapp was started
+    const loadingEl = this.$el.children[0];
 
     // get module id
     this.startedDApp = await getNextDApp();
@@ -116,5 +122,10 @@ export default class DAppLoaderComponent extends mixins(EvanComponent) {
 
     // startup the dapp
     await dappBrowser.dapp.startDApp(this.startedDApp.ens, containerEl);
+
+    // remove loading element
+    if (loadingEl.parentElement) {
+      loadingEl.parentElement.removeChild(loadingEl);
+    }
   }
 }

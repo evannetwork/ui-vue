@@ -20,20 +20,21 @@ the following URL: https://evan.network/license/
 <template>
   <evan-form-control v-bind="$props">
     <evan-v-select
+      :disabled="disabled"
       :id="id"
       :label="optionLabel"
       :reduce="reduce"
       :value="value"
+      @input="$emit('input', $event)"
       @search:blur="$emit('blur')"
       @search:focus="$parent.$emit('setFocus')"
-      @input="$emit('input', $event)"
       v-bind="$attrs"
     />
   </evan-form-control>
 </template>
 
 <style lang="scss">
-  @import './v-select.scss'
+  @import './v-select.scss';
 </style>
 
 <script lang="ts">

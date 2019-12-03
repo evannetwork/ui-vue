@@ -110,15 +110,16 @@ export default class LoginComponent extends mixins(EvanComponent) {
             this.form.password.value
           );
         }
-        dappBrowser.core.setCurrentProvider('internal');
 
-        window.location.hash = `/${this.$route.query.origin ||
-          `dashboard.vue.${getDomainName()}`}`;
+        if (this.dapp.baseHash.endsWith(`onboarding.vue.${ getDomainName() }`)) {
+          dappBrowser.core.setCurrentProvider('internal');
+          window.location.hash = `/${this.$route.query.origin ||
+            `dashboard.vue.${ getDomainName() }`}`;
+        }
       } else {
         // only enable button when password is invalid
         this.checkingPassword = false;
       }
-
       this.form.password.dirty = true;
     }
   }

@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-  import Component from './dropdown.ts';
+  import Component from './dropdown';
   export default Component;
 </script>
 

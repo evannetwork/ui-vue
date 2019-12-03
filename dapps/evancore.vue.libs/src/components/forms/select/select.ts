@@ -19,8 +19,7 @@
 
 // vue imports
 import Component, { mixins } from 'vue-class-component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 
@@ -43,4 +42,10 @@ export default class SelectComponent extends mixins(EvanControlComponent) {
   @Prop({
     type: Object
   }) options: Option[] | string[];
+
+  @Prop({
+    required: false
+  }) placeholder: string;
+
+  @Prop() required: boolean;
 }

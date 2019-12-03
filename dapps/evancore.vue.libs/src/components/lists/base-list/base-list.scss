@@ -20,25 +20,33 @@ the following URL: https://evan.network/license/
 @import '~@evan.network/ui/src/style/utils';
 
 .evan-base-list {
-  list-style-type: none;
   padding: 0;
 
+  list-style-type: none;
+
+  &.is-selectable {
+    li {
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid cssVar('gray-200');
+        background-color: cssVar('gray-100');
+      }
+    }
+  }
+
   li {
-    background-color: white;
-    border: 1px solid white;
     display: block;
+
     width: 100%;
     height: 64px;
     margin: 2px 0;
-    cursor: pointer;
 
-    &:hover {
-      background-color: cssVar('gray-100');
-      border: 1px solid cssVar('gray-200');
-    }
+    border: 1px solid cssVar('white');
+    background-color: cssVar('white');
 
     &.isSelected {
-      border: 1px solid cssVar('primary')
+      border: 1px solid cssVar('primary');
     }
   }
 }

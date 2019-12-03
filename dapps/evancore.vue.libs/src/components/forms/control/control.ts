@@ -35,9 +35,7 @@ export default class ControlComponent extends mixins(EvanComponent) {
   /**
    * The value for the input field.
    */
-  @Prop({
-    type: String
-  }) value: string;
+  @Prop() value: Array<any> | string;
 
   /**
    *  The label for the input field.
@@ -52,6 +50,13 @@ export default class ControlComponent extends mixins(EvanComponent) {
   @Prop({
     type: String
   }) placeholder: string;
+
+  /**
+   * Hint text that should be displayed after the control
+   */
+  @Prop({
+    type: String
+  }) hint: string;
 
   /**
    * The id for the input field.
@@ -86,4 +91,20 @@ export default class ControlComponent extends mixins(EvanComponent) {
   @Prop({
     default: 12,
   }) size: boolean;
+
+  /**
+   * Is the current field is required? If not, a optional hint will be displayed
+   */
+  @Prop() required: boolean|Function;
+
+  /**
+   * Determines if the current field is required. If not, show a optional hint.
+   */
+  isRequired() {
+    if (this.required && typeof this.required === 'function') {
+      return this.required();
+    } else {
+      return this.required;
+    }
+  }
 }

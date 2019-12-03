@@ -27,6 +27,7 @@
     ]"
     :disabled="disabled"
     :href="href"
+    :rel="href ? 'noopener noreferrer': ''"
     @click="$emit('click', $event)">
     <template v-if="!$slots.default">
       <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />

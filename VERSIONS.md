@@ -8,6 +8,34 @@
 ### Deprecations
 
 
+## Version 1.9.0
+### Features
+- `evancore.vue.libs` (v1.9.0)
+  - add required flag to `evan-control`
+  - add configurable `no-contacts` text to the `evan-permission-editor`
+  - add `evan-wallet` component
+  - added `evan-qr-code` component
+  - add `mail` toast message
+  - add hint to `evan-control`
+  - add `evan-form-control-textarea`
+  - add `mnemonic-export` component ui after onboarding
+  - add `closeAction` parameter to `evan-modal`
+  - add `evan-form-control-countries` component as predefined `v-select` component
+  - make `evan-base-list` item `isSelectedCallback` and `itemClickedCallback` functions optional
+
+### Fixes
+- `evancore.vue.libs` (v1.9.0)
+  - fix `evan-control` without label width
+  - add correct `evan-button` href handling
+  - fix `evan-dapp-loader` loading symbol is removed
+  - disable number input select option
+  - fix `profile-preview` for foreign profiles
+
+### Deprecations
+- `evancore.vue.libs` (v1.9.0)
+  - remove company name from registration entry
+
+
 ## Version 1.8.0
 ### Features
 - `evancore.vue.libs` (v1.8.0)

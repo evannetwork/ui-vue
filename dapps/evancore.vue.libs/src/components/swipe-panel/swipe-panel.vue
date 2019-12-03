@@ -27,7 +27,26 @@
           [`alignment-${alignment}`]: !mountId,
         }"
         :style="customStyle">
-        <slot></slot>
+        <header v-if="!hideCloseButton || !!title">
+          <h3 class="title">
+            {{title}}
+          </h3>
+          <evan-button
+            v-if="!hideCloseButton"
+            class="btn-close"
+            :size="size" type="icon-secondary" 
+            @click="hide($event)"
+            icon="mdi mdi-close" 
+          />
+        </header>
+        
+        <main>
+          <slot></slot>
+        </main>
+        
+        <footer>
+          <slot name="footer"></slot>
+        </footer>
       </div>
       <div v-if="showBackdrop" class="fullscreen"
         @click="hide($event)">

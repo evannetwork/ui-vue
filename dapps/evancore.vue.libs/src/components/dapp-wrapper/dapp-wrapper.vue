@@ -82,7 +82,7 @@
                   @click="routeActivated(route)">
                   <i class="position-relative" :class="route.icon">
                     <span class="notification-dot"
-                      v-if="route.path.startsWith('mailbox.vue') && userInfo.newMailCount !== 0">
+                      v-if="route.path.startsWith('mailbox.vue') && userInfo.newMailCount > 0">
                     </span>
                   </i>
                   <evan-tooltip :placement="'right'">
@@ -232,6 +232,8 @@
                 </template>
               </evan-modal>
               <slot name="content"></slot>
+              <!-- if the user gone through the sign-up, but never exported his mnemonic -->
+              <evan-mnemonic-export v-if="createRuntime && topLevel && isLoggedin"></evan-mnemonic-export>
             </div>
             <div v-if="topLevel" id="dapp-wrapper-sidebar-right" />
           </div>

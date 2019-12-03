@@ -32,14 +32,15 @@ module.exports = function(customExcludes) {
     '@evan.network/ui-vue-core': '@evan.network/ui-vue-core',
     'axios': 'axios',
     'moment': 'moment',
+    'qrcodejs': 'qrcodejs',
     'vue': 'vue',
     'vue-material': 'vue-material',
     'vue-recaptcha': 'vue-recaptcha',
     'vue-router': 'vue-router',
+    'vue-select': 'vue-select',
     'vue-toasted': 'vue-toasted',
     'vuex': 'vuex',
     'vuex-i18n': 'vuex-i18n',
-    'vue-select': 'vue-select',
     ...(customExcludes || { }) 
   };
 }

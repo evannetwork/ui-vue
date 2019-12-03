@@ -18,14 +18,11 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 // evan.network imports
 import EvanComponent from '../../component';
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
 
 /**
  * Bootstrap dropdown menu wrapper in evan.network style.
@@ -39,7 +36,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
    * Passes the current open state into the side panel, so it will be openable / closable with one
    * param.
    */
-  @Prop({ }) isOpen: string;
+  @Prop() isOpen: string;
 
   /**
    * Where should the popup should been attached? (left / right)
@@ -57,9 +54,19 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
   @Prop({ default: false }) showBackdrop: boolean;
 
   /**
+   * Should the close button be shown?
+   */
+  @Prop({ default: false }) hideCloseButton: boolean;
+
+  /**
    * Should the sidebar be fixed, or mounted as child of #mountId in in DOM flow?
    */
   @Prop({ default: null }) mountId: string;
+
+  /**
+   * Show fixed title in the Swipe Panel
+   */
+  @Prop() title: string;
 
   /**
    * Animation stuff
@@ -161,6 +168,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       document.getElementById(mountId).appendChild(this.$el);
       this.isRendered = true;
       this.isShown = true;
+      this.$emit('show');
     } else {
       // move the element to it's original position
       if (this.originParentElement !== this.$el.parentElement) {
@@ -172,6 +180,7 @@ export default class SidePanelComponent extends mixins(EvanComponent) {
       } else {
         this.isRendered = false;
         this.isShown = false;
+        this.$emit('hide');
       }
     }
   }

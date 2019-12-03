@@ -20,7 +20,7 @@
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop, } from 'vue-property-decorator';
 
 import EvanControlComponent from '../control/control';
 
@@ -31,4 +31,11 @@ import EvanControlComponent from '../control/control';
  * @selector      evan-form-control-input
  */
 @Component({})
-export default class InputComponent extends mixins(EvanControlComponent) { }
+export default class InputComponent extends mixins(EvanControlComponent) {
+  /**
+   * Input type attribute
+   */
+  @Prop({
+    default: 'text',
+  }) type: string;
+}

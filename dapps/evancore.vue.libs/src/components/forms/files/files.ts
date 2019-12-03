@@ -18,14 +18,11 @@
 */
 
 // vue imports
-import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 // evan.network imports
-import * as bcc from '@evan.network/api-blockchain-core';
-import * as dappBrowser from '@evan.network/ui-dapp-browser';
-import { FileHandler, } from '@evan.network/ui';
+import { FileHandler, UIContainerFile } from '@evan.network/ui';
 
 import ControlComponent from '../control/control';
 
@@ -80,6 +77,8 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
    */
   hovered = false;
 
+  value: UIContainerFile[];
+
   /**
    * Transform the input files to the correct format.
    */
@@ -100,7 +99,7 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
 
     // iterate through all files and check if they already exists, if not, add them
     await Promise.all(newFiles.map(async (newFile: File) => {
-      const isNew = this.value.filter((existing: File) =>
+      const isNew = this.value.filter((existing: UIContainerFile) =>
         existing.name === newFile.name &&
         existing.size === newFile.size
       ).length === 0;

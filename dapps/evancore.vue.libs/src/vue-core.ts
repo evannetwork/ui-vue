@@ -87,6 +87,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
         },
         swipePanel: ''
       },
+      isLoggedin: false,
       ...options.state,
     },
     mutations: {
@@ -97,6 +98,9 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
         // open the desired one
         state.uiState.swipePanel = state.uiState.swipePanel && state.uiState.swipePanel === type ?
           '' : type;
+      },
+      setLoginState(state, isLoggedin: boolean) {
+        state.isLoggedin = isLoggedin;
       }
     }
   });
@@ -126,7 +130,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
   // add vue toaster
   Vue.use(VueToasted, {
     duration: 3000,
-    position: 'bottom-right',
+    position: 'bottom-left',
   });
 
   const vue = new Vue({
@@ -227,6 +231,9 @@ export function registerEventHandlers(vueInstance: any) {
         vueInstance.$destroy();
         elementObserver.disconnect();
         setTimeout(() => window.removeEventListener('beforeunload', beforeUnload));
+
+        // recover toastet container element and move it to the next existing vue dapp container
+        document.querySelector('.evan-vue-dapp').appendChild(vueInstance.$toasted.container);
       }
     } while (parent && parent !== document.body);
   });
