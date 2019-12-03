@@ -29,6 +29,7 @@
       :closeAction="onModalClose"
       :hideFooterButton="true"
       :maxWidth="'1000px'"
+      :hideCloseButton="true"
       class="mnemonic-modal"
       disableBackdrop="true"
       ref="modal">
@@ -62,7 +63,7 @@
                   @click="goSecure"
                   icon="mdi mdi-account-key"
                   type="danger"
-                  v-if="understood"
+                  :disabled="!understood"
                 />
               </p>
             </div>
@@ -131,7 +132,7 @@
        <template v-slot:footer>
         <evan-button
           type="text"
-          @click="downloadMnemonics()">
+          @click="downloadMnemonics">
           {{ '_evan.mnemonic-export.download' | translate}}
         </evan-button>
         <evan-button
