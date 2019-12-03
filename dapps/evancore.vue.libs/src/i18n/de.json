@@ -87,7 +87,7 @@
       "print-or-store": "Drucken Sie Ihren Wiederherstellungsschlüssel aus und speichern Sie ihn offline an einem sicheren Ort! Nach dem Schließen des Fensters wird der Wiederherstellungsschlüssel nicht mehr angezeigt.",
       "recovery-key": "Wiederherstellungssschlüssel",
       "title": "Drucken Sie Ihren Wiederherstellungsschlüssel",
-      "understood": "Ich habe verstanden"
+      "understood": "Ich verstehe das Risiko"
     },
     "need-an-account": "Noch kein Account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Account erstellen</a>",
     "no": "Nein",

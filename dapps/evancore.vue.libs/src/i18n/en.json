@@ -87,7 +87,7 @@
       "print-or-store": "Print your recovery key and store it offline on a safe place! After you close the window, the recovery key no longer appears.",
       "recovery-key": "Recovery Key",
       "title": "Print your Recovery Key",
-      "understood": "I understood"
+      "understood": "I understand the risk"
     },
     "need-an-account": "Need an account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Sign Up</a>",
     "no": "No",
