@@ -18,7 +18,7 @@
 */
 
 // vue imports
-import Component, { mixins } from 'vue-class-component';
+import Component from 'vue-class-component';
 import Vue from 'vue';
 import VueRouter, { Route } from 'vue-router';
 
@@ -26,19 +26,28 @@ import VueRouter, { Route } from 'vue-router';
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { getDomainName } from './utils';
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    $i18n: any;
+    $router: VueRouter;
+    $route: Route;
+    $store: any;
+  }
+}
+
 /**
  * Evan.network component wrapper for easily accessing blockchain runtime data and active DApp information.
  *
  * @class      EvanComponent
  */
-@Component({ })
+@Component({})
 export default class EvanComponent extends Vue {
   /**
    * active dapp that was detected by the routing lib (getNextDApp)
    */
   dapp: any;
 
-  dispatcher;
+  dispatcher: any;
 
   /**
    * Active dapp browser domain name
@@ -49,8 +58,6 @@ export default class EvanComponent extends Vue {
    * Declare vue stuff
    */
   $i18n: any;
-  $router: VueRouter;
-  $route: Route;
   $store: any;
   $t: any;
 
@@ -80,7 +87,7 @@ export default class EvanComponent extends Vue {
    * @param      {string}  baseHash  navigation base hash (e.g. dashboard.vue.evan, default = this.dapp.baseHash)
    */
   evanNavigate(path: string, baseHash: string = this.activeDApp().baseHash) {
-    window.location.hash = `${ baseHash }/${ path }`;
+    window.location.hash = `${baseHash}/${path}`;
   }
 
   /**
