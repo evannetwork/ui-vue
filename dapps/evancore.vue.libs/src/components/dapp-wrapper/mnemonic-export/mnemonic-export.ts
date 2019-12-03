@@ -52,7 +52,7 @@ export default class MnemonicExport extends mixins(EvanComponent) {
     this.alias = window.localStorage.getItem('evan-alias');
     this.identityAddress = await runtime.verifications.getIdentityForAccount(this.address, true);
 
-    // Show directly the mnemonic export and do not allow closing.
+    // Show the mnemonic export directly and do not allow closing.
     this.mnemonic && this.$nextTick(() => this.showModal());
   }
 
