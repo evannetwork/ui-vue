@@ -315,7 +315,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     window.addEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
 
     // Set correct language on body (for correct auto hyphens)
-    document.body.setAttribute('lang', (<any>this).$i18n.locale());    
+    document.body.setAttribute('lang', (<any>this).$i18n.locale());
   }
 
 
