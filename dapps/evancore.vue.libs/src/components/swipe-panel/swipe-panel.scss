@@ -95,7 +95,7 @@
       color: cssVar('text-color');
     }
 
-    .btn-close {
+    /deep/ .btn-close {
       i {
         color: cssVar('text-color');
       }
