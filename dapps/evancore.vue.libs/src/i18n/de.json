@@ -73,7 +73,7 @@
       "account-id": "Account-ID",
       "alias": "Alias",
       "cancel": {
-        "desc": "Das Sichern des Wiederherstellungsschlüssels ist enorm wichtig. Bitte exportieren oder drucken Sie Ihren Wiederherstellungssschlüssel und akzeptieren Sie den Dialog auf der linken Seite, um fortzufahren",
+        "desc": "Das Sichern des Wiederherstellungsschlüssels ist enorm wichtig. Bitte exportieren oder drucken Sie Ihren Wiederherstellungssschlüssel und akzeptieren Sie den Dialog auf der linken Seite, um fortzufahren.",
         "title": "Wiederherstellungssschlüssel drucken"
       },
       "copied": "Mnemonic wurde in die Zwischenablage kopiert.",
