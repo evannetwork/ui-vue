@@ -51,6 +51,12 @@
         font-size: 1.2rem;
       }
     }
+
+    /deep/ .btn-close {
+      i {
+        color: cssVar('light');
+      }
+    }
   }
 
   main {
@@ -87,6 +93,12 @@
 
     &, h1, h2, h3, h4, h5, span, p, li, b, label, small {
       color: cssVar('text-color');
+    }
+
+    .btn-close {
+      i {
+        color: cssVar('text-color');
+      }
     }
   }
 
