@@ -60,7 +60,7 @@
       "empty": "Es wurden noch keine Dateien hochgeladen...",
       "remove-modal": {
         "action": "Löschen",
-        "desc": "Möchten Sie diese Datei wirklich löschen?",
+        "desc": "Möchten Sie diese Dateien wirklich löschen?",
         "title": "Dateien löschen"
       }
     },
