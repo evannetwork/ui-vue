@@ -313,6 +313,9 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     window.addEventListener('dapp-wrapper-sidebar-close', this.sideBarCloseWatcher);
     window.addEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
     window.addEventListener('dapp-wrapper-sidebar-2-disable', this.sidebar2DisableWatcher);
+
+    // Set correct language on body (for correct auto hyphens)
+    document.body.setAttribute('lang', (<any>this).$i18n.locale());
   }
 
 
