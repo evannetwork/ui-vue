@@ -136,6 +136,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   async created() {
+    this.runtime = (this as any).getRuntime();
     this.getPermissionsForContact();
   }
 
@@ -176,6 +177,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
     }
 
     this.isLoading = true;
+    this.setUserNameWithAddress();
     this.containersPermissions = null;
     this.containersPermissions = await this.loadPermissions(this.selectedContact)
       .catch((e: Error) => {
@@ -184,6 +186,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
       });
 
     this.initialPermissions = this.containersPermissions ? clone(this.containersPermissions) : this.initialPermissions;
+
     this.isLoading = false;
   }
 
@@ -227,10 +230,10 @@ class PermissionsEditor extends mixins(EvanComponent) {
     return null;
   }
 
-  async setUserNameWithAddress(accountId) {
+  async setUserNameWithAddress() {
     const profile = new bcc.Profile({
       accountId: this.runtime.activeAccount,
-      profileOwner: accountId,
+      profileOwner: this.selectedContact,
       ...this.runtime,
     } as any);
 
