@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "ant-design-vue": "^1.4.8",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.0.0",

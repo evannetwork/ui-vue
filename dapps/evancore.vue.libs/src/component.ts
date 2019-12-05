@@ -20,15 +20,11 @@
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
-import { Table } from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
 import VueRouter, { Route } from 'vue-router';
 
 // evan.network imports
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
 import { getDomainName } from './utils';
-
-Vue.use(Table);
 
 /**
  * Evan.network component wrapper for easily accessing blockchain runtime data and active DApp information.
