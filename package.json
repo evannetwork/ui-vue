@@ -3,6 +3,7 @@
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.0.0",
+    "bootstrap-vue": "^2.1.0",
     "cache-loader": "^4.1.0",
     "css-loader": "^1.0.0",
     "declaration-bundler-webpack-plugin": "^1.0.3",
