@@ -4,6 +4,8 @@
 ### Features
 
 ### Fixes
+- `evancore.vue.libs` (v1.9.1)
+  - fix unchecking all read properties are not unchecking all readWrite fields in `evan-permission-editor`
 
 ### Deprecations
 

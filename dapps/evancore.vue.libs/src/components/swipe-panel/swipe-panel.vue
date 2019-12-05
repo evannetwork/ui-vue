@@ -28,15 +28,18 @@
         }"
         :style="customStyle">
         <header v-if="!hideCloseButton || !!title">
-          <h3 class="title">
-            {{title}}
-          </h3>
+          <slot name="header">
+            <h3 class="title">
+              {{ title }}
+            </h3>
+          </slot>
+          <span class="mx-auto" />
           <evan-button
-            v-if="!hideCloseButton"
-            class="btn-close"
-            :size="size" type="icon-secondary" 
             @click="hide($event)"
-            icon="mdi mdi-close" 
+            class="btn-close"
+            icon="mdi mdi-close"
+            type="icon-secondary"
+            v-if="!hideCloseButton"
           />
         </header>
         

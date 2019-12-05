@@ -100,7 +100,9 @@ class Permissions extends mixins(EvanComponent) {
     this.sortFilter.forEach( property =>  {
       this.permissions[property][mode] = flag;
 
-      if (mode === 'readWrite' && flag) {
+      if (mode === 'read' && !flag) {
+        this.permissions[property].readWrite = flag;
+      } else if (mode === 'readWrite' && flag) {
         this.permissions[property].read = flag;
       }
     });
