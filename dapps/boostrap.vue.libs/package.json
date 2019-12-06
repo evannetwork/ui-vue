@@ -1,0 +1,19 @@
+{
+  "author": "evan GmbH",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "API",
+    "VueJS",
+    "DApp",
+    "CSS"
+  ],
+  "main": "dist/bootstrap.vue.libs.js",
+  "name": "@evan.network/vue-bootstrap",
+  "scripts": {
+    "build": "gulp --gulpfile ../../vue/gulpfile.js --dapp $(pwd)"
+  },
+  "typings": "dist/bootstrap.vue.libs.d.ts",
+  "version": "2.5.2"
+}
