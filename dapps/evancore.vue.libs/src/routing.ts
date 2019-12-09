@@ -118,7 +118,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  *
  * Returns ens:
  *   - ens: ens address of the loaded dapp
- *   - contractAddess: optional detected contract address
+ *   - contractAddress: optional detected contract address
  *   - baseHash: base of the dapp
  *
  * E.g.: opened url #/dashboard.evan/onboarding.evan

@@ -37,7 +37,7 @@ const i18nPref = '_evan._routes';
 
 /**
  * Each DApp must be wrapped with the evan-dapp-wrapper component. This component will handle the
- * complete login process and it is nessecary to use the ``getRuntime`` that is included into the
+ * complete login process and it is necessary to use the ``getRuntime`` that is included into the
  * `EvanComponent <../js/components.html>`__ function. It also provides this UI interactions:
  * Dispatcher Interaction, Mailbox Notifications, Profile, Addressbook, Favorites, Mailbox Links…,
  * Top Panel, Left Panel, Login & Logout.
@@ -73,22 +73,14 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
 
   /**
    * routes that should be displayed in the sidepanel, if no sidebar slot is given
-   * format: [
-   *    {
-   *      name: 'favorites.evan',
-   *      icon: 'mdi mdi-bookmark',
-   *      title: '_dashboard.routes.favorites'
-   *    }
-   *  ]
    */
   @Prop({
     type: Array,
-    default: function(options) {
+    default: function(options): DAppWrapperRouteInterface[] {
       return [
         { title: `${ i18nPref }.favorites`, path: `favorites.vue.${ domainName }`, icon: 'mdi mdi-apps' },
-        { title: `${ i18nPref }.digitaltwins`, path: `digitaltwins.${ domainName }`, icon: 'mdi mdi-cube-outline' },
+        { title: `${ i18nPref }.assets`, path: `assets.${ domainName }`, icon: 'mdi mdi-home' },
         { title: `${ i18nPref }.verifications`, path: `verifications.vue.${ domainName }`, icon: 'mdi mdi-checkbox-marked-circle-outline' },
-        { title: `${ i18nPref }.explorer`, path: `explorer.vue.${ domainName }`, icon: 'mdi mdi-magnify' },
       ];
     }
   }) routes: Array<DAppWrapperRouteInterface>;
@@ -98,7 +90,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
    */
   @Prop({
     type: Array,
-    default: function(options) {
+    default: function(options): DAppWrapperRouteInterface[] {
       return [
         { title: `${ i18nPref }.actions`, path: `mailbox.vue.${ domainName }`, icon: 'mdi mdi-format-list-checks' },
         { title: `${ i18nPref }.help`, path: `help.vue.${ domainName }`, icon: 'mdi mdi-help-circle-outline' },
@@ -145,13 +137,13 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
   loading = true;
 
   /**
-   * Is the sidebar enabled and should be shown? Per defaul enabled, but when no routes are defined
+   * Is the sidebar enabled and should be shown? Per default enabled, but when no routes are defined
    * or the user is within an onboarding or login process, it will be true.
    */
   enableSidebar = true;
 
   /**
-   * Enables the nav bar icons including mailbox, synchronization, .... Will be disabled uring login
+   * Enables the nav bar icons including mailbox, synchronization, .... Will be disabled during login
    * or onboarding process.
    */
   topLevel = true;
@@ -332,7 +324,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     // remove the watch function
     this.sideBarCloseWatcher && window.removeEventListener(`evan-queue-${ this.id }`,
       this.sideBarCloseWatcher);
-    // deletee dispatcher handler
+    // delete dispatcher handler
     this.dispatcherHandler && this.dispatcherHandler.destroy();
     // unbind dapp-wrapper-sidebar level handlers
     window.removeEventListener('dapp-wrapper-sidebar-2-enable', this.sidebar2EnableWatcher);
@@ -416,7 +408,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
 
       let encryptionKey, privateKey, executor;
 
-      // if agent-exutor is passed to the dapp-browser, do not try to unlock the current vault
+      // if agent-executor is passed to the dapp-browser, do not try to unlock the current vault
       const provider = dappBrowser.core.getCurrentProvider();
       if (provider !== 'agent-executor') {
         // set the password function
@@ -490,7 +482,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     this.userInfo.loading = true;
     this.userInfo.address = dappBrowser.core.activeAccount();
 
-    // load alias from addressbook
+    // load alias from adressbook
     this.userInfo.addressBook = await this.$store.state.runtime.profile.getAddressBook();
     this.userInfo.alias = this.userInfo.addressBook.profile[dappBrowser.core.activeAccount()].alias;
 

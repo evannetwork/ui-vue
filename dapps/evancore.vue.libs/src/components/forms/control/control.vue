@@ -48,6 +48,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import './control.scss'
+  @import './control.scss';
 </style>
 

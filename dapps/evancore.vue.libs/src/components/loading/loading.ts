@@ -20,7 +20,6 @@
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
-import Vue from 'vue';
 import { Prop } from 'vue-property-decorator';
 
 /**
@@ -30,4 +29,8 @@ import { Prop } from 'vue-property-decorator';
  * @selector      evan-loading
  */
 @Component({ })
-export default class DAppLoadingComponent extends mixins(EvanComponent) { }
+export default class DAppLoadingComponent extends mixins(EvanComponent) {
+  @Prop({
+    default: 'pt-5 pb-5'
+  }) classes: string;
+}

@@ -18,7 +18,6 @@
 */
 
 // vue imports
-import Component, { mixins } from 'vue-class-component';
 import Vue from 'vue';
 
 // evan.network imports
