@@ -39,6 +39,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
   initialPermissions: ContainerPermissionsInterface[] = null;
   isLoading = false;
 
+  /**
+   * initial contacts from current user
+   */
   @Prop({
     default: null
   }) contacts: ContactInterface[];
@@ -230,6 +233,9 @@ class PermissionsEditor extends mixins(EvanComponent) {
     return null;
   }
 
+  /**
+   * writes specific string in selectedUsername variable used in permission text
+   */
   async setUserNameWithAddress() {
     const profile = new bcc.Profile({
       accountId: this.runtime.activeAccount,
