@@ -28,6 +28,7 @@
     :disabled="disabled"
     :href="href"
     :rel="href ? 'noopener noreferrer': ''"
+    :type="nativeType"
     @click="$emit('click', $event)">
     <template v-if="!$slots.default">
       <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
@@ -52,5 +53,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import './button.scss'
+  @import './button.scss';
 </style>

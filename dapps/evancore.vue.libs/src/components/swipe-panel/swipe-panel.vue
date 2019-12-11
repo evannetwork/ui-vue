@@ -64,5 +64,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import './swipe-panel.scss'
+  @import './swipe-panel.scss';
 </style>
