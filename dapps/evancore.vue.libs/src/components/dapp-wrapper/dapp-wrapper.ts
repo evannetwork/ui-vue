@@ -482,7 +482,7 @@ export default class DAppWrapperComponent extends mixins(EvanComponent) {
     this.userInfo.loading = true;
     this.userInfo.address = dappBrowser.core.activeAccount();
 
-    // load alias from adressbook
+    // load alias from addressbook
     this.userInfo.addressBook = await this.$store.state.runtime.profile.getAddressBook();
     this.userInfo.alias = this.userInfo.addressBook.profile[dappBrowser.core.activeAccount()].alias;
 
