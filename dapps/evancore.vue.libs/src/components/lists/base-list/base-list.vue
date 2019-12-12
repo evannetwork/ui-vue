@@ -29,7 +29,7 @@ the following URL: https://evan.network/license/
   </ul>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "./base-list.scss";
 </style>
 
