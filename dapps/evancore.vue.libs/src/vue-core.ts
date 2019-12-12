@@ -83,7 +83,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       dapp: dappToLoad,
       uiState: {
         profile: {
-          selectedSharedContacts: [],
+          selectedSharedContacts: null,
         },
         swipePanel: ''
       },
@@ -91,7 +91,7 @@ export async function initializeVue(options: EvanVueOptionsInterface) {
       ...options.state,
     },
     mutations: {
-      setSelectedSharedContacts (state, contacts = []) {
+      setSelectedSharedContacts (state, contacts = null) {
         state.uiState.profile.selectedSharedContacts = contacts;
       },
       toggleSidePanel (state, type = 'left') {

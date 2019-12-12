@@ -68,17 +68,6 @@
   footer:not(:empty) {
     border-top: 1px solid cssVar('border-color-2');
     padding: 24px 32px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-
-    :last-child {
-      flex-grow: 1;
-    }
-    
-    :not(:first-child) {
-      margin-left: 24px;
-    }
   }
   
 

@@ -11,7 +11,7 @@
       "verifications": "Verifikations-Center"
     },
     "address": {
-      "copied": "Adresse kopiert ...",
+      "copied": "Adresse kopiert",
       "copy": "Kopieren",
       "open-in-explorer": "Im Explorer anzeigen"
     },
@@ -33,7 +33,7 @@
         "stopped": "Wird gestoppt {title} ({percentage}%)",
         "stopping": "Gestoppt {title} ({percentage}%)"
       },
-      "empty-queue": "Alles ist synchronisiert...",
+      "empty-queue": "Alles ist synchronisiert",
       "from": "von",
       "instance-accept": {
         "desc": "Sie haben eine Transkation angestoßen. Die Kosten belaufen sich ungefähr auf <b>{evePrice} EVE</b>.",
@@ -54,10 +54,10 @@
       "queue-error": "Während der Synchronisation ist ein Fehler aufgetreten.",
       "sync-complete": "Abgeschlossen"
     },
-    "dispatcher-not-found": "Synchronisations Job nicht gefunden...",
+    "dispatcher-not-found": "Synchronisations Job nicht gefunden",
     "file-input": {
       "description": "Ziehen Sie Ihre Datei(en) hierher, um zu beginnen<br>oder klicken Sie zum Durchsuchen",
-      "empty": "Es wurden noch keine Dateien hochgeladen...",
+      "empty": "Es wurden noch keine Dateien hochgeladen",
       "remove-modal": {
         "action": "Löschen",
         "desc": "Möchten Sie diese Dateien wirklich löschen?",

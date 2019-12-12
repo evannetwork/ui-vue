@@ -18,7 +18,7 @@
             <evan-loading v-if="isLoading"/>
             <template v-else>
               <p v-if="selectedContact" class="mt-6 mb-0">
-                {{ $t('_evan.sharing.defineFor', { contactName: getContactLabel(selectedContact) }) }}
+                {{ $t('_evan.sharing.defineFor', { contactName: selectedUsername }) }}
               </p>
 
               <div v-for="(val, contractId) in containersPermissions" :key="contractId">
