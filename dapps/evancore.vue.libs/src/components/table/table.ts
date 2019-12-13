@@ -27,8 +27,8 @@ import EvanComponent from '../../component';
  * Data Table based on bootstrap table
  * https://bootstrap-vue.js.org/docs/components/table
  *
- * @class         SuccessComponent
- * @selector      evan-success
+ * @class         EvanTable
+ * @selector      evan-table
  */
-@Component({})
+@Component
 export default class EvanTable extends mixins(EvanComponent) {}
