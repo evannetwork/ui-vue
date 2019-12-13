@@ -20,6 +20,7 @@
 <template>
   <b-table
     v-bind="$attrs"
+    v-on="$listeners"
     class="evan-table-wrapper"
     :tbody-tr-class="'evan-table-body-row'"
     :thead-tr-class="'evan-table-head-row'"
