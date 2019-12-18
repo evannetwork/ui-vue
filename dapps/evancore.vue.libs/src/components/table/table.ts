@@ -22,6 +22,7 @@ import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
 import EvanComponent from '../../component';
+import { Prop } from 'vue-property-decorator';
 
 /**
  * Data Table based on bootstrap table
@@ -31,4 +32,6 @@ import EvanComponent from '../../component';
  * @selector      evan-table
  */
 @Component
-export default class EvanTable extends mixins(EvanComponent) {}
+export default class EvanTable extends mixins(EvanComponent) {
+  @Prop({ default: false }) showScrollbar: boolean;
+}
