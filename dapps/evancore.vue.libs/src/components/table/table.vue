@@ -50,6 +50,8 @@ export default Component;
 
   &.show-scrollbar {
     overflow-y: scroll;
+    // This is needed for webkit browsers
+    // https://stackoverflow.com/a/31278448
     &::-webkit-scrollbar {
       -webkit-appearance: none;
       width: 7px;
@@ -63,10 +65,10 @@ export default Component;
 
   /deep/ table.table.b-table {
     margin: 0;
-    border-spacing: 0 4px;
-    border-collapse: separate;
     margin-left: auto;
     margin-right: auto;
+    // Fix janky offset in sticky header
+    padding-top: 1px;
 
     & > thead.evan-table-head > tr.evan-table-head-row > th {
       background-color: cssVar('bg-level-3');
@@ -83,6 +85,9 @@ export default Component;
       height: 64px;
       background-color: white;
       cursor: pointer;
+      // create spacing between rows without using border-collapse
+      // because it causes janky behavior with sticky header
+      border-bottom: 4px solid cssVar('bg-level-3');
 
       & > td {
         vertical-align: middle;
