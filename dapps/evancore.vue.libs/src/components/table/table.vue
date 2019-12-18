@@ -67,8 +67,6 @@ export default Component;
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    // Fix janky offset in sticky header
-    padding-top: 1px;
 
     & > thead.evan-table-head > tr.evan-table-head-row > th {
       background-color: cssVar('bg-level-3');
