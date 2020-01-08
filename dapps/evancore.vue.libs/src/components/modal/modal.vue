@@ -34,7 +34,7 @@
             <template v-if="!customModal">
               <div :class="{ 'modal-header d-flex align-items-center': modalClasses.indexOf('modal-header') !== -1 }">
                 <slot name="header"></slot>
-                <evan-button type="icon" @click="closeAction ? closeAction() : hide()">
+                <evan-button v-if="!hideCloseButton" type="icon" @click="closeAction ? closeAction() : hide()">
                   <i class="mdi mdi-close"></i>
                 </evan-button>
               </div>

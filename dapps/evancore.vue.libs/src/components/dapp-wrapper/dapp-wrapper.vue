@@ -48,7 +48,7 @@
         <div class="dapp-wrapper-sidebar" v-if="!onboarding && enableSidebar">
           <slot name="sidebar">
             <ul class="nav top-nav">
-              <li v-for="(route, index) in routes">
+              <li v-for="route in routes" :key="route.path">
                 <a
                   :id="`evan-dapp-${ (route.path || route.id).split('.')[0] }`"
                   :class="{ active: route.path && $route.path.startsWith(route.fullPath) }"
@@ -74,6 +74,7 @@
               </li>
               <li
                 v-for="(route, index) in bottomRoutes"
+                :key="route.path"
                 :style="{ order: (index + 1) * 10 }">
                 <a
                   :id="`evan-dapp-${ (route.path || route.id).split('.')[0] }`"
@@ -111,21 +112,26 @@
                     {{ '_evan._routes.synchronization' | translate }}
                   </evan-tooltip>
                 </a>
-                <evan-swipe-panel ref="queuePanel" alignment="left" showBackdrop="true">
-                  <div class="d-flex align-items-center mb-5">
-                    <evan-button type="text" @click="$refs.queuePanel.hide()" icon="mdi mdi-arrow-left" />
-                    <h5 class="m-0 font-weight-bold text-truncate">
-                      {{ '_evan.dapp-wrapper.queue' | translate }}
-                    </h5>
-                  </div>
+                <evan-swipe-panel
+                  alignment="left"
+                  ref="queuePanel"
+                  showBackdrop="true">
+                  <template v-slot:header>
+                    <div class="d-flex align-items-center">
+                      <evan-button type="text" @click="$refs.queuePanel.hide()" icon="mdi mdi-arrow-left" />
+                      <h5 class="m-0 font-weight-bold text-truncate">
+                        {{ '_evan.dapp-wrapper.queue' | translate }}
+                      </h5>
+                    </div>
+                  </template>
                   <span class="p-3 d-block"
                     v-if="queueCount === 0 && queueErrorCount === 0">
                     {{ '_evan.dapp-wrapper.empty-queue' | translate }}
                   </span>
                   <div class="p-3"
                     v-for="(instance, index) in queueInstances"
-                    :id="`evan-panel-queue-${ index }`"
-                    @click="">
+                    :key="instance.stepIndex"
+                    :id="`evan-panel-queue-${ index }`">
                     <template v-if="instance.dispatcher">
                       <div class="d-flex">
                         <strong class="d-flex align-items-center mb-2">

@@ -18,8 +18,6 @@
 */
 // import vue libs
 import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-import vuexI18n from 'vuex-i18n';
 
 // import evan libs
 import * as dappBrowser from '@evan.network/ui-dapp-browser';
@@ -120,7 +118,7 @@ export async function initializeRouting(options: EvanVueOptionsInterface) {
  *
  * Returns ens:
  *   - ens: ens address of the loaded dapp
- *   - contractAddess: optional detected contract address
+ *   - contractAddress: optional detected contract address
  *   - baseHash: base of the dapp
  *
  * E.g.: opened url #/dashboard.evan/onboarding.evan

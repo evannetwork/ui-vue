@@ -60,6 +60,7 @@ import SharedContact from './lists/shared-contact/shared-contact.vue';
 import StepsComponent from './steps/steps.vue';
 import SuccessComponent from './success/success.vue';
 import SwipePanelComponent from './swipe-panel/swipe-panel.vue';
+import TableComponent from './table/table.vue';
 import TooltipComponent from './tooltip/tooltip.vue';
 import UnderDevelopmentComponent from './under-development/under-development.vue';
 import vSelect from 'vue-select';
@@ -105,6 +106,7 @@ export {
   StepsComponent,
   SuccessComponent,
   SwipePanelComponent,
+  TableComponent,
   TooltipComponent,
   UnderDevelopmentComponent,
   WalletCardComponent,
@@ -151,6 +153,7 @@ const componentRegistration: Array<ComponentRegistrationInterface> = [
   { name: 'evan-steps', component: StepsComponent },
   { name: 'evan-success', component: SuccessComponent },
   { name: 'evan-swipe-panel', component: SwipePanelComponent },
+  { name: 'evan-table', component: TableComponent },
   { name: 'evan-tooltip', component: TooltipComponent },
   { name: 'evan-under-development', component: UnderDevelopmentComponent },
   { name: 'evan-v-select', component: vSelect },

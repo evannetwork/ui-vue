@@ -31,6 +31,7 @@ module.exports = function(customExcludes) {
     '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
     '@evan.network/ui-vue-core': '@evan.network/ui-vue-core',
     'axios': 'axios',
+    'bootstrap-vue': 'bootstrap-vue',
     'moment': 'moment',
     'qrcodejs': 'qrcodejs',
     'vue': 'vue',

@@ -2,8 +2,12 @@
 
 ## Next Version
 ### Features
+- add `bootstrap.vue.libs` (v2.1.0)
+  - add bootstrap-vue import and expose it as dapp (currently only TableLitePlugin, TablePlugin, TableSimplePlugin exported)
 
 ### Fixes
+- `evancore.vue.libs` (v1.9.1)
+  - fix unchecking all read properties are not unchecking all readWrite fields in `evan-permission-editor`
 
 ### Deprecations
 

@@ -16,14 +16,12 @@
   Fifth Floor, Boston, MA, 02110-1301 USA, or download the license from
   the following URL: https://evan.network/license/
 */
+// map the original vue path to bootstrap.vue.libs
+import { getDomainName, System } from '@evan.network/ui-dapp-browser';
+System.map['bootstrap-vue'] = `bootstrap.vue.libs.${ getDomainName() }!dapp-content`;
 
-<template>
-  <div class="evan-loading w-100 h-100 text-center" :class="classes">
-    <div class="spinner-border text-primary"></div>
-  </div>
-</template>
-
-<script lang="ts">
-  import Component from './loading';
-  export default Component;
-</script>
+export {
+  TableLitePlugin,
+  TablePlugin,
+  TableSimplePlugin,
+} from 'bootstrap-vue';

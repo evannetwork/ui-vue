@@ -28,10 +28,11 @@
     :disabled="disabled"
     :href="href"
     :rel="href ? 'noopener noreferrer': ''"
+    :type="nativeType"
     @click="$emit('click', $event)">
     <template v-if="!$slots.default">
       <div class="spinner-border spinner-border-sm spinner" v-if="isLoading" />
-      <div :class="{'hidden': isLoading}" >
+      <template :class="{'hidden': isLoading}" >
         <template v-if="icon && !label">
           <i :class="[icon, 'centered']" />
         </template>
@@ -40,7 +41,7 @@
           <span>{{label}}</span>
           <i v-if="icon && iconPosition === 'right'" :class="[icon, 'label', 'right']" />
         </template>
-      </div>
+      </template>
     </template>
     <slot></slot>
   </component>
@@ -52,5 +53,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import './button.scss'
+  @import './button.scss';
 </style>

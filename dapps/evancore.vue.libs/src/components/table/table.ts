@@ -17,13 +17,21 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <div class="evan-loading w-100 h-100 text-center" :class="classes">
-    <div class="spinner-border text-primary"></div>
-  </div>
-</template>
+// vue imports
+import Component, { mixins } from 'vue-class-component';
 
-<script lang="ts">
-  import Component from './loading';
-  export default Component;
-</script>
+// evan.network imports
+import EvanComponent from '../../component';
+import { Prop } from 'vue-property-decorator';
+
+/**
+ * Data Table based on bootstrap table
+ * https://bootstrap-vue.js.org/docs/components/table
+ *
+ * @class         EvanTable
+ * @selector      evan-table
+ */
+@Component
+export default class EvanTable extends mixins(EvanComponent) {
+  @Prop({ default: false }) showScrollbar: boolean;
+}

@@ -77,7 +77,7 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
    */
   hovered = false;
 
-  value: UIContainerFile[];
+  value: UIContainerFile[] = [];
 
   /**
    * Transform the input files to the correct format.
@@ -94,7 +94,7 @@ export default class FilesInputComponent extends mixins(ControlComponent) {
    * @param      {Arrayany}  files   The files
    */
   async filesChanged(fileList: FileList) {
-    // make the list iteratable
+    // make the list iterable
     const newFiles: Array<File> = Array.from(fileList);
 
     // iterate through all files and check if they already exists, if not, add them

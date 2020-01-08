@@ -17,13 +17,14 @@
   the following URL: https://evan.network/license/
 */
 
-<template>
-  <div class="evan-loading w-100 h-100 text-center" :class="classes">
-    <div class="spinner-border text-primary"></div>
-  </div>
-</template>
-
-<script lang="ts">
-  import Component from './loading';
-  export default Component;
-</script>
+// load not the name from package.json, it useds @evan.network/ui-vue-core and not the dbcp origin
+module.exports = require('../../vue/webpack.config')(
+  require('./dbcp.json').public.name,
+  require('path').resolve(__dirname, './dist'),
+  true,
+  true,
+  {
+    '@evan.network/ui-dapp-browser': '@evan.network/ui-dapp-browser',
+    'vue': 'vue',
+  },
+);

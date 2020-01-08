@@ -2,6 +2,7 @@
   "_evan": {
     "_routes": {
       "actions": "Actions",
+      "assets": "My Assets",
       "digitaltwins": "Digital Twins",
       "explorer": "Explorer",
       "favorites": "DApps",
@@ -11,7 +12,7 @@
       "verifications": "Verification Center"
     },
     "address": {
-      "copied": "Address copied...",
+      "copied": "Address copied",
       "copy": "Copy",
       "open-in-explorer": "Open in Explorer"
     },
@@ -33,7 +34,7 @@
         "stopped": "Stopped {title} ({percentage}%)",
         "stopping": "Stopping {title} ({percentage}%)"
       },
-      "empty-queue": "Everything is synchronized...",
+      "empty-queue": "Everything is synchronized",
       "from": "from",
       "instance-accept": {
         "desc": "You have initiated a transaction. The costs amount to approximately <b>{evePrice} EVE</b>.",
@@ -54,10 +55,10 @@
       "queue-error": "An error occurred during synchronization.",
       "sync-complete": "Complete"
     },
-    "dispatcher-not-found": "Synchronization job not found...",
+    "dispatcher-not-found": "Synchronization job not found",
     "file-input": {
       "description": "Drag your file(s) here to begin<br> or click to browse",
-      "empty": "No files are available...",
+      "empty": "No files are available",
       "remove-modal": {
         "action": "Delete",
         "desc": "Are you sure you want to delete this file?",
@@ -87,7 +88,7 @@
       "print-or-store": "Print your recovery key and store it offline on a safe place! After you close the window, the recovery key no longer appears.",
       "recovery-key": "Recovery Key",
       "title": "Print your Recovery Key",
-      "understood": "I understood"
+      "understood": "I understand the risk"
     },
     "need-an-account": "Need an account? <a href=\"#/dashboard.vue.evan/onboarding.vue.evan/sign-up\">Sign Up</a>",
     "no": "No",

@@ -20,7 +20,8 @@
 import Component, { mixins } from 'vue-class-component';
 
 // evan.network imports
-import { deepEqual } from '@evan.network/ui';
+import { deepEqual, bccUtils } from '@evan.network/ui/src';
+import * as bcc from '@evan.network/api-blockchain-core';
 import { ContactInterface, ContainerPermissionsInterface } from '../../interfaces';
 import EvanComponent from '../../component';
 
@@ -32,17 +33,18 @@ interface SortFiltersInterface {
   [key: string]: string[];
 }
 
-interface Address {
-  label: string;
-  value: string;
-}
-
 @Component({ })
 class PermissionsEditor extends mixins(EvanComponent) {
-  contacts: ContactInterface[] = null;
   permissionsChanged = false;
   initialPermissions: ContainerPermissionsInterface[] = null;
   isLoading = false;
+
+  /**
+   * initial contacts from current user
+   */
+  @Prop({
+    default: null
+  }) contacts: ContactInterface[];
 
   @Prop({
     default: null
@@ -110,6 +112,16 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }) sortFilters: SortFiltersInterface | string[];
 
   /**
+   * Current users runtime.
+   */
+  runtime: bcc.Runtime;
+
+  /**
+   * Name of the selected account adress
+   */
+  selectedUsername = '';
+
+  /**
    *  Update shown permissions according to selected contact.
    *
    * @param val
@@ -127,7 +139,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
   }
 
   async created() {
-    this.contacts = await this.loadAddressBook();
+    this.runtime = (this as any).getRuntime();
     this.getPermissionsForContact();
   }
 
@@ -168,6 +180,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
     }
 
     this.isLoading = true;
+    this.setUserNameWithAddress();
     this.containersPermissions = null;
     this.containersPermissions = await this.loadPermissions(this.selectedContact)
       .catch((e: Error) => {
@@ -176,6 +189,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
       });
 
     this.initialPermissions = this.containersPermissions ? clone(this.containersPermissions) : this.initialPermissions;
+
     this.isLoading = false;
   }
 
@@ -186,8 +200,7 @@ class PermissionsEditor extends mixins(EvanComponent) {
     this.isLoading = true;
 
     try {
-      const runtime = (<any>this).getRuntime();
-      await this.updatePermissions(runtime, this.selectedContact, this.containersPermissions, this.initialPermissions);
+      await this.updatePermissions(this.runtime, this.selectedContact, this.containersPermissions, this.initialPermissions);
       this.initialPermissions = clone(this.containersPermissions);
     } catch (ex) {
       return console.error('Error writing permissions', ex.message);
@@ -195,31 +208,6 @@ class PermissionsEditor extends mixins(EvanComponent) {
 
     this.cancel();
     this.isLoading = false;
-  }
-
-  /**
-   * Load the addressbook for the current user.
-   * Excludes the current user and invited users which are not registered yet.
-   */
-  async loadAddressBook(): Promise<Address[]> {
-    const runtime = (<any>this).getRuntime();
-
-    // load the contacts for the current user, so we can display correct contact alias
-    delete runtime.profile.trees[runtime.profile.treeLabels.addressBook];
-    let addressBook = (await runtime.profile.getAddressBook()).profile;
-
-    return Object.keys(addressBook).map(key => {
-      return {
-        'label': addressBook[key].alias,
-        'value': key
-      };
-    }).filter(entry => entry.value !== runtime.activeAccount && !/\@/.test(entry.value));
-  }
-
-  getContactLabel(contactId: string): string {
-    const { label } = this.contacts.find(item => item.value === contactId);
-
-    return label;
   }
 
   /**
@@ -243,6 +231,19 @@ class PermissionsEditor extends mixins(EvanComponent) {
     console.warn(`getSortFilter function can not determine the desired filter array for ${contractId}`);
 
     return null;
+  }
+
+  /**
+   * writes specific string in selectedUsername variable used in permission text
+   */
+  async setUserNameWithAddress() {
+    const profile = new bcc.Profile({
+      accountId: this.runtime.activeAccount,
+      profileOwner: this.selectedContact,
+      ...this.runtime,
+    } as any);
+
+    this.selectedUsername = await bccUtils.getUserAlias(profile);
   }
 }
 

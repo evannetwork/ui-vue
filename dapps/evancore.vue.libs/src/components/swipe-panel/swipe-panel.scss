@@ -51,6 +51,12 @@
         font-size: 1.2rem;
       }
     }
+
+    /deep/ .btn-close {
+      i {
+        color: cssVar('light');
+      }
+    }
   }
 
   main {
@@ -62,17 +68,6 @@
   footer:not(:empty) {
     border-top: 1px solid cssVar('border-color-2');
     padding: 24px 32px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-
-    :last-child {
-      flex-grow: 1;
-    }
-    
-    :not(:first-child) {
-      margin-left: 24px;
-    }
   }
   
 
@@ -87,6 +82,12 @@
 
     &, h1, h2, h3, h4, h5, span, p, li, b, label, small {
       color: cssVar('text-color');
+    }
+
+    /deep/ .btn-close {
+      i {
+        color: cssVar('text-color');
+      }
     }
   }
 

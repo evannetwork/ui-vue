@@ -20,8 +20,7 @@
 // vue imports
 import Component, { mixins } from 'vue-class-component';
 import EvanComponent from '../../component';
-import Vue from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 /**
  * Wrapper component for button elements.
@@ -65,7 +64,7 @@ export default class Button extends mixins(EvanComponent) {
   /**
    * Button Label.
    */
-  @Prop({ type: String }) label: String;
+  @Prop({ type: String }) label: string;
 
   /**
    * The class name for the material design icon, without prefixed 'mdi'.
@@ -75,7 +74,7 @@ export default class Button extends mixins(EvanComponent) {
   @Prop({
     type: String,
     validator: value => value.slice(0, 3) === 'mdi' // TODO: validator seems not to be called
-  }) icon: String;
+  }) icon: string;
 
   /**
    * Defines whether the icon is shown before or after the label.
@@ -91,7 +90,12 @@ export default class Button extends mixins(EvanComponent) {
   /**
    * Loading state of the component.
    */
-  @Prop({ type: Boolean, default: false }) isLoading: Boolean;
+  @Prop({ type: Boolean, default: false }) isLoading: boolean;
+
+  /**
+   * Button Label.
+   */
+  @Prop({ type: String, default: 'button' }) nativeType: string;
 
   /**
    * Evan specific button definitions mapped to it's classes. By applying other types, they will be
@@ -107,5 +111,6 @@ export default class Button extends mixins(EvanComponent) {
     'text': 'btn-text-primary',
     'text-primary': 'btn-text-primary',
     'text-secondary': 'btn-text-secondary',
+    'text-filter': 'btn-text-filter',
   };
 }

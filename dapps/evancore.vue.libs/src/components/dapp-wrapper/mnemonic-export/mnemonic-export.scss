@@ -20,6 +20,10 @@
   white-space: pre-wrap;
 }
 
+.hyphen-auto {
+  hyphens: auto;
+}
+
 .notification-bar {
   .hint-banner {
     line-height: 25px;
@@ -97,9 +101,7 @@
   }
 
   .account-id {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
   }
 
   .button-wrapper {
