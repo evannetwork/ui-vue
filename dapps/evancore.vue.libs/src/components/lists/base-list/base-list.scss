@@ -45,7 +45,7 @@ the following URL: https://evan.network/license/
     border: 1px solid cssVar('white');
     background-color: cssVar('white');
 
-    &.isSelected {
+    &.is-selected, &.is-selected:hover {
       border: 1px solid cssVar('primary');
     }
   }
