@@ -1,4 +1,7 @@
 # ui-vue-core
+
+*This project is archived / readonly and was migrated to the [ui-dapps](https://github.com/evannetwork/ui-dapps) project.*
+
 This library includes the core libraries for the evan.network ui development using vue js. Within the dapps folder, you will find the `evancore.vue.libs` dapp, that includes evan specific vue implementations and is published under `@evan.network/ui-vue-core`.
 
 All other dapps are constructed simply, to exclude the wanted library and map the correct original package name. E.g.: The vue-material library is published using the ens address `material.vue.libs.evan`. Within the DBCP of the using DApp, this lib is referenced within the dbcp.json as dependency. Within the application it self, `vue-material` can be imported normally using `import VueMaterial from 'vue-material'`. Within the webpack configuration, the vue-material import can be exported, to reduce the bundle size. 
