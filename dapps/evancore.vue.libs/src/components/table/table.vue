@@ -22,6 +22,7 @@
     v-bind="$attrs"
     v-on="$listeners"
     class="evan-table-wrapper"
+    :class="{ 'show-scrollbar': showScrollbar }"
     :tbody-tr-class="'evan-table-body-row'"
     :thead-tr-class="'evan-table-head-row'"
     :thead-class="'evan-table-head'"
@@ -45,12 +46,25 @@ export default Component;
 @import '~@evan.network/ui/src/style/utils';
 
 .evan-table-wrapper {
-  margin: 0;
   width: 100%;
 
+  &.show-scrollbar {
+    overflow-y: scroll;
+    // This is needed for webkit browsers
+    // https://stackoverflow.com/a/31278448
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.5);
+      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+  }
+
   /deep/ table.table.b-table {
-    border-spacing: 0 4px;
-    border-collapse: separate;
+    margin: 0;
     margin-left: auto;
     margin-right: auto;
 
@@ -69,6 +83,9 @@ export default Component;
       height: 64px;
       background-color: white;
       cursor: pointer;
+      // create spacing between rows without using border-collapse
+      // because it causes janky behavior with sticky header
+      border-bottom: 4px solid cssVar('bg-level-3');
 
       & > td {
         vertical-align: middle;

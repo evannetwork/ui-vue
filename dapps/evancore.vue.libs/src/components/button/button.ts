@@ -111,5 +111,6 @@ export default class Button extends mixins(EvanComponent) {
     'text': 'btn-text-primary',
     'text-primary': 'btn-text-primary',
     'text-secondary': 'btn-text-secondary',
+    'text-filter': 'btn-text-filter',
   };
 }
